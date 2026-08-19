@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html, body { margin: 0; padding: 0; background: #FAF8F4; }
+html { scroll-behavior: smooth; }
+body { font-family: Inter, system-ui, sans-serif; color: #55584D; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+a { color: #2C4A3B; text-decoration: none; }
+a:hover { color: #16170F; }
+video, img { display: block; }
+button { font-family: Inter, system-ui, sans-serif; }
+:focus-visible { outline: 2px solid #2C4A3B; outline-offset: 3px; }
+input, select { font-family: Inter, system-ui, sans-serif; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</helmet>
+
+<div style="background:#FAF8F4;color:#55584D;font-family:Inter,system-ui,sans-serif">
+
+  <header ref="{{ headerRef }}" style="position:fixed;top:0;left:0;right:0;z-index:40;background:transparent;border-bottom:1px solid rgba(250,248,244,0.2);transition:background-color 420ms ease, border-color 420ms ease">
+    <div style="max-width:1360px;margin:0 auto;padding:16px clamp(20px,4vw,40px);display:flex;align-items:center;gap:20px 32px;flex-wrap:wrap">
+      <a href="#top" style="display:flex;align-items:center;gap:10px;flex:0 0 auto">
+        <img data-nav-mark="1" src="assets/cv-mark-light.png" alt="CourseVista" style="height:28px;width:auto">
+        <img data-nav-word="1" src="assets/cv-wordmark-light.png" alt="" style="height:16px;width:auto">
+      </a>
+      <nav style="margin-left:auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px 26px;font-size:14px;font-weight:500">
+        <a data-nav-link="1" href="#work" style="color:#FAF8F4">Work</a>
+        <a data-nav-link="1" href="#why" style="color:#FAF8F4">Why CourseVista</a>
+        <a data-nav-link="1" href="#pricing" style="color:#FAF8F4">Pricing</a>
+        <a data-nav-cta="1" href="#enquiry" style="border:1px solid rgba(250,248,244,0.6);color:#FAF8F4;padding:9px 16px;font-weight:500" style-hover="background:#FAF8F4;color:#16170F">See your course</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section ref="{{ heroFrame }}" style="position:sticky;top:0;z-index:0;isolation:isolate;overflow:hidden;min-height:640px;height:100svh;display:flex;align-items:flex-end;background:#16170F">
+      <video ref="{{ heroVideo }}" muted="{{ true }}" defaultMuted="{{ true }}" volume="{{ 0 }}" loop="{{ true }}" playsInline="{{ true }}" autoPlay="{{ true }}" disableRemotePlayback="{{ true }}" preload="metadata" poster="assets/course-coastal.png" aria-label="Cinematic course film" src="assets/hero.mp4" style="position:absolute;inset:-4% -2%;width:104%;height:108%;object-fit:cover"></video>
+      <div ref="{{ heroDim }}" style="position:absolute;inset:0;background:rgba(10,12,8,0.3)"></div>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:62%;background:linear-gradient(to bottom, rgba(10,12,8,0), rgba(10,12,8,0.5))"></div>
+      <div ref="{{ heroContent }}" style="position:relative;width:100%;max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,40px) clamp(104px,17vh,196px)">
+        <div data-reveal="up" style="font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#E4E0D6">Cinematic course films · without the shoot</div>
+        <h1 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FAF8F4;font-size:clamp(42px,7vw,96px);line-height:1.0;letter-spacing:-0.02em;margin:22px 0 0;max-width:16ch;text-wrap:pretty">Your course, in motion.</h1>
+        <p data-reveal="up" style="font-size:clamp(16px,1.35vw,19px);line-height:1.6;color:#E4E0D6;margin:26px 0 0;max-width:52ch;text-wrap:pretty">Turn the photography your club already owns into cinematic tee-to-green flyovers — without a site visit, filming crew or course closure.</p>
+        <div data-reveal="up" style="margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
+          <a href="#enquiry" style="background:#FAF8F4;color:#16170F;padding:16px 26px;font-size:15px;font-weight:500" style-hover="background:#E6D3AC">See what your course could look like</a>
+          <button type="button" onClick="{{ playFeature }}" style="background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center;gap:11px;color:#FAF8F4;font-size:15px" style-hover="color:#E6D3AC">
+            <span style="width:28px;height:28px;border:1px solid rgba(250,248,244,0.7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;padding-left:2px">&#9654;</span>
+            <span>Watch a hole film · 0:30</span>
+          </button>
+        </div>
+        <div data-reveal="up" style="margin-top:clamp(38px,6vh,64px);border-top:1px solid rgba(250,248,244,0.24);padding-top:16px;display:flex;flex-wrap:wrap;gap:8px 0;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#E4E0D6">
+          <span style="padding-right:22px">No site visit</span>
+          <span style="padding:0 22px;border-left:1px solid rgba(250,248,244,0.24)">No shoot day</span>
+          <span style="padding-left:22px;border-left:1px solid rgba(250,248,244,0.24)">No course closure</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="compare" style="position:relative;z-index:1;background:#FAF8F4;padding:clamp(64px,8vw,120px) clamp(20px,4vw,40px)">
+      <div style="max-width:1360px;margin:0 auto">
+      <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:44px">
+        <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px">01</div>
+        <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;flex:1 1 480px;max-width:22ch;text-wrap:pretty">From a photograph to a place you can move through.</h2>
+      </div>
+      <div data-reveal="clip" ref="{{ compareWrap }}" role="slider" tabindex="0" aria-label="Compare original photograph with the CourseVista film" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" style="position:relative;aspect-ratio:16/9;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden;touch-action:none;cursor:ew-resize;user-select:none">
+        <video ref="{{ compareVideo }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" poster="assets/poster-07.png" src="assets/hole-07.mp4" aria-label="CourseVista film of the seventh hole" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+        <img ref="{{ compareBefore }}" src="assets/photo-fairway.png" alt="Original club photograph of the hole" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(0.82) contrast(0.94)">
+        <div ref="{{ compareLine }}" style="position:absolute;top:0;bottom:0;left:50%;width:1px;background:#FAF8F4;box-shadow:none">
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#FAF8F4;border:1px solid #2C4A3B;display:flex;align-items:center;justify-content:center;gap:3px;color:#2C4A3B;font-size:10px">
+            <span>&#9664;</span><span>&#9654;</span>
+          </div>
+        </div>
+        <div style="position:absolute;top:0;left:0;padding:16px 18px;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#FAF8F4">Original</div>
+        <div style="position:absolute;top:0;right:0;padding:16px 18px;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#FAF8F4">CourseVista</div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:24px 48px;align-items:flex-start;margin-top:28px">
+        <p style="font-size:17px;line-height:1.66;margin:0;max-width:56ch;flex:1 1 420px;text-wrap:pretty">The club already owns the raw visual information. CourseVista turns it into a coherent journey from tee to green.</p>
+        <a href="#work" style="font-size:15px;font-weight:500;border-bottom:1px solid #E4E0D6;padding-bottom:4px" style-hover="border-bottom-color:#2C4A3B">Watch the full transformation →</a>
+      </div>
+      </div>
+    </section>
+
+    <section id="assets" style="position:relative;z-index:1;border-top:1px solid #E4E0D6;background:#FAF8F4;scroll-margin-top:90px">
+      <div style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px)">
+        <div style="display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start;margin-bottom:clamp(38px,4vw,58px)">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#2C4A3B;flex:0 0 auto;padding-top:10px"><span style="font-family:'Playfair Display',Georgia,serif;color:#B08D4F;letter-spacing:0.06em">02</span> · What you get</div>
+          <div style="flex:1 1 460px">
+            <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,50px);line-height:1.08;margin:0;max-width:20ch;text-wrap:pretty">One set of photography. Three ways to use it.</h2>
+            <p style="font-size:16px;line-height:1.62;color:#55584D;margin:20px 0 0;max-width:58ch;text-wrap:pretty">Build the hole films once, then use them across your course website, homepage and hosted course guide.</p>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:20px">
+            <button type="button" onClick="{{ openFilms }}" style="display:flex;flex-wrap:wrap;gap:26px 44px;align-items:stretch;width:100%;background:#FFFFFF;border:1px solid #E4E0D6;border-radius:3px;padding:clamp(22px,2.6vw,32px);text-align:left;cursor:pointer;transition:border-color 320ms ease" style-hover="border-color:#2C4A3B">
+              <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:14px">
+                <div style="font-family:'Playfair Display',Georgia,serif;font-size:14px;color:#B08D4F;letter-spacing:0.06em">01</div>
+                <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(23px,2.5vw,31px);line-height:1.1;margin:0;max-width:18ch">18 hole films</h3>
+                <p style="font-size:15px;line-height:1.6;color:#55584D;margin:0;max-width:44ch;text-wrap:pretty">Thirty seconds per hole, tee to green. Sized to drop directly into your existing hole pages.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:2px">
+                <span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82">18 films</span>
+                <span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82;padding-left:16px;border-left:1px solid #E4E0D6">30 sec each</span>
+                <span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82;padding-left:16px;border-left:1px solid #E4E0D6">Delivered outright</span>
+                </div>
+                <div style="font-size:13px;color:#2C4A3B;margin-top:6px">Explore &#43;</div>
+              </div>
+              <div style="flex:1 1 380px;min-width:0;height:clamp(168px,21vw,232px);transition:transform 480ms cubic-bezier(.22,.61,.36,1)" style-hover="transform:scale(1.015)">
+                <div style="position:relative;height:100%;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
+                  <video ref="{{ v1 }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" poster="assets/poster-03.png" src="assets/hole-03.mp4" aria-label="Hole film, tee to green" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+                  <div style="position:absolute;top:0;left:0;right:0;padding:12px 14px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline">
+                    <span style="font-family:'Playfair Display',Georgia,serif;font-size:20px;line-height:1;color:#FAF8F4">Hole 18</span>
+                    <span style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#E4E0D6">Par 4</span>
+                    <span style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#E4E0D6">412 m</span>
+                    <span style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#E4E0D6">Index 6</span>
+                  </div>
+                  <div style="position:absolute;left:0;right:0;bottom:0;padding:12px 14px;display:flex;align-items:center;gap:12px">
+                    <div style="flex:1;height:2px;background:rgba(250,248,244,0.35)">
+                      <div ref="{{ scrub1 }}" style="height:2px;width:0%;background:#FAF8F4"></div>
+                    </div>
+                    <span style="font-size:11px;color:#FAF8F4;letter-spacing:0.1em">0:30</span>
+                  </div>
+                </div>
+              </div>
+            </button>
+            <button type="button" onClick="{{ openHomepage }}" style="display:flex;flex-wrap:wrap;gap:26px 44px;align-items:stretch;width:100%;background:#FFFFFF;border:1px solid #E4E0D6;border-radius:3px;padding:clamp(22px,2.6vw,32px);text-align:left;cursor:pointer;transition:border-color 320ms ease" style-hover="border-color:#2C4A3B">
+              <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:14px">
+                <div style="font-family:'Playfair Display',Georgia,serif;font-size:14px;color:#B08D4F;letter-spacing:0.06em">02</div>
+                <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(23px,2.5vw,31px);line-height:1.1;margin:0;max-width:18ch">Homepage film</h3>
+                <p style="font-size:15px;line-height:1.6;color:#55584D;margin:0;max-width:44ch;text-wrap:pretty">All eighteen holes edited into one cinematic cut for your homepage, socials and stay-and-play listings.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:2px">
+                <span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82">Homepage</span>
+                <span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82;padding-left:16px;border-left:1px solid #E4E0D6">Social</span>
+                <span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82;padding-left:16px;border-left:1px solid #E4E0D6">Stay-and-play</span>
+                </div>
+                <div style="font-size:13px;color:#2C4A3B;margin-top:6px">Explore &#43;</div>
+              </div>
+              <div style="flex:1 1 380px;min-width:0;height:clamp(168px,21vw,232px);transition:transform 480ms cubic-bezier(.22,.61,.36,1)" style-hover="transform:scale(1.015)">
+                <div style="height:100%;background:#FFFFFF;border:1px solid #E4E0D6;overflow:hidden;display:flex;flex-direction:column">
+                  <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid #E4E0D6;flex:0 0 auto">
+                    <span style="width:6px;height:6px;border-radius:50%;background:#E4E0D6"></span>
+                    <span style="width:6px;height:6px;border-radius:50%;background:#E4E0D6"></span>
+                    <span style="flex:1;text-align:center;font-size:10px;color:#8A8D82;letter-spacing:0.06em">yourclub.com.au</span>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 12px;border-bottom:1px solid #E4E0D6;flex:0 0 auto">
+                    <span style="font-family:'Playfair Display',Georgia,serif;font-size:12px;color:#16170F">Your Golf Club</span>
+                    <span style="display:flex;gap:10px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#8A8D82"><span>Course</span><span>Visitors</span><span>Members</span></span>
+                  </div>
+                  <div style="position:relative;flex:1 1 auto;min-height:0;background:#F1EDE6;overflow:hidden">
+                    <video ref="{{ v2 }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" poster="assets/course-mist.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down running as a club website hero" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+                    <div style="position:absolute;left:0;bottom:0;padding:12px 14px">
+                      <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(13px,1.4vw,18px);color:#FAF8F4;max-width:18ch;line-height:1.15">Experience the course before you arrive.</div>
+                      <span style="display:inline-block;margin-top:8px;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#FAF8F4;border-bottom:1px solid rgba(250,248,244,0.6);padding-bottom:2px">Book a tee time</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </button>
+            <button type="button" onClick="{{ openGuide }}" style="display:flex;flex-wrap:wrap;gap:26px 44px;align-items:stretch;width:100%;background:#FFFFFF;border:1px solid #E4E0D6;border-radius:3px;padding:clamp(22px,2.6vw,32px);text-align:left;cursor:pointer;transition:border-color 320ms ease" style-hover="border-color:#2C4A3B">
+              <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:14px">
+                <div style="font-family:'Playfair Display',Georgia,serif;font-size:14px;color:#B08D4F;letter-spacing:0.06em">03</div>
+                <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(23px,2.5vw,31px);line-height:1.1;margin:0;max-width:18ch">Hosted course guide</h3>
+                <p style="font-size:15px;line-height:1.6;color:#55584D;margin:0;max-width:44ch;text-wrap:pretty">Every hole on its own page at coursevista.com.au/yourclub, ready to link, embed or hand to a visitor at the tee.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:2px">
+                <span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82">Hosted</span>
+                <span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82;padding-left:16px;border-left:1px solid #E4E0D6">Shareable</span>
+                <span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82;padding-left:16px;border-left:1px solid #E4E0D6">Hole-by-hole</span>
+                </div>
+                <div style="font-size:13px;color:#2C4A3B;margin-top:6px">Explore &#43;</div>
+              </div>
+              <div style="flex:1 1 380px;min-width:0;height:clamp(168px,21vw,232px);transition:transform 480ms cubic-bezier(.22,.61,.36,1)" style-hover="transform:scale(1.015)">
+                <div style="height:100%;background:#FAF8F4;border:1px solid #E4E0D6;overflow:hidden;padding:12px 14px;display:flex;flex-direction:column;gap:10px">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #E4E0D6;padding-bottom:9px;flex:0 0 auto">
+                    <img src="assets/cv-wordmark.png" alt="CourseVista" style="height:10px;width:auto">
+                    <span style="font-size:9px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#2C4A3B">Glenelg Golf Club</span>
+                  </div>
+                  <div style="display:flex;align-items:flex-end;gap:14px;flex:0 0 auto">
+                    <span style="font-family:'Playfair Display',Georgia,serif;font-size:26px;line-height:0.9;color:#B08D4F">01</span>
+                    <span style="display:flex;gap:12px;font-size:10px;color:#8A8D82;padding-bottom:3px"><span>Par 4</span><span>372 m</span><span>Index 7</span></span>
+                  </div>
+                  <div style="position:relative;flex:1 1 auto;min-height:0;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
+                    <img src="assets/poster-13.png" alt="Hole one" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+                    <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:rgba(250,248,244,0.92);color:#2C4A3B;display:flex;align-items:center;justify-content:center;font-size:9px;padding-left:2px">&#9654;</span>
+                  </div>
+                  <div style="display:flex;gap:4px;flex-wrap:wrap;flex:0 0 auto">
+                    <sc-for list="{{ guideHoles }}" as="n" hint-placeholder-count="9">
+                      <span style="min-width:18px;height:18px;border:1px solid #E4E0D6;display:flex;align-items:center;justify-content:center;font-size:9px;color:#8A8D82">{{ n }}</span>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+            </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" style="position:relative;z-index:1;background:#FAF8F4;border-top:1px solid #E4E0D6;scroll-margin-top:90px">
+      <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,4vw,40px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(36px,5vw,80px);align-items:center">
+          <div>
+            <div style="display:flex;gap:28px;margin-bottom:26px">
+              <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px;padding-top:10px">03</div>
+              <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;max-width:20ch;text-wrap:pretty">The course is being judged before the first tee.</h2>
+            </div>
+            <div style="padding-left:72px;max-width:58ch">
+              <p style="font-size:17px;line-height:1.68;margin:0 0 18px;text-wrap:pretty">Most club websites show a photograph and a yardage table. A member already knows what that means.</p>
+              <p style="font-size:17px;line-height:1.68;margin:0;text-wrap:pretty">A visitor choosing where to spend a green fee, a weekend or a stay-and-play trip does not. CourseVista lets them understand the landscape before they arrive.</p>
+            </div>
+          </div>
+          <div data-reveal="clip" ref="{{ whyWrap }}" style="position:relative;aspect-ratio:4/3;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
+            <video ref="{{ whyVideo }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/poster-13.png" src="assets/hole-13.mp4" aria-label="A hole in motion" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+            <img ref="{{ whyStill }}" src="assets/photo-green.png" alt="Static club photograph of the green complex" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          </div>
+        </div>
+        <div style="margin-top:clamp(48px,6vw,88px);border-top:1px solid #B08D4F;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+          <div style="padding:30px 24px 0 0">
+            <div ref="{{ m1 }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(42px,4.6vw,60px);line-height:1;color:#16170F">30</div>
+            <div style="font-size:13px;color:#8A8D82;margin-top:12px">seconds per hole</div>
+          </div>
+          <div style="padding:30px 24px 0;border-left:1px solid #E4E0D6">
+            <div ref="{{ m2 }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(42px,4.6vw,60px);line-height:1;color:#16170F">18</div>
+            <div style="font-size:13px;color:#8A8D82;margin-top:12px">holes covered</div>
+          </div>
+          <div style="padding:30px 24px 0;border-left:1px solid #E4E0D6">
+            <div ref="{{ m3 }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(42px,4.6vw,60px);line-height:1;color:#16170F">0</div>
+            <div style="font-size:13px;color:#8A8D82;margin-top:12px">closure days</div>
+          </div>
+          <div style="padding:30px 0 0 24px;border-left:1px solid #E4E0D6">
+            <div ref="{{ m4 }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(42px,4.6vw,60px);line-height:1;color:#16170F">1</div>
+            <div style="font-size:13px;color:#8A8D82;margin-top:12px">set of existing photography</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <sc-if value="{{ showCalculator }}" hint-placeholder-val="{{ true }}">
+      <section id="estimate" style="position:relative;z-index:1;overflow:hidden;border-top:1px solid #E4E0D6;background:#FAF8F4;scroll-margin-top:90px">
+        <img src="assets/tex-sand.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.5">
+        <div style="position:relative;max-width:1160px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,4vw,40px)">
+
+          <div style="display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start">
+            <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px;padding-top:9px">04</div>
+            <div style="flex:1 1 460px">
+              <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,50px);line-height:1.08;margin:0;max-width:19ch">See what avoiding the shoot changes.</h2>
+              <p style="font-size:16px;line-height:1.62;color:#55584D;margin:20px 0 0;max-width:58ch;text-wrap:pretty">Compare CourseVista with a conventional multi-hole filming production — including the rounds a club stops selling while the crew is on the course.</p>
+            </div>
+          </div>
+
+          <div style="background:#E4E0D6;border:1px solid #E4E0D6;margin-top:clamp(36px,4vw,56px);display:flex;flex-wrap:wrap;gap:1px">
+            <div style="flex:1 1 190px;padding:22px 26px 24px;background:#FFFFFF">
+              <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Holes</div>
+              <div style="display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:14px">
+                  <sc-for list="{{ holeOptions }}" as="opt" hint-placeholder-count="4">
+                    <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="background:none;border:0;border-bottom:2px solid transparent;padding:6px 10px 7px;cursor:pointer;font-family:'Playfair Display',Georgia,serif;font-size:21px;color:#8A8D82" style-hover="color:#16170F">
+                      <sc-if value="{{ opt.active }}" hint-placeholder-val="{{ false }}">
+                        <span style="color:#16170F;border-bottom:2px solid #2C4A3B;padding-bottom:6px">{{ opt.label }}</span>
+                      </sc-if>
+                      <sc-if value="{{ opt.inactiveLabel }}" hint-placeholder-val="{{ true }}">
+                        <span>{{ opt.label }}</span>
+                      </sc-if>
+                    </button>
+                  </sc-for>
+                </div>
+            </div>
+            <div style="flex:1 1 220px;padding:22px 26px 24px;background:#FFFFFF">
+              <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Green fee</div>
+              <div style="display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:14px">
+                  <sc-for list="{{ feeOptions }}" as="opt" hint-placeholder-count="4">
+                    <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="background:none;border:0;border-bottom:2px solid transparent;padding:6px 10px 7px;cursor:pointer;font-family:'Playfair Display',Georgia,serif;font-size:21px;color:#8A8D82" style-hover="color:#16170F">
+                      <sc-if value="{{ opt.active }}" hint-placeholder-val="{{ false }}">
+                        <span style="color:#16170F;border-bottom:2px solid #2C4A3B;padding-bottom:6px">{{ opt.label }}</span>
+                      </sc-if>
+                      <sc-if value="{{ opt.inactiveLabel }}" hint-placeholder-val="{{ true }}">
+                        <span>{{ opt.label }}</span>
+                      </sc-if>
+                    </button>
+                  </sc-for>
+                </div>
+            </div>
+            <div style="flex:2 1 300px;padding:22px 26px 24px;background:#FFFFFF">
+              <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Course type</div>
+              <div style="display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:14px">
+                <sc-for list="{{ typeOptions }}" as="opt" hint-placeholder-count="3">
+                  <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="background:none;border:0;padding:8px 10px 9px;cursor:pointer;font-size:14px;color:#8A8D82" style-hover="color:#16170F">
+                    <sc-if value="{{ opt.active }}" hint-placeholder-val="{{ true }}">
+                      <span style="color:#16170F;border-bottom:2px solid #2C4A3B;padding-bottom:6px">{{ opt.label }}</span>
+                    </sc-if>
+                    <sc-if value="{{ opt.inactive }}" hint-placeholder-val="{{ false }}">
+                      <span>{{ opt.label }}</span>
+                    </sc-if>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#FFFFFF;border:1px solid #E4E0D6;border-top:0;padding:clamp(20px,3vw,34px) clamp(18px,3vw,34px) clamp(26px,3vw,38px)">
+            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;padding-bottom:11px">
+              <div style="flex:1 1 210px;min-width:0"></div>
+              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
+                <div style="flex:1 1 0;min-width:0;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D82">Traditional</div>
+                <div style="flex:1 1 0;min-width:0;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#2C4A3B">CourseVista</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid #E4E0D6;padding:13px 0">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;color:#55584D;text-wrap:pretty">Filming days on site</div>
+              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
+                <div ref="{{ tDays }}" style="flex:1 1 0;min-width:0;font-size:15px;color:#16170F;overflow-wrap:anywhere">4</div>
+                <div style="flex:1 1 0;min-width:0;font-size:15px;color:#2C4A3B;overflow-wrap:anywhere">0</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid #E4E0D6;padding:13px 0">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;color:#55584D;text-wrap:pretty">Crew mobilisations</div>
+              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
+                <div ref="{{ tCrew }}" style="flex:1 1 0;min-width:0;font-size:15px;color:#16170F;overflow-wrap:anywhere">4</div>
+                <div style="flex:1 1 0;min-width:0;font-size:15px;color:#2C4A3B;overflow-wrap:anywhere">0</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid #E4E0D6;padding:13px 0">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;color:#55584D;text-wrap:pretty">Holes out of play</div>
+              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
+                <div ref="{{ tClosure }}" style="flex:1 1 0;min-width:0;font-size:15px;color:#16170F;overflow-wrap:anywhere">18</div>
+                <div style="flex:1 1 0;min-width:0;font-size:15px;color:#2C4A3B;overflow-wrap:anywhere">0</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid #E4E0D6;padding:13px 0">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;color:#55584D;text-wrap:pretty">Rounds displaced</div>
+              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
+                <div ref="{{ tDisplaced }}" style="flex:1 1 0;min-width:0;font-size:15px;color:#16170F;overflow-wrap:anywhere">97</div>
+                <div style="flex:1 1 0;min-width:0;font-size:15px;color:#2C4A3B;overflow-wrap:anywhere">0</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid #E4E0D6;padding:13px 0">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;color:#55584D;text-wrap:pretty">Production</div>
+              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
+                <div ref="{{ tCost }}" style="flex:1 1 0;min-width:0;font-size:15px;color:#16170F;overflow-wrap:anywhere">$24,600</div>
+                <div style="flex:1 1 0;min-width:0;font-size:15px;color:#2C4A3B;overflow-wrap:anywhere">Quoted per course</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid #E4E0D6;padding:13px 0">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;color:#55584D;text-wrap:pretty">Green fees not sold while holes are closed</div>
+              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
+                <div ref="{{ tLost }}" style="flex:1 1 0;min-width:0;font-size:15px;color:#16170F;overflow-wrap:anywhere">$24,250</div>
+                <div style="flex:1 1 0;min-width:0;font-size:15px;color:#2C4A3B;overflow-wrap:anywhere">$0</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px 12px;border-top:1px solid #B08D4F;padding:24px 0 0">
+              <div style="flex:1 1 210px;min-width:0;font-family:'Playfair Display',Georgia,serif;font-size:19px;color:#16170F">Total exposure</div>
+              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px;align-items:flex-start">
+                <div style="flex:1 1 0;min-width:0">
+                  <div ref="{{ tTotal }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(23px,3.2vw,42px);line-height:1.05;color:#16170F;overflow-wrap:anywhere">$48,850</div>
+                  <div style="display:flex;height:5px;background:#F1EDE6;margin-top:14px">
+                    <div ref="{{ barProd }}" style="height:5px;width:50%;background:#2C4A3B"></div>
+                    <div ref="{{ barClosure }}" style="height:5px;width:50%;background:#B08D4F"></div>
+                  </div>
+                  <div style="display:flex;flex-wrap:wrap;gap:5px 14px;margin-top:10px;font-size:11px;color:#8A8D82">
+                    <span style="display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;background:#2C4A3B;flex:0 0 auto"></span>Production</span>
+                    <span style="display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;background:#B08D4F;flex:0 0 auto"></span>Fees not sold</span>
+                  </div>
+                </div>
+                <div style="flex:1 1 0;min-width:0">
+                  <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.4vw,30px);line-height:1.1;color:#2C4A3B">Nil</div>
+                  <div style="font-size:13px;color:#8A8D82;margin-top:12px;text-wrap:pretty">No crew, no closure, no lost rounds. The course keeps selling while the films are built.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#2C4A3B;color:#FAF8F4;padding:clamp(26px,3vw,40px);display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center;justify-content:space-between">
+            <div ref="{{ avoidLine }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.5vw,32px);line-height:1.18;color:#FAF8F4;flex:1 1 420px;max-width:30ch;text-wrap:pretty">Avoid 4 filming days, 97 displaced rounds and every hour of course closure.</div>
+            <a href="#enquiry" style="background:#FAF8F4;color:#2C4A3B;padding:15px 26px;font-size:15px;font-weight:500;flex:0 0 auto" style-hover="background:#E6D3AC;color:#16170F">See your course estimate</a>
+          </div>
+
+          <p style="font-size:12px;color:#8A8D82;margin:22px 0 0;max-width:74ch;font-style:italic">Illustrative comparison only. Production costs, rounds displaced and green fee revenue vary by club, location, season and requirements.</p>
+        </div>
+      </section>
+    </sc-if>
+
+    <section id="work" style="position:relative;z-index:1;background:#FAF8F4;border-top:1px solid #E4E0D6;scroll-margin-top:90px">
+      <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px)">
+        <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:44px">
+          <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px">05</div>
+          <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;flex:1 1 auto">Selected courses</h2>
+        </div>
+        <a href="glenelg/" data-reveal="scale" style="display:block;position:relative;aspect-ratio:21/9;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
+          <video ref="{{ featureVideo }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" poster="assets/poster-club.png" src="assets/cutdown.mp4" aria-label="Glenelg Golf Club, homepage cut-down" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:clamp(20px,3vw,36px);display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between">
+            <div>
+              <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(24px,2.8vw,38px);color:#FAF8F4;line-height:1.1">Glenelg Golf Club</div>
+              <div style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#E4E0D6;margin-top:10px">South Australia · 18 holes</div>
+            </div>
+            <span style="font-size:14px;color:#FAF8F4;border-bottom:1px solid rgba(250,248,244,0.5);padding-bottom:3px">View the course →</span>
+          </div>
+        </a>
+        <p style="font-size:14px;color:#8A8D82;margin:22px 0 0;max-width:56ch">Full eighteen, homepage cut-down and hosted guide. Individual holes play on the course page.</p>
+      </div>
+    </section>
+
+    <section id="three" style="position:relative;z-index:1;overflow:hidden;background:#2C4A3B;color:#FAF8F4;scroll-margin-top:90px">
+      <img src="assets/tex-leaf.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.3">
+      <div style="position:relative;max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(36px,5vw,80px);align-items:start">
+        <div>
+          <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#E6D3AC;letter-spacing:0.06em">06</div>
+          <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FAF8F4;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:18px 0 0;max-width:18ch;text-wrap:pretty">Don't take our word for it. Send us three holes.</h2>
+          <p style="font-size:17px;line-height:1.66;color:#D8DCD2;margin:26px 0 34px;max-width:50ch;text-wrap:pretty">If your existing photography is suitable, we'll build three sample holes before you commit to the full course.</p>
+          <a href="#enquiry" style="display:inline-block;background:#FAF8F4;color:#2C4A3B;padding:15px 26px;font-size:15px;font-weight:500" style-hover="background:#E6D3AC;color:#16170F">Try three holes</a>
+          <div style="font-size:13px;color:#A8B0A4;margin-top:16px">No cost. No obligation. Yours to review.</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#E6D3AC">From club name to finished course</div>
+          <div style="display:flex;flex-direction:column;margin-top:22px">
+            <sc-for list="{{ journey }}" as="stepItem" hint-placeholder-count="4">
+              <div style="border-top:1px solid rgba(250,248,244,0.2)">
+                <button type="button" onClick="{{ stepItem.onToggle }}" aria-expanded="{{ stepItem.open }}" style="width:100%;background:none;border:0;padding:20px 0;display:flex;gap:20px;align-items:baseline;cursor:pointer;text-align:left">
+                  <span style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#E6D3AC;flex:0 0 32px">{{ stepItem.n }}</span>
+                  <span style="font-size:17px;color:#FAF8F4;flex:1">{{ stepItem.title }}</span>
+                  <sc-if value="{{ stepItem.open }}" hint-placeholder-val="{{ false }}">
+                    <span style="color:#E6D3AC;font-size:12px;flex:0 0 auto">&#9652;</span>
+                  </sc-if>
+                  <sc-if value="{{ stepItem.closed }}" hint-placeholder-val="{{ true }}">
+                    <span style="color:#A8B0A4;font-size:12px;flex:0 0 auto">&#9662;</span>
+                  </sc-if>
+                </button>
+                <sc-if value="{{ stepItem.open }}" hint-placeholder-val="{{ false }}">
+                  <p style="font-size:15px;line-height:1.66;color:#D8DCD2;margin:0;padding:0 0 24px 52px;max-width:52ch;text-wrap:pretty">{{ stepItem.body }}</p>
+                </sc-if>
+              </div>
+            </sc-for>
+            <div style="border-top:1px solid rgba(250,248,244,0.2)"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="position:relative;z-index:1;border-top:1px solid #E4E0D6;background:#FFFFFF">
+      <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px)">
+        <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:44px">
+          <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px">07</div>
+          <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;flex:1 1 auto;max-width:22ch">You may already have everything we need.</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:20px">
+          <div data-reveal="scale">
+            <div style="aspect-ratio:4/3;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
+              <img src="assets/photo-tee.png" alt="Tee view of a hole" style="width:100%;height:100%;object-fit:cover">
+            </div>
+            <div style="display:flex;gap:9px;align-items:baseline;margin-top:14px">
+              <span style="color:#2C4A3B;font-size:12px">&#10003;</span>
+              <span style="font-size:14px;color:#55584D">Tee view</span>
+            </div>
+          </div>
+          <div data-reveal="scale">
+            <div style="aspect-ratio:4/3;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
+              <img src="assets/photo-fairway.png" alt="Fairway coverage" style="width:100%;height:100%;object-fit:cover">
+            </div>
+            <div style="display:flex;gap:9px;align-items:baseline;margin-top:14px">
+              <span style="color:#2C4A3B;font-size:12px">&#10003;</span>
+              <span style="font-size:14px;color:#55584D">Fairway coverage</span>
+            </div>
+          </div>
+          <div data-reveal="scale">
+            <div style="aspect-ratio:4/3;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
+              <img src="assets/photo-green.png" alt="Green complex" style="width:100%;height:100%;object-fit:cover">
+            </div>
+            <div style="display:flex;gap:9px;align-items:baseline;margin-top:14px">
+              <span style="color:#2C4A3B;font-size:12px">&#10003;</span>
+              <span style="font-size:14px;color:#55584D">Green complex</span>
+            </div>
+          </div>
+          <div data-reveal="scale">
+            <div style="aspect-ratio:4/3;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
+              <img src="assets/hole-map.png" alt="Overhead hole map" style="width:100%;height:100%;object-fit:contain">
+            </div>
+            <div style="display:flex;gap:9px;align-items:baseline;margin-top:14px">
+              <span style="color:#2C4A3B;font-size:12px">&#10003;</span>
+              <span style="font-size:14px;color:#55584D">Course map or yardages</span>
+            </div>
+          </div>
+          <div data-reveal="scale">
+            <div style="aspect-ratio:4/3;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
+              <img src="assets/poster-club.png" alt="Existing aerial imagery" style="width:100%;height:100%;object-fit:cover">
+            </div>
+            <div style="display:flex;gap:9px;align-items:baseline;margin-top:14px">
+              <span style="color:#2C4A3B;font-size:12px">&#10003;</span>
+              <span style="font-size:14px;color:#55584D">Existing aerial imagery</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px 32px;margin-top:44px;border-top:1px solid #E4E0D6;padding-top:32px">
+          <p style="font-size:17px;margin:0;color:#16170F;font-family:'Playfair Display',Georgia,serif;font-size:22px">Not sure? Send us the club name. We'll check for you.</p>
+          <a href="#enquiry" style="border:1px solid #2C4A3B;color:#2C4A3B;padding:13px 22px;font-size:15px;font-weight:500" style-hover="background:#2C4A3B;color:#FAF8F4">Check my course</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" style="position:relative;z-index:1;background:#FAF8F4;border-top:1px solid #E4E0D6;scroll-margin-top:90px">
+      <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px)">
+        <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:48px">
+          <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px">08</div>
+          <div style="flex:1 1 480px">
+            <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0">Priced per hole.</h2>
+            <p style="font-size:17px;line-height:1.66;margin:22px 0 0;max-width:58ch;text-wrap:pretty">Final pricing depends on hole count, image coverage, reconstruction complexity and whether you want the hosted guide. Tell us the course and we'll quote it properly rather than guess.</p>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px">
+          <div style="background:#FFFFFF;border:1px solid #E4E0D6;padding:clamp(26px,3vw,38px)">
+            <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:26px;margin:0 0 22px">Course films</h3>
+            <div style="display:flex;flex-direction:column;font-size:15px">
+              <span style="padding:12px 0;border-top:1px solid #E4E0D6">18 individual hole films</span>
+              <span style="padding:12px 0;border-top:1px solid #E4E0D6">Homepage cinematic cut</span>
+              <span style="padding:12px 0;border-top:1px solid #E4E0D6">Delivered as files</span>
+              <span style="padding:12px 0;border-top:1px solid #E4E0D6;border-bottom:1px solid #E4E0D6">Owned outright</span>
+            </div>
+          </div>
+          <div style="background:#FFFFFF;border:1px solid #2C4A3B;padding:clamp(26px,3vw,38px)">
+            <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:26px;margin:0 0 22px">Films and hosted guide</h3>
+            <div style="display:flex;flex-direction:column;font-size:15px">
+              <span style="padding:12px 0;border-top:1px solid #E4E0D6">Everything above</span>
+              <span style="padding:12px 0;border-top:1px solid #E4E0D6">Dedicated CourseVista course page</span>
+              <span style="padding:12px 0;border-top:1px solid #E4E0D6">Hole-by-hole navigation</span>
+              <span style="padding:12px 0;border-top:1px solid #E4E0D6;border-bottom:1px solid #E4E0D6">View and scan reporting</span>
+            </div>
+          </div>
+        </div>
+        <sc-if value="{{ showQr }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-wrap:wrap;gap:14px 28px;align-items:baseline;border-top:1px solid #E4E0D6;margin-top:32px;padding-top:22px">
+            <span style="font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#8A6B2E">Coming soon</span>
+            <span style="font-size:15px;color:#16170F;font-weight:500">On-course QR</span>
+            <span style="font-size:15px;color:#8A8D82;max-width:56ch">Weatherproof plates at the tee on blind holes, linked to that hole's film, with scan counts reported back to the club.</span>
+          </div>
+        </sc-if>
+        <div style="display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;margin-top:40px">
+          <a href="#enquiry" style="background:#2C4A3B;color:#FAF8F4;padding:15px 24px;font-size:15px;font-weight:500" style-hover="background:#16170F">Get a course quote</a>
+          <a href="#three" style="font-size:15px;font-weight:500;border-bottom:1px solid #E4E0D6;padding-bottom:3px" style-hover="border-bottom-color:#2C4A3B">Try three holes first</a>
+        </div>
+      </div>
+    </section>
+
+    <section style="position:relative;z-index:1;border-top:1px solid #E4E0D6;background:#FFFFFF">
+      <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(28px,4vw,72px);align-items:start">
+        <div>
+          <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em">09</div>
+          <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,48px);line-height:1.08;margin:18px 0 0;max-width:14ch">Questions clubs ask.</h2>
+        </div>
+        <div>
+          <sc-for list="{{ faqs }}" as="item" hint-placeholder-count="4">
+            <div style="border-top:1px solid #E4E0D6">
+              <button type="button" onClick="{{ item.onToggle }}" aria-expanded="{{ item.open }}" style="width:100%;background:none;border:0;padding:22px 0;display:flex;gap:20px;align-items:flex-start;justify-content:space-between;cursor:pointer;text-align:left">
+                <span style="font-size:17px;font-weight:500;color:#16170F;line-height:1.4">{{ item.q }}</span>
+                <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
+                  <span style="color:#2C4A3B;font-size:12px;line-height:2;flex:0 0 auto">&#9652;</span>
+                </sc-if>
+                <sc-if value="{{ item.closed }}" hint-placeholder-val="{{ true }}">
+                  <span style="color:#2C4A3B;font-size:12px;line-height:2;flex:0 0 auto">&#9662;</span>
+                </sc-if>
+              </button>
+              <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
+                <p style="font-size:16px;line-height:1.68;margin:0;padding:0 0 26px;max-width:64ch;text-wrap:pretty">{{ item.a }}</p>
+              </sc-if>
+            </div>
+          </sc-for>
+          <div style="border-top:1px solid #E4E0D6"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="enquiry" style="position:relative;z-index:1;overflow:hidden;background:#2C4A3B;color:#FAF8F4;scroll-margin-top:80px">
+      <img src="assets/tex-marble.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.35">
+      <div style="position:relative;max-width:1360px;margin:0 auto;padding:clamp(68px,9vw,120px) clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:clamp(36px,5vw,80px);align-items:start">
+        <div>
+          <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FAF8F4;font-size:clamp(32px,4.6vw,58px);line-height:1.06;margin:0;max-width:18ch;text-wrap:pretty">Your course is already photographed. Let's put it in motion.</h2>
+          <p style="font-size:18px;line-height:1.62;color:#D8DCD2;margin:26px 0 0;max-width:50ch;text-wrap:pretty">Send us the club name. We'll tell you whether the photography you already have is enough to build from — before either of us spends anything.</p>
+          <div style="margin-top:40px;border-top:1px solid rgba(250,248,244,0.2);padding-top:24px;display:flex;flex-direction:column;gap:10px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(19px,2vw,25px)">
+            <a href="mailto:business@coursevista.com.au" style="color:#FAF8F4" style-hover="color:#E6D3AC">business@coursevista.com.au</a>
+            <a href="tel:+61473239787" style="color:#FAF8F4" style-hover="color:#E6D3AC">0473 239 787</a>
+          </div>
+          <div style="font-size:13px;color:#A8B0A4;margin-top:16px">Brandon Pullens · CourseVista · Adelaide · working nationally</div>
+        </div>
+
+        <div style="background:#FAF8F4;padding:clamp(24px,3vw,40px)">
+          <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:16px">
+                <div style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#2C4A3B">{{ stepLabel }}</div>
+                <sc-if value="{{ canGoBack }}" hint-placeholder-val="{{ false }}">
+                  <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13px;color:#8A8D82" style-hover="color:#2C4A3B">← Back</button>
+                </sc-if>
+              </div>
+              <div style="height:1px;background:#E4E0D6;margin:16px 0 30px;position:relative">
+                <div ref="{{ progressBar }}" style="position:absolute;left:0;top:0;height:1px;width:25%;background:#2C4A3B"></div>
+              </div>
+
+              <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+                <div>
+                  <label for="cv-club" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.2vw,27px);color:#16170F;display:block;margin-bottom:20px">Which club are you with?</label>
+                  <input id="cv-club" ref="{{ clubInput }}" type="text" value="{{ club }}" onChange="{{ setClub }}" onKeyDown="{{ onKeyNext }}" placeholder="Club name" autoComplete="organization" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:15px 16px;font-size:16px;color:#16170F">
+                  <sc-if value="{{ clubError }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size:13px;color:#8A6B2E;margin-top:10px">A club name gets us started — that's all we need here.</div>
+                  </sc-if>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+                <div>
+                  <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.2vw,27px);color:#16170F;margin-bottom:20px">How many holes?</div>
+                  <div style="display:flex;flex-wrap:wrap;gap:10px">
+                    <sc-for list="{{ holeChoices }}" as="opt" hint-placeholder-count="5">
+                      <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="border:1px solid {{ opt.border }};background:{{ opt.bg }};color:{{ opt.fg }};padding:13px 20px;font-size:15px;cursor:pointer;min-width:56px">{{ opt.label }}</button>
+                    </sc-for>
+                  </div>
+                  <label for="cv-url" style="display:block;font-size:13px;color:#8A8D82;margin:28px 0 10px">Club website (optional)</label>
+                  <input id="cv-url" type="url" value="{{ url }}" onChange="{{ setUrl }}" placeholder="yourclub.com.au" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:15px 16px;font-size:16px;color:#16170F">
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+                <div>
+                  <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.2vw,27px);color:#16170F;margin-bottom:20px">What would you like to create?</div>
+                  <div style="display:flex;flex-direction:column">
+                    <sc-for list="{{ wantChoices }}" as="opt" hint-placeholder-count="4">
+                      <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="display:flex;align-items:center;gap:14px;background:none;border:0;border-top:1px solid #E4E0D6;padding:16px 0;cursor:pointer;text-align:left;font-size:16px;color:#55584D" style-hover="color:#16170F">
+                        <span style="width:16px;height:16px;border:1px solid {{ opt.border }};background:{{ opt.box }};flex:0 0 auto"></span>
+                        <span>{{ opt.label }}</span>
+                      </button>
+                    </sc-for>
+                    <div style="border-top:1px solid #E4E0D6"></div>
+                  </div>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ isStep4 }}" hint-placeholder-val="{{ false }}">
+                <div>
+                  <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.2vw,27px);color:#16170F;margin-bottom:20px">Where should we send the assessment?</div>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:14px">
+                    <div>
+                      <label for="cv-name" style="display:block;font-size:12px;color:#8A8D82;margin-bottom:8px">Name</label>
+                      <input id="cv-name" type="text" value="{{ name }}" onChange="{{ setName }}" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:14px 15px;font-size:16px;color:#16170F">
+                    </div>
+                    <div>
+                      <label for="cv-role" style="display:block;font-size:12px;color:#8A8D82;margin-bottom:8px">Role</label>
+                      <input id="cv-role" type="text" value="{{ role }}" onChange="{{ setRole }}" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:14px 15px;font-size:16px;color:#16170F">
+                    </div>
+                    <div>
+                      <label for="cv-email" style="display:block;font-size:12px;color:#8A8D82;margin-bottom:8px">Email</label>
+                      <input id="cv-email" type="email" value="{{ email }}" onChange="{{ setEmail }}" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:14px 15px;font-size:16px;color:#16170F">
+                    </div>
+                    <div>
+                      <label for="cv-phone" style="display:block;font-size:12px;color:#8A8D82;margin-bottom:8px">Phone (optional)</label>
+                      <input id="cv-phone" type="tel" value="{{ phone }}" onChange="{{ setPhone }}" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:14px 15px;font-size:16px;color:#16170F">
+                    </div>
+                  </div>
+                  <sc-if value="{{ contactError }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size:13px;color:#8A6B2E;margin-top:14px">{{ contactError }}</div>
+                  </sc-if>
+                </div>
+              </sc-if>
+
+              <button type="button" onClick="{{ next }}" style="margin-top:30px;width:100%;background:#2C4A3B;color:#FAF8F4;border:0;padding:16px 22px;font-size:15px;font-weight:500;cursor:pointer" style-hover="background:#16170F">{{ nextLabel }}</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:8px 0">
+              <div style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#2C4A3B">Received</div>
+              <p style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.2vw,28px);line-height:1.3;color:#16170F;margin:20px 0 0;text-wrap:pretty">We'll review the photography available for {{ clubOrCourse }} and tell you whether it's suitable before discussing a project.</p>
+              <div style="border-top:1px solid #E4E0D6;margin-top:28px;padding-top:20px;font-size:14px;color:#8A8D82">Usually within two business days, from business@coursevista.com.au.</div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <footer style="position:relative;z-index:1;background:#FAF8F4">
+      <div style="max-width:1360px;margin:0 auto;padding:36px clamp(20px,4vw,40px) 56px;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center;font-size:13px;color:#8A8D82">
+        <img src="assets/cv-mark.png" alt="CourseVista" style="height:24px;width:auto">
+        <nav style="display:flex;flex-wrap:wrap;gap:10px 22px">
+          <a href="#work" style="color:#8A8D82" style-hover="color:#2C4A3B">Work</a>
+          <a href="#how" style="color:#8A8D82" style-hover="color:#2C4A3B">How it works</a>
+          <a href="#pricing" style="color:#8A8D82" style-hover="color:#2C4A3B">Pricing</a>
+          <a href="#enquiry" style="color:#8A8D82" style-hover="color:#2C4A3B">Contact</a>
+        </nav>
+        <div style="margin-left:auto;display:flex;flex-wrap:wrap;gap:10px 22px">
+          <span>Australia</span>
+          <span>ABN 63 310 893 546</span>
+          <span>© 2026 CourseVista</span>
+          <a href="#privacy" style="color:#8A8D82" style-hover="color:#2C4A3B">Privacy</a>
+          <a href="#terms" style="color:#8A8D82" style-hover="color:#2C4A3B">Terms</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closePanel }}" role="dialog" aria-modal="true" style="position:fixed;inset:0;z-index:60;background:rgba(22,23,15,0.42);display:flex;align-items:flex-start;justify-content:center;padding:clamp(12px,3vw,48px);overflow:auto">
+      <div ref="{{ panel }}" onClick="{{ stop }}" style="width:100%;max-width:1120px;background:#FAF8F4;border:1px solid #E4E0D6;border-radius:5px;padding:clamp(20px,3vw,44px);margin:auto">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;border-bottom:1px solid #E4E0D6;padding-bottom:20px">
+          <div>
+            <div style="font-family:'Playfair Display',Georgia,serif;font-size:14px;color:#B08D4F;letter-spacing:0.06em">{{ panelNumber }}</div>
+            <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(25px,3vw,38px);line-height:1.08;margin:12px 0 0">{{ panelTitle }}</h3>
+          </div>
+          <button type="button" onClick="{{ closePanel }}" aria-label="Close" style="background:none;border:0;padding:6px;cursor:pointer;font-size:13px;color:#8A8D82;flex:0 0 auto" style-hover="color:#16170F">Close &#10005;</button>
+        </div>
+
+        <sc-if value="{{ isFilms }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(24px,3vw,44px);padding-top:clamp(22px,3vw,34px)">
+            <div>
+              <div style="position:relative;aspect-ratio:16/9;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
+                <video data-panel-video="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" controls="{{ true }}" preload="metadata" poster="assets/poster-03.png" src="assets/hole-03.mp4" aria-label="Full hole film" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:14px">
+                <sc-for list="{{ holeNav }}" as="n" hint-placeholder-count="18">
+                  <span style="min-width:26px;height:26px;border:1px solid #E4E0D6;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A8D82;background:#FFFFFF">{{ n }}</span>
+                </sc-for>
+              </div>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:12px;margin-top:16px">
+                    <div style="aspect-ratio:4/3;border:1px solid #E4E0D6;background:#F1EDE6;overflow:hidden"><img src="assets/photo-tee.png" alt="Tee view" style="width:100%;height:100%;object-fit:cover"></div>
+                    <div style="aspect-ratio:4/3;border:1px solid #E4E0D6;background:#F1EDE6;overflow:hidden"><img src="assets/photo-fairway.png" alt="Fairway" style="width:100%;height:100%;object-fit:cover"></div>
+                    <div style="aspect-ratio:4/3;border:1px solid #E4E0D6;background:#F1EDE6;overflow:hidden"><img src="assets/course-bunker.png" alt="Green complex from above" style="width:100%;height:100%;object-fit:cover"></div>
+                  </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <p style="font-size:16px;line-height:1.66;margin:0;text-wrap:pretty">Eighteen films, thirty seconds each, tee to green. Delivered as 1080p MP4 files at 16:9, plus a vertical crop for socials, named by hole and sized to drop straight onto your existing hole pages.</p>
+              <div style="border-top:1px solid #E4E0D6;padding-top:16px;display:flex;flex-direction:column;gap:10px;font-size:14px;color:#55584D">
+                <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#8A8D82">Format</span><span style="color:#16170F">1080p MP4 · 16:9 and 9:16</span></div>
+                <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#8A8D82">Length</span><span style="color:#16170F">30 seconds per hole</span></div>
+                <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#8A8D82">Delivery</span><span style="color:#16170F">Download link, about two weeks</span></div>
+              </div>
+              <div style="border-top:1px solid #B08D4F;padding-top:18px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(19px,2vw,25px);line-height:1.25;color:#16170F;text-wrap:pretty">The files are yours outright. No licence, no expiry, no attribution.</div>
+              <a href="glenelg/" style="align-self:flex-start;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500" style-hover="background:#16170F">See a full hole film</a>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isHomepage }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(24px,3vw,44px);padding-top:clamp(22px,3vw,34px)">
+            <div style="background:#FFFFFF;border:1px solid #E4E0D6;overflow:hidden;align-self:start">
+              <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid #E4E0D6">
+                <span style="width:7px;height:7px;border-radius:50%;background:#E4E0D6"></span>
+                <span style="width:7px;height:7px;border-radius:50%;background:#E4E0D6"></span>
+                <span style="flex:1;text-align:center;font-size:11px;color:#8A8D82">yourclub.com.au</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;border-bottom:1px solid #E4E0D6">
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#16170F">Your Golf Club</span>
+                <span style="display:flex;gap:14px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82"><span>Course</span><span>Visitors</span><span>Members</span></span>
+              </div>
+              <div style="position:relative;aspect-ratio:16/9;background:#F1EDE6;overflow:hidden">
+                <video data-panel-video="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" poster="assets/course-mist.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+                <div style="position:absolute;left:0;bottom:0;padding:clamp(14px,2vw,26px)">
+                  <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(18px,2.4vw,30px);color:#FAF8F4;max-width:20ch;line-height:1.12;text-wrap:pretty">Experience the course before you arrive.</div>
+                  <span style="display:inline-block;margin-top:12px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#FAF8F4;border-bottom:1px solid rgba(250,248,244,0.6);padding-bottom:3px">Book a tee time</span>
+                </div>
+              </div>
+              <div style="padding:14px 14px 18px">
+                <div style="height:8px;width:48%;background:#E4E0D6"></div>
+                <div style="height:8px;width:72%;background:#EDE9E0;margin-top:8px"></div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+                <div style="flex:0 0 130px;border:1px solid #E4E0D6;border-radius:12px;background:#FFFFFF;padding:8px 8px 12px">
+                  <div style="height:3px;width:34px;background:#E4E0D6;margin:0 auto 8px;border-radius:2px"></div>
+                  <div style="position:relative;aspect-ratio:9/16;background:#F1EDE6;overflow:hidden;border:1px solid #E4E0D6">
+                    <video data-panel-video="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/course-coastal.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down on mobile" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+                  </div>
+                </div>
+                <p style="font-size:16px;line-height:1.66;margin:0;flex:1 1 200px;text-wrap:pretty">One cinematic cut of all eighteen, supplied in landscape for the top of your site and vertical for socials and stay-and-play listings. Muted autoplay-ready, with a poster frame so the page paints instantly.</p>
+              </div>
+              <div style="border-top:1px solid #E4E0D6;padding-top:16px;display:flex;flex-direction:column;gap:10px;font-size:14px">
+                <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#8A8D82">Supplied as</span><span style="color:#16170F">MP4 and poster frame</span></div>
+                <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#8A8D82">Crops</span><span style="color:#16170F">16:9, 1:1, 9:16</span></div>
+                <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#8A8D82">Length</span><span style="color:#16170F">60 to 90 seconds</span></div>
+              </div>
+              <a href="#work" onClick="{{ closePanel }}" style="align-self:flex-start;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500" style-hover="background:#16170F">See the homepage cut</a>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isGuide }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(24px,3vw,44px);padding-top:clamp(22px,3vw,34px)">
+            <div style="background:#FFFFFF;border:1px solid #E4E0D6;padding:clamp(16px,2vw,24px);align-self:start">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #E4E0D6;padding-bottom:14px">
+                <img src="assets/cv-wordmark.png" alt="CourseVista" style="height:12px;width:auto">
+                <span style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#2C4A3B">Glenelg Golf Club</span>
+              </div>
+              <div style="display:flex;align-items:flex-end;gap:18px;margin:20px 0 16px">
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:44px;line-height:0.9;color:#B08D4F">01</span>
+                <span style="display:flex;gap:16px;font-size:12px;color:#8A8D82;padding-bottom:5px"><span>Par 4</span><span>372 m</span><span>Index 7</span></span>
+              </div>
+              <div style="position:relative;aspect-ratio:16/9;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
+                <video data-panel-video="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" controls="{{ true }}" preload="metadata" poster="assets/poster-13.png" src="assets/hole-13.mp4" aria-label="Hosted guide, hole one" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:16px">
+                <sc-for list="{{ holeNav }}" as="n" hint-placeholder-count="18">
+                  <span style="min-width:24px;height:24px;border:1px solid #E4E0D6;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A8D82">{{ n }}</span>
+                </sc-for>
+              </div>
+              <div style="display:flex;justify-content:space-between;gap:16px;border-top:1px solid #E4E0D6;margin-top:16px;padding-top:14px;font-size:13px;color:#2C4A3B">
+                <span>← Hole 18</span><span>Hole 02 →</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+                <div style="flex:0 0 126px;border:1px solid #E4E0D6;border-radius:12px;background:#FFFFFF;padding:8px 8px 12px">
+                  <div style="height:3px;width:32px;background:#E4E0D6;margin:0 auto 8px;border-radius:2px"></div>
+                  <div style="aspect-ratio:9/16;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden;position:relative">
+                    <img src="assets/poster-07.png" alt="Guide on a phone at the tee" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+                    <span style="position:absolute;left:8px;top:8px;font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#FAF8F4">07</span>
+                  </div>
+                </div>
+                <p style="font-size:16px;line-height:1.66;margin:0;flex:1 1 200px;text-wrap:pretty">Every hole on its own page, hosted at coursevista.com.au/yourclub. Link it from your course pages, embed it, or point a visitor at it from the tee.</p>
+              </div>
+              <div style="border-top:1px solid #E4E0D6;padding-top:16px;display:flex;flex-direction:column;gap:10px;font-size:14px">
+                <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#8A8D82">Address</span><span style="color:#16170F">coursevista.com.au/yourclub</span></div>
+                <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#8A8D82">Pages</span><span style="color:#16170F">One per hole, plus the cut-down</span></div>
+                <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#8A8D82">Hosting</span><span style="color:#16170F">Annual, or host it yourself</span></div>
+              </div>
+              <div style="border-top:1px solid #B08D4F;padding-top:18px">
+                <div style="font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#8A6B2E">Reporting</div>
+                <p style="font-size:15px;line-height:1.6;margin:10px 0 0;text-wrap:pretty">Monthly view and scan counts per hole, so you can see which holes visitors actually watch.</p>
+              </div>
+              <a href="glenelg/" style="align-self:flex-start;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500" style-hover="background:#16170F">View the course guide</a>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <div ref="{{ stickyCta }}" style="position:fixed;left:0;right:0;bottom:0;z-index:50;background:#FAF8F4;border-top:1px solid #E4E0D6;padding:12px 20px;display:none;align-items:center;justify-content:space-between;gap:16px">
+    <span style="font-size:13px;color:#55584D">Photography already suitable?</span>
+    <a href="#enquiry" style="background:#2C4A3B;color:#FAF8F4;padding:12px 18px;font-size:14px;font-weight:500">Check my course</a>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;showCalculator&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot; },
+  &quot;showQrPackage&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot; },
+  &quot;showStickyMobileCta&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot; }
+}">
+const COST = {
+  holesPerDay: 6,
+  extraDays: 1,
+  dayRate: { "Local club": 4200, "Destination course": 5400, "Resort / multi-course facility": 6600 },
+  aerialPerDay: 1600,
+  travelPerDay: { "Local club": 350, "Destination course": 1100, "Resort / multi-course facility": 1400 },
+  roundsPerDay: { "Local club": 110, "Destination course": 90, "Resort / multi-course facility": 150 },
+  displacedShare: 0.22,
+  feeOptions: [150, 250, 380, 580]
+};
+
+const JOURNEY = [
+  { n: "01", title: "Tell us your club", body: "We check the photography already published by your club and tell you whether it is sufficient. Nothing is needed from you but the name." },
+  { n: "02", title: "See three holes", body: "We create three sample holes at no cost, sent as a link you can share with your committee. They are yours either way." },
+  { n: "03", title: "Approve the course", body: "If the result is right, we build the remaining holes. If it isn't, we leave it there and you have lost nothing." },
+  { n: "04", title: "Receive everything", body: "Your complete hole-film set, the homepage cut and the optional hosted course guide are delivered in about two weeks from go-ahead." }
+];
+
+class Component extends DCLogic {
+  state = {
+    holes: 18,
+    courseType: "Local club",
+    greenFee: 250,
+    journeyOpen: 0,
+    panel: null,
+    faqOpen: null,
+    step: 1,
+    done: false,
+    club: "", formHoles: "18", url: "", wants: [], name: "", role: "", email: "", phone: "",
+    clubError: false, contactError: ""
+  };
+
+  refs = {};
+  ref(k) { this.refs[k] = this.refs[k] || React.createRef(); return this.refs[k]; }
+  el(k) { return this.refs[k] && this.refs[k].current; }
+
+  componentDidMount() {
+    this._lastStep = this.state.step;
+    const hv = this.el("heroVideo");
+    if (hv) { hv.muted = true; hv.volume = 0; hv.removeAttribute("controls"); }
+    this.silence();
+    this._onKey = e => { if (e.key === "Escape" && this.state.panel) this.closePanel(); };
+    document.addEventListener("keydown", this._onKey);
+    this.reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    this.setupReveal();
+    this.setupVideos();
+    this.setupCompare();
+    this.setupScroll();
+    this.setupSticky();
+    this.paintCalc(false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this._onKey);
+    if (this._hush) ["play", "playing", "loadedmetadata", "canplay", "volumechange"].forEach(ev => document.removeEventListener(ev, this._hush, true));
+    document.body.style.overflow = "";
+    if (this.io) this.io.disconnect();
+    if (this.vio) this.vio.disconnect();
+    window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.onResize);
+    if (this.rafScrub) cancelAnimationFrame(this.rafScrub);
+  }
+
+  /* ---------- reveal ---------- */
+  setupReveal() {
+    const nodes = Array.from(document.querySelectorAll("[data-reveal]"));
+    if (this.reduced) return;
+    nodes.forEach(n => {
+      const kind = n.getAttribute("data-reveal");
+      n.style.willChange = "opacity, transform, clip-path";
+      n.style.transition = "opacity 780ms cubic-bezier(.22,.61,.36,1), transform 900ms cubic-bezier(.22,.61,.36,1), clip-path 1000ms cubic-bezier(.22,.61,.36,1)";
+      n.style.opacity = "0";
+      if (kind === "up") n.style.transform = "translateY(16px)";
+      if (kind === "scale") n.style.transform = "scale(1.03)";
+      if (kind === "clip") n.style.clipPath = "inset(0 0 22% 0)";
+    });
+    this.revealNodes = nodes;
+    this.io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) this.show(e.target); });
+    }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
+    nodes.forEach(n => this.io.observe(n));
+  }
+
+  show(n) {
+    if (!n || n.dataset.revealed === "1") return;
+    n.dataset.revealed = "1";
+    n.style.opacity = "1";
+    n.style.transform = "none";
+    n.style.clipPath = "inset(0 0 0 0)";
+    if (this.io) this.io.unobserve(n);
+  }
+
+  sweepReveals() {
+    if (!this.revealNodes) return;
+    const vh = window.innerHeight;
+    let pending = false;
+    this.revealNodes.forEach(n => {
+      if (n.dataset.revealed === "1") return;
+      const r = n.getBoundingClientRect();
+      if (r.top < vh * 0.92 || r.bottom < 0) this.show(n);
+      else pending = true;
+    });
+    if (!pending) this.revealNodes = null;
+  }
+
+  /* ---------- video ---------- */
+  setupVideos() {
+    const vids = Array.from(document.querySelectorAll("video"));
+    this.vio = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const v = e.target;
+        if (e.isIntersecting) {
+          if (v.muted && v.hasAttribute("loop")) this.safePlay(v);
+        } else if (!v.paused) {
+          v.pause();
+        }
+      });
+    }, { threshold: 0.35 });
+    vids.forEach(v => this.vio.observe(v));
+    this.scrubLoop();
+  }
+
+  silence() {
+    const hero = this.el("heroVideo");
+    const hush = v => {
+      if (v !== hero && v.dataset.allowAudio === "1") return;
+      v.muted = true;
+      v.defaultMuted = true;
+      v.volume = 0;
+      if (!v.hasAttribute("muted")) v.setAttribute("muted", "");
+      if (v === hero) { v.removeAttribute("controls"); v.controls = false; }
+    };
+    document.querySelectorAll("video").forEach(hush);
+    this._hush = e => { if (e.target && e.target.tagName === "VIDEO") hush(e.target); };
+    ["play", "playing", "loadedmetadata", "canplay", "volumechange"].forEach(ev =>
+      document.addEventListener(ev, this._hush, true)
+    );
+  }
+
+  safePlay(v) {
+    try {
+      const p = v.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    } catch (e) { /* autoplay blocked or interrupted */ }
+  }
+
+  scrubLoop = () => {
+    const v = this.el("v1"), bar = this.el("scrub1");
+    if (v && bar && v.readyState > 0 && isFinite(v.duration) && v.duration > 0) {
+      bar.style.width = ((v.currentTime / v.duration) * 100).toFixed(1) + "%";
+    }
+    this.rafScrub = requestAnimationFrame(this.scrubLoop);
+  };
+
+  /* ---------- before / after ---------- */
+  setupCompare() {
+    const wrap = this.el("compareWrap");
+    if (!wrap) return;
+    let pct = 50;
+    const paint = () => {
+      const img = this.el("compareBefore"), line = this.el("compareLine");
+      if (img) img.style.clipPath = "inset(0 " + (100 - pct) + "% 0 0)";
+      if (line) line.style.left = pct + "%";
+      wrap.setAttribute("aria-valuenow", Math.round(pct));
+    };
+    const set = clientX => {
+      const r = wrap.getBoundingClientRect();
+      pct = Math.max(0, Math.min(100, ((clientX - r.left) / r.width) * 100));
+      paint();
+    };
+    let dragging = false;
+    wrap.addEventListener("pointerdown", e => { dragging = true; wrap.setPointerCapture(e.pointerId); set(e.clientX); });
+    wrap.addEventListener("pointermove", e => { if (dragging) set(e.clientX); });
+    wrap.addEventListener("pointerup", () => { dragging = false; });
+    wrap.addEventListener("keydown", e => {
+      const stepK = e.shiftKey ? 10 : 4;
+      if (e.key === "ArrowLeft") { pct = Math.max(0, pct - stepK); paint(); e.preventDefault(); }
+      if (e.key === "ArrowRight") { pct = Math.min(100, pct + stepK); paint(); e.preventDefault(); }
+      if (e.key === "Home") { pct = 0; paint(); }
+      if (e.key === "End") { pct = 100; paint(); }
+    });
+    paint();
+  }
+
+  /* ---------- scroll: parallax, how-line, why crossfade ---------- */
+  setupScroll() {
+    this.onScroll = () => {
+      if (this.tick) return;
+      this.tick = true;
+      requestAnimationFrame(() => { this.tick = false; this.paintScroll(); });
+    };
+    this.onResize = () => { this.paintScroll(); this.paintSticky(); };
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+    window.addEventListener("resize", this.onResize);
+    this.paintScroll();
+  }
+
+  paintScroll() {
+    const vh = window.innerHeight;
+    this.sweepReveals();
+    this.paintHeader();
+    if (!this.reduced) {
+      const frame = this.el("heroFrame"), vid = this.el("heroVideo"), content = this.el("heroContent"), dim = this.el("heroDim");
+      if (frame && vid) {
+        const h = Math.max(1, frame.offsetHeight);
+        const p = Math.max(0, Math.min(1, window.scrollY / (h * 0.85)));
+        const cover = p;
+        vid.style.transform = "translate3d(0," + (cover * -46).toFixed(1) + "px,0) scale(" + (1 + cover * 0.05).toFixed(3) + ")";
+        if (dim) dim.style.background = "rgba(10,12,8," + (0.3 + cover * 0.26).toFixed(3) + ")";
+        if (content) {
+          content.style.transform = "translate3d(0," + (p * -34).toFixed(1) + "px,0)";
+          content.style.opacity = String(Math.max(0, 1 - p * 1.5));
+        }
+      }
+    }
+    const whyWrap = this.el("whyWrap"), still = this.el("whyStill");
+    if (whyWrap && still) {
+      const r = whyWrap.getBoundingClientRect();
+      const p = Math.max(0, Math.min(1, (vh * 0.78 - r.top) / (r.height * 0.7)));
+      still.style.opacity = this.reduced ? "0" : String(1 - p);
+      still.style.transform = "scale(" + (1 + p * 0.02).toFixed(3) + ")";
+    }
+    if (!this.metricsDone) {
+      const m = this.el("m1");
+      if (m && m.getBoundingClientRect().top < vh * 0.9) {
+        this.metricsDone = true;
+        this.tween(this.el("m1"), 0, 30, v => String(Math.round(v)));
+        this.tween(this.el("m2"), 0, 18, v => String(Math.round(v)));
+        this.tween(this.el("m3"), 0, 0, () => "0");
+        this.tween(this.el("m4"), 0, 1, v => String(Math.round(v)));
+      }
+    }
+    this.paintSticky();
+  }
+
+  paintHeader() {
+    const header = this.el("headerRef");
+    const hero = this.el("heroFrame");
+    if (!header || !hero) return;
+    const solid = window.scrollY > Math.max(0, hero.offsetHeight - 90);
+    if (this._solidNav === solid) return;
+    this._solidNav = solid;
+    header.style.backgroundColor = solid ? "#FAF8F4" : "transparent";
+    header.style.borderBottomColor = solid ? "#E4E0D6" : "rgba(250,248,244,0.2)";
+    document.querySelectorAll("[data-nav-link]").forEach(a => { a.style.color = solid ? "#2C4A3B" : "#FAF8F4"; });
+    const cta = document.querySelector("[data-nav-cta]");
+    if (cta) {
+      cta.style.color = solid ? "#2C4A3B" : "#FAF8F4";
+      cta.style.borderColor = solid ? "#2C4A3B" : "rgba(250,248,244,0.6)";
+    }
+    const mark = document.querySelector("[data-nav-mark]"), word = document.querySelector("[data-nav-word]");
+    if (mark) mark.src = solid ? "assets/cv-mark.png" : "assets/cv-mark-light.png";
+    if (word) word.src = solid ? "assets/cv-wordmark.png" : "assets/cv-wordmark-light.png";
+  }
+
+  setupSticky() { this.paintSticky(); }
+
+  setupPointerDepth() {
+    const frame = this.el("heroFrame");
+    if (!frame || this.reduced) return;
+    this.pointer = { x: 0, y: 0 };
+    frame.addEventListener("pointermove", e => {
+      const r = frame.getBoundingClientRect();
+      this.pointer = {
+        x: (((e.clientX - r.left) / r.width) - 0.5) * 14,
+        y: (((e.clientY - r.top) / r.height) - 0.5) * 10
+      };
+      this.paintScroll();
+    });
+    frame.addEventListener("pointerleave", () => { this.pointer = { x: 0, y: 0 }; this.paintScroll(); });
+  }
+
+  paintSticky() {
+    const bar = this.el("stickyCta");
+    if (!bar) return;
+    const show = (this.props.showStickyMobileCta ?? true) && window.innerWidth < 720 && window.scrollY > window.innerHeight * 0.9;
+    bar.style.display = show ? "flex" : "none";
+  }
+
+  /* ---------- counters ---------- */
+  tween(node, from, to, fmt, ms) {
+    if (!node) return;
+    if (this.reduced) { node.textContent = fmt(to); return; }
+    const dur = ms || 900, t0 = performance.now();
+    const step = now => {
+      const p = Math.min(1, (now - t0) / dur);
+      const e = 1 - Math.pow(1 - p, 3);
+      node.textContent = fmt(from + (to - from) * e);
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- calculator ---------- */
+  calc(holes, type, fee) {
+    const days = Math.ceil(holes / COST.holesPerDay) + COST.extraDays;
+    const perDay = COST.dayRate[type] + COST.aerialPerDay + COST.travelPerDay[type];
+    const mid = Math.round((days * perDay) / 100) * 100;
+    const displaced = Math.round(days * COST.roundsPerDay[type] * COST.displacedShare);
+    const lost = displaced * fee;
+    return { days, crew: days, holes, mid, displaced, lost, total: mid + lost };
+  }
+
+  money(v) { return "$" + Math.round(v).toLocaleString("en-AU"); }
+
+  paintCalc(animate) {
+    const c = this.calc(this.state.holes, this.state.courseType, this.state.greenFee);
+    const prev = this.prevCalc || { days: 0, crew: 0, holes: 0, displaced: 0, mid: 0, lost: 0, total: 0 };
+    const go = (key, from, to, fmt) => {
+      const node = this.el(key);
+      if (!node) return;
+      if (animate) this.tween(node, from, to, fmt, 600);
+      else node.textContent = fmt(to);
+    };
+    go("tDays", prev.days, c.days, v => String(Math.round(v)));
+    go("tCrew", prev.crew, c.crew, v => String(Math.round(v)));
+    go("tClosure", prev.holes, c.holes, v => String(Math.round(v)));
+    go("tDisplaced", prev.displaced, c.displaced, v => Math.round(v).toLocaleString("en-AU"));
+    go("tCost", prev.mid, c.mid, v => this.money(v));
+    go("tLost", prev.lost, c.lost, v => this.money(v));
+    go("tTotal", prev.total, c.total, v => this.money(v));
+    const prod = this.el("barProd"), clos = this.el("barClosure");
+    if (prod) { prod.style.transition = "width 600ms cubic-bezier(.22,.61,.36,1)"; prod.style.width = ((c.mid / c.total) * 100).toFixed(1) + "%"; }
+    if (clos) { clos.style.transition = "width 600ms cubic-bezier(.22,.61,.36,1)"; clos.style.width = ((c.lost / c.total) * 100).toFixed(1) + "%"; }
+    const avoid = this.el("avoidLine");
+    if (avoid) avoid.textContent = "Avoid " + c.days + " filming days, " + c.displaced.toLocaleString("en-AU") + " displaced rounds and every hour of course closure.";
+    this.prevCalc = c;
+  }
+
+  setHoles = n => { this.setState({ holes: n }, () => this.paintCalc(true)); };
+  setType = t => { this.setState({ courseType: t }, () => this.paintCalc(true)); };
+  setFee = f => { this.setState({ greenFee: f }, () => this.paintCalc(true)); };
+
+  openPanel = id => this.setState({ panel: id });
+  closePanel = () => this.setState({ panel: null });
+
+  /* ---------- feature video ---------- */
+  playFeature = () => {
+    const el = document.getElementById("work");
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 60, behavior: this.reduced ? "auto" : "smooth" });
+    const v = this.el("featureVideo");
+    if (v) { v.dataset.allowAudio = "1"; v.muted = false; v.volume = 1; v.controls = true; this.safePlay(v); }
+  };
+
+  /* ---------- form ---------- */
+  next = () => {
+    const s = this.state;
+    if (s.step === 1) {
+      if (!s.club.trim()) { this.setState({ clubError: true }); return; }
+      this.setState({ step: 2, clubError: false });
+      return;
+    }
+    if (s.step === 2 || s.step === 3) { this.setState({ step: s.step + 1 }); return; }
+    const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email.trim());
+    if (!s.name.trim() || !okEmail) {
+      this.setState({ contactError: !s.name.trim() ? "We need a name to address the assessment to." : "That email doesn't look complete — check it and we'll send the assessment there." });
+      return;
+    }
+    this.setState({ done: true, contactError: "" });
+  };
+
+  back = () => this.setState(st => ({ step: Math.max(1, st.step - 1), contactError: "" }));
+
+  componentDidUpdate() {
+    if (this._lastPanel !== this.state.panel) {
+      this._lastPanel = this.state.panel;
+      document.body.style.overflow = this.state.panel ? "hidden" : "";
+      if (this.state.panel) {
+        const node = this.el("panel");
+        if (node) {
+          if (!this.reduced) {
+            node.style.opacity = "0";
+            node.style.transform = "translateY(14px) scale(0.985)";
+            requestAnimationFrame(() => {
+              node.style.transition = "opacity 340ms cubic-bezier(.22,.61,.36,1), transform 520ms cubic-bezier(.16,.84,.24,1)";
+              node.style.opacity = "1";
+              node.style.transform = "none";
+            });
+          }
+          node.querySelectorAll("video[data-panel-video]").forEach(v => { if (v.muted) this.safePlay(v); });
+        }
+      }
+    }
+    if (this._lastStep !== this.state.step) {
+      this._lastStep = this.state.step;
+      const bar = this.el("progressBar");
+      if (bar) bar.style.width = this.state.step * 25 + "%";
+      if (this.state.step === 1) { const i = this.el("clubInput"); if (i) i.focus(); }
+    }
+  }
+
+  toggleWant = label => this.setState(st => ({
+    wants: st.wants.indexOf(label) >= 0 ? st.wants.filter(w => w !== label) : st.wants.concat([label])
+  }));
+
+  faqList() {
+    return [
+      { q: "Do you need to visit the course?", a: "No. Everything is built from the photography you already publish. Nothing is shot on site and your course is never closed." },
+      { q: "What photography do you need?", a: "Tee views, fairway coverage, green complexes, and a course map or yardage information. Existing aerial imagery helps. Send the club name and we'll check what's already published." },
+      { q: "What if our photography isn't good enough?", a: "Then we'll tell you, before either of us spends anything. Some courses can't be done well from what's published, and we'd rather say so than deliver something that doesn't look like your course. Often clubs hold far more imagery than they've put online — that's usually the fix." },
+      { q: "How are the films made?", a: "They're built from your own course photography rather than filmed on site. That's why a full eighteen costs a fraction of a conventional production, and why we'd rather show you three finished holes than describe the process." },
+      { q: "Who owns the files?", a: "You do, outright. No licence, no expiry, no attribution required. Use them on your site, your socials, your ads, anywhere." },
+      { q: "How long does production take?", a: "About two weeks from go-ahead for a full eighteen plus the homepage cut-down." },
+      { q: "We already have drone flyovers. Why would we use CourseVista?", a: "Worth a look at when they were made. A lot of club footage predates a bunker programme or a redesign and shows holes that no longer exist. Rebuilding from current photography is faster and cheaper than commissioning another shoot." },
+      { q: "Do you work outside South Australia?", a: "Yes. Distance makes no difference to the process — clubs in Victoria, New South Wales, Queensland, WA and Tasmania are all the same job." }
+    ];
+  }
+
+  renderVals() {
+    const s = this.state;
+    const R = k => this.ref(k);
+    const holeOptions = [9, 18, 27, 36].map(n => ({
+      label: String(n), active: s.holes === n, inactiveLabel: s.holes !== n, onPick: () => this.setHoles(n)
+    }));
+    const feeOptions = COST.feeOptions.map(f => ({
+      label: "$" + f, active: s.greenFee === f, inactiveLabel: s.greenFee !== f, onPick: () => this.setFee(f)
+    }));
+    const journey = JOURNEY.map((j, i) => ({
+      n: j.n, title: j.title, body: j.body,
+      open: s.journeyOpen === i, closed: s.journeyOpen !== i,
+      onToggle: () => this.setState(st => ({ journeyOpen: st.journeyOpen === i ? null : i }))
+    }));
+    const typeOptions = ["Local club", "Destination course", "Resort / multi-course facility"].map(t => ({
+      label: t, active: s.courseType === t, inactive: s.courseType !== t, onPick: () => this.setType(t)
+    }));
+    const holeChoices = ["9", "18", "27", "36+", "Other"].map(l => {
+      const active = s.formHoles === l;
+      return {
+        label: l, active,
+        border: active ? "#2C4A3B" : "#E4E0D6",
+        bg: active ? "#2C4A3B" : "#FFFFFF",
+        fg: active ? "#FAF8F4" : "#55584D",
+        onPick: () => this.setState({ formHoles: l })
+      };
+    });
+    const wantChoices = ["Individual hole films", "Homepage film", "Hosted course guide", "Not sure yet"].map(l => {
+      const active = s.wants.indexOf(l) >= 0;
+      return {
+        label: l, active,
+        border: active ? "#2C4A3B" : "#E4E0D6",
+        box: active ? "#2C4A3B" : "#FFFFFF",
+        onPick: () => this.toggleWant(l)
+      };
+    });
+    const faqs = this.faqList().map((f, i) => ({
+      q: f.q, a: f.a,
+      open: s.faqOpen === i, closed: s.faqOpen !== i,
+      onToggle: () => this.setState(st => ({ faqOpen: st.faqOpen === i ? null : i }))
+    }));
+
+    return {
+      headerRef: R("headerRef"), heroFrame: R("heroFrame"), heroVideo: R("heroVideo"), heroContent: R("heroContent"), heroDim: R("heroDim"),
+      compareWrap: R("compareWrap"), compareBefore: R("compareBefore"), compareVideo: R("compareVideo"), compareLine: R("compareLine"),
+      v1: R("v1"), v2: R("v2"), scrub1: R("scrub1"),
+      whyWrap: R("whyWrap"), whyVideo: R("whyVideo"), whyStill: R("whyStill"),
+      m1: R("m1"), m2: R("m2"), m3: R("m3"), m4: R("m4"),
+      tDays: R("tDays"), tCrew: R("tCrew"), tClosure: R("tClosure"), tCost: R("tCost"), avoidLine: R("avoidLine"),
+      tDisplaced: R("tDisplaced"), tLost: R("tLost"), tTotal: R("tTotal"), barProd: R("barProd"), barClosure: R("barClosure"),
+      featureVideo: R("featureVideo"),
+      progressBar: R("progressBar"), clubInput: R("clubInput"), stickyCta: R("stickyCta"),
+      playFeature: this.playFeature,
+      showCalculator: this.props.showCalculator ?? true,
+      showQr: this.props.showQrPackage ?? true,
+      holeOptions, typeOptions, feeOptions, journey, holeChoices, wantChoices, faqs,
+      guideHoles: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      holeNav: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+      panel: R("panel"),
+      panelOpen: !!s.panel,
+      isFilms: s.panel === "films", isHomepage: s.panel === "homepage", isGuide: s.panel === "guide",
+      panelNumber: s.panel === "films" ? "01" : s.panel === "homepage" ? "02" : "03",
+      panelTitle: s.panel === "films" ? "18 hole films" : s.panel === "homepage" ? "Homepage film" : "Hosted course guide",
+      openFilms: () => this.openPanel("films"),
+      openHomepage: () => this.openPanel("homepage"),
+      openGuide: () => this.openPanel("guide"),
+      closePanel: this.closePanel,
+      stop: e => e.stopPropagation(),
+      formOpen: !s.done, done: s.done,
+      isStep1: !s.done && s.step === 1, isStep2: !s.done && s.step === 2,
+      isStep3: !s.done && s.step === 3, isStep4: !s.done && s.step === 4,
+      canGoBack: !s.done && s.step > 1,
+      stepLabel: s.step + " / 4",
+      nextLabel: s.step === 4 ? "Check my course" : "Continue",
+      club: s.club, url: s.url, name: s.name, role: s.role, email: s.email, phone: s.phone,
+      clubError: s.clubError, contactError: s.contactError,
+      clubOrCourse: s.club.trim() || "your club",
+      setClub: e => this.setState({ club: e.target.value, clubError: false }),
+      setUrl: e => this.setState({ url: e.target.value }),
+      setName: e => this.setState({ name: e.target.value }),
+      setRole: e => this.setState({ role: e.target.value }),
+      setEmail: e => this.setState({ email: e.target.value }),
+      setPhone: e => this.setState({ phone: e.target.value }),
+      onKeyNext: e => { if (e.key === "Enter") this.next(); },
+      next: this.next, back: this.back
+    };
+  }
+}
+
+</script>
+</body>
+</html>
