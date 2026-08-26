@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="icon" type="image/png" href="../../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://js.stripe.com/v3"></script>
+<style>
+html, body { margin: 0; padding: 0; background: #FAF8F4; }
+body { font-family: Inter, system-ui, sans-serif; color: #55584D; -webkit-font-smoothing: antialiased; }
+a { color: #2C4A3B; text-decoration: none; }
+a:hover { color: #16170F; }
+img { display: block; }
+button { font-family: inherit; }
+input, select, textarea { font-family: inherit; }
+:focus-visible { outline: 2px solid #2C4A3B; outline-offset: 3px; }
+@keyframes cv-spin { to { transform: rotate(360deg); } }
+@keyframes cv-fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes cv-rail-fade { from { opacity: 0.15; } to { opacity: 1; } }
+@keyframes cv-pay-marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+@media (prefers-reduced-motion: reduce) { [style*="cv-pay-marquee"] { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; } }
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#FAF8F4;color:#55584D;font-family:Inter,system-ui,sans-serif">
+
+  <header style="position:sticky;top:0;z-index:30;background:rgba(250,248,244,0.94);backdrop-filter:blur(12px);border-bottom:1px solid #E4E0D6">
+    <div style="max-width:1180px;margin:0 auto;padding:15px clamp(18px,4vw,34px);display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap">
+      <a href="/" style="display:flex;align-items:center;gap:10px;flex:0 0 auto">
+        <img src="../../assets/cv-mark.png" alt="CourseVista" style="height:26px;width:auto">
+        <img src="../../assets/cv-wordmark.png" alt="" style="height:15px;width:auto">
+      </a>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:9px;font-size:12px;color:#8A8D82">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A8D82" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="1.6"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+        <span>Secure project setup &#183; payments by Stripe</span>
+      </div>
+    </div>
+  </header>
+
+  <sc-if value="{{ showFlow }}" hint-placeholder-val="{{ true }}">
+  <div style="max-width:1180px;margin:0 auto;padding:clamp(26px,3.6vw,48px) clamp(18px,4vw,34px) 96px">
+
+    <div style="display:flex;flex-wrap:wrap;gap:6px 0;align-items:center;margin-bottom:clamp(28px,3.4vw,44px)">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+        <div style="display:flex;align-items:center;gap:12px;flex:0 1 auto;padding-right:12px">
+          <button type="button" onClick="{{ s.go }}" style="display:flex;align-items:baseline;gap:9px;background:none;border:0;padding:6px 0;cursor:pointer;text-align:left">
+            <span style="font-size:10px;font-weight:600;letter-spacing:0.18em;color:{{ s.numColor }}">{{ s.num }}</span>
+            <span style="font-size:13px;font-weight:500;letter-spacing:0.01em;color:{{ s.color }};border-bottom:1px solid {{ s.rule }};padding-bottom:3px">{{ s.label }}</span>
+          </button>
+          <sc-if value="{{ s.showDash }}" hint-placeholder-val="{{ true }}">
+            <span style="width:clamp(16px,3vw,46px);height:1px;background:#DAD5C9"></span>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(28px,3.4vw,52px);align-items:start" ref="{{ gridRef }}">
+
+      <div style="min-width:0">
+
+        <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+          <div style="animation:cv-fade 520ms cubic-bezier(.19,1,.22,1) both">
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Step one</div>
+            <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(29px,3.8vw,44px);line-height:1.1;margin:14px 0 0;max-width:18ch;text-wrap:pretty">Tell us which course we're building.</h1>
+            <p style="font-size:16px;line-height:1.65;margin:14px 0 0;max-width:52ch;text-wrap:pretty">We'll use this to confirm the source material and prepare your project.</p>
+
+            <div style="background:#FFFFFF;border:1px solid #E4E0D6;margin-top:clamp(24px,2.8vw,36px);padding:clamp(22px,2.6vw,34px);display:flex;flex-direction:column;gap:24px">
+
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px 22px">
+                <div>
+                  <label for="cv-club" style="display:block;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D82;margin-bottom:8px">Club name</label>
+                  <input id="cv-club" type="text" value="{{ club }}" onInput="{{ onClub }}" placeholder="Glenelg Golf Club" name="organization" autoComplete="organization" list="cv-clubs" spellCheck="{{ false }}" style="width:100%;box-sizing:border-box;background:#FDFCFA;border:1px solid #D9D4C8;padding:13px 14px;font-size:15px;color:#16170F;outline:none" style-focus="border-color:#2C4A3B;background:#FFFFFF">
+                  <sc-if value="{{ errClub }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size:12.5px;color:#A95752;margin-top:7px">Please enter the club name.</div>
+                  </sc-if>
+                </div>
+                <div>
+                  <label for="cv-site" style="display:block;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D82;margin-bottom:8px">Club website</label>
+                  <input id="cv-site" type="text" value="{{ website }}" onInput="{{ onWebsite }}" placeholder="yourclub.com.au" name="url" autoComplete="url" spellCheck="{{ false }}" style="width:100%;box-sizing:border-box;background:#FDFCFA;border:1px solid #D9D4C8;padding:13px 14px;font-size:15px;color:#16170F;outline:none" style-focus="border-color:#2C4A3B;background:#FFFFFF">
+                  <sc-if value="{{ errWebsite }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size:12.5px;color:#A95752;margin-top:7px">Please enter a valid website address.</div>
+                  </sc-if>
+                </div>
+              </div>
+
+              <div>
+                <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D82;margin-bottom:10px">Number of holes</div>
+                <div style="display:flex;flex-wrap:wrap;gap:10px">
+                  <sc-for list="{{ holeOptions }}" as="h" hint-placeholder-count="4">
+                    <button type="button" onClick="{{ h.pick }}" style="min-width:74px;padding:12px 18px;font-size:15px;font-weight:500;cursor:pointer;background:{{ h.bg }};border:1px solid {{ h.border }};color:{{ h.color }};transition:background-color 240ms ease, border-color 240ms ease, color 240ms ease">{{ h.label }}</button>
+                  </sc-for>
+                </div>
+              </div>
+
+              <div>
+                <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D82;margin-bottom:10px">Location</div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:12px">
+                  <input type="text" value="{{ city }}" onInput="{{ onCity }}" placeholder="City" name="city" autoComplete="address-level2" list="cv-cities" style="width:100%;box-sizing:border-box;background:#FDFCFA;border:1px solid #D9D4C8;padding:13px 14px;font-size:15px;color:#16170F;outline:none" style-focus="border-color:#2C4A3B;background:#FFFFFF">
+                  <input type="text" value="{{ region }}" onInput="{{ onRegion }}" placeholder="State" name="state" autoComplete="address-level1" list="cv-regions" style="width:100%;box-sizing:border-box;background:#FDFCFA;border:1px solid #D9D4C8;padding:13px 14px;font-size:15px;color:#16170F;outline:none" style-focus="border-color:#2C4A3B;background:#FFFFFF">
+                  <input type="text" value="{{ country }}" onInput="{{ onCountry }}" placeholder="Country" name="country" autoComplete="country-name" list="cv-countries" style="width:100%;box-sizing:border-box;background:#FDFCFA;border:1px solid #D9D4C8;padding:13px 14px;font-size:15px;color:#16170F;outline:none" style-focus="border-color:#2C4A3B;background:#FFFFFF">
+                </div>
+                <datalist id="cv-clubs"><option value="Glenelg Golf Club"></option><option value="Royal Adelaide Golf Club"></option><option value="Kooyonga Golf Club"></option><option value="The Grange Golf Club"></option><option value="Royal Melbourne Golf Club"></option><option value="Kingston Heath Golf Club"></option><option value="Metropolitan Golf Club"></option><option value="Peninsula Kingswood Country Golf Club"></option><option value="Royal Sydney Golf Club"></option><option value="The Australian Golf Club"></option><option value="New South Wales Golf Club"></option><option value="Royal Queensland Golf Club"></option><option value="Royal Perth Golf Club"></option><option value="Lake Karrinyup Country Club"></option><option value="Cottesloe Golf Club"></option><option value="Royal Hobart Golf Club"></option><option value="Royal Canberra Golf Club"></option><option value="Barnbougle Dunes"></option><option value="Thirteenth Beach Golf Links"></option><option value="Cape Wickham Links"></option></datalist>
+                <datalist id="cv-cities"><option value="Adelaide"></option><option value="Melbourne"></option><option value="Sydney"></option><option value="Brisbane"></option><option value="Perth"></option><option value="Hobart"></option><option value="Canberra"></option><option value="Darwin"></option><option value="Gold Coast"></option><option value="Sunshine Coast"></option><option value="Newcastle"></option><option value="Wollongong"></option><option value="Geelong"></option><option value="Ballarat"></option><option value="Bendigo"></option><option value="Launceston"></option><option value="Cairns"></option><option value="Townsville"></option><option value="Toowoomba"></option><option value="Mornington"></option><option value="Barossa Valley"></option><option value="Victor Harbor"></option><option value="Auckland"></option><option value="Queenstown"></option><option value="Christchurch"></option></datalist>
+                <datalist id="cv-regions"><option value="SA"></option><option value="NSW"></option><option value="VIC"></option><option value="QLD"></option><option value="WA"></option><option value="TAS"></option><option value="NT"></option><option value="ACT"></option></datalist>
+                <datalist id="cv-countries"><option value="Australia"></option><option value="New Zealand"></option><option value="United States"></option><option value="United Kingdom"></option><option value="Ireland"></option><option value="Canada"></option><option value="Japan"></option><option value="Singapore"></option><option value="United Arab Emirates"></option><option value="South Africa"></option><option value="Thailand"></option><option value="Indonesia"></option><option value="Vietnam"></option><option value="Fiji"></option></datalist>
+              </div>
+
+              <div style="border-top:1px solid #F1EDE6;padding-top:22px">
+                <div style="font-size:16px;font-weight:500;color:#16170F">Where can we find your course photography?</div>
+                <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px">
+                  <sc-for list="{{ sourceOptions }}" as="o" hint-placeholder-count="4">
+                    <button type="button" onClick="{{ o.pick }}" style="display:flex;align-items:center;gap:12px;text-align:left;padding:13px 15px;cursor:pointer;background:{{ o.bg }};border:1px solid {{ o.border }};transition:background-color 240ms ease, border-color 240ms ease">
+                      <span style="width:15px;height:15px;border-radius:50%;flex:0 0 auto;border:1px solid {{ o.dotBorder }};background:{{ o.dotFill }};box-shadow:{{ o.dotShadow }}"></span>
+                      <span style="font-size:15px;color:{{ o.color }}">{{ o.label }}</span>
+                    </button>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ errSource }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size:12.5px;color:#A95752;margin-top:8px">Let us know where the photography lives.</div>
+                </sc-if>
+                <sc-if value="{{ showLinkField }}" hint-placeholder-val="{{ false }}">
+                  <div style="margin-top:16px">
+                    <label for="cv-link" style="display:block;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D82;margin-bottom:8px">Photography link &#183; optional</label>
+                    <input id="cv-link" type="text" value="{{ sourceLink }}" onInput="{{ onSourceLink }}" placeholder="Google Drive, Dropbox or other URL" style="width:100%;box-sizing:border-box;background:#FDFCFA;border:1px solid #D9D4C8;padding:13px 14px;font-size:15px;color:#16170F;outline:none" style-focus="border-color:#2C4A3B;background:#FFFFFF">
+                    <div style="font-size:12.5px;color:#8A8D82;margin-top:7px">No need to upload anything yet — a link is plenty.</div>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:26px">
+              <button type="button" onClick="{{ next }}" data-ofill="#16170F" style="display:inline-flex;align-items:center;gap:10px;background:#2C4A3B;color:#FAF8F4;border:0;padding:15px 26px;font-size:15px;font-weight:500;cursor:pointer;transition:background-color 300ms ease">
+                <span>Continue</span><span style="font-size:13px">&#8594;</span>
+              </button>
+              <button type="button" onClick="{{ exitBack }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
+              <span style="font-size:13px;color:#8A8D82">Takes about 2 minutes</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+          <div style="animation:cv-fade 520ms cubic-bezier(.19,1,.22,1) both">
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Step two</div>
+            <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(29px,3.8vw,44px);line-height:1.1;margin:14px 0 0;max-width:18ch;text-wrap:pretty">Choose your package.</h1>
+            <p style="font-size:16px;line-height:1.65;margin:14px 0 0;max-width:52ch;text-wrap:pretty">{{ step2Support }}</p>
+
+            <sc-if value="{{ isExtended }}" hint-placeholder-val="{{ false }}">
+              <div style="background:#FFFFFF;border:1px solid #E6D3AC;margin-top:26px;padding:clamp(20px,2.4vw,28px);display:flex;flex-direction:column;gap:10px">
+                <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A6B2E">Extended project</div>
+                <div style="font-family:'Playfair Display',Georgia,serif;font-size:23px;color:#16170F">Multi-course / extended course project</div>
+                <p style="font-size:14.5px;line-height:1.65;margin:0;max-width:56ch;text-wrap:pretty">{{ extendedCopy }}</p>
+                <div style="font-size:13px;color:#8A6B2E;font-weight:500;border-top:1px solid #F1EDE6;padding-top:12px;margin-top:4px">Final scope confirmation required before payment</div>
+              </div>
+            </sc-if>
+
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:clamp(22px,2.6vw,30px)">
+              <sc-for list="{{ packageOptions }}" as="p" hint-placeholder-count="3">
+                <button type="button" onClick="{{ p.pick }}" style="display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px 18px;align-items:start;text-align:left;cursor:pointer;padding:clamp(18px,2vw,24px);background:{{ p.bg }};border:1px solid {{ p.border }};box-shadow:{{ p.shadow }};transition:border-color 260ms ease, background-color 260ms ease, box-shadow 260ms ease" style-hover="border-color:#2C4A3B">
+                  <span style="margin-top:4px;width:19px;height:19px;border-radius:50%;border:1px solid {{ p.dotBorder }};background:{{ p.dotFill }};display:flex;align-items:center;justify-content:center">
+                    <span style="font-size:11px;line-height:1;color:#FAF8F4;opacity:{{ p.checkOpacity }}">&#10003;</span>
+                  </span>
+                  <span style="min-width:0;display:flex;flex-direction:column;gap:9px">
+                    <span style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px">
+                      <span style="font-family:'Playfair Display',Georgia,serif;font-size:21px;color:#16170F">{{ p.name }}</span>
+                      <sc-if value="{{ p.popular }}" hint-placeholder-val="{{ false }}">
+                        <span style="display:inline-flex;align-items:center;gap:6px;border:1px solid #A95752;background:rgba(169,87,82,0.1);color:#A95752;border-radius:100px;padding:4px 10px;font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase">Most popular</span>
+                      </sc-if>
+                    </span>
+                    <span style="font-size:14.5px;color:#55584D;text-wrap:pretty">{{ p.headline }}</span>
+                    <span style="display:flex;flex-wrap:wrap;gap:6px 18px">
+                      <sc-for list="{{ p.points }}" as="pt" hint-placeholder-count="3">
+                        <span style="display:inline-flex;align-items:baseline;gap:8px;font-size:13px;color:#8A8D82"><span style="color:#2C4A3B;font-size:10px">&#10003;</span><span>{{ pt.text }}</span></span>
+                      </sc-for>
+                    </span>
+                    <sc-if value="{{ p.warn }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-size:12.5px;color:#8A6B2E">{{ p.warnText }}</span>
+                    </sc-if>
+                  </span>
+                  <span style="text-align:right;white-space:nowrap"><span style="display:block;font-size:9.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#8A8D82;margin-bottom:6px">From</span><span style="font-family:'Playfair Display',Georgia,serif;font-size:24px;color:#16170F">{{ p.price }}</span><span style="display:block;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#8A8D82;margin-top:5px">AUD</span></span>
+                </button>
+              </sc-for>
+            </div>
+
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:26px">
+              <button type="button" onClick="{{ next }}" data-ofill="#16170F" style="display:inline-flex;align-items:center;gap:10px;background:#2C4A3B;color:#FAF8F4;border:0;padding:15px 26px;font-size:15px;font-weight:500;cursor:pointer;transition:background-color 300ms ease">
+                <span>{{ step2Cta }}</span><span style="font-size:13px">&#8594;</span>
+              </button>
+              <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+          <div style="animation:cv-fade 520ms cubic-bezier(.19,1,.22,1) both">
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Step three</div>
+            <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(29px,3.8vw,44px);line-height:1.1;margin:14px 0 0;max-width:18ch;text-wrap:pretty">Your CourseVista project</h1>
+
+            <div style="background:#FFFFFF;border:1px solid #E4E0D6;margin-top:clamp(22px,2.6vw,32px)">
+              <div style="padding:clamp(22px,2.6vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:22px 32px;border-bottom:1px solid #F1EDE6">
+                <div>
+                  <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Club</div>
+                  <div style="font-size:17px;color:#16170F;margin-top:8px">{{ club }}</div>
+                </div>
+                <div>
+                  <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Course</div>
+                  <div style="font-size:17px;color:#16170F;margin-top:8px">{{ holesLabel }}</div>
+                </div>
+                <div>
+                  <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Package</div>
+                  <div style="font-size:17px;color:#16170F;margin-top:8px">{{ pkgName }}</div>
+                </div>
+              </div>
+
+              <div style="padding:clamp(22px,2.6vw,32px);border-bottom:1px solid #F1EDE6">
+                <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Included</div>
+                <div style="display:flex;flex-direction:column;margin-top:12px">
+                  <sc-for list="{{ pkgFeatures }}" as="f" hint-placeholder-count="5">
+                    <span style="display:flex;align-items:baseline;gap:11px;padding:10px 0;border-top:1px solid #F1EDE6;font-size:15px;color:#55584D">
+                      <span style="color:#2C4A3B;font-size:12px">&#10003;</span><span style="text-wrap:pretty">{{ f.text }}</span>
+                    </span>
+                  </sc-for>
+                </div>
+              </div>
+
+              <div style="padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;justify-content:space-between;gap:20px;font-size:15px">
+                  <span>Project price</span><span style="color:#16170F;font-weight:500">{{ totalLabel }}</span>
+                </div>
+                <sc-if value="{{ promoApplied }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;justify-content:space-between;gap:20px;font-size:15px;color:#8A6B2E">
+                    <span>{{ promoLabel }}</span><span>&#8722;{{ discountLabel }}</span>
+                  </div>
+                </sc-if>
+                <div style="display:flex;justify-content:space-between;gap:20px;font-size:15px;border-top:1px solid #F1EDE6;padding-top:12px">
+                  <span>Payment today</span><span style="color:#16170F;font-weight:500">{{ dueLabel }}</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;gap:20px;font-size:15px">
+                  <span>Balance before final delivery</span><span style="color:#16170F;font-weight:500">{{ remainingLabel }}</span>
+                </div>
+                <div style="font-size:12.5px;color:#8A8D82;margin-top:4px">{{ taxNote }}</div>
+              </div>
+            </div>
+
+            <div style="font-size:14px;color:#8A8D82;margin-top:16px">Final production begins once source material is confirmed.</div>
+
+            <div style="display:flex;align-items:flex-start;gap:13px;margin-top:24px;max-width:64ch">
+              <button type="button" onClick="{{ toggleTerms }}" aria-pressed="{{ termsOk }}" style="flex:0 0 auto;margin-top:2px;width:20px;height:20px;border:1px solid {{ termsBorder }};background:{{ termsFill }};cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0">
+                <span style="font-size:12px;line-height:1;color:#FAF8F4;opacity:{{ termsCheck }}">&#10003;</span>
+              </button>
+              <div style="font-size:14.5px;line-height:1.6;text-wrap:pretty">
+                <span>I confirm that I am authorised to commission this work for the club and agree to the CourseVista project terms.</span>
+                <button type="button" onClick="{{ openTerms }}" style="background:none;border:0;padding:0;margin-left:7px;font-size:14.5px;color:#2C4A3B;text-decoration:underline;text-underline-offset:3px;cursor:pointer">View project terms</button>
+              </div>
+            </div>
+            <sc-if value="{{ errTerms }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:12.5px;color:#A95752;margin-top:9px">Please confirm the project terms to continue.</div>
+            </sc-if>
+
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:26px">
+              <button type="button" onClick="{{ next }}" data-ofill="#16170F" style="display:inline-flex;align-items:center;gap:10px;background:#2C4A3B;color:#FAF8F4;border:0;padding:15px 26px;font-size:15px;font-weight:500;cursor:pointer;transition:background-color 300ms ease">
+                <span>Continue to payment</span><span style="font-size:13px">&#8594;</span>
+              </button>
+              <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isStep4 }}" hint-placeholder-val="{{ false }}">
+          <div style="animation:cv-fade 520ms cubic-bezier(.19,1,.22,1) both">
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Step four</div>
+            <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(29px,3.8vw,44px);line-height:1.1;margin:14px 0 0;max-width:18ch;text-wrap:pretty">How would you like to pay?</h1>
+            <p style="font-size:16px;line-height:1.65;margin:14px 0 0;max-width:52ch;text-wrap:pretty">Choose how you&#8217;d like to secure your CourseVista project.</p>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,252px),1fr));gap:14px;margin-top:clamp(22px,2.6vw,30px)">
+              <sc-for list="{{ payOptions }}" as="o" hint-placeholder-count="2">
+                <button type="button" onClick="{{ o.pick }}" style="display:flex;flex-direction:column;gap:13px;text-align:left;cursor:pointer;padding:clamp(20px,2.2vw,26px);background:{{ o.bg }};border:1px solid {{ o.border }};box-shadow:{{ o.shadow }};transition:border-color 300ms ease, background-color 300ms ease, box-shadow 300ms ease" style-hover="border-color:#2C4A3B">
+                  <span style="display:flex;align-items:center;gap:11px">
+                    <span style="width:19px;height:19px;border-radius:50%;flex:0 0 auto;border:1px solid {{ o.dotBorder }};background:{{ o.dotFill }};display:flex;align-items:center;justify-content:center">
+                      <span style="font-size:11px;line-height:1;color:#FAF8F4;opacity:{{ o.checkOpacity }}">&#10003;</span>
+                    </span>
+                    <span style="font-size:15px;font-weight:500;color:#16170F;white-space:nowrap">{{ o.title }}</span>
+                    <sc-if value="{{ o.chip }}" hint-placeholder-val="{{ false }}">
+                      <span style="margin-left:auto;border:1px solid #C6D2C2;color:#2C4A3B;padding:4px 9px;font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;white-space:nowrap">{{ o.chip }}</span>
+                    </sc-if>
+                  </span>
+                  <span style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,3.6vw,40px);line-height:1;color:#16170F">{{ o.amount }}</span>
+                  <span style="font-size:13.5px;line-height:1.6;color:#8A8D82;text-wrap:pretty">{{ o.note }}</span>
+                  <span style="display:flex;gap:20px;border-top:1px solid {{ o.rule }};margin-top:auto;padding-top:13px">
+                    <sc-for list="{{ o.legs }}" as="leg" hint-placeholder-count="2">
+                      <span style="display:flex;flex-direction:column;gap:5px">
+                        <span style="font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:{{ leg.labelColor }}">{{ leg.label }}</span>
+                        <span style="font-size:15px;font-weight:500;color:{{ leg.color }}">{{ leg.amount }}</span>
+                      </span>
+                    </sc-for>
+                  </span>
+                </button>
+              </sc-for>
+            </div>
+
+            <div style="background:#FFFFFF;border:1px solid #E4E0D6;margin-top:16px;padding:clamp(20px,2.3vw,28px)">
+              <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Project summary</div>
+              <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-top:12px">
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:21px;color:#16170F">{{ pkgName }}</span>
+                <span style="font-size:14px;color:#8A8D82">{{ pkgSummaryLine }}</span>
+              </div>
+              <div style="display:flex;flex-direction:column;margin-top:16px">
+                <sc-for list="{{ summaryRows }}" as="r" hint-placeholder-count="4">
+                  <span style="display:flex;justify-content:space-between;gap:18px;padding:9px 0;border-top:1px solid #F1EDE6;font-size:14.5px"><span style="color:#8A8D82">{{ r.label }}</span><span style="font-weight:500;color:{{ r.color }}">{{ r.value }}</span></span>
+                </sc-for>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:18px;border-top:1px solid #B08D4F;margin-top:14px;padding-top:16px">
+                <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#16170F">Total due now</span>
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,3.2vw,36px);line-height:1;color:#16170F">{{ dueLabel }}</span>
+              </div>
+              <div style="font-size:12px;color:#8A8D82;margin-top:11px">{{ taxNote }}</div>
+            </div>
+
+            <div style="background:#FFFFFF;border:1px solid #E4E0D6;margin-top:16px;padding:clamp(20px,2.3vw,26px)">
+              <label for="cv-email" style="display:block;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D82;margin-bottom:8px">Receipt email</label>
+              <input id="cv-email" type="email" value="{{ email }}" onInput="{{ onEmail }}" placeholder="you@yourclub.com.au" autoComplete="email" style="width:100%;max-width:420px;box-sizing:border-box;background:#FDFCFA;border:1px solid #D9D4C8;padding:13px 14px;font-size:15px;color:#16170F;outline:none" style-focus="border-color:#2C4A3B;background:#FFFFFF">
+              <sc-if value="{{ errEmail }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:12.5px;color:#A95752;margin-top:7px">Enter a valid email address.</div>
+              </sc-if>
+
+              <sc-if value="{{ showPromo }}" hint-placeholder-val="{{ true }}">
+                <div style="border-top:1px solid #F1EDE6;margin-top:18px;padding-top:16px">
+                  <sc-if value="{{ promoClosed }}" hint-placeholder-val="{{ true }}">
+                    <button type="button" onClick="{{ openPromo }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer;text-decoration:underline;text-underline-offset:3px" style-hover="color:#2C4A3B">Have an offer code?</button>
+                  </sc-if>
+                  <sc-if value="{{ promoOpen }}" hint-placeholder-val="{{ false }}">
+                    <div>
+                      <label for="cv-promo" style="display:block;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D82;margin-bottom:8px">Offer code</label>
+                      <div style="display:flex;gap:9px;max-width:420px">
+                        <input id="cv-promo" type="text" value="{{ promoInput }}" onInput="{{ onPromo }}" placeholder="CV-XXXXXX" style="flex:1 1 auto;min-width:0;box-sizing:border-box;background:#FDFCFA;border:1px solid #D9D4C8;padding:13px 14px;font-size:15px;letter-spacing:0.06em;color:#16170F;outline:none;text-transform:uppercase" style-focus="border-color:#2C4A3B;background:#FFFFFF">
+                        <button type="button" onClick="{{ applyPromo }}" style="flex:0 0 auto;border:1px solid #2C4A3B;background:none;color:#2C4A3B;padding:0 18px;font-size:14px;font-weight:500;cursor:pointer;transition:background-color 240ms ease, color 240ms ease" style-hover="background:#2C4A3B;color:#FAF8F4">{{ promoBtn }}</button>
+                      </div>
+                      <sc-if value="{{ promoMsg }}" hint-placeholder-val="{{ false }}">
+                        <div style="display:flex;align-items:baseline;gap:8px;font-size:13px;margin-top:9px;color:{{ promoMsgColor }}"><span>{{ promoMsgMark }}</span><span>{{ promoMsg }}</span></div>
+                      </sc-if>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </div>
+
+            <div style="background:#FFFFFF;border:1px solid #E4E0D6;margin-top:16px;padding:clamp(20px,2.3vw,26px);display:flex;flex-direction:column;gap:15px">
+              <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Secure payment</div>
+              <div style="font-size:15px;color:#16170F">Payment processed securely by Stripe</div>
+              <div ref="{{ payElRef }}" style="min-height:0"></div>
+              <sc-if value="{{ payElFallback }}" hint-placeholder-val="{{ true }}">
+                <div style="border:1px dashed #D9D4C8;background:#FDFCFA;padding:18px 16px;display:flex;align-items:center;gap:12px">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8D82" stroke-width="1.7" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="1.6"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+                  <span style="font-size:13.5px;line-height:1.6;color:#8A8D82;text-wrap:pretty">{{ payElNote }}</span>
+                </div>
+              </sc-if>
+              <div style="position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent)">
+                <div style="display:flex;width:max-content;animation:cv-pay-marquee 26s linear infinite" style-hover="animation-play-state:paused">
+                  <span style="display:flex;align-items:center;gap:52px;padding-right:52px;flex:0 0 auto">
+                    <sc-if value="{{ pmVisa }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-visa-mark.png" alt="Visa" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmMastercard }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-mastercard-mark.png" alt="Mastercard" style="height:26px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmAmex }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-amex-mark.png" alt="American Express" style="height:24px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmApplePay }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-applepay-mark.png" alt="Apple Pay" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmGooglePay }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-googlepay-mark.png" alt="Google Pay" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                  </span>
+                  <span style="display:flex;align-items:center;gap:52px;padding-right:52px;flex:0 0 auto">
+                    <sc-if value="{{ pmVisa }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-visa-mark.png" alt="Visa" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmMastercard }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-mastercard-mark.png" alt="Mastercard" style="height:26px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmAmex }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-amex-mark.png" alt="American Express" style="height:24px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmApplePay }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-applepay-mark.png" alt="Apple Pay" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmGooglePay }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-googlepay-mark.png" alt="Google Pay" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                  </span>
+                  <span style="display:flex;align-items:center;gap:52px;padding-right:52px;flex:0 0 auto">
+                    <sc-if value="{{ pmVisa }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-visa-mark.png" alt="Visa" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmMastercard }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-mastercard-mark.png" alt="Mastercard" style="height:26px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmAmex }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-amex-mark.png" alt="American Express" style="height:24px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmApplePay }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-applepay-mark.png" alt="Apple Pay" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmGooglePay }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-googlepay-mark.png" alt="Google Pay" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                  </span>
+                  <span style="display:flex;align-items:center;gap:52px;padding-right:52px;flex:0 0 auto">
+                    <sc-if value="{{ pmVisa }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-visa-mark.png" alt="Visa" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmMastercard }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-mastercard-mark.png" alt="Mastercard" style="height:26px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmAmex }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-amex-mark.png" alt="American Express" style="height:24px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmApplePay }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-applepay-mark.png" alt="Apple Pay" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmGooglePay }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-googlepay-mark.png" alt="Google Pay" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                  </span>
+                  <span style="display:flex;align-items:center;gap:52px;padding-right:52px;flex:0 0 auto">
+                    <sc-if value="{{ pmVisa }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-visa-mark.png" alt="Visa" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmMastercard }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-mastercard-mark.png" alt="Mastercard" style="height:26px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmAmex }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-amex-mark.png" alt="American Express" style="height:24px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmApplePay }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-applepay-mark.png" alt="Apple Pay" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmGooglePay }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-googlepay-mark.png" alt="Google Pay" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                  </span>
+                  <span style="display:flex;align-items:center;gap:52px;padding-right:52px;flex:0 0 auto">
+                    <sc-if value="{{ pmVisa }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-visa-mark.png" alt="Visa" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmMastercard }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-mastercard-mark.png" alt="Mastercard" style="height:26px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmAmex }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-amex-mark.png" alt="American Express" style="height:24px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmApplePay }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-applepay-mark.png" alt="Apple Pay" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                    <sc-if value="{{ pmGooglePay }}" hint-placeholder-val="{{ true }}"><img src="../../assets/pay-googlepay-mark.png" alt="Google Pay" style="height:19px;width:auto;flex:0 0 auto;object-fit:contain;opacity:0.86;transition:opacity 380ms ease"></sc-if>
+                  </span>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,175px),1fr));gap:14px;border-top:1px solid #F1EDE6;padding-top:15px">
+                <span style="display:flex;align-items:center;gap:10px;font-size:13px;color:#55584D">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="1.6"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+                  <span>Secure Stripe checkout</span>
+                </span>
+                <span style="display:flex;align-items:center;gap:10px;font-size:13px;color:#55584D">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-2.9 7.9-7 9-4.1-1.1-7-4.6-7-9V6z"></path></svg>
+                  <span>Card fields hosted by Stripe, never by us</span>
+                </span>
+                <span style="display:flex;align-items:center;gap:10px;font-size:13px;color:#55584D">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M14.5 9.2c-.6-.8-1.5-1.2-2.6-1.2-1.7 0-2.9 1-2.9 2.2 0 2.7 5.6 1.3 5.6 3.9 0 1.2-1.2 2.1-2.9 2.1-1.2 0-2.1-.4-2.7-1.2"></path></svg>
+                  <span>All prices in AUD</span>
+                </span>
+              </div>
+            </div>
+
+            <div style="margin-top:clamp(26px,3vw,38px)">
+              <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">What happens next</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,148px),1fr));gap:1px;background:#E4E0D6;border:1px solid #E4E0D6;margin-top:14px">
+                <sc-for list="{{ nextSteps }}" as="n" hint-placeholder-count="5">
+                  <div style="background:#FDFCFA;padding:16px 15px;display:flex;flex-direction:column;gap:7px">
+                    <span style="font-size:9.5px;font-weight:600;letter-spacing:0.2em;color:{{ n.numColor }}">{{ n.num }}</span>
+                    <span style="font-size:14px;font-weight:500;color:#16170F">{{ n.title }}</span>
+                    <span style="font-size:12.5px;line-height:1.55;color:#8A8D82;text-wrap:pretty">{{ n.body }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:24px">
+              <button type="button" onClick="{{ pay }}" disabled="{{ paying }}" data-ofill="#16170F" style="display:inline-flex;align-items:center;gap:11px;background:#2C4A3B;color:#FAF8F4;border:0;padding:16px 30px;font-size:16px;font-weight:500;cursor:pointer;opacity:{{ payOpacity }};transition:background-color 300ms ease">
+                <sc-if value="{{ paying }}" hint-placeholder-val="{{ false }}">
+                  <span style="width:14px;height:14px;border:2px solid rgba(250,248,244,0.35);border-top-color:#FAF8F4;border-radius:50%;animation:cv-spin 720ms linear infinite"></span>
+                </sc-if>
+                <sc-if value="{{ notPaying }}" hint-placeholder-val="{{ true }}">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FAF8F4" stroke-width="1.8" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="1.6"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+                </sc-if>
+                <span>{{ payLabel }}</span>
+              </button>
+              <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
+            </div>
+            <sc-if value="{{ payError }}" hint-placeholder-val="{{ false }}">
+              <div style="border:1px solid #E4C9C7;background:#FBF3F2;color:#A95752;font-size:13.5px;line-height:1.6;padding:13px 15px;margin-top:14px;max-width:56ch;text-wrap:pretty">{{ payError }}</div>
+            </sc-if>
+            <div style="font-size:12.5px;color:#8A8D82;margin-top:14px;max-width:56ch;text-wrap:pretty">Your card is entered directly with Stripe. Apple Pay, Google Pay and Link appear automatically when your device supports them.</div>
+          </div>
+        </sc-if>
+
+      </div>
+
+      <aside ref="{{ railRef }}" style="min-width:0;position:sticky;top:96px">
+        <div style="background:#FFFFFF;border:1px solid #E4E0D6;overflow:hidden">
+
+          <button ref="{{ railToggleRef }}" type="button" onClick="{{ toggleSummary }}" style="display:none;width:100%;box-sizing:border-box;align-items:center;justify-content:space-between;gap:14px;background:none;border:0;padding:15px 18px;cursor:pointer;text-align:left">
+            <span style="font-size:14px;color:#16170F">{{ railCollapsedLabel }}</span>
+            <span style="font-size:13px;font-weight:500;color:#2C4A3B;white-space:nowrap">{{ railToggleLabel }}</span>
+          </button>
+
+          <div ref="{{ railBodyRef }}">
+
+            <div style="padding:clamp(18px,2vw,24px)">
+              <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Selected package</div>
+              <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 14px;margin-top:11px">
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:24px;color:#16170F">{{ pkgName }}</span>
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#16170F">{{ railPrice }}</span>
+              </div>
+              <div style="font-size:13.5px;line-height:1.6;color:#8A8D82;margin-top:8px;text-wrap:pretty">{{ pkgDescriptor }}</div>
+
+              <div style="display:flex;flex-direction:column;margin-top:16px;border-top:1px solid #F1EDE6">
+                <sc-for list="{{ railIncludes }}" as="f" hint-placeholder-count="5">
+                  <span style="display:flex;align-items:baseline;gap:10px;padding:8px 0;font-size:13.5px;color:#55584D;text-wrap:pretty"><span style="color:#2C4A3B;font-size:10px">&#10003;</span><span>{{ f.text }}</span></span>
+                </sc-for>
+              </div>
+
+              <div style="border-top:1px solid #F1EDE6;margin-top:14px;padding-top:14px;display:flex;flex-direction:column;gap:9px">
+                <sc-for list="{{ railPayment }}" as="r" hint-placeholder-count="2">
+                  <span style="display:flex;justify-content:space-between;gap:14px;font-size:13.5px"><span style="color:#8A8D82">{{ r.label }}</span><span style="font-weight:500;color:{{ r.color }}">{{ r.value }}</span></span>
+                </sc-for>
+              </div>
+
+              <div style="border-top:1px solid #F1EDE6;margin-top:14px;padding-top:14px;display:flex;flex-direction:column;gap:9px;font-size:13.5px">
+                <span style="display:flex;justify-content:space-between;gap:14px"><span style="color:#8A8D82">Club</span><span style="color:#16170F;text-align:right">{{ railClub }}</span></span>
+                <span style="display:flex;justify-content:space-between;gap:14px"><span style="color:#8A8D82">Holes</span><span style="color:#16170F">{{ railHoles }}</span></span>
+              </div>
+
+              <div style="font-size:12px;line-height:1.6;color:#8A8D82;margin-top:14px;border-top:1px solid #F1EDE6;padding-top:12px;text-wrap:pretty">{{ railNote }}</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ showAssessment }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:760px;margin:0 auto;padding:clamp(40px,6vw,90px) clamp(18px,4vw,34px) 110px;animation:cv-fade 560ms cubic-bezier(.19,1,.22,1) both">
+      <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Source review</div>
+      <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(31px,4.4vw,50px);line-height:1.08;margin:16px 0 0;max-width:17ch;text-wrap:pretty">We need to check the source material first.</h1>
+      <p style="font-size:17px;line-height:1.65;margin:18px 0 0;max-width:52ch;text-wrap:pretty">Send the course through and we'll confirm what's workable before you pay anything.</p>
+
+      <div style="background:#FFFFFF;border:1px solid #E4E0D6;margin-top:clamp(26px,3vw,38px);padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;flex-direction:column;font-size:15px">
+          <span style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid #F1EDE6"><span style="color:#8A8D82">Club</span><span style="color:#16170F;text-align:right">{{ club }}</span></span>
+          <span style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid #F1EDE6"><span style="color:#8A8D82">Website</span><span style="color:#16170F;text-align:right">{{ website }}</span></span>
+          <span style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid #F1EDE6"><span style="color:#8A8D82">Course</span><span style="color:#16170F;text-align:right">{{ holesLabel }}</span></span>
+          <span style="display:flex;justify-content:space-between;gap:16px;padding:11px 0"><span style="color:#8A8D82">Reason</span><span style="color:#16170F;text-align:right;max-width:30ch;text-wrap:pretty">{{ assessmentReason }}</span></span>
+        </div>
+        <div>
+          <label for="cv-aemail" style="display:block;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D82;margin-bottom:8px">Where should we reply?</label>
+          <input id="cv-aemail" type="email" value="{{ email }}" onInput="{{ onEmail }}" placeholder="you@yourclub.com.au" autoComplete="email" style="width:100%;box-sizing:border-box;background:#FDFCFA;border:1px solid #D9D4C8;padding:13px 14px;font-size:15px;color:#16170F;outline:none" style-focus="border-color:#2C4A3B;background:#FFFFFF">
+          <sc-if value="{{ errEmail }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:12.5px;color:#A95752;margin-top:7px">Please enter a valid email address.</div>
+          </sc-if>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:26px">
+        <button type="button" onClick="{{ submitAssessment }}" disabled="{{ paying }}" data-ofill="#16170F" style="display:inline-flex;align-items:center;gap:11px;background:#2C4A3B;color:#FAF8F4;border:0;padding:15px 26px;font-size:15px;font-weight:500;cursor:pointer;opacity:{{ payOpacity }};transition:background-color 300ms ease">
+          <sc-if value="{{ paying }}" hint-placeholder-val="{{ false }}">
+            <span style="width:14px;height:14px;border:2px solid rgba(250,248,244,0.35);border-top-color:#FAF8F4;border-radius:50%;animation:cv-spin 720ms linear infinite"></span>
+          </sc-if>
+          <span>Request free assessment</span>
+        </button>
+        <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
+      </div>
+      <div style="font-size:13px;color:#8A8D82;margin-top:14px">No payment is taken at this stage.</div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showAssessmentDone }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:700px;margin:0 auto;padding:clamp(60px,9vw,130px) clamp(18px,4vw,34px) 130px;animation:cv-fade 560ms cubic-bezier(.19,1,.22,1) both">
+      <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Assessment requested</div>
+      <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(31px,4.4vw,48px);line-height:1.08;margin:16px 0 0;max-width:16ch;text-wrap:pretty">We're reviewing your course.</h1>
+      <p style="font-size:17px;line-height:1.65;margin:18px 0 0;max-width:50ch;text-wrap:pretty">We'll look at what's on {{ websiteShort }}, confirm what's workable and come back to you within two business days with scope and pricing.</p>
+      <div style="font-size:14px;color:#8A8D82;margin-top:26px;border-top:1px solid #E4E0D6;padding-top:18px">Reference {{ orderNumber }} &#183; sent to {{ email }}</div>
+      <a href="/" style="display:inline-flex;align-items:center;gap:9px;margin-top:26px;font-size:15px;font-weight:500;color:#2C4A3B">Back to CourseVista<span style="font-size:13px">&#8594;</span></a>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showSuccess }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:860px;margin:0 auto;padding:clamp(38px,5vw,74px) clamp(18px,4vw,34px) 110px;animation:cv-fade 560ms cubic-bezier(.19,1,.22,1) both">
+      <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Project reserved</div>
+      <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(33px,4.8vw,56px);line-height:1.06;margin:16px 0 0;text-wrap:pretty">Welcome to CourseVista.</h1>
+      <p style="font-size:17px;line-height:1.65;margin:18px 0 0;max-width:54ch;text-wrap:pretty">Your project is reserved and your payment has been received. Let's get everything we need to begin.</p>
+
+      <div style="background:#FFFFFF;border:1px solid #E4E0D6;margin-top:clamp(24px,3vw,36px);padding:clamp(20px,2.4vw,28px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:20px 26px">
+        <div>
+          <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Order</div>
+          <div style="font-size:17px;color:#16170F;margin-top:8px">{{ orderNumber }}</div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Package</div>
+          <div style="font-size:17px;color:#16170F;margin-top:8px">{{ pkgName }}</div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Paid today</div>
+          <div style="font-size:17px;color:#16170F;margin-top:8px">{{ dueLabel }}</div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Remaining</div>
+          <div style="font-size:17px;color:#16170F;margin-top:8px">{{ remainingLabel }}</div>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid #E4E0D6;margin-top:clamp(40px,5vw,64px);padding-top:clamp(28px,3.4vw,42px)">
+        <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Source material</div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(25px,3vw,34px);line-height:1.14;margin:14px 0 0;max-width:20ch;text-wrap:pretty">Anything extra to send us?</h2>
+        <p style="font-size:16px;line-height:1.65;margin:14px 0 0;max-width:54ch;text-wrap:pretty">We work from the photography the club already holds. If there is more than what sits on your website, share it however suits — a link is plenty, and it can follow later.</p>
+
+        <div style="background:#FFFFFF;border:1px solid #E4E0D6;margin-top:24px;padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column;gap:20px">
+          <div>
+            <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D82;margin-bottom:12px">Where it lives</div>
+            <div style="display:flex;flex-wrap:wrap;gap:9px">
+              <sc-for list="{{ shareOptions }}" as="o" hint-placeholder-count="5">
+                <button type="button" onClick="{{ o.pick }}" style="padding:11px 16px;font-size:14px;cursor:pointer;background:{{ o.bg }};border:1px solid {{ o.border }};color:{{ o.color }};transition:background-color 240ms ease, border-color 240ms ease">{{ o.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+
+          <sc-if value="{{ showIntakeLink }}" hint-placeholder-val="{{ false }}">
+            <div style="border-top:1px solid #F1EDE6;padding-top:20px">
+              <label for="cv-share" style="display:block;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D82;margin-bottom:8px">Share link</label>
+              <input id="cv-share" type="text" value="{{ intakeLink }}" onInput="{{ onIntakeLink }}" placeholder="{{ sharePlaceholder }}" spellCheck="{{ false }}" style="width:100%;box-sizing:border-box;background:#FDFCFA;border:1px solid #D9D4C8;padding:13px 14px;font-size:15px;color:#16170F;outline:none" style-focus="border-color:#2C4A3B;background:#FFFFFF">
+              <div style="font-size:12.5px;color:#8A8D82;margin-top:7px">Set it so anyone with the link can view, then send it through.</div>
+              <sc-if value="{{ errShare }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:12.5px;color:#A95752;margin-top:7px">Paste the link, or choose Upload later.</div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ shareLater }}" hint-placeholder-val="{{ false }}">
+            <div style="border-top:1px solid #F1EDE6;padding-top:20px;font-size:14.5px;line-height:1.65;color:#55584D;text-wrap:pretty">No rush. Email the files or a share link to <a href="mailto:business@coursevista.com.au">business@coursevista.com.au</a> and quote {{ orderNumber }}. Production starts as soon as it lands.</div>
+          </sc-if>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:24px">
+          <button type="button" onClick="{{ sendSource }}" disabled="{{ paying }}" data-ofill="#16170F" style="display:inline-flex;align-items:center;gap:11px;background:#2C4A3B;color:#FAF8F4;border:0;padding:15px 26px;font-size:15px;font-weight:500;cursor:pointer;opacity:{{ payOpacity }};transition:background-color 300ms ease">
+            <sc-if value="{{ paying }}" hint-placeholder-val="{{ false }}">
+              <span style="width:14px;height:14px;border:2px solid rgba(250,248,244,0.35);border-top-color:#FAF8F4;border-radius:50%;animation:cv-spin 720ms linear infinite"></span>
+            </sc-if>
+            <span>{{ sendSourceLabel }}</span>
+          </button>
+          <button type="button" onClick="{{ sourceBack }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
+          <span style="font-size:13px;color:#8A8D82">Anything can follow by email to business@coursevista.com.au.</span>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showDone }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:760px;margin:0 auto;padding:clamp(50px,7vw,110px) clamp(18px,4vw,34px) 130px;animation:cv-fade 560ms cubic-bezier(.19,1,.22,1) both">
+      <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">{{ orderNumber }}</div>
+      <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(31px,4.4vw,50px);line-height:1.08;margin:16px 0 0;max-width:16ch;text-wrap:pretty">That's everything we need for now.</h1>
+      <p style="font-size:17px;line-height:1.65;margin:18px 0 0;max-width:52ch;text-wrap:pretty">We'll review your source material and be in touch if anything is missing. Here's where your project sits.</p>
+
+      <div style="background:#FFFFFF;border:1px solid #E4E0D6;margin-top:clamp(28px,3.4vw,42px);padding:clamp(22px,2.6vw,32px)">
+        <sc-for list="{{ statusSteps }}" as="st" hint-placeholder-count="4">
+          <div style="display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:16px;align-items:center;padding:16px 0;border-top:1px solid #F1EDE6">
+            <span style="width:22px;height:22px;border-radius:50%;border:1px solid {{ st.dotBorder }};background:{{ st.dotFill }};display:flex;align-items:center;justify-content:center;font-size:11px;color:{{ st.numColor }}">{{ st.mark }}</span>
+            <span style="font-size:16px;color:{{ st.color }}">{{ st.label }}</span>
+            <span style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:{{ st.tagColor }}">{{ st.tag }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="font-size:14px;line-height:1.65;color:#8A8D82;margin-top:22px;max-width:56ch;text-wrap:pretty">{{ balanceNote }}</div>
+      <a href="/" style="display:inline-flex;align-items:center;gap:9px;margin-top:26px;font-size:15px;font-weight:500;color:#2C4A3B">Back to CourseVista<span style="font-size:13px">&#8594;</span></a>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ termsOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeTerms }}" style="position:fixed;inset:0;z-index:60;background:rgba(22,23,15,0.5);backdrop-filter:blur(3px);display:flex;align-items:flex-end;justify-content:center;padding:0">
+      <div onClick="{{ stop }}" style="background:#FAF8F4;width:100%;max-width:720px;max-height:86vh;overflow:auto;padding:clamp(24px,3vw,38px);animation:cv-fade 420ms cubic-bezier(.19,1,.22,1) both">
+        <div style="display:flex;align-items:flex-start;gap:20px">
+          <div>
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">CourseVista</div>
+            <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(24px,3vw,32px);margin:12px 0 0">Project terms</h2>
+          </div>
+          <button type="button" onClick="{{ closeTerms }}" aria-label="Close" style="margin-left:auto;background:none;border:1px solid #D9D4C8;width:34px;height:34px;font-size:15px;color:#55584D;cursor:pointer;flex:0 0 auto" style-hover="border-color:#2C4A3B;color:#2C4A3B">&#215;</button>
+        </div>
+        <div style="display:flex;flex-direction:column;margin-top:22px">
+          <sc-for list="{{ terms }}" as="t" hint-placeholder-count="8">
+            <div style="padding:16px 0;border-top:1px solid #E4E0D6">
+              <div style="font-size:15px;font-weight:500;color:#16170F">{{ t.title }}</div>
+              <p style="font-size:14.5px;line-height:1.65;margin:7px 0 0;text-wrap:pretty">{{ t.body }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <button type="button" onClick="{{ acceptFromTerms }}" data-ofill="#16170F" style="margin-top:22px;background:#2C4A3B;color:#FAF8F4;border:0;padding:14px 24px;font-size:15px;font-weight:500;cursor:pointer">Accept and close</button>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;depositPercent&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:50,&quot;min&quot;:10,&quot;max&quot;:100,&quot;step&quot;:5,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Commercial&quot;},&quot;gstInclusive&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Commercial&quot;},&quot;showPromoField&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Commercial&quot;}}">
+const PKG = {
+  essentials: {
+    key: "essentials", name: "Essentials", price: 1490, maxHoles: 9,
+    summary: "Up to 9 hole films, delivered files, one revision.",
+    features: ["Up to 9 individual tee-to-green hole films", "Approximately 30 seconds per hole", "Website-ready delivered files", "Commercial usage rights", "One revision round"]
+  },
+  complete: {
+    key: "complete", name: "Complete", price: 1990, maxHoles: 18, popular: true,
+    summary: "18 hole films, homepage cinematic film, delivered files, one revision.",
+    features: ["Up to 18 individual tee-to-green hole films", "Homepage cinematic course film", "Website-ready delivered files", "Commercial usage rights", "One revision round", "Consistent CourseVista presentation across the course"]
+  },
+  hosted: {
+    key: "hosted", name: "Hosted", price: 2390, maxHoles: 18,
+    summary: "Everything in Complete, plus your own hosted course page.",
+    features: ["Everything in Complete", "Dedicated CourseVista hosted course page", "Hole-by-hole navigation", "Mobile-friendly viewing", "Dedicated course URL", "Initial hosted setup"]
+  }
+};
+const PKG_ORDER = ["essentials", "complete", "hosted"];
+const META = {
+  essentials: {
+    descriptor: "The essential hole-film package.",
+    headline: "Up to 9 holes, delivered ready for your website.",
+    points: ["9 hole films", "Delivered files", "One revision"],
+    image: null,
+    includes: ["Up to 9 individual tee-to-green films", "Website-ready delivered files", "Commercial usage rights", "One revision round"]
+  },
+  complete: {
+    descriptor: "The complete 18-hole CourseVista experience.",
+    headline: "Up to 18 holes, plus a homepage cinematic course film.",
+    points: ["18 hole films", "Homepage film", "One revision"],
+    image: "assets/pricing-consult.png",
+    includes: ["Up to 18 individual tee-to-green films", "Homepage cinematic course film", "Website-ready delivered files", "Commercial usage rights", "One revision round", "Consistent CourseVista presentation"]
+  },
+  hosted: {
+    descriptor: "Complete, plus your own hosted course guide.",
+    headline: "Everything in Complete with a hosted, hole-by-hole course guide.",
+    points: ["Everything in Complete", "Hosted course page", "Dedicated URL"],
+    image: null,
+    includes: ["Everything in Complete", "Dedicated CourseVista hosted course page", "Hole-by-hole navigation", "Dedicated course URL", "Initial hosted setup"]
+  }
+};
+// Only list methods actually enabled on the Stripe account.
+const ENABLED_PAYMENT_METHODS = ["visa", "mastercard", "amex", "applePay", "googlePay", "link"];
+const PAYMENT_METHOD_LABELS = {
+  visa: "Visa", mastercard: "Mastercard", amex: "Amex", applePay: "Apple Pay",
+  googlePay: "Google Pay", link: "Link", eftpos: "eftpos", paypal: "PayPal",
+  afterpay: "Afterpay", klarna: "Klarna"
+};
+const NEXT_STEPS = [
+  { title: "Payment", body: "Secure your project" },
+  { title: "Source review", body: "We confirm your course material" },
+  { title: "Production", body: "Your CourseVista films are built" },
+  { title: "Review", body: "One included revision round" },
+  { title: "Delivery", body: "Final files released after the balance" }
+];
+const SOURCES = ["It's already on our website", "We have additional photography", "Both", "I'm not sure"];
+const TERMS = [
+  { title: "Source material", body: "We work from photography the club already owns or supplies. Before production we review the material and confirm it is workable. If it is not, we will tell you what is missing before any further work — or refund the deposit in full if the project cannot proceed." },
+  { title: "Usage rights", body: "The club confirms it holds the rights to the photography supplied and grants CourseVista permission to use it to produce the films. Delivered films carry commercial usage rights for the club." },
+  { title: "Revisions", body: "Each package includes one revision round across the delivered films. Additional rounds are quoted separately before work begins." },
+  { title: "Production schedule", body: "Production begins once source material is confirmed. Typical delivery is three to four weeks from confirmation; we will tell you if a project needs longer." },
+  { title: "Deposits", body: "Standard projects are reserved with a 50% deposit. The deposit holds your production slot and is applied against the project total." },
+  { title: "Final balance", body: "The remaining balance is due before final delivery. Final high-resolution files are released once the balance is received." },
+  { title: "Refunds and cancellation", body: "Cancel before production starts and the deposit is refunded in full, less any work already agreed and completed. Once production has begun the deposit is non-refundable." },
+  { title: "Hosted service", body: "Hosted packages include initial setup and the first year of hosting. Renewal is optional and quoted before each renewal date." }
+];
+const STATUS_STEPS = ["Source review", "Production", "Club review", "Final delivery"];
+const DRAFT_KEY = "cv-order-draft-v1";
+
+function money(n) {
+  return "$" + Math.round(n).toLocaleString("en-AU");
+}
+async function callApi(path, body) {
+  try {
+    const r = await fetch(path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    if (!r.ok) return null;
+    return await r.json();
+  } catch (e) {
+    return null;
+  }
+}
+
+class Component extends DCLogic {
+  state = {
+    step: 1,
+    screen: "flow",
+    pkg: "complete",
+    club: "", website: "", holes: "18", city: "", region: "", country: "Australia",
+    source: "", sourceLink: "",
+    email: "", paymentType: "deposit",
+    promoInput: "", promoCode: "", promoChecking: false, promoMsg: "", promoOk: false,
+    termsOk: false, termsOpen: false,
+    paying: false,
+    contactName: "", contactRole: "", contactPhone: "", coursePage: "", notes: "",
+    intakePhoto: "", intakeLink: "", logoName: "",
+    orderNumber: "",
+    peReady: false, peNote: "", payError: "",
+    promoOpen: false, summaryOpen: false, anim: null,
+    err: {}
+  };
+
+  exitBack = () => {
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = "/";
+  };
+
+  componentDidMount() {
+    let next = {};
+    try {
+      const saved = JSON.parse(localStorage.getItem(DRAFT_KEY) || "null");
+      if (saved && typeof saved === "object") next = saved;
+    } catch (e) {}
+    const q = new URLSearchParams(location.search);
+    const p = (q.get("package") || "").toLowerCase();
+    if (PKG[p]) next.pkg = p;
+    ["club", "website", "city", "region", "country"].forEach((k) => {
+      const v = (q.get(k) || "").trim();
+      if (v) next[k] = v;
+    });
+    const h = (q.get("holes") || "").trim();
+    if (["9", "18", "27", "36+"].indexOf(h) !== -1) next.holes = h;
+    const promo = q.get("promo");
+    if (promo) next.promoInput = promo.toUpperCase();
+    if (!next.orderNumber) next.orderNumber = "CV-" + String(1000 + Math.floor(Math.random() * 9000));
+    const sessionId = q.get("session_id");
+    const returned = !!sessionId || /\/order\/success/.test(location.pathname);
+    next.screen = returned ? "success" : "flow";
+    next.paying = false;
+    next.termsOpen = false;
+    this.setState(next);
+    if (sessionId) this.hydrateFromSession(sessionId);
+    this._mq = window.matchMedia("(min-width: 940px)");
+    this._onMq = () => this.forceUpdate();
+    this._mq.addEventListener("change", this._onMq);
+    this.applyLayout();
+  }
+
+  // After a real Stripe redirect the order of record lives server-side.
+  async hydrateFromSession(sessionId) {
+    const res = await callApi("/api/order-status", { session_id: sessionId });
+    if (!res || !res.order) return;
+    const o = res.order;
+    this.setState({
+      orderNumber: o.order_number || this.state.orderNumber,
+      club: o.club_name || this.state.club,
+      holes: o.hole_count || this.state.holes,
+      pkg: PKG[o.package] ? o.package : this.state.pkg,
+      email: o.customer_email || this.state.email,
+      paymentType: o.payment_type === "full" ? "full" : "deposit"
+    });
+  }
+
+  componentDidUpdate() {
+    this.mountPaymentElement();
+    this.applyLayout();
+    this.persist();
+    if (this._lastPkg !== this.state.pkg) {
+      this._lastPkg = this.state.pkg;
+      // Self-terminating fade: the animation always ends at opacity 1, so no lost
+      // write can leave the panel stuck faded.
+      const el = this.railBodyRef && this.railBodyRef.current;
+      if (el) {
+        el.style.opacity = "";
+        el.style.animation = "none";
+        void el.offsetWidth;
+        el.style.animation = "cv-rail-fade 320ms cubic-bezier(.19,1,.22,1) both";
+      }
+    }
+  }
+
+  // Money moves between values rather than snapping. The tween only ever overrides the
+  // displayed figures while it is running — the real totals are the source of truth.
+  startTween = (from) => {
+    const to = this.totals();
+    if (this._animRaf) cancelAnimationFrame(this._animRaf);
+    if (!from || (from.payable === to.payable && from.due === to.due && from.remaining === to.remaining)) {
+      this._tweening = false;
+      this.setState({ anim: null });
+      return;
+    }
+    this._tweening = true;
+    const start = performance.now();
+    const tick = (now) => {
+      const p = Math.min(1, (now - start) / 340);
+      const e = 1 - Math.pow(1 - p, 3);
+      const lerp = (a, b) => a + (b - a) * e;
+      if (p < 1) {
+        this.setState({ anim: { payable: lerp(from.payable, to.payable), due: lerp(from.due, to.due), remaining: lerp(from.remaining, to.remaining) } });
+        this._animRaf = requestAnimationFrame(tick);
+      } else {
+        this._tweening = false;
+        this.setState({ anim: null });
+      }
+    };
+    this._animRaf = requestAnimationFrame(tick);
+  };
+
+  componentWillUnmount() { if (this._mq) this._mq.removeEventListener("change", this._onMq); }
+
+  applyLayout() {
+    const wide = this._mq ? this._mq.matches : window.innerWidth >= 940;
+    const showRail = this.state.screen === "flow" && this.state.step > 1;
+    const g = this.gridRef && this.gridRef.current;
+    const r = this.railRef && this.railRef.current;
+    const tog = this.railToggleRef && this.railToggleRef.current;
+    const body = this.railBodyRef && this.railBodyRef.current;
+    if (g) g.style.gridTemplateColumns = wide && showRail ? "minmax(0,1fr) 340px" : "minmax(0,1fr)";
+    if (r) {
+      r.style.display = showRail ? "block" : "none";
+      r.style.position = wide ? "sticky" : "static";
+      r.style.order = wide ? "0" : "-1";
+    }
+    if (tog) tog.style.display = wide ? "none" : "flex";
+    if (body) body.style.display = wide || this.state.summaryOpen ? "block" : "none";
+    const imgWrap = this.railImgWrapRef && this.railImgWrapRef.current;
+    if (imgWrap) {
+      imgWrap.style.aspectRatio = wide ? "1.14" : "auto";
+      imgWrap.style.height = wide ? "" : "220px";
+    }
+  }
+
+  // Only non-sensitive project details are kept, so a shared or stolen browser
+  // profile exposes nothing personal: no email, no promo code, no payment data.
+  persist() {
+    const fingerprint = [this.state.pkg, this.state.club, this.state.website, this.state.holes, this.state.paymentType, this.state.step].join("|");
+    if (fingerprint === this._persisted) return;
+    this._persisted = fingerprint;
+    try {
+      const s = this.state;
+      localStorage.setItem(DRAFT_KEY, JSON.stringify({
+        pkg: s.pkg, club: s.club, website: s.website, holes: s.holes, city: s.city, region: s.region,
+        country: s.country, source: s.source, paymentType: s.paymentType, step: s.step
+      }));
+    } catch (e) {}
+  }
+
+  clearDraft() {
+    try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+  }
+
+  depositPct() {
+    const p = Number(this.props.depositPercent);
+    return p > 0 && p <= 100 ? p : 50;
+  }
+
+  pkgObj() { return PKG[this.state.pkg] || PKG.complete; }
+
+  totals() {
+    const base = this.pkgObj().price;
+    const discount = this.state.promoOk ? Math.round(base * 0.1) : 0;
+    const payable = base - discount;
+    const deposit = this.state.paymentType === "deposit";
+    const due = deposit ? Math.round(payable * (this.depositPct() / 100)) : payable;
+    return { base: base, discount: discount, payable: payable, due: due, remaining: payable - due };
+  }
+
+  isExtended() { return this.state.holes === "27" || this.state.holes === "36+"; }
+
+  assessmentReason() {
+    if (this.isExtended()) return "Extended " + this.state.holes + "-hole facility";
+    if (this.state.source === "I'm not sure") return "Source photography needs review";
+    return "";
+  }
+
+  needsAssessment() { return !!this.assessmentReason(); }
+
+  set = (key) => (e) => {
+    const v = e && e.target ? e.target.value : e;
+    this.setState((s) => ({ [key]: v, err: Object.assign({}, s.err, { [key]: false }) }));
+  };
+
+  pickHoles = (v) => () => this.setState({ holes: v });
+  pickSource = (v) => () => this.setState((s) => ({ source: v, err: Object.assign({}, s.err, { source: false }) }));
+  pickPkg = (k) => () => { const from = this.totals(); this.setState({ pkg: k }, () => this.startTween(from)); };
+  pickPay = (k) => () => { const from = this.totals(); this.setState({ paymentType: k }, () => this.startTween(from)); };
+  pickIntakePhoto = (v) => () => this.setState({ intakePhoto: v });
+  goStep = (n) => () => { if (n < this.state.step) { this.resetPaymentElement(); this.setState({ step: n, screen: "flow" }); } };
+  toggleTerms = () => this.setState((s) => ({ termsOk: !s.termsOk, err: Object.assign({}, s.err, { terms: false }) }));
+  openTerms = () => this.setState({ termsOpen: true });
+  closeTerms = () => this.setState({ termsOpen: false });
+  acceptFromTerms = () => this.setState((s) => ({ termsOpen: false, termsOk: true, err: Object.assign({}, s.err, { terms: false }) }));
+  stop = (e) => e.stopPropagation();
+  openPromo = () => this.setState({ promoOpen: true });
+  toggleSummary = () => this.setState((s) => ({ summaryOpen: !s.summaryOpen }));
+
+  onLogo = (e) => {
+    const f = e.target.files && e.target.files[0];
+    this.setState({ logoName: f ? f.name : "" });
+  };
+
+  validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test((v || "").trim()); }
+
+  resetPaymentElement() {
+    this._peStarted = false;
+    this._stripe = null;
+    this._elements = null;
+    if (this.state.peReady || this.state.payError) this.setState({ peReady: false, payError: "" });
+  }
+
+  back = () => {
+    this.resetPaymentElement();
+    if (this.state.screen === "assessment") { this.setState({ screen: "flow", step: 1 }); return; }
+    this.setState((s) => ({ step: Math.max(1, s.step - 1) }));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  next = () => {
+    const s = this.state;
+    if (s.step === 1) {
+      const err = {};
+      if (!s.club.trim()) err.club = true;
+      if (!/^[a-z0-9.-]+\.[a-z]{2,}/i.test(s.website.trim().replace(/^https?:\/\//i, ""))) err.website = true;
+      if (!s.source) err.source = true;
+      if (Object.keys(err).length) { this.setState({ err: err }); return; }
+      if (this.needsAssessment() && !this.isExtended()) { this.setState({ screen: "assessment" }); window.scrollTo({ top: 0 }); return; }
+      this.setState({ step: 2 });
+    } else if (s.step === 2) {
+      if (this.isExtended()) { this.setState({ screen: "assessment" }); window.scrollTo({ top: 0 }); return; }
+      this.setState({ step: 3 });
+    } else if (s.step === 3) {
+      if (!s.termsOk) { this.setState({ err: { terms: true } }); return; }
+      this.setState({ step: 4 });
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  applyPromo = async () => {
+    const code = (this.state.promoInput || "").trim().toUpperCase();
+    if (!code) return;
+    const before = this.totals();
+    this.setState({ promoChecking: true, promoMsg: "" });
+    const res = await callApi("/api/validate-promo", { code: code, package: this.state.pkg });
+    const ok = res ? !!res.valid : /^CV-[A-Z0-9]{6}$/.test(code);
+    this.setState({
+      promoChecking: false,
+      promoOk: ok,
+      promoCode: ok ? code : "",
+      promoOpen: true,
+      promoMsg: ok ? "10% first-project offer applied." : "That offer code could not be found."
+    }, () => this.startTween(before));
+  };
+
+  orderPayload() {
+    const t = this.totals();
+    const s = this.state;
+    return {
+      order_number: s.orderNumber,
+      club_name: s.club.trim(),
+      club_website: s.website.trim(),
+      location: [s.city, s.region, s.country].filter(Boolean).join(", "),
+      hole_count: s.holes,
+      package: s.pkg,
+      project_price: t.base,
+      payment_type: s.paymentType,
+      amount_due_now: t.due,
+      remaining_balance: t.remaining,
+      customer_email: s.email.trim(),
+      source_type: s.source,
+      source_links: s.sourceLink ? [s.sourceLink.trim()] : [],
+      promo_code: s.promoOk ? s.promoCode : null
+    };
+  }
+
+  // Card entry lives entirely inside Stripe.js's cross-origin iframes: no card
+  // number, CVC or expiry ever enters this page's DOM, state or storage, and
+  // none is sent to our own API. Nothing sensitive is persisted client-side.
+  async mountPaymentElement() {
+    if (this._peStarted || this.state.screen !== "flow" || this.state.step !== 4) return;
+    const node = this.payElRef && this.payElRef.current;
+    if (!node || !window.Stripe) return;
+    this._peStarted = true;
+    const res = await callApi("/api/create-payment-intent", this.orderPayload());
+    if (!res || !res.client_secret || !res.publishable_key) {
+      this._peStarted = false;
+      this.setState({ peReady: false, peNote: "Secure card entry loads here. Stripe keys are not configured on this environment, so payment falls back to Stripe's hosted checkout." });
+      return;
+    }
+    this._stripe = window.Stripe(res.publishable_key);
+    this._elements = this._stripe.elements({
+      clientSecret: res.client_secret,
+      appearance: {
+        theme: "flat",
+        variables: {
+          colorPrimary: "#2C4A3B", colorBackground: "#FDFCFA", colorText: "#16170F",
+          colorDanger: "#A95752", fontFamily: "Inter, system-ui, sans-serif",
+          borderRadius: "0px", spacingUnit: "4px"
+        },
+        rules: { ".Input": { border: "1px solid #D9D4C8", boxShadow: "none" }, ".Input:focus": { border: "1px solid #2C4A3B", boxShadow: "none" } }
+      }
+    });
+    const el = this._elements.create("payment", { layout: "tabs", fields: { billingDetails: { email: "never" } } });
+    el.mount(node);
+    if (res.order_number) this.setState({ orderNumber: res.order_number });
+    this.setState({ peReady: true, peNote: "" });
+  }
+
+  pay = async () => {
+    const s = this.state;
+    if (!this.validEmail(s.email)) { this.setState({ err: { email: true } }); return; }
+    this.setState({ paying: true, err: {} });
+
+    if (this._stripe && this._elements && s.peReady) {
+      const out = await this._stripe.confirmPayment({
+        elements: this._elements,
+        confirmParams: {
+          receipt_email: s.email,
+          payment_method_data: { billing_details: { email: s.email, name: s.club.trim() || undefined } },
+          return_url: location.origin + "/order/success"
+        },
+        redirect: "if_required"
+      });
+      if (out && out.error) {
+        this.setState({ paying: false, payError: out.error.message || "That payment could not be completed. Try another card." });
+        return;
+      }
+      this.clearDraft();
+      this.setState({ paying: false, payError: "", screen: "success" });
+      window.scrollTo({ top: 0 });
+      return;
+    }
+
+    const res = await callApi("/api/create-checkout-session", this.orderPayload());
+    if (res && res.url) { this.clearDraft(); window.location.href = res.url; return; }
+    setTimeout(() => this.setState({ paying: false, screen: "success" }), 1200);
+  };
+
+  submitAssessment = async () => {
+    if (!this.validEmail(this.state.email)) { this.setState({ err: { email: true } }); return; }
+    this.setState({ paying: true });
+    const payload = Object.assign(this.orderPayload(), { status: "assessment_required", reason: this.assessmentReason() });
+    await callApi("/api/orders", payload);
+    setTimeout(() => this.setState({ paying: false, screen: "assessmentDone" }), 800);
+  };
+
+  sourceBack = () => { this.setState({ intakePhoto: "", intakeLink: "", err: {} }); window.scrollTo({ top: 0, behavior: "smooth" }); };
+
+  sendSource = async () => {
+    const s = this.state;
+    const via = s.intakePhoto || "Upload later";
+    const link = s.intakeLink.trim();
+    if (via !== "Upload later" && !link) { this.setState({ err: { share: true } }); return; }
+    this.setState({ paying: true, err: {} });
+    const subject = "CourseVista source material \u2014 " + (s.orderNumber || "") + " \u2014 " + (s.club.trim() || "club");
+    const lines = [
+      "Order: " + s.orderNumber,
+      "Club: " + s.club.trim(),
+      "Package: " + this.pkgObj().name,
+      "Shared via: " + via,
+      link ? "Link: " + link : "Link: to follow by email",
+      "Contact: " + s.email
+    ];
+    await callApi("/api/orders", Object.assign(this.orderPayload(), {
+      status: "source_material", shared_via: via, source_link: link
+    }));
+    if (link) {
+      const href = "mailto:business@coursevista.com.au?subject=" + encodeURIComponent(subject)
+        + "&body=" + encodeURIComponent(lines.join("\r\n"));
+      try { window.open(href, "_blank"); } catch (e) {}
+    }
+    setTimeout(() => { this.setState({ paying: false, screen: "done" }); window.scrollTo({ top: 0 }); }, 700);
+  };
+
+  renderVals() {
+    const s = this.state;
+    const t = this.totals();
+    const pkg = this.pkgObj();
+    const R = (n) => (this[n] = this[n] || React.createRef());
+    const flow = s.screen === "flow";
+    const gstInclusive = this.props.gstInclusive !== false;
+    const holesLabel = s.holes === "36+" ? "36+ holes" : s.holes + " holes";
+    const stepLabels = ["Course", "Package", "Review", "Payment"];
+
+    const steps = stepLabels.map((label, i) => {
+      const n = i + 1;
+      const active = s.step === n;
+      const done = s.step > n;
+      return {
+        num: done ? "\u2713" : "0" + n, label: label, showDash: n < 4, go: this.goStep(n),
+        numColor: active ? "#B08D4F" : done ? "#2C4A3B" : "#C4C0B4",
+        color: active ? "#16170F" : done ? "#2C4A3B" : "#B4B0A4",
+        rule: active ? "#2C4A3B" : "transparent"
+      };
+    });
+
+    const holeOptions = ["9", "18", "27", "36+"].map((v) => {
+      const on = s.holes === v;
+      return { label: v, pick: this.pickHoles(v), bg: on ? "#2C4A3B" : "#FDFCFA", border: on ? "#2C4A3B" : "#D9D4C8", color: on ? "#FAF8F4" : "#55584D" };
+    });
+
+    const sourceOptions = SOURCES.map((v) => {
+      const on = s.source === v;
+      return {
+        label: v, pick: this.pickSource(v),
+        bg: on ? "#F4F6F1" : "#FDFCFA", border: on ? "#2C4A3B" : "#E4E0D6", color: on ? "#16170F" : "#55584D",
+        dotBorder: on ? "#2C4A3B" : "#C4C0B4", dotFill: on ? "#2C4A3B" : "transparent",
+        dotShadow: on ? "inset 0 0 0 3px #FFFFFF" : "none"
+      };
+    });
+
+    const packageOptions = PKG_ORDER.map((k) => {
+      const p = PKG[k];
+      const m = META[k];
+      const on = s.pkg === k;
+      const tooSmall = k === "essentials" && (s.holes === "18" || this.isExtended());
+      return {
+        name: p.name, summary: p.summary, headline: m.headline, price: money(p.price), popular: !!p.popular,
+        points: m.points.map((x) => ({ text: x })),
+        pick: this.pickPkg(k), checkOpacity: on ? 1 : 0,
+        bg: on ? "#F4F6F1" : "#FFFFFF", border: on ? "#2C4A3B" : "#E4E0D6",
+        shadow: on ? "0 14px 30px -26px rgba(22,23,15,0.55)" : "none",
+        dotBorder: on ? "#2C4A3B" : "#C4C0B4", dotFill: on ? "#2C4A3B" : "transparent",
+        warn: tooSmall, warnText: "Covers 9 holes — your course has more."
+      };
+    });
+
+    const anim = this._tweening && s.anim ? s.anim : { payable: t.payable, due: t.due, remaining: t.remaining };
+    const depositNow = Math.round(anim.payable * (this.depositPct() / 100));
+    const depositLater = anim.payable - depositNow;
+    const payOptions = [
+      {
+        key: "deposit", title: this.depositPct() + "% project deposit", amount: money(depositNow), chip: "",
+        note: "Reserve your production slot today. The remaining " + money(depositLater) + " is due before final delivery.",
+        legs: [
+          { label: "Today", amount: money(depositNow), color: "#2C4A3B", labelColor: "#2C4A3B" },
+          { label: "Later", amount: money(depositLater), color: "#8A6B2E", labelColor: "#8A6B2E" }
+        ]
+      },
+      {
+        key: "full", title: "Pay in full", amount: money(anim.payable), chip: "One payment",
+        note: "Settle the complete project now — nothing further to pay before delivery.",
+        legs: [
+          { label: "Today", amount: money(anim.payable), color: "#2C4A3B", labelColor: "#2C4A3B" },
+          { label: "Later", amount: "—", color: "#8A8D82", labelColor: "#8A8D82" }
+        ]
+      }
+    ].map((o) => {
+      const on = s.paymentType === o.key;
+      return Object.assign({}, o, {
+        pick: this.pickPay(o.key), checkOpacity: on ? 1 : 0,
+        bg: on ? "#F4F6F1" : "#FFFFFF", border: on ? "#2C4A3B" : "#E4E0D6",
+        shadow: on ? "0 16px 34px -28px rgba(22,23,15,0.6), inset 0 0 0 1px rgba(44,74,59,0.16)" : "none",
+        rule: on ? "#D5DED0" : "#F1EDE6",
+        dotBorder: on ? "#2C4A3B" : "#C4C0B4", dotFill: on ? "#2C4A3B" : "transparent"
+      });
+    });
+
+    const summaryRows = [
+      { label: "Project total", value: money(t.base) + " AUD", color: "#16170F" },
+      { label: "Payment today", value: money(anim.due) + " AUD", color: "#2C4A3B" },
+      { label: "Remaining balance", value: t.remaining > 0 ? money(anim.remaining) + " AUD" : "—", color: t.remaining > 0 ? "#8A6B2E" : "#8A8D82" },
+      { label: "Promotion", value: s.promoOk ? s.promoCode + " · −" + money(t.discount) : "—", color: s.promoOk ? "#8A6B2E" : "#8A8D82" }
+    ];
+
+    const shareOptions = ["Google Drive", "Dropbox", "WeTransfer", "Website link", "Upload later"].map((v) => {
+      const on = s.intakePhoto === v;
+      return { label: v, pick: this.pickIntakePhoto(v), bg: on ? "#2C4A3B" : "#FDFCFA", border: on ? "#2C4A3B" : "#D9D4C8", color: on ? "#FAF8F4" : "#55584D" };
+    });
+
+    const statusSteps = STATUS_STEPS.map((label, i) => {
+      const current = i === 0;
+      return {
+        label: label, mark: current ? "\u2022" : String(i + 1),
+        dotBorder: current ? "#2C4A3B" : "#DAD5C9", dotFill: current ? "#2C4A3B" : "transparent",
+        numColor: current ? "#FAF8F4" : "#B4B0A4",
+        color: current ? "#16170F" : "#8A8D82",
+        tag: current ? "In progress" : "", tagColor: "#8A6B2E"
+      };
+    });
+
+    return {
+      gridRef: R("gridRef"), railRef: R("railRef"),
+      steps: steps, holeOptions: holeOptions, sourceOptions: sourceOptions, exitBack: this.exitBack,
+      packageOptions: packageOptions, payOptions: payOptions, shareOptions: shareOptions,
+      statusSteps: statusSteps, terms: TERMS.map((x) => ({ title: x.title, body: x.body })),
+      pkgFeatures: pkg.features.map((x) => ({ text: x })),
+
+      showFlow: flow, isStep1: flow && s.step === 1, isStep2: flow && s.step === 2,
+      isStep3: flow && s.step === 3, isStep4: flow && s.step === 4,
+      showAssessment: s.screen === "assessment", showAssessmentDone: s.screen === "assessmentDone",
+      showSuccess: s.screen === "success", showDone: s.screen === "done",
+
+      club: s.club, website: s.website, city: s.city, region: s.region, country: s.country,
+      sourceLink: s.sourceLink, email: s.email, promoInput: s.promoInput,
+      contactName: s.contactName, contactRole: s.contactRole, contactPhone: s.contactPhone,
+      coursePage: s.coursePage, notes: s.notes, intakeLink: s.intakeLink,
+      orderNumber: s.orderNumber || "CV-0000",
+      websiteShort: (s.website || "your website").replace(/^https?:\/\//i, "").replace(/\/$/, ""),
+      railClub: s.club.trim() || "Your course",
+      holesLabel: holesLabel, pkgName: pkg.name,
+      logoLabel: s.logoName || "Attach club logo",
+
+      showLinkField: s.source === "We have additional photography" || s.source === "Both",
+      showIntakeLink: !!s.intakePhoto && s.intakePhoto !== "Upload later",
+      shareLater: s.intakePhoto === "Upload later",
+      errShare: !!s.err.share,
+      sharePlaceholder: s.intakePhoto === "Website link" ? "yourclub.com.au/gallery" : s.intakePhoto === "Dropbox" ? "dropbox.com/scl/fo/\u2026" : s.intakePhoto === "WeTransfer" ? "wetransfer.com/downloads/\u2026" : "drive.google.com/drive/folders/\u2026",
+      sendSourceLabel: s.intakePhoto === "Upload later" || !s.intakePhoto ? "Confirm and finish" : "Send to CourseVista",
+      isExtended: this.isExtended(),
+      assessmentReason: this.assessmentReason(),
+      extendedCopy: "Your " + s.holes + "-hole facility runs beyond the standard CourseVista package. Send the course through in this same flow and we'll confirm the scope and price before anything is paid.",
+      step2Support: this.isExtended() ? "Tell us which package your course should be built on. We'll confirm the final scope and price for an extended facility before anything is paid." : s.holes === "9" ? "Essentials covers a 9-hole course. You can move up at any point before payment." : "Complete is the right fit for most 18-hole clubs. You can change this before you pay.",
+      step2Cta: this.isExtended() ? "Continue to scope review" : "Continue",
+
+      totalLabel: money(t.base) + " AUD",
+      payableLabel: this.isExtended() ? "Confirmed after scope review" : money(anim.payable) + " AUD",
+      dueLabel: this.isExtended() ? "\u2014" : money(anim.due) + " AUD",
+      showRailTotals: !this.isExtended(),
+      remainingLabel: money(anim.remaining) + " AUD",
+      summaryRows: summaryRows,
+      pkgDescriptor: META[pkg.key].descriptor,
+      pkgSummaryLine: pkg.key === "hosted" ? holesLabel + " project + hosted guide" : holesLabel + " CourseVista project",
+      railPrice: this.isExtended() ? "—" : money(t.base) + " AUD",
+      railIncludes: META[pkg.key].includes.map((x) => ({ text: x })),
+      railImage: META[pkg.key].image || "",
+      railHasImage: !!META[pkg.key].image,
+      railNoImage: !META[pkg.key].image,
+      railHoles: s.holes === "36+" ? "36+" : s.holes,
+      railCollapsedLabel: pkg.name + " · " + holesLabel + " · " + (this.isExtended() ? "scoped" : money(t.base)),
+      railToggleLabel: s.summaryOpen ? "Hide \u2191" : "View package \u2193",
+      railPayment: this.isExtended()
+        ? [{ label: "Project price", value: "After scope review", color: "#8A6B2E" }]
+        : s.paymentType === "deposit"
+          ? [{ label: "Due today", value: money(anim.due), color: "#2C4A3B" }, { label: "Before final delivery", value: money(anim.remaining), color: "#8A6B2E" }]
+          : [{ label: "Due today", value: money(anim.payable), color: "#2C4A3B" }],
+      pmVisa: ENABLED_PAYMENT_METHODS.indexOf("visa") > -1,
+      pmMastercard: ENABLED_PAYMENT_METHODS.indexOf("mastercard") > -1,
+      pmAmex: ENABLED_PAYMENT_METHODS.indexOf("amex") > -1,
+      pmApplePay: ENABLED_PAYMENT_METHODS.indexOf("applePay") > -1,
+      pmGooglePay: ENABLED_PAYMENT_METHODS.indexOf("googlePay") > -1,
+      nextSteps: NEXT_STEPS.map((n, i) => ({ num: "0" + (i + 1), title: n.title, body: n.body, numColor: i === 0 ? "#2C4A3B" : "#B4B0A4" })),
+      notPaying: !s.paying,
+      promoOpen: s.promoOpen || !!s.promoMsg, promoClosed: !(s.promoOpen || !!s.promoMsg),
+      promoMsgMark: s.promoOk ? "\u2713" : "",
+      openPromo: this.openPromo, toggleSummary: this.toggleSummary,
+      railToggleRef: R("railToggleRef"), railBodyRef: R("railBodyRef"), railImgWrapRef: R("railImgWrapRef"),
+      discountLabel: money(t.discount),
+      promoApplied: s.promoOk && t.discount > 0,
+      promoLabel: "Offer code " + s.promoCode,
+      promoBtn: s.promoChecking ? "Checking" : s.promoOk ? "Applied" : "Apply",
+      promoMsg: s.promoMsg,
+      promoMsgColor: s.promoOk ? "#2C4A3B" : "#A95752",
+      showPromo: this.props.showPromoField !== false,
+      taxNote: gstInclusive ? "All prices are in Australian dollars and include GST." : "All prices are in Australian dollars, exclusive of GST.",
+      railNote: this.isExtended() ? "Extended facilities are scoped before payment. Nothing is charged until you approve the scope and price." : s.paymentType === "deposit" ? "Reserve your project with a " + this.depositPct() + "% deposit. The balance is due before final delivery." : "Paying in full — nothing further to pay after today.",
+      balanceNote: t.remaining > 0 ? "When your films are approved we'll send a secure link to settle the remaining " + money(t.remaining) + ". Final files are released once that clears." : "Your project is paid in full. Final files are released after club review.",
+
+      payLabel: s.paying ? "Confirming payment" : "Pay " + money(t.due) + " securely",
+      paying: s.paying, payOpacity: s.paying ? 0.72 : 1,
+      payElRef: R("payElRef"), payElFallback: !s.peReady, payError: s.payError,
+      payElNote: s.peNote || "Secure card entry loads here \u2014 the fields are served by Stripe inside an isolated frame.",
+      termsOk: s.termsOk, termsOpen: s.termsOpen,
+      termsBorder: s.termsOk ? "#2C4A3B" : "#C4C0B4", termsFill: s.termsOk ? "#2C4A3B" : "#FFFFFF",
+      termsCheck: s.termsOk ? 1 : 0,
+
+      errClub: !!s.err.club, errWebsite: !!s.err.website, errSource: !!s.err.source,
+      errEmail: !!s.err.email, errTerms: !!s.err.terms, errContact: !!s.err.contact,
+
+      onClub: this.set("club"), onWebsite: this.set("website"), onCity: this.set("city"),
+      onRegion: this.set("region"), onCountry: this.set("country"), onSourceLink: this.set("sourceLink"),
+      onEmail: this.set("email"), onPromo: this.set("promoInput"), onContactName: this.set("contactName"),
+      onContactRole: this.set("contactRole"), onContactPhone: this.set("contactPhone"),
+      onCoursePage: this.set("coursePage"), onNotes: this.set("notes"), onIntakeLink: this.set("intakeLink"),
+      onLogo: this.onLogo,
+      next: this.next, back: this.back, pay: this.pay, applyPromo: this.applyPromo,
+      submitAssessment: this.submitAssessment, sendSource: this.sendSource, sourceBack: this.sourceBack,
+      toggleTerms: this.toggleTerms, openTerms: this.openTerms, closeTerms: this.closeTerms,
+      acceptFromTerms: this.acceptFromTerms, stop: this.stop
+    };
+  }
+}
+</script>
+</body>
+</html>

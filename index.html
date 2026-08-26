@@ -8,6 +8,8 @@
 <body>
 <x-dc>
 <helmet>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -22,6 +24,13 @@ button { font-family: Inter, system-ui, sans-serif; }
 :focus-visible { outline: 2px solid #2C4A3B; outline-offset: 3px; }
 input, select { font-family: Inter, system-ui, sans-serif; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@keyframes cv-marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+[data-cvmark] { z-index: 90; }
+[data-cvmark], [data-cvmark] *, #founding h2 { clip-path: none !important; }
+[data-cvmark] [data-cvmark-disc] { cursor: pointer; }
+[data-cvmark]:hover [data-cvmark-disc], [data-cvmark]:focus-within [data-cvmark-disc], [data-cvmark][data-cvmark-open="1"] [data-cvmark-disc] { transform: scale(1.14); box-shadow: 0 16px 30px -18px rgba(22,23,15,0.5); }
+[data-cvmark]:hover [data-cvmark-card], [data-cvmark]:focus-within [data-cvmark-card], [data-cvmark][data-cvmark-open="1"] [data-cvmark-card] { opacity: 1 !important; transform: translate(-50%,0) !important; pointer-events: auto !important; }
+@media (prefers-reduced-motion: reduce) { [data-marquee-track] { animation: none !important; } }
 </style>
 </helmet>
 
@@ -34,10 +43,10 @@ input, select { font-family: Inter, system-ui, sans-serif; }
         <img data-nav-word="1" src="assets/cv-wordmark-light.png" alt="" style="height:16px;width:auto">
       </a>
       <nav style="margin-left:auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px 26px;font-size:14px;font-weight:500">
-        <a data-nav-link="1" href="#work" style="color:#FAF8F4">Work</a>
-        <a data-nav-link="1" href="#why" style="color:#FAF8F4">Why CourseVista</a>
-        <a data-nav-link="1" href="#pricing" style="color:#FAF8F4">Pricing</a>
-        <a data-nav-cta="1" href="#enquiry" style="border:1px solid rgba(250,248,244,0.6);color:#FAF8F4;padding:9px 16px;font-weight:500" style-hover="background:#FAF8F4;color:#16170F">See your course</a>
+        <a data-nav-link="1" data-uline="1" href="#work" style="color:#FAF8F4;position:relative;display:inline-block;padding-bottom:4px">Work<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></a>
+        <a data-nav-link="1" data-uline="1" href="#why" style="color:#FAF8F4;position:relative;display:inline-block;padding-bottom:4px">Why CourseVista<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></a>
+        <a data-nav-link="1" data-uline="1" href="#pricing" style="color:#FAF8F4;position:relative;display:inline-block;padding-bottom:4px">Pricing<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></a>
+        <a data-nav-cta="1" href="#enquiry" data-ofill="#FAF8F4" data-ofill-text="#16170F" style="border:1px solid rgba(250,248,244,0.6);color:#FAF8F4;padding:9px 16px;font-weight:500">See your course</a>
       </nav>
     </div>
   </header>
@@ -53,16 +62,134 @@ input, select { font-family: Inter, system-ui, sans-serif; }
         <h1 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FAF8F4;font-size:clamp(42px,7vw,96px);line-height:1.0;letter-spacing:-0.02em;margin:22px 0 0;max-width:16ch;text-wrap:pretty">Your course, in motion.</h1>
         <p data-reveal="up" style="font-size:clamp(16px,1.35vw,19px);line-height:1.6;color:#E4E0D6;margin:26px 0 0;max-width:52ch;text-wrap:pretty">Turn the photography your club already owns into cinematic tee-to-green flyovers — without a site visit, filming crew or course closure.</p>
         <div data-reveal="up" style="margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
-          <a href="#enquiry" style="background:#FAF8F4;color:#16170F;padding:16px 26px;font-size:15px;font-weight:500" style-hover="background:#E6D3AC">See what your course could look like</a>
-          <button type="button" onClick="{{ playFeature }}" style="background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center;gap:11px;color:#FAF8F4;font-size:15px" style-hover="color:#E6D3AC">
-            <span style="width:28px;height:28px;border:1px solid rgba(250,248,244,0.7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;padding-left:2px">&#9654;</span>
-            <span>Watch a hole film · 0:30</span>
+          <a href="#enquiry" data-flyarrow="1" style="display:inline-flex;align-items:center;gap:0;flex:0 0 auto">
+            <span data-fly-pill="1" style="background:#DDE8CC;color:#16170F;border-radius:999px;padding:16px 30px;font-size:15px;font-weight:500;transition:background-color 340ms cubic-bezier(.16,1,.3,1), color 300ms ease">See what your course could look like</span>
+            <span data-fly-circle="1" style="position:relative;overflow:hidden;width:52px;height:52px;border-radius:50%;background:#DDE8CC;color:#16170F;display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:background-color 340ms cubic-bezier(.16,1,.3,1), color 300ms ease">
+              <span data-fly-a="1" style="position:absolute;font-size:16px;line-height:1;transition:transform 460ms cubic-bezier(.22,.61,.36,1)">&#8599;</span>
+              <span data-fly-b="1" style="position:absolute;font-size:16px;line-height:1;transform:translate(-260%,260%);transition:transform 460ms cubic-bezier(.22,.61,.36,1)">&#8599;</span>
+            </span>
+          </a>
+          <button type="button" onClick="{{ playFeature }}" data-uline="1" style="background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center;gap:11px;color:#FAF8F4;font-size:15px" style-hover="color:#E6D3AC">
+            <span style="position:relative;overflow:hidden;width:28px;height:28px;border:1px solid rgba(250,248,244,0.7);border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto">
+              <span data-uline-a="1" style="position:absolute;font-size:9px;line-height:1;padding-left:2px;transition:transform 620ms cubic-bezier(.34,1.4,.64,1)">&#9654;</span>
+              <span data-uline-b="1" style="position:absolute;font-size:9px;line-height:1;padding-left:2px;transform:translateX(-320%);transition:transform 620ms cubic-bezier(.34,1.4,.64,1)">&#9654;</span>
+            </span>
+            <span style="position:relative;display:inline-block;padding-bottom:4px">Watch a hole film · 0:30<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 620ms cubic-bezier(.19,1,.22,1)"></span></span>
           </button>
         </div>
         <div data-reveal="up" style="margin-top:clamp(38px,6vh,64px);border-top:1px solid rgba(250,248,244,0.24);padding-top:16px;display:flex;flex-wrap:wrap;gap:8px 0;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#E4E0D6">
           <span style="padding-right:22px">No site visit</span>
           <span style="padding:0 22px;border-left:1px solid rgba(250,248,244,0.24)">No shoot day</span>
           <span style="padding-left:22px;border-left:1px solid rgba(250,248,244,0.24)">No course closure</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="founding" style="position:relative;z-index:2;background:#FAF8F4;border-top:1px solid #E4E0D6">
+      <div style="max-width:760px;margin:0 auto;padding:clamp(58px,7vw,100px) clamp(20px,4vw,40px) 0;display:flex;flex-direction:column;align-items:center;text-align:center">
+        <div style="font-size:10px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#B08D4F">Founding courses</div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(28px,3.8vw,46px);line-height:1.18;margin:22px 0 0;max-width:24ch;text-wrap:pretty">
+          Built with clubs,<br>improved by
+          <span data-cvmark="1" data-cvmark-v="2" style="position:relative;display:inline-block;vertical-align:-0.18em;margin:0 0.12em">
+            <span data-cvmark-disc="1" style="display:flex;align-items:center;justify-content:center;width:1.02em;height:1.02em;border-radius:50%;overflow:hidden;background:#FFFFFF;border:1px solid #E4E0D6;box-shadow:0 10px 24px -20px rgba(22,23,15,0.4);transition:transform 420ms cubic-bezier(.19,1,.22,1), box-shadow 420ms cubic-bezier(.19,1,.22,1);will-change:transform">
+              <img src="assets/cv-medallion.png" alt="CourseVista" style="width:100%;height:100%;object-fit:cover;display:block">
+            </span>
+            <span data-cvmark-card="1" style="position:absolute;left:50%;top:calc(100% + 14px);transform:translate(-50%,7px);box-sizing:border-box;width:min(310px,74vw);background:#FFFFFF;border:1px solid #E4E0D6;box-shadow:0 22px 52px -32px rgba(22,23,15,0.45);padding:16px 18px 17px;font-family:Inter,system-ui,sans-serif;letter-spacing:0;text-transform:none;text-align:left;opacity:0;pointer-events:none;z-index:90;transition:opacity 300ms ease, transform 420ms cubic-bezier(.19,1,.22,1)">
+              <span style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:15px;line-height:1.2;color:#16170F">Course Vista</span>
+                <span style="display:flex;align-items:center;gap:6px;white-space:nowrap"><span aria-hidden="true" style="font-size:10px;letter-spacing:0.12em;color:#B08D4F">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span style="font-size:9.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#8A8D82">5 stars</span></span>
+              </span>
+              <span data-cvmark-type="1" style="display:block;margin-top:11px;font-size:12.5px;font-weight:400;line-height:1.62;color:#55584D;text-wrap:pretty;min-height:5.2em" data-cv-quote="The software has been improved drastically creating gorgeous aerial flyovers way more efficiently than anything else, the accuracy is insane.">The software has been improved drastically creating gorgeous aerial flyovers way more efficiently than anything else, the accuracy is insane.</span>
+            </span>
+          </span>
+          every
+          course.
+        </h2>
+        <p style="font-size:16px;line-height:1.7;color:#55584D;margin:26px 0 0;max-width:54ch;text-wrap:pretty">CourseVista is still early. Every club we work with directly helps shape the product — and standout projects may be featured here for future clubs to explore.</p>
+        <a href="#enquiry" data-uline="1" style="display:inline-flex;align-items:center;gap:9px;margin-top:24px;font-size:15px;font-weight:500;color:#2C4A3B">
+          <span style="position:relative;display:inline-block;padding-bottom:3px">Work with us<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></span>
+          <span style="font-size:13px">&#8594;</span>
+        </a>
+      </div>
+
+      <div ref="{{ marquee }}" style="margin-top:clamp(46px,5.4vw,76px);padding-bottom:clamp(34px,3.8vw,52px);overflow:hidden;mask-image:linear-gradient(to right, transparent, #000 14%, #000 86%, transparent);-webkit-mask-image:linear-gradient(to right, transparent, #000 14%, #000 86%, transparent)">
+        <div data-marquee-track="1" style="display:flex;width:max-content;gap:20px;padding:6px 10px;animation:cv-marquee 78s linear infinite">
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span aria-hidden="true" style="width:34px;height:34px;border-radius:50%;border:1px solid #D8D4C8;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-size:13px;letter-spacing:0.06em;color:#2C4A3B">YC</span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Your club here</span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span style="font-family:'Playfair Display',Georgia,serif;font-size:17px;line-height:1.2;color:#16170F;text-align:center">Founding Course</span>
+            <span aria-hidden="true" style="width:26px;height:1px;background:#B08D4F;opacity:0.55"></span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Available</span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span aria-hidden="true" style="width:30px;height:36px;background:#F3F5F1;border:1px solid #D3DCD3;border-radius:4px 4px 14px 14px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-size:12px;letter-spacing:0.05em;color:#2C4A3B">CV</span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Reserved for a founding course</span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#55584D;text-align:center">Next featured club</span>
+            <span aria-hidden="true" style="width:26px;height:1px;background:#B08D4F;opacity:0.55"></span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span aria-hidden="true" style="display:flex;align-items:center;gap:9px">
+              <img src="assets/cv-mark.png" alt="" style="height:22px;width:auto;display:block">
+              <img src="assets/cv-wordmark.png" alt="" style="height:11px;width:auto;display:block;opacity:0.9">
+            </span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Founding partners</span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span aria-hidden="true" style="width:36px;height:36px;border-radius:50%;border:1px solid #E0DACB;display:flex;align-items:center;justify-content:center">
+              <span style="width:26px;height:26px;border-radius:50%;border:1px solid #B08D4F;opacity:0.75;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-size:11px;letter-spacing:0.06em;color:#8A6B2E">FC</span>
+            </span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Founding course</span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span style="font-family:'Playfair Display',Georgia,serif;font-size:16px;line-height:1.2;color:#16170F;text-align:center">Early access</span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Clubs</span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span aria-hidden="true" style="width:34px;height:34px;border-radius:50%;border:1px solid #D8D4C8;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-size:13px;letter-spacing:0.06em;color:#2C4A3B">&#8212;</span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Coming soon</span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span aria-hidden="true" style="width:34px;height:34px;border-radius:50%;border:1px solid #D8D4C8;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-size:13px;letter-spacing:0.06em;color:#2C4A3B">YC</span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Your club here</span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span style="font-family:'Playfair Display',Georgia,serif;font-size:17px;line-height:1.2;color:#16170F;text-align:center">Founding Course</span>
+            <span aria-hidden="true" style="width:26px;height:1px;background:#B08D4F;opacity:0.55"></span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Available</span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span aria-hidden="true" style="width:30px;height:36px;background:#F3F5F1;border:1px solid #D3DCD3;border-radius:4px 4px 14px 14px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-size:12px;letter-spacing:0.05em;color:#2C4A3B">CV</span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Reserved for a founding course</span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#55584D;text-align:center">Next featured club</span>
+            <span aria-hidden="true" style="width:26px;height:1px;background:#B08D4F;opacity:0.55"></span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span aria-hidden="true" style="display:flex;align-items:center;gap:9px">
+              <img src="assets/cv-mark.png" alt="" style="height:22px;width:auto;display:block">
+              <img src="assets/cv-wordmark.png" alt="" style="height:11px;width:auto;display:block;opacity:0.9">
+            </span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Founding partners</span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span aria-hidden="true" style="width:36px;height:36px;border-radius:50%;border:1px solid #E0DACB;display:flex;align-items:center;justify-content:center">
+              <span style="width:26px;height:26px;border-radius:50%;border:1px solid #B08D4F;opacity:0.75;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-size:11px;letter-spacing:0.06em;color:#8A6B2E">FC</span>
+            </span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Founding course</span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span style="font-family:'Playfair Display',Georgia,serif;font-size:16px;line-height:1.2;color:#16170F;text-align:center">Early access</span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Clubs</span>
+          </span>
+          <span style="flex:0 0 auto;box-sizing:border-box;width:206px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:0 18px">
+            <span aria-hidden="true" style="width:34px;height:34px;border-radius:50%;border:1px solid #D8D4C8;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-size:13px;letter-spacing:0.06em;color:#2C4A3B">&#8212;</span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#8A8D82;text-align:center">Coming soon</span>
+          </span>
         </div>
       </div>
     </section>
@@ -222,19 +349,19 @@ input, select { font-family: Inter, system-ui, sans-serif; }
           </div>
         </div>
         <div style="margin-top:clamp(48px,6vw,88px);border-top:1px solid #B08D4F;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
-          <div style="padding:30px 24px 0 0">
+          <div style="padding:30px 24px 0;text-align:center">
             <div ref="{{ m1 }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(42px,4.6vw,60px);line-height:1;color:#16170F">30</div>
             <div style="font-size:13px;color:#8A8D82;margin-top:12px">seconds per hole</div>
           </div>
-          <div style="padding:30px 24px 0;border-left:1px solid #E4E0D6">
+          <div style="padding:30px 24px 0;border-left:1px solid #E4E0D6;text-align:center">
             <div ref="{{ m2 }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(42px,4.6vw,60px);line-height:1;color:#16170F">18</div>
             <div style="font-size:13px;color:#8A8D82;margin-top:12px">holes covered</div>
           </div>
-          <div style="padding:30px 24px 0;border-left:1px solid #E4E0D6">
+          <div style="padding:30px 24px 0;border-left:1px solid #E4E0D6;text-align:center">
             <div ref="{{ m3 }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(42px,4.6vw,60px);line-height:1;color:#16170F">0</div>
             <div style="font-size:13px;color:#8A8D82;margin-top:12px">closure days</div>
           </div>
-          <div style="padding:30px 0 0 24px;border-left:1px solid #E4E0D6">
+          <div style="padding:30px 24px 0;border-left:1px solid #E4E0D6;text-align:center">
             <div ref="{{ m4 }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(42px,4.6vw,60px);line-height:1;color:#16170F">1</div>
             <div style="font-size:13px;color:#8A8D82;margin-top:12px">set of existing photography</div>
           </div>
@@ -251,35 +378,21 @@ input, select { font-family: Inter, system-ui, sans-serif; }
             <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px;padding-top:9px">04</div>
             <div style="flex:1 1 460px">
               <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,50px);line-height:1.08;margin:0;max-width:19ch">See what avoiding the shoot changes.</h2>
-              <p style="font-size:16px;line-height:1.62;color:#55584D;margin:20px 0 0;max-width:58ch;text-wrap:pretty">Compare CourseVista with a conventional multi-hole filming production — including the rounds a club stops selling while the crew is on the course.</p>
+              <p style="font-size:16px;line-height:1.62;color:#55584D;margin:20px 0 0;max-width:58ch;text-wrap:pretty">Compare a conventional on-course filming production with a remote CourseVista project. Adjust the course assumptions below.</p>
             </div>
           </div>
 
-          <div style="background:#E4E0D6;border:1px solid #E4E0D6;margin-top:clamp(36px,4vw,56px);display:flex;flex-wrap:wrap;gap:1px">
+          <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82;margin-top:clamp(34px,4vw,52px)">Step 01 · Assumptions</div>
+          <div style="background:#E4E0D6;border:1px solid #E4E0D6;margin-top:14px;display:flex;flex-wrap:wrap;gap:1px">
             <div style="flex:1 1 190px;padding:22px 26px 24px;background:#FFFFFF">
               <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Holes</div>
-              <div style="display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:14px">
+                <div style="display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:14px">
                   <sc-for list="{{ holeOptions }}" as="opt" hint-placeholder-count="4">
-                    <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="background:none;border:0;border-bottom:2px solid transparent;padding:6px 10px 7px;cursor:pointer;font-family:'Playfair Display',Georgia,serif;font-size:21px;color:#8A8D82" style-hover="color:#16170F">
+                    <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="background:none;border:0;padding:6px 10px 7px;cursor:pointer;font-family:'Playfair Display',Georgia,serif;font-size:21px;color:#8A8D82" style-hover="color:#16170F">
                       <sc-if value="{{ opt.active }}" hint-placeholder-val="{{ false }}">
                         <span style="color:#16170F;border-bottom:2px solid #2C4A3B;padding-bottom:6px">{{ opt.label }}</span>
                       </sc-if>
-                      <sc-if value="{{ opt.inactiveLabel }}" hint-placeholder-val="{{ true }}">
-                        <span>{{ opt.label }}</span>
-                      </sc-if>
-                    </button>
-                  </sc-for>
-                </div>
-            </div>
-            <div style="flex:1 1 220px;padding:22px 26px 24px;background:#FFFFFF">
-              <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Green fee</div>
-              <div style="display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:14px">
-                  <sc-for list="{{ feeOptions }}" as="opt" hint-placeholder-count="4">
-                    <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="background:none;border:0;border-bottom:2px solid transparent;padding:6px 10px 7px;cursor:pointer;font-family:'Playfair Display',Georgia,serif;font-size:21px;color:#8A8D82" style-hover="color:#16170F">
-                      <sc-if value="{{ opt.active }}" hint-placeholder-val="{{ false }}">
-                        <span style="color:#16170F;border-bottom:2px solid #2C4A3B;padding-bottom:6px">{{ opt.label }}</span>
-                      </sc-if>
-                      <sc-if value="{{ opt.inactiveLabel }}" hint-placeholder-val="{{ true }}">
+                      <sc-if value="{{ opt.inactive }}" hint-placeholder-val="{{ true }}">
                         <span>{{ opt.label }}</span>
                       </sc-if>
                     </button>
@@ -288,99 +401,167 @@ input, select { font-family: Inter, system-ui, sans-serif; }
             </div>
             <div style="flex:2 1 300px;padding:22px 26px 24px;background:#FFFFFF">
               <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Course type</div>
-              <div style="display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:14px">
-                <sc-for list="{{ typeOptions }}" as="opt" hint-placeholder-count="3">
-                  <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="background:none;border:0;padding:8px 10px 9px;cursor:pointer;font-size:14px;color:#8A8D82" style-hover="color:#16170F">
-                    <sc-if value="{{ opt.active }}" hint-placeholder-val="{{ true }}">
-                      <span style="color:#16170F;border-bottom:2px solid #2C4A3B;padding-bottom:6px">{{ opt.label }}</span>
-                    </sc-if>
-                    <sc-if value="{{ opt.inactive }}" hint-placeholder-val="{{ false }}">
-                      <span>{{ opt.label }}</span>
-                    </sc-if>
-                  </button>
-                </sc-for>
-              </div>
+                <div style="display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:14px">
+                  <sc-for list="{{ typeOptions }}" as="opt" hint-placeholder-count="3">
+                    <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="background:none;border:0;padding:6px 10px 7px;cursor:pointer;font-family:inherit;font-size:14px;color:#8A8D82" style-hover="color:#16170F">
+                      <sc-if value="{{ opt.active }}" hint-placeholder-val="{{ false }}">
+                        <span style="color:#16170F;border-bottom:2px solid #2C4A3B;padding-bottom:6px">{{ opt.label }}</span>
+                      </sc-if>
+                      <sc-if value="{{ opt.inactive }}" hint-placeholder-val="{{ true }}">
+                        <span>{{ opt.label }}</span>
+                      </sc-if>
+                    </button>
+                  </sc-for>
+                </div>
             </div>
           </div>
 
-          <div style="background:#FFFFFF;border:1px solid #E4E0D6;border-top:0;padding:clamp(20px,3vw,34px) clamp(18px,3vw,34px) clamp(26px,3vw,38px)">
-            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;padding-bottom:11px">
-              <div style="flex:1 1 210px;min-width:0"></div>
-              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
-                <div style="flex:1 1 0;min-width:0;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D82">Traditional</div>
-                <div style="flex:1 1 0;min-width:0;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#2C4A3B">CourseVista</div>
+          <div style="background:#FFFFFF;border:1px solid #E4E0D6;border-top:0;padding:clamp(22px,3vw,34px) clamp(18px,3vw,34px) clamp(26px,3vw,36px)">
+            <div style="display:flex;flex-wrap:wrap;gap:6px 14px;align-items:flex-end;padding-bottom:12px">
+              <div style="flex:1 1 210px;min-width:0;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Step 02 · Comparison</div>
+              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px">
+                <div style="flex:1 1 0;min-width:0;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#55584D;line-height:1.55">On-course drone</div>
+                <div style="flex:1 1 0;min-width:0;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#2C4A3B;line-height:1.55">CourseVista</div>
               </div>
             </div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid #E4E0D6;padding:13px 0">
-              <div style="flex:1 1 210px;min-width:0;font-size:14px;color:#55584D;text-wrap:pretty">Filming days on site</div>
-              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
-                <div ref="{{ tDays }}" style="flex:1 1 0;min-width:0;font-size:15px;color:#16170F;overflow-wrap:anywhere">4</div>
-                <div style="flex:1 1 0;min-width:0;font-size:15px;color:#2C4A3B;overflow-wrap:anywhere">0</div>
-              </div>
-            </div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid #E4E0D6;padding:13px 0">
-              <div style="flex:1 1 210px;min-width:0;font-size:14px;color:#55584D;text-wrap:pretty">Crew mobilisations</div>
-              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
-                <div ref="{{ tCrew }}" style="flex:1 1 0;min-width:0;font-size:15px;color:#16170F;overflow-wrap:anywhere">4</div>
-                <div style="flex:1 1 0;min-width:0;font-size:15px;color:#2C4A3B;overflow-wrap:anywhere">0</div>
-              </div>
-            </div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid #E4E0D6;padding:13px 0">
-              <div style="flex:1 1 210px;min-width:0;font-size:14px;color:#55584D;text-wrap:pretty">Holes out of play</div>
-              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
-                <div ref="{{ tClosure }}" style="flex:1 1 0;min-width:0;font-size:15px;color:#16170F;overflow-wrap:anywhere">18</div>
-                <div style="flex:1 1 0;min-width:0;font-size:15px;color:#2C4A3B;overflow-wrap:anywhere">0</div>
-              </div>
-            </div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid #E4E0D6;padding:13px 0">
-              <div style="flex:1 1 210px;min-width:0;font-size:14px;color:#55584D;text-wrap:pretty">Rounds displaced</div>
-              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
-                <div ref="{{ tDisplaced }}" style="flex:1 1 0;min-width:0;font-size:15px;color:#16170F;overflow-wrap:anywhere">97</div>
-                <div style="flex:1 1 0;min-width:0;font-size:15px;color:#2C4A3B;overflow-wrap:anywhere">0</div>
-              </div>
-            </div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid #E4E0D6;padding:13px 0">
-              <div style="flex:1 1 210px;min-width:0;font-size:14px;color:#55584D;text-wrap:pretty">Production</div>
-              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
-                <div ref="{{ tCost }}" style="flex:1 1 0;min-width:0;font-size:15px;color:#16170F;overflow-wrap:anywhere">$24,600</div>
-                <div style="flex:1 1 0;min-width:0;font-size:15px;color:#2C4A3B;overflow-wrap:anywhere">Quoted per course</div>
-              </div>
-            </div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px 12px;border-top:1px solid #E4E0D6;padding:13px 0">
-              <div style="flex:1 1 210px;min-width:0;font-size:14px;color:#55584D;text-wrap:pretty">Green fees not sold while holes are closed</div>
-              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px">
-                <div ref="{{ tLost }}" style="flex:1 1 0;min-width:0;font-size:15px;color:#16170F;overflow-wrap:anywhere">$24,250</div>
-                <div style="flex:1 1 0;min-width:0;font-size:15px;color:#2C4A3B;overflow-wrap:anywhere">$0</div>
-              </div>
-            </div>
-            <div style="display:flex;flex-wrap:wrap;gap:8px 12px;border-top:1px solid #B08D4F;padding:24px 0 0">
-              <div style="flex:1 1 210px;min-width:0;font-family:'Playfair Display',Georgia,serif;font-size:19px;color:#16170F">Total exposure</div>
-              <div style="flex:1 1 200px;min-width:0;display:flex;gap:12px;align-items:flex-start">
-                <div style="flex:1 1 0;min-width:0">
-                  <div ref="{{ tTotal }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(23px,3.2vw,42px);line-height:1.05;color:#16170F;overflow-wrap:anywhere">$48,850</div>
-                  <div style="display:flex;height:5px;background:#F1EDE6;margin-top:14px">
-                    <div ref="{{ barProd }}" style="height:5px;width:50%;background:#2C4A3B"></div>
-                    <div ref="{{ barClosure }}" style="height:5px;width:50%;background:#B08D4F"></div>
+
+            <div ref="{{ costRow }}" style="display:flex;flex-wrap:wrap;gap:8px 14px;border-top:1px solid #E4E0D6;border-bottom:2px solid #E4E0D6;padding:20px 0 22px;transition:background-color 460ms ease">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;font-weight:500;color:#16170F;text-wrap:pretty">Production estimate</div>
+              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px">
+                <div data-col="drone" style="flex:1 1 0;min-width:0">
+                  <div ref="{{ wrapDrone }}" style="display:flex;align-items:baseline;gap:2px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.4vw,29px);line-height:1.1;color:#16170F">
+                    <span>{{ droneLo }}</span><span>–</span><span>{{ droneHi }}</span>
                   </div>
-                  <div style="display:flex;flex-wrap:wrap;gap:5px 14px;margin-top:10px;font-size:11px;color:#8A8D82">
-                    <span style="display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;background:#2C4A3B;flex:0 0 auto"></span>Production</span>
-                    <span style="display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;background:#B08D4F;flex:0 0 auto"></span>Fees not sold</span>
-                  </div>
+                  <div style="font-size:12px;color:#8A8D82;margin-top:7px;text-wrap:pretty">{{ droneNoteShort }}</div>
                 </div>
-                <div style="flex:1 1 0;min-width:0">
-                  <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.4vw,30px);line-height:1.1;color:#2C4A3B">Nil</div>
-                  <div style="font-size:13px;color:#8A8D82;margin-top:12px;text-wrap:pretty">No crew, no closure, no lost rounds. The course keeps selling while the films are built.</div>
+                <div data-col="cv" style="flex:1 1 0;min-width:0">
+                  <div ref="{{ wrapCv }}" style="display:flex;align-items:baseline;gap:6px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.4vw,29px);line-height:1.1;color:#2C4A3B">
+                    <span style="font-family:inherit;font-size:13px;color:#8A8D82">from</span><span>{{ cvFrom }}</span>
+                  </div>
+                  <div style="font-size:12px;color:#8A8D82;margin-top:7px;text-wrap:pretty">{{ cvNote }}</div>
                 </div>
               </div>
             </div>
+
+            <div style="display:flex;align-items:center;gap:14px;border-top:1px solid #E4E0D6;padding:13px 0 5px">
+              <span style="font-size:9px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#8A6B2E">Logistics</span>
+              <span style="flex:1 1 auto;height:1px;background:#F1EDE6"></span>
+            </div>
+            <div data-matrix-row="1" style="display:flex;flex-wrap:wrap;gap:2px 14px;align-items:center;border-top:1px solid #F1EDE6;padding:11px 0;transition:background-color 260ms ease" style-hover="background:#FBFAF7">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;line-height:1.35;color:#16170F;text-wrap:pretty">Site visit</div>
+              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px"><div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#55584D;font-weight:400"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A6534F" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M9.2 9.2 L14.8 14.8 M14.8 9.2 L9.2 14.8"></path></svg><span style="overflow-wrap:anywhere">Required</span></div><div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#2C4A3B;font-weight:500"><svg data-tick="1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M8.4 12.3 L11 14.9 L15.8 9.3"></path></svg><span style="overflow-wrap:anywhere">Not required</span></div></div>
+            </div>
+            <div data-matrix-row="1" style="display:flex;flex-wrap:wrap;gap:2px 14px;align-items:center;border-top:1px solid #F1EDE6;padding:11px 0;transition:background-color 260ms ease" style-hover="background:#FBFAF7">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;line-height:1.35;color:#16170F;text-wrap:pretty">Shoot scheduling</div>
+              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px"><div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#55584D;font-weight:400"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A6534F" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M9.2 9.2 L14.8 14.8 M14.8 9.2 L9.2 14.8"></path></svg><span style="overflow-wrap:anywhere">Required</span></div><div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#2C4A3B;font-weight:500"><svg data-tick="1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M8.4 12.3 L11 14.9 L15.8 9.3"></path></svg><span style="overflow-wrap:anywhere">Not required</span></div></div>
+            </div>
+            <div data-matrix-row="1" style="display:flex;flex-wrap:wrap;gap:2px 14px;align-items:center;border-top:1px solid #F1EDE6;padding:11px 0;transition:background-color 260ms ease" style-hover="background:#FBFAF7">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;line-height:1.35;color:#16170F;text-wrap:pretty">Weather window</div>
+              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px"><div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#55584D;font-weight:400"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A6534F" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M9.2 9.2 L14.8 14.8 M14.8 9.2 L9.2 14.8"></path></svg><span style="overflow-wrap:anywhere">Required</span></div><div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#2C4A3B;font-weight:500"><svg data-tick="1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M8.4 12.3 L11 14.9 L15.8 9.3"></path></svg><span style="overflow-wrap:anywhere">Not required</span></div></div>
+            </div>
+            <div data-matrix-row="1" style="display:flex;flex-wrap:wrap;gap:2px 14px;align-items:center;border-top:1px solid #F1EDE6;padding:11px 0;transition:background-color 260ms ease" style-hover="background:#FBFAF7">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;line-height:1.35;color:#16170F;text-wrap:pretty">On-course filming access</div>
+              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px"><div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#55584D;font-weight:400"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A6534F" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M9.2 9.2 L14.8 14.8 M14.8 9.2 L9.2 14.8"></path></svg><span style="overflow-wrap:anywhere">Required</span></div><div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#2C4A3B;font-weight:500"><svg data-tick="1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M8.4 12.3 L11 14.9 L15.8 9.3"></path></svg><span style="overflow-wrap:anywhere">Not required</span></div></div>
+            </div>
+            <div data-matrix-row="1" style="display:flex;flex-wrap:wrap;gap:2px 14px;align-items:center;border-top:1px solid #F1EDE6;padding:11px 0;transition:background-color 260ms ease" style-hover="background:#FBFAF7">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;line-height:1.35;color:#16170F;text-wrap:pretty">Drone operation</div>
+              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px"><div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#55584D;font-weight:400"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A6534F" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M9.2 9.2 L14.8 14.8 M14.8 9.2 L9.2 14.8"></path></svg><span style="overflow-wrap:anywhere">Required</span></div><div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#2C4A3B;font-weight:500"><svg data-tick="1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M8.4 12.3 L11 14.9 L15.8 9.3"></path></svg><span style="overflow-wrap:anywhere">Not required</span></div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;border-top:1px solid #E4E0D6;padding:13px 0 5px">
+              <span style="font-size:9px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#8A6B2E">Deliverables</span>
+              <span style="flex:1 1 auto;height:1px;background:#F1EDE6"></span>
+            </div>
+            <div data-matrix-row="1" style="display:flex;flex-wrap:wrap;gap:2px 14px;align-items:center;border-top:1px solid #F1EDE6;padding:11px 0;transition:background-color 260ms ease" style-hover="background:#FBFAF7">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;line-height:1.35;color:#16170F;text-wrap:pretty">Existing photography reused</div>
+              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px"><div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#55584D;font-weight:400"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A6534F" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M9.2 9.2 L14.8 14.8 M14.8 9.2 L9.2 14.8"></path></svg><span style="overflow-wrap:anywhere">Usually not</span></div><div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#2C4A3B;font-weight:500"><svg data-tick="1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M8.4 12.3 L11 14.9 L15.8 9.3"></path></svg><span style="overflow-wrap:anywhere">Yes</span></div></div>
+            </div>
+            <div data-matrix-row="1" style="display:flex;flex-wrap:wrap;gap:2px 14px;align-items:center;border-top:1px solid #F1EDE6;padding:11px 0;transition:background-color 260ms ease" style-hover="background:#FBFAF7">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;line-height:1.35;color:#16170F;text-wrap:pretty">Individual hole films</div>
+              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px"><div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#8A8D82;font-weight:400"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8A8D82" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6" stroke-dasharray="3 3"></circle></svg><span style="overflow-wrap:anywhere">Package dependent</span></div><div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#2C4A3B;font-weight:500"><svg data-tick="1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M8.4 12.3 L11 14.9 L15.8 9.3"></path></svg><span style="overflow-wrap:anywhere">Included</span></div></div>
+            </div>
+            <div data-matrix-row="1" style="display:flex;flex-wrap:wrap;gap:2px 14px;align-items:center;border-top:1px solid #F1EDE6;padding:11px 0;transition:background-color 260ms ease" style-hover="background:#FBFAF7">
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;line-height:1.35;color:#16170F;text-wrap:pretty">Homepage cinematic film</div>
+              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px"><div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#8A8D82;font-weight:400"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8A8D82" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6" stroke-dasharray="3 3"></circle></svg><span style="overflow-wrap:anywhere">Package dependent</span></div><div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#2C4A3B;font-weight:500"><svg data-tick="1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M8.4 12.3 L11 14.9 L15.8 9.3"></path></svg><span style="overflow-wrap:anywhere"><span>{{ cvHomepage }}</span></span></div></div>
+            </div>
+
+            <div style="border-top:1px solid #E4E0D6;margin-top:22px;padding:16px 0 0">
+              <button type="button" onClick="{{ toggleDisrupt }}" aria-expanded="{{ disruptOn }}" style="background:none;border:0;padding:0;cursor:pointer;font-family:inherit;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;text-align:left" style-hover="color:#2C4A3B">
+                <span style="font-size:13px;font-weight:500;color:#2C4A3B">Estimate potential disruption</span>
+                <span style="font-size:12px;color:#8A8D82">Optional — only if filming would displace play</span>
+              </button>
+              <sc-if value="{{ disruptOn }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-wrap:wrap;gap:20px 40px;margin-top:18px">
+                  <div style="flex:1 1 170px">
+                    <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Rounds affected</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:14px">
+                      <sc-for list="{{ roundOptions }}" as="opt" hint-placeholder-count="4">
+                        <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="background:none;border:0;padding:6px 10px 7px;cursor:pointer;font-family:'Playfair Display',Georgia,serif;font-size:21px;color:#8A8D82" style-hover="color:#16170F">
+                          <sc-if value="{{ opt.active }}" hint-placeholder-val="{{ false }}">
+                            <span style="color:#16170F;border-bottom:2px solid #2C4A3B;padding-bottom:6px">{{ opt.label }}</span>
+                          </sc-if>
+                          <sc-if value="{{ opt.inactive }}" hint-placeholder-val="{{ true }}">
+                            <span>{{ opt.label }}</span>
+                          </sc-if>
+                        </button>
+                      </sc-for>
+                    </div>
+                  </div>
+                  <div style="flex:1 1 170px">
+                    <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Green fee</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:14px">
+                      <sc-for list="{{ feeOptions }}" as="opt" hint-placeholder-count="4">
+                        <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="background:none;border:0;padding:6px 10px 7px;cursor:pointer;font-family:'Playfair Display',Georgia,serif;font-size:21px;color:#8A8D82" style-hover="color:#16170F">
+                          <sc-if value="{{ opt.active }}" hint-placeholder-val="{{ false }}">
+                            <span style="color:#16170F;border-bottom:2px solid #2C4A3B;padding-bottom:6px">{{ opt.label }}</span>
+                          </sc-if>
+                          <sc-if value="{{ opt.inactive }}" hint-placeholder-val="{{ true }}">
+                            <span>{{ opt.label }}</span>
+                          </sc-if>
+                        </button>
+                      </sc-for>
+                    </div>
+                  </div>
+                  <div style="flex:1 1 180px;align-self:flex-end">
+                    <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Potential exposure</div>
+                    <div style="font-family:'Playfair Display',Georgia,serif;font-size:26px;color:#8A6B2E;margin-top:10px">{{ lostExposure }}</div>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+
+            <p style="font-size:12px;color:#8A8D82;margin:18px 0 0;max-width:66ch;font-style:italic">Drone-production ranges are based on published Australian golf flyover pricing. On-course requirements vary by operator and filming conditions.</p>
           </div>
 
-          <div style="background:#2C4A3B;color:#FAF8F4;padding:clamp(26px,3vw,40px);display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center;justify-content:space-between">
-            <div ref="{{ avoidLine }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.5vw,32px);line-height:1.18;color:#FAF8F4;flex:1 1 420px;max-width:30ch;text-wrap:pretty">Avoid 4 filming days, 97 displaced rounds and every hour of course closure.</div>
-            <a href="#enquiry" style="background:#FAF8F4;color:#2C4A3B;padding:15px 26px;font-size:15px;font-weight:500;flex:0 0 auto" style-hover="background:#E6D3AC;color:#16170F">See your course estimate</a>
+          <div style="background:#2C4A3B;color:#FAF8F4;padding:clamp(28px,3.4vw,46px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:32px 52px;align-items:start">
+            <div>
+              <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#E6D3AC">The difference</div>
+              <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(24px,3vw,40px);line-height:1.14;margin-top:18px;max-width:20ch;text-wrap:pretty">{{ calcHead }}</div>
+              <div style="font-size:15px;line-height:1.6;color:#D8DCD2;margin-top:20px;max-width:34ch;text-wrap:pretty">No site visit. No shoot scheduling. No weather window to organise.</div>
+              <div style="font-size:13px;line-height:1.6;color:#A8B0A4;margin-top:16px;max-width:34ch;text-wrap:pretty">{{ calcContext }}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:24px;align-items:flex-start">
+              <div style="width:100%;display:flex;flex-wrap:wrap;gap:24px 32px">
+                <div style="flex:1 1 150px;min-width:0">
+                  <div style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#A8B0A4;line-height:1.5">On-course drone</div>
+                  <div ref="{{ hWrapDrone }}" style="display:flex;align-items:baseline;gap:2px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(23px,2.7vw,33px);line-height:1.1;color:#FAF8F4;margin-top:11px">
+                    <span>{{ droneLo }}</span><span>–</span><span>{{ droneHi }}</span>
+                  </div>
+                  <div style="font-size:12px;color:#A8B0A4;margin-top:8px;text-wrap:pretty">{{ droneNote }}</div>
+                </div>
+                <div style="flex:1 1 150px;min-width:0">
+                  <div style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#E6D3AC;line-height:1.5">CourseVista</div>
+                  <div ref="{{ hWrapCv }}" style="display:flex;align-items:baseline;gap:6px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(23px,2.7vw,33px);line-height:1.1;color:#FAF8F4;margin-top:11px">
+                    <span style="font-family:inherit;font-size:13px;color:#A8B0A4">from</span><span>{{ cvFrom }}</span>
+                  </div>
+                  <div style="font-size:12px;color:#A8B0A4;margin-top:8px;text-wrap:pretty">{{ cvNote }}</div>
+                </div>
+              </div>
+              <div style="font-size:14px;color:#E6D3AC;max-width:42ch;text-wrap:pretty;border-top:1px solid rgba(250,248,244,0.18);padding-top:16px;width:100%">Comparable production cost. No second shoot to organise.</div>
+              <a href="#enquiry" onClick="{{ quoteFromCalc }}" data-ofill="#E6D3AC" data-ofill-text="#16170F" style="background:#FAF8F4;color:#2C4A3B;padding:15px 26px;font-size:15px;font-weight:500">See your course estimate</a>
+            </div>
           </div>
 
-          <p style="font-size:12px;color:#8A8D82;margin:22px 0 0;max-width:74ch;font-style:italic">Illustrative comparison only. Production costs, rounds displaced and green fee revenue vary by club, location, season and requirements.</p>
+          <p style="font-size:12px;color:#8A8D82;margin:22px 0 0;max-width:92ch;font-style:italic">Indicative comparison only. Drone-production pricing and on-course requirements vary by provider, location, deliverables and operating conditions. CourseVista prices shown are package starting points and remain subject to source-material assessment.</p>
         </div>
       </section>
     </sc-if>
@@ -391,7 +572,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
           <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px">05</div>
           <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;flex:1 1 auto">Selected courses</h2>
         </div>
-        <a href="glenelg/" data-reveal="scale" style="display:block;position:relative;aspect-ratio:21/9;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
+        <a href="/glenelg/" data-reveal="scale" style="display:block;position:relative;aspect-ratio:21/9;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
           <video ref="{{ featureVideo }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" poster="assets/poster-club.png" src="assets/cutdown.mp4" aria-label="Glenelg Golf Club, homepage cut-down" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
           <div style="position:absolute;left:0;right:0;bottom:0;padding:clamp(20px,3vw,36px);display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between">
             <div>
@@ -412,27 +593,24 @@ input, select { font-family: Inter, system-ui, sans-serif; }
           <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#E6D3AC;letter-spacing:0.06em">06</div>
           <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FAF8F4;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:18px 0 0;max-width:18ch;text-wrap:pretty">Don't take our word for it. Send us three holes.</h2>
           <p style="font-size:17px;line-height:1.66;color:#D8DCD2;margin:26px 0 34px;max-width:50ch;text-wrap:pretty">If your existing photography is suitable, we'll build three sample holes before you commit to the full course.</p>
-          <a href="#enquiry" style="display:inline-block;background:#FAF8F4;color:#2C4A3B;padding:15px 26px;font-size:15px;font-weight:500" style-hover="background:#E6D3AC;color:#16170F">Try three holes</a>
+          <a href="#enquiry" data-ofill="#E6D3AC" data-ofill-text="#16170F" style="display:inline-block;background:#FAF8F4;color:#2C4A3B;padding:15px 26px;font-size:15px;font-weight:500">Try three holes</a>
           <div style="font-size:13px;color:#A8B0A4;margin-top:16px">No cost. No obligation. Yours to review.</div>
         </div>
         <div>
-          <div style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#E6D3AC">From club name to finished course</div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#E6D3AC">From 18 holes to 18 flyovers</div>
           <div style="display:flex;flex-direction:column;margin-top:22px">
             <sc-for list="{{ journey }}" as="stepItem" hint-placeholder-count="4">
               <div style="border-top:1px solid rgba(250,248,244,0.2)">
                 <button type="button" onClick="{{ stepItem.onToggle }}" aria-expanded="{{ stepItem.open }}" style="width:100%;background:none;border:0;padding:20px 0;display:flex;gap:20px;align-items:baseline;cursor:pointer;text-align:left">
                   <span style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#E6D3AC;flex:0 0 32px">{{ stepItem.n }}</span>
                   <span style="font-size:17px;color:#FAF8F4;flex:1">{{ stepItem.title }}</span>
-                  <sc-if value="{{ stepItem.open }}" hint-placeholder-val="{{ false }}">
-                    <span style="color:#E6D3AC;font-size:12px;flex:0 0 auto">&#9652;</span>
-                  </sc-if>
-                  <sc-if value="{{ stepItem.closed }}" hint-placeholder-val="{{ true }}">
-                    <span style="color:#A8B0A4;font-size:12px;flex:0 0 auto">&#9662;</span>
-                  </sc-if>
+                  <span style="font-size:12px;flex:0 0 auto;color:{{ stepItem.caretColor }};transform:{{ stepItem.caret }};transition:transform 420ms cubic-bezier(.22,.61,.36,1), color 240ms ease">&#9662;</span>
                 </button>
-                <sc-if value="{{ stepItem.open }}" hint-placeholder-val="{{ false }}">
-                  <p style="font-size:15px;line-height:1.66;color:#D8DCD2;margin:0;padding:0 0 24px 52px;max-width:52ch;text-wrap:pretty">{{ stepItem.body }}</p>
-                </sc-if>
+                <div style="display:grid;grid-template-rows:{{ stepItem.rows }};opacity:{{ stepItem.fade }};transition:grid-template-rows 460ms cubic-bezier(.22,.61,.36,1), opacity 340ms ease">
+                  <div style="overflow:hidden;min-height:0">
+                    <p style="font-size:15px;line-height:1.66;color:#D8DCD2;margin:0;padding:0 0 24px 52px;max-width:52ch;text-wrap:pretty">{{ stepItem.body }}</p>
+                  </div>
+                </div>
               </div>
             </sc-for>
             <div style="border-top:1px solid rgba(250,248,244,0.2)"></div>
@@ -447,7 +625,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
           <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px">07</div>
           <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;flex:1 1 auto;max-width:22ch">You may already have everything we need.</h2>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:20px">
+        <div data-reveal-stagger="120" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:20px">
           <div data-reveal="scale">
             <div style="aspect-ratio:4/3;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
               <img src="assets/photo-tee.png" alt="Tee view of a hole" style="width:100%;height:100%;object-fit:cover">
@@ -496,78 +674,178 @@ input, select { font-family: Inter, system-ui, sans-serif; }
         </div>
         <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px 32px;margin-top:44px;border-top:1px solid #E4E0D6;padding-top:32px">
           <p style="font-size:17px;margin:0;color:#16170F;font-family:'Playfair Display',Georgia,serif;font-size:22px">Not sure? Send us the club name. We'll check for you.</p>
-          <a href="#enquiry" style="border:1px solid #2C4A3B;color:#2C4A3B;padding:13px 22px;font-size:15px;font-weight:500" style-hover="background:#2C4A3B;color:#FAF8F4">Check my course</a>
+          <a href="#enquiry" data-ofill="#2C4A3B" data-ofill-text="#FAF8F4" style="border:1px solid #2C4A3B;color:#2C4A3B;padding:13px 22px;font-size:15px;font-weight:500">Check my course</a>
         </div>
       </div>
     </section>
 
     <section id="pricing" style="position:relative;z-index:1;background:#FAF8F4;border-top:1px solid #E4E0D6;scroll-margin-top:90px">
       <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px)">
-        <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:48px">
+        <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:clamp(38px,4vw,56px)">
           <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px">08</div>
           <div style="flex:1 1 480px">
-            <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0">Priced per hole.</h2>
-            <p style="font-size:17px;line-height:1.66;margin:22px 0 0;max-width:58ch;text-wrap:pretty">Final pricing depends on hole count, image coverage, reconstruction complexity and whether you want the hosted guide. Tell us the course and we'll quote it properly rather than guess.</p>
+            <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;max-width:20ch;text-wrap:pretty">Choose how far you want to take it.</h2>
+            <p style="font-size:17px;line-height:1.66;margin:22px 0 0;max-width:60ch;text-wrap:pretty">Start with the holes you need, build the complete course, or add a hosted CourseVista guide. Every project is quoted from the package that best fits the source photography and reconstruction required.</p>
+            <a href="#enquiry" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="display:inline-block;margin-top:26px;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500">Get a course quote</a>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px">
-          <div style="background:#FFFFFF;border:1px solid #E4E0D6;padding:clamp(26px,3vw,38px)">
-            <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:26px;margin:0 0 22px">Course films</h3>
-            <div style="display:flex;flex-direction:column;font-size:15px">
-              <span style="padding:12px 0;border-top:1px solid #E4E0D6">18 individual hole films</span>
-              <span style="padding:12px 0;border-top:1px solid #E4E0D6">Homepage cinematic cut</span>
-              <span style="padding:12px 0;border-top:1px solid #E4E0D6">Delivered as files</span>
-              <span style="padding:12px 0;border-top:1px solid #E4E0D6;border-bottom:1px solid #E4E0D6">Owned outright</span>
+
+        <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:stretch">
+
+          <div data-tilt3d="1" data-reveal="up" style="flex:1 1 205px;min-width:0;max-width:430px;margin-top:clamp(0px,2.4vw,34px);background:#FFFFFF;border:1px solid #E4E0D6;display:flex;flex-direction:column;transition:transform 420ms cubic-bezier(.19,1,.22,1), box-shadow 420ms ease, border-color 420ms ease;transform-style:preserve-3d">
+            <div style="padding:12px clamp(22px,2.2vw,28px);border-bottom:1px solid #E4E0D6;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Package 01</div>
+            <div style="padding:clamp(22px,2.4vw,30px) clamp(22px,2.2vw,28px) clamp(24px,2.4vw,30px);display:flex;flex-direction:column;flex:1 1 auto">
+              <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:25px;margin:0">Essentials</h3>
+              <div style="font-size:14px;color:#55584D;margin-top:9px;text-wrap:pretty">The essential hole-film package.</div>
+              <div style="border-top:1px solid #E4E0D6;margin-top:20px;padding-top:18px;display:flex;align-items:baseline;gap:9px">
+                <span style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">From</span>
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,3vw,36px);line-height:1;color:#16170F">$1,490</span>
+              </div>
+              <div style="font-size:13px;line-height:1.6;color:#8A8D82;margin-top:12px;text-wrap:pretty">For smaller courses, or clubs wanting to modernise their core hole pages.</div>
+              <div style="display:flex;flex-direction:column;font-size:14px;margin-top:20px;margin-bottom:24px">
+                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Up to 9 individual tee-to-green hole films</span>
+                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Approximately 30 seconds per hole</span>
+                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Website-ready delivered files</span>
+                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Commercial usage rights</span>
+                <span style="padding:10px 0;border-top:1px solid #E4E0D6;border-bottom:1px solid #E4E0D6">One revision round</span>
+              </div>
+              <div style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+                <a href="/start?package=essentials" data-ofill="#2C4A3B" data-ofill-text="#FAF8F4" style="align-self:stretch;display:flex;align-items:center;justify-content:center;gap:9px;border:1px solid #2C4A3B;color:#2C4A3B;font-size:14px;font-weight:500;padding:13px 18px"><span>Start Essentials</span><span style="font-size:13px">&#8594;</span></a>
+                <span style="font-size:12px;color:#8A8D82;text-align:center">Secure online project setup</span>
+              </div>
             </div>
           </div>
-          <div style="background:#FFFFFF;border:1px solid #2C4A3B;padding:clamp(26px,3vw,38px)">
-            <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:26px;margin:0 0 22px">Films and hosted guide</h3>
-            <div style="display:flex;flex-direction:column;font-size:15px">
-              <span style="padding:12px 0;border-top:1px solid #E4E0D6">Everything above</span>
-              <span style="padding:12px 0;border-top:1px solid #E4E0D6">Dedicated CourseVista course page</span>
-              <span style="padding:12px 0;border-top:1px solid #E4E0D6">Hole-by-hole navigation</span>
-              <span style="padding:12px 0;border-top:1px solid #E4E0D6;border-bottom:1px solid #E4E0D6">View and scan reporting</span>
+
+          <div data-tilt3d="hero" data-reveal="up" style="position:relative;overflow:hidden;flex:1.42 1 250px;min-width:0;background:#1B2A22;border:1px solid #2C4A3B;color:#FAF8F4;display:flex;flex-direction:column;box-shadow:0 18px 44px -30px rgba(22,23,15,0.4);transition:transform 420ms cubic-bezier(.19,1,.22,1), box-shadow 420ms ease;transform-style:preserve-3d">
+            <div data-tilt3d-img="1" aria-hidden="true" style="position:absolute;inset:0;overflow:hidden">
+              <img src="assets/pricing-consult.png" alt="" style="position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;object-position:52% 38%;transition:transform 620ms cubic-bezier(.19,1,.22,1)">
+              <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(15,24,19,0.16) 0%, rgba(15,24,19,0.2) 22%, rgba(15,24,19,0.5) 58%, rgba(15,24,19,0.78) 100%)"></div>
+              <div style="position:absolute;inset:0;background:linear-gradient(100deg, rgba(15,24,19,0.62) 0%, rgba(15,24,19,0.34) 46%, rgba(15,24,19,0) 88%)"></div>
+            </div>
+            <div style="position:relative;padding:14px clamp(24px,2.6vw,34px);border-bottom:1px solid rgba(250,248,244,0.16);font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#E6D3AC">Package 02</div>
+            <div style="position:relative;padding:clamp(26px,2.8vw,36px) clamp(24px,2.6vw,34px) clamp(28px,2.8vw,36px);display:flex;flex-direction:column;flex:1 1 auto">
+              <div style="display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center">
+                <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FAF8F4;font-size:31px;margin:0">Complete</h3>
+                <span ref="{{ popBadge }}" style="position:relative;display:inline-block">
+                  <span style="position:relative;display:inline-flex;align-items:center;gap:7px;border:1px solid #A95752;background:rgba(169,87,82,0.14);color:#D98B84;border-radius:100px;padding:6px 13px;font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;white-space:nowrap">
+                    <span style="width:4px;height:4px;border-radius:50%;background:#C9645D"></span>
+                    <span>Most popular</span>
+                  </span>                </span>
+              </div>
+              <div style="font-size:15px;color:#D8DCD2;margin-top:9px;text-wrap:pretty">The complete 18-hole course experience.</div>
+              <div style="border-top:1px solid rgba(250,248,244,0.16);margin-top:22px;padding-top:20px;display:flex;align-items:baseline;gap:10px">
+                <span style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#A8B0A4">From</span>
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(38px,4.2vw,52px);line-height:1;color:#FAF8F4">$1,990</span>
+              </div>
+              <div style="font-size:14px;line-height:1.6;color:#A8B0A4;margin-top:12px;text-wrap:pretty">The primary CourseVista product, and the package most 18-hole clubs should choose.</div>
+              <div style="display:flex;flex-direction:column;font-size:15px;color:rgba(250,248,244,0.94);margin-top:20px;margin-bottom:26px">
+                <span style="padding:11px 0;border-top:1px solid rgba(250,248,244,0.16)">Up to 18 individual tee-to-green hole films</span>
+                <span style="padding:11px 0;border-top:1px solid rgba(250,248,244,0.16)">Homepage cinematic course film</span>
+                <span style="padding:11px 0;border-top:1px solid rgba(250,248,244,0.16)">Website-ready delivered files</span>
+                <span style="padding:11px 0;border-top:1px solid rgba(250,248,244,0.16)">Commercial usage rights</span>
+                <span style="padding:11px 0;border-top:1px solid rgba(250,248,244,0.16)">One revision round</span>
+                <span style="padding:11px 0;border-top:1px solid rgba(250,248,244,0.16);border-bottom:1px solid rgba(250,248,244,0.16)">Consistent CourseVista presentation across the course</span>
+              </div>
+              <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+                <a href="/start?package=complete" data-ofill="#E6D3AC" data-ofill-text="#16170F" style="align-self:stretch;display:flex;align-items:center;justify-content:center;gap:9px;background:#FAF8F4;color:#2C4A3B;padding:15px 20px;font-size:15px;font-weight:500"><span>Start Complete</span><span style="font-size:13px">&#8594;</span></a>
+                <span style="font-size:12px;color:#A8B0A4;text-align:center">Secure online project setup &#183; about 2 minutes</span>
+              </div>
+            </div>
+          </div>
+
+          <div data-tilt3d="1" data-reveal="up" style="flex:1 1 205px;min-width:0;max-width:430px;margin-top:clamp(0px,2.4vw,34px);background:#FFFFFF;border:1px solid #E4E0D6;display:flex;flex-direction:column;transition:transform 420ms cubic-bezier(.19,1,.22,1), box-shadow 420ms ease, border-color 420ms ease;transform-style:preserve-3d">
+            <div style="padding:12px clamp(22px,2.2vw,28px);border-bottom:1px solid #E4E0D6;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Package 03</div>
+            <div style="padding:clamp(22px,2.4vw,30px) clamp(22px,2.2vw,28px) clamp(24px,2.4vw,30px);display:flex;flex-direction:column;flex:1 1 auto">
+              <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:25px;margin:0">Hosted</h3>
+              <div style="font-size:14px;color:#55584D;margin-top:9px;text-wrap:pretty">Films plus your own hosted course guide.</div>
+              <div style="border-top:1px solid #E4E0D6;margin-top:20px;padding-top:18px;display:flex;align-items:baseline;gap:9px">
+                <span style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">From</span>
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,3vw,36px);line-height:1;color:#16170F">$2,390</span>
+              </div>
+              <div style="font-size:13px;line-height:1.6;color:#8A8D82;margin-top:12px;text-wrap:pretty">For clubs wanting the films and a complete visitor-facing course guide.</div>
+              <div style="display:flex;flex-direction:column;font-size:14px;margin-top:20px">
+                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Everything in Complete</span>
+                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Dedicated CourseVista hosted course page</span>
+                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Hole-by-hole navigation</span>
+                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Mobile-friendly viewing</span>
+                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Dedicated course URL</span>
+                <span style="padding:10px 0;border-top:1px solid #E4E0D6;border-bottom:1px solid #E4E0D6">Initial hosted setup</span>
+              </div>
+              <div style="font-size:12px;color:#8A8D82;margin:12px 0 22px">Hosting renewal may apply after the first year.</div>
+              <div style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+                <a href="/start?package=hosted" data-ofill="#2C4A3B" data-ofill-text="#FAF8F4" style="align-self:stretch;display:flex;align-items:center;justify-content:center;gap:9px;border:1px solid #2C4A3B;color:#2C4A3B;font-size:14px;font-weight:500;padding:13px 18px"><span>Start Hosted</span><span style="font-size:13px">&#8594;</span></a>
+                <span style="font-size:12px;color:#8A8D82;text-align:center">Secure online project setup</span>
+              </div>
             </div>
           </div>
         </div>
-        <sc-if value="{{ showQr }}" hint-placeholder-val="{{ true }}">
-          <div style="display:flex;flex-wrap:wrap;gap:14px 28px;align-items:baseline;border-top:1px solid #E4E0D6;margin-top:32px;padding-top:22px">
-            <span style="font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#8A6B2E">Coming soon</span>
-            <span style="font-size:15px;color:#16170F;font-weight:500">On-course QR</span>
-            <span style="font-size:15px;color:#8A8D82;max-width:56ch">Weatherproof plates at the tee on blind holes, linked to that hole's film, with scan counts reported back to the club.</span>
+
+        <div style="background:#FFFFFF;border:1px solid #E4E0D6;margin-top:clamp(36px,4vw,58px);padding:clamp(26px,3vw,42px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:28px clamp(36px,5vw,72px);align-items:start">
+          <div>
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Bespoke work</div>
+            <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(23px,2.6vw,32px);line-height:1.15;color:#16170F;margin-top:14px">Need something different?</div>
+            <p style="font-size:15px;line-height:1.66;color:#55584D;margin:14px 0 0;max-width:42ch;text-wrap:pretty">For 27-hole, 36-hole, multi-course or unusual source-photography projects, start the same way &#8212; we&#8217;ll confirm the scope and price before anything is paid.</p>
+            <a href="/start?package=complete" data-uline="1" style="display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-size:15px;font-weight:500;color:#2C4A3B">
+              <span style="position:relative;display:inline-block;padding-bottom:3px">Start an extended project<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></span>
+              <span style="font-size:13px">&#8594;</span>
+            </a>
           </div>
-        </sc-if>
-        <div style="display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;margin-top:40px">
-          <a href="#enquiry" style="background:#2C4A3B;color:#FAF8F4;padding:15px 24px;font-size:15px;font-weight:500" style-hover="background:#16170F">Get a course quote</a>
-          <a href="#three" style="font-size:15px;font-weight:500;border-bottom:1px solid #E4E0D6;padding-bottom:3px" style-hover="border-bottom-color:#2C4A3B">Try three holes first</a>
+          <div style="display:flex;flex-direction:column;font-size:15px;color:#55584D">
+            <span style="padding:13px 0;border-top:1px solid #F1EDE6">Additional course, or 27 and 36-hole facilities</span>
+            <span style="padding:13px 0;border-top:1px solid #F1EDE6">Additional homepage or social film</span>
+            <span style="padding:13px 0;border-top:1px solid #F1EDE6">Additional revision round</span>
+            <span style="padding:13px 0;border-top:1px solid #F1EDE6">Complex source reconstruction</span>
+            <sc-if value="{{ showQr }}" hint-placeholder-val="{{ true }}">
+              <span style="padding:13px 0;border-top:1px solid #F1EDE6;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between">On-course QR<span style="font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#8A6B2E;border:1px solid #E6D3AC;padding:4px 9px">Coming soon</span></span>
+            </sc-if>
+          </div>
         </div>
+
+        <div style="background:#FFFFFF;border:1px solid #E4E0D6;margin-top:20px;padding:clamp(24px,2.8vw,38px);display:flex;flex-wrap:wrap;gap:24px 48px;align-items:center;justify-content:space-between">
+          <div style="flex:1 1 420px;min-width:0">
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Not ready to commit?</div>
+            <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(23px,2.6vw,33px);line-height:1.15;color:#16170F;margin-top:14px">See three holes first.</div>
+            <p style="font-size:15px;line-height:1.62;color:#55584D;margin:12px 0 0;max-width:52ch;text-wrap:pretty">If your existing photography is suitable, we'll build three sample holes before you commit to the complete course.</p>
+          </div>
+          <div style="flex:0 0 auto;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+            <a href="#three" data-ofill="#2C4A3B" data-ofill-text="#FAF8F4" style="border:1px solid #2C4A3B;color:#2C4A3B;padding:14px 22px;font-size:15px;font-weight:500">Try three holes</a>
+            <span style="font-size:13px;color:#8A8D82">No cost. No obligation.</span>
+          </div>
+        </div>
+
+        <p style="max-width:58ch;margin:clamp(34px,4vw,52px) auto 0;text-align:center;font-size:13px;line-height:1.7;color:#8A8D82;text-wrap:pretty">Every course is different. Final pricing depends on hole count, usable source photography, reconstruction complexity, and selected deliverables.</p>
       </div>
     </section>
 
     <section style="position:relative;z-index:1;border-top:1px solid #E4E0D6;background:#FFFFFF">
-      <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(28px,4vw,72px);align-items:start">
+      <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px);display:grid;grid-template-columns:minmax(min(100%,300px),0.82fr) minmax(min(100%,320px),1.5fr);gap:clamp(24px,3vw,48px);align-items:start">
         <div>
           <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em">09</div>
           <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,48px);line-height:1.08;margin:18px 0 0;max-width:14ch">Questions clubs ask.</h2>
+          <div data-tilt="1" data-reveal="scale" style="position:relative;overflow:hidden;margin-top:clamp(28px,3vw,44px);aspect-ratio:4/5;max-width:400px;background:#F1EDE6;border:1px solid #E4E0D6">
+            <img src="assets/faq-golfers.png" alt="Two golfers reviewing a course film on a tablet" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 620ms cubic-bezier(.19,1,.22,1)">
+          </div>
         </div>
-        <div>
+        <div style="margin-top:clamp(0px,3.4vw,52px)">
           <sc-for list="{{ faqs }}" as="item" hint-placeholder-count="4">
             <div style="border-top:1px solid #E4E0D6">
               <button type="button" onClick="{{ item.onToggle }}" aria-expanded="{{ item.open }}" style="width:100%;background:none;border:0;padding:22px 0;display:flex;gap:20px;align-items:flex-start;justify-content:space-between;cursor:pointer;text-align:left">
                 <span style="font-size:17px;font-weight:500;color:#16170F;line-height:1.4">{{ item.q }}</span>
-                <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
-                  <span style="color:#2C4A3B;font-size:12px;line-height:2;flex:0 0 auto">&#9652;</span>
-                </sc-if>
-                <sc-if value="{{ item.closed }}" hint-placeholder-val="{{ true }}">
-                  <span style="color:#2C4A3B;font-size:12px;line-height:2;flex:0 0 auto">&#9662;</span>
-                </sc-if>
+                <span style="color:#2C4A3B;font-size:11px;line-height:2.2;flex:0 0 auto;transform:{{ item.caret }};transition:transform 420ms cubic-bezier(.22,.61,.36,1)">&#9662;</span>
               </button>
-              <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
-                <p style="font-size:16px;line-height:1.68;margin:0;padding:0 0 26px;max-width:64ch;text-wrap:pretty">{{ item.a }}</p>
-              </sc-if>
+              <div style="display:grid;grid-template-rows:{{ item.rows }};opacity:{{ item.fade }};transition:grid-template-rows 460ms cubic-bezier(.22,.61,.36,1), opacity 340ms ease">
+                <div style="overflow:hidden;min-height:0">
+                  <p style="font-size:16px;line-height:1.68;margin:0;padding:0 0 26px;max-width:64ch;text-wrap:pretty">{{ item.a }}</p>
+                </div>
+              </div>
             </div>
           </sc-for>
           <div style="border-top:1px solid #E4E0D6"></div>
+          <a href="mailto:support@coursevista.com.au" data-uline="1" style="margin-top:26px;display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:16px;color:#55584D">
+            <svg data-uline-icon="1" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="flex:0 0 auto;transform-origin:center;transition:transform 420ms cubic-bezier(.34,1.4,.64,1)"><rect x="2.5" y="5" width="19" height="14" rx="2"></rect><path d="M3 6.5 L12 13 L21 6.5"></path></svg>
+            <span>Still got questions? Reach out to</span>
+            <span style="position:relative;display:inline-block;color:#2C4A3B;font-weight:500;padding-bottom:3px">support@coursevista.com.au<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></span>
+          </a>
         </div>
       </div>
     </section>
@@ -616,8 +894,11 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                       <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="border:1px solid {{ opt.border }};background:{{ opt.bg }};color:{{ opt.fg }};padding:13px 20px;font-size:15px;cursor:pointer;min-width:56px">{{ opt.label }}</button>
                     </sc-for>
                   </div>
-                  <label for="cv-url" style="display:block;font-size:13px;color:#8A8D82;margin:28px 0 10px">Club website (optional)</label>
-                  <input id="cv-url" type="url" value="{{ url }}" onChange="{{ setUrl }}" placeholder="yourclub.com.au" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:15px 16px;font-size:16px;color:#16170F">
+                  <label for="cv-url" style="display:block;font-size:13px;color:#8A8D82;margin:28px 0 10px">Club website</label>
+                  <input id="cv-url" type="text" value="{{ url }}" onChange="{{ setUrl }}" placeholder="yourclub.com.au" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:15px 16px;font-size:16px;color:#16170F">
+                  <sc-if value="{{ urlError }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size:13px;color:#8A6B2E;margin-top:10px">We need the club's web address — that's where we look for the photography.</div>
+                  </sc-if>
                 </div>
               </sc-if>
 
@@ -633,6 +914,9 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                     </sc-for>
                     <div style="border-top:1px solid #E4E0D6"></div>
                   </div>
+                  <sc-if value="{{ wantError }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size:13px;color:#8A6B2E;margin-top:14px">Pick at least one — "Not sure yet" is a fine answer.</div>
+                  </sc-if>
                 </div>
               </sc-if>
 
@@ -663,7 +947,16 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                 </div>
               </sc-if>
 
-              <button type="button" onClick="{{ next }}" style="margin-top:30px;width:100%;background:#2C4A3B;color:#FAF8F4;border:0;padding:16px 22px;font-size:15px;font-weight:500;cursor:pointer" style-hover="background:#16170F">{{ nextLabel }}</button>
+              <sc-if value="{{ sendError }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:13px;color:#8A6B2E;margin-top:16px">{{ sendError }}</div>
+              </sc-if>
+              <button type="button" onClick="{{ next }}" disabled="{{ sending }}" data-flyarrow="1" style="margin-top:30px;width:100%;background:none;border:0;padding:0;display:flex;align-items:center;gap:0;cursor:{{ submitCursor }}">
+                <span data-fly-pill="1" style="flex:1 1 auto;background:#DDE8CC;color:#16170F;border-radius:999px;padding:16px 22px;font-size:15px;font-weight:500;text-align:center;transition:background-color 340ms cubic-bezier(.16,1,.3,1), color 300ms ease">{{ nextLabel }}</span>
+                <span data-fly-circle="1" style="position:relative;overflow:hidden;width:52px;height:52px;border-radius:50%;background:#DDE8CC;color:#16170F;display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:background-color 340ms cubic-bezier(.16,1,.3,1), color 300ms ease">
+                  <span data-fly-a="1" style="position:absolute;font-size:16px;line-height:1;transition:transform 460ms cubic-bezier(.22,.61,.36,1)">&#8599;</span>
+                  <span data-fly-b="1" style="position:absolute;font-size:16px;line-height:1;transform:translate(-260%,260%);transition:transform 460ms cubic-bezier(.22,.61,.36,1)">&#8599;</span>
+                </span>
+              </button>
             </div>
           </sc-if>
 
@@ -671,7 +964,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
             <div style="padding:8px 0">
               <div style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#2C4A3B">Received</div>
               <p style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.2vw,28px);line-height:1.3;color:#16170F;margin:20px 0 0;text-wrap:pretty">We'll review the photography available for {{ clubOrCourse }} and tell you whether it's suitable before discussing a project.</p>
-              <div style="border-top:1px solid #E4E0D6;margin-top:28px;padding-top:20px;font-size:14px;color:#8A8D82">Usually within two business days, from business@coursevista.com.au.</div>
+              <div style="border-top:1px solid #E4E0D6;margin-top:28px;padding-top:20px;font-size:14px;color:#8A8D82;text-wrap:pretty">{{ doneNote }} <a href="{{ mailtoHref }}" style="color:#2C4A3B;border-bottom:1px solid #E4E0D6">business@coursevista.com.au</a>. We reply within two business days.</div>
             </div>
           </sc-if>
         </div>
@@ -734,7 +1027,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                 <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#8A8D82">Delivery</span><span style="color:#16170F">Download link, about two weeks</span></div>
               </div>
               <div style="border-top:1px solid #B08D4F;padding-top:18px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(19px,2vw,25px);line-height:1.25;color:#16170F;text-wrap:pretty">The files are yours outright. No licence, no expiry, no attribution.</div>
-              <a href="glenelg/" style="align-self:flex-start;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500" style-hover="background:#16170F">See a full hole film</a>
+              <a href="/glenelg/" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="align-self:flex-start;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500">See a full hole film</a>
             </div>
           </div>
         </sc-if>
@@ -765,10 +1058,57 @@ input, select { font-family: Inter, system-ui, sans-serif; }
             </div>
             <div style="display:flex;flex-direction:column;gap:18px">
               <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
-                <div style="flex:0 0 130px;border:1px solid #E4E0D6;border-radius:12px;background:#FFFFFF;padding:8px 8px 12px">
-                  <div style="height:3px;width:34px;background:#E4E0D6;margin:0 auto 8px;border-radius:2px"></div>
-                  <div style="position:relative;aspect-ratio:9/16;background:#F1EDE6;overflow:hidden;border:1px solid #E4E0D6">
-                    <video data-panel-video="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/course-coastal.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down on mobile" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+                <div style="flex:0 0 204px;display:flex;flex-direction:column;gap:12px">
+                  <div style="border:1px solid #E4E0D6;border-radius:14px;background:#FFFFFF;padding:8px 8px 10px">
+                    <div style="height:3px;width:34px;background:#E4E0D6;margin:0 auto 8px;border-radius:2px"></div>
+                    <div onClick="{{ tapStage }}" style="position:relative;aspect-ratio:9/16;background:#F1EDE6;overflow:hidden;border:1px solid #E4E0D6;cursor:pointer">
+                      <video data-panel-video="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/course-coastal.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down on mobile" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+                      <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,12,8,0.6), rgba(10,12,8,0) 44%)"></div>
+                      <div ref="{{ burstLayer }}" style="position:absolute;inset:0;overflow:hidden;pointer-events:none"></div>
+                      <div style="position:absolute;left:8px;top:8px;display:flex;align-items:center;gap:5px;background:rgba(10,12,8,0.42);padding:4px 8px;border-radius:20px">
+                        <span ref="{{ liveDot }}" style="width:5px;height:5px;border-radius:50%;background:#E6D3AC;flex:0 0 auto"></span>
+                        <span ref="{{ watchCount }}" style="font-size:9px;font-weight:600;letter-spacing:0.06em;color:#FAF8F4">312 watching</span>
+                      </div>
+                      <div style="position:absolute;right:7px;bottom:12px;display:flex;flex-direction:column;gap:13px;align-items:center">
+                        <button type="button" onClick="{{ tapLike }}" aria-pressed="{{ liked }}" aria-label="Like this film" style="background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px">
+                          <span style="font-size:19px;line-height:1;color:{{ heartColor }};transform:{{ heartScale }};transition:transform 340ms cubic-bezier(.2,1.6,.4,1), color 240ms ease;text-shadow:0 1px 3px rgba(10,12,8,0.45)">&#9829;</span>
+                          <span ref="{{ likeCount }}" style="font-size:9px;font-weight:600;color:#FAF8F4;text-shadow:0 1px 3px rgba(10,12,8,0.5)">4,182</span>
+                        </button>
+                        <button type="button" onClick="{{ tapComment }}" aria-label="Comment" style="background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px">
+                          <span style="font-size:15px;line-height:1;color:#FAF8F4;text-shadow:0 1px 3px rgba(10,12,8,0.45)">&#9993;</span>
+                          <span ref="{{ commentCount }}" style="font-size:9px;font-weight:600;color:#FAF8F4;text-shadow:0 1px 3px rgba(10,12,8,0.5)">218</span>
+                        </button>
+                        <button type="button" onClick="{{ tapShare }}" aria-label="Share" style="background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px">
+                          <span style="font-size:14px;line-height:1;color:#FAF8F4;text-shadow:0 1px 3px rgba(10,12,8,0.45)">&#10150;</span>
+                          <span ref="{{ shareCount }}" style="font-size:9px;font-weight:600;color:#FAF8F4;text-shadow:0 1px 3px rgba(10,12,8,0.5)">613</span>
+                        </button>
+                        <button type="button" onClick="{{ tapSave }}" aria-pressed="{{ saved }}" aria-label="Save" style="background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px">
+                          <span style="font-size:14px;line-height:1;color:{{ saveColor }};transform:{{ saveScale }};transition:transform 340ms cubic-bezier(.2,1.6,.4,1), color 240ms ease;text-shadow:0 1px 3px rgba(10,12,8,0.45)">&#9873;</span>
+                          <span style="font-size:9px;font-weight:600;color:#FAF8F4;text-shadow:0 1px 3px rgba(10,12,8,0.5)">Save</span>
+                        </button>
+                      </div>
+                      <div style="position:absolute;left:9px;right:42px;bottom:12px">
+                        <div style="font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#FAF8F4;text-shadow:0 1px 3px rgba(10,12,8,0.5)">yourgolfclub</div>
+                        <div style="font-size:9px;color:#E4E0D6;margin-top:3px;text-shadow:0 1px 3px rgba(10,12,8,0.5)">Eighteen holes, one minute.</div>
+                      </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:7px;margin-top:9px">
+                      <span style="display:flex;flex:0 0 auto">
+                        <span style="width:15px;height:15px;border-radius:50%;background:#2C4A3B;border:1.5px solid #FFFFFF"></span>
+                        <span style="width:15px;height:15px;border-radius:50%;background:#B08D4F;border:1.5px solid #FFFFFF;margin-left:-6px"></span>
+                        <span style="width:15px;height:15px;border-radius:50%;background:#8A8D82;border:1.5px solid #FFFFFF;margin-left:-6px"></span>
+                      </span>
+                      <span ref="{{ likeLine }}" style="font-size:10px;color:#8A8D82;line-height:1.3">Liked by 4,182 people</span>
+                    </div>
+                    <div style="display:flex;align-items:baseline;gap:6px;margin-top:8px;border-top:1px solid #E4E0D6;padding-top:8px;min-height:26px">
+                      <span style="font-size:9px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#B08D4F;flex:0 0 auto">New</span>
+                      <span ref="{{ commentLine }}" style="font-size:10px;line-height:1.35;color:#8A8D82;transition:opacity 300ms ease">Booked a round after watching this.</span>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:6px;flex-wrap:wrap">
+                    <span style="font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#2C4A3B;border:1px solid #E4E0D6;padding:5px 8px">Reels</span>
+                    <span style="font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#2C4A3B;border:1px solid #E4E0D6;padding:5px 8px">Shorts</span>
+                    <span style="font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#2C4A3B;border:1px solid #E4E0D6;padding:5px 8px">Feed</span>
                   </div>
                 </div>
                 <p style="font-size:16px;line-height:1.66;margin:0;flex:1 1 200px;text-wrap:pretty">One cinematic cut of all eighteen, supplied in landscape for the top of your site and vertical for socials and stay-and-play listings. Muted autoplay-ready, with a poster frame so the page paints instantly.</p>
@@ -778,7 +1118,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                 <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#8A8D82">Crops</span><span style="color:#16170F">16:9, 1:1, 9:16</span></div>
                 <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#8A8D82">Length</span><span style="color:#16170F">60 to 90 seconds</span></div>
               </div>
-              <a href="#work" onClick="{{ closePanel }}" style="align-self:flex-start;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500" style-hover="background:#16170F">See the homepage cut</a>
+              <a href="#work" onClick="{{ closePanel }}" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="align-self:flex-start;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500">See the homepage cut</a>
             </div>
           </div>
         </sc-if>
@@ -826,7 +1166,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                 <div style="font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#8A6B2E">Reporting</div>
                 <p style="font-size:15px;line-height:1.6;margin:10px 0 0;text-wrap:pretty">Monthly view and scan counts per hole, so you can see which holes visitors actually watch.</p>
               </div>
-              <a href="glenelg/" style="align-self:flex-start;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500" style-hover="background:#16170F">View the course guide</a>
+              <a href="/glenelg/" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="align-self:flex-start;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500">View the course guide</a>
             </div>
           </div>
         </sc-if>
@@ -834,9 +1174,116 @@ input, select { font-family: Inter, system-ui, sans-serif; }
     </div>
   </sc-if>
 
+  <sc-if value="{{ promoOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ promoBackdrop }}" style="position:fixed;inset:0;z-index:120;background:rgba(0,0,0,0.52);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:12px">
+      <div ref="{{ promoCard }}" onClick="{{ promoStop }}" role="dialog" aria-modal="true" aria-label="CourseVista offer" style="position:relative;width:min(740px,calc(100vw - 24px));max-height:92svh;overflow:auto;background:#FAF8F4;border:1px solid #E4E0D6;border-radius:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))">
+        <button type="button" onClick="{{ promoClose }}" aria-label="Close" style="position:absolute;top:8px;right:8px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:none;border:0;border-radius:50%;cursor:pointer;color:#55584D;font-size:15px;line-height:1;z-index:3;transition:background-color 220ms ease, color 220ms ease" style-hover="background:#F1EDE6;color:#16170F">&#10005;</button>
+
+        <div style="position:relative;padding:clamp(30px,3.6vw,42px) clamp(24px,3vw,34px);display:flex;flex-direction:column;align-items:center;text-align:center;border-right:1px solid #E4E0D6">
+          <img src="assets/tex-sand.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;pointer-events:none">
+          <div style="position:relative;width:72px;height:72px;border-radius:50%;background:#FFFFFF;border:1px solid #E4E0D6;box-shadow:0 2px 12px rgba(22,23,15,0.07);display:flex;align-items:center;justify-content:center;flex:0 0 auto">
+            <img src="assets/cv-mark.png" alt="CourseVista" style="width:36px;height:auto">
+          </div>
+          <h3 style="position:relative;font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(21px,2.4vw,26px);line-height:1.24;margin:22px 0 0;display:flex;flex-direction:column;white-space:nowrap">
+            <span>See your course.</span>
+            <span>Unlock an offer.</span>
+          </h3>
+          <p style="position:relative;font-size:14px;color:#8A8D82;margin:12px 0 0;text-wrap:pretty">Enter your website to continue.</p>
+          <div style="position:relative;width:100%;margin-top:26px;display:flex;align-items:center;gap:10px;height:45px;padding:0 14px;box-sizing:border-box;background:#FFFFFF;border:1px solid {{ promoUrlBorder }};border-radius:7px;transition:border-color 240ms ease">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8A8D82" stroke-width="1.5" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18"></path></svg>
+            <input id="cv-promo-url" type="text" value="{{ promoUrl }}" onChange="{{ setPromoUrl }}" onKeyDown="{{ promoUrlKey }}" placeholder="yourclub.com.au" aria-label="Your club website" autoComplete="url" style="flex:1 1 auto;min-width:0;background:none;border:0;outline:none;font-family:inherit;font-size:15px;color:#16170F">
+          </div>
+          <sc-if value="{{ promoUrlError }}" hint-placeholder-val="{{ false }}">
+            <div style="position:relative;width:100%;font-size:12px;color:#A8302A;margin-top:9px;text-align:left">Add your club's web address before scratching.</div>
+          </sc-if>
+          <button type="button" onClick="{{ promoRevealStep }}" style="position:relative;width:100%;margin-top:14px;background:#2C4A3B;color:#FAF8F4;border:0;border-radius:7px;padding:14px;font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;transition:background-color 240ms ease, transform 160ms ease" style-hover="background:#24402F" style-active="transform:translateY(1px)">Reveal your offer</button>
+          <div style="position:relative;display:flex;align-items:center;gap:7px;margin-top:14px;font-size:12px;color:#8A8D82;white-space:nowrap">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3"></path></svg>
+            <span>We respect your privacy.</span>
+          </div>
+        </div>
+
+        <div style="position:relative;padding:clamp(30px,3.6vw,42px) clamp(24px,3vw,34px);background:#FFFFFF;display:flex;flex-direction:column">
+          <div style="font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#16170F;padding-right:34px">Scratch to reveal</div>
+          <div style="font-size:13px;color:#8A8D82;margin-top:6px">Something special just for you.</div>
+
+          <div ref="{{ promoCardWrap }}" style="position:relative;margin-top:20px;width:100%;max-width:320px;aspect-ratio:1.6;border-radius:15px;border:1px solid #E4E0D6;background:#FAF8F4">
+            <canvas ref="{{ promoConfetti }}" aria-hidden="true" style="position:absolute;left:-14%;top:-78px;width:128%;height:calc(100% + 150px);pointer-events:none;z-index:4;opacity:0"></canvas>
+            <div style="position:absolute;inset:0;border-radius:15px;overflow:hidden">
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#FAF8F4">
+              <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(34px,5.4vw,46px);line-height:1;color:#2C4A3B">10% off</div>
+              <div style="font-size:10px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#16170F;margin-top:9px">Your first project</div>
+              <img src="assets/cv-mark.png" alt="" style="width:18px;height:auto;margin-top:12px;opacity:0.55">
+            </div>
+              <canvas ref="{{ promoCanvas }}" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;transition:opacity 300ms ease"></canvas>
+            </div>
+          </div>
+
+          <sc-if value="{{ promoScratching }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ promoForceReveal }}" style="align-self:flex-start;margin-top:12px;background:none;border:0;padding:0;font-family:inherit;font-size:13px;color:#8A8D82;cursor:pointer;border-bottom:1px solid #E4E0D6;padding-bottom:2px" style-hover="color:#2C4A3B;border-bottom-color:#2C4A3B">Reveal offer</button>
+          </sc-if>
+
+          <sc-if value="{{ promoRevealed }}" hint-placeholder-val="{{ false }}">
+            <div ref="{{ promoClaim }}" style="margin-top:22px">
+              <sc-if value="{{ promoUnsent }}" hint-placeholder-val="{{ true }}">
+                <div>
+                  <div style="font-family:'Playfair Display',Georgia,serif;font-size:19px;color:#16170F">Claim your offer</div>
+                  <div style="font-size:13px;line-height:1.55;color:#8A8D82;margin-top:6px;text-wrap:pretty">Enter your email and we'll send your unique discount code.</div>
+                  <div style="display:flex;align-items:center;gap:10px;height:45px;margin-top:14px;padding:0 14px;box-sizing:border-box;background:#FFFFFF;border:1px solid {{ promoEmailBorder }};border-radius:7px;transition:border-color 240ms ease">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8A8D82" stroke-width="1.5" aria-hidden="true" style="flex:0 0 auto"><rect x="2.5" y="5" width="19" height="14" rx="2"></rect><path d="M3 6.5 L12 13 L21 6.5"></path></svg>
+                    <input id="cv-promo-email" type="email" value="{{ promoEmail }}" onChange="{{ setPromoEmail }}" onKeyDown="{{ promoEmailKey }}" placeholder="your@email.com.au" aria-label="Your email" autoComplete="email" style="flex:1 1 auto;min-width:0;background:none;border:0;outline:none;font-family:inherit;font-size:15px;color:#16170F">
+                  </div>
+                  <sc-if value="{{ promoEmailError }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size:12px;color:#8A6B2E;margin-top:9px">That email doesn't look complete — check it and we'll send the code there.</div>
+                  </sc-if>
+                  <button type="button" onClick="{{ promoSubmit }}" disabled="{{ promoSending }}" style="width:100%;margin-top:14px;background:#2C4A3B;color:#FAF8F4;border:0;border-radius:7px;padding:14px;font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;transition:background-color 240ms ease, transform 160ms ease" style-hover="background:#24402F" style-active="transform:translateY(1px)">{{ promoSubmitLabel }}</button>
+                </div>
+              </sc-if>
+              <sc-if value="{{ promoSent }}" hint-placeholder-val="{{ false }}">
+                <div>
+                  <div data-seq="1" style="opacity:0;transform:translateY(9px)">
+                    <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(24px,3vw,30px);line-height:1.15;color:#2C4A3B">Congratulations!</div>
+                  </div>
+                  <div data-seq="2" style="opacity:0;transform:translateY(9px)">
+                    <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F;margin-top:16px">Your offer is reserved</div>
+                    <div style="font-family:'Playfair Display',Georgia,serif;font-size:21px;color:#16170F;margin-top:10px">Check your inbox.</div>
+                  </div>
+                  <div data-seq="3" style="opacity:0;transform:translateY(9px)">
+                    <div ref="{{ promoSentLine }}" style="font-size:13px;line-height:1.6;color:#55584D;margin-top:12px;text-wrap:pretty">We've sent your CourseVista code.</div>
+                  </div>
+                  <div data-seq="4" style="opacity:0;transform:translateY(9px)">
+                    <div style="border-top:1px solid #E4E0D6;border-bottom:1px solid #E4E0D6;margin-top:16px;padding:12px 0;font-size:12px;line-height:1.6;color:#8A8D82;text-wrap:pretty">Your code arrives by email only. Use it when requesting your first project within 14 days.</div>
+                  </div>
+                  <div data-seq="5" style="opacity:0;transform:translateY(9px)">
+                    <div style="display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:20px">
+                      <a href="#enquiry" onClick="{{ promoClose }}" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="background:#2C4A3B;color:#FAF8F4;padding:13px 20px;font-size:14px;font-weight:500;border-radius:7px">Get a course quote</a>
+                      <button type="button" onClick="{{ promoClose }}" style="background:none;border:0;padding:0;font-family:inherit;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Continue browsing</button>
+                    </div>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <div style="margin-top:auto;padding-top:26px;display:flex;align-items:center;gap:9px;font-size:11px">
+            <span style="width:20px;height:20px;flex:0 0 auto;border-radius:50%;border:1px solid {{ promoS1Border }};background:{{ promoS1Bg }};color:{{ promoS1Fg }};display:flex;align-items:center;justify-content:center;font-size:10px;transition:background-color 260ms ease, border-color 260ms ease">1</span>
+            <span style="color:{{ promoS1Text }};white-space:nowrap;transition:color 260ms ease">Enter website</span>
+            <span style="flex:1 1 auto;min-width:14px;height:1px;background:#E4E0D6"></span>
+            <span style="width:20px;height:20px;flex:0 0 auto;border-radius:50%;border:1px solid {{ promoS2Border }};background:{{ promoS2Bg }};color:{{ promoS2Fg }};display:flex;align-items:center;justify-content:center;font-size:10px;transition:background-color 260ms ease, border-color 260ms ease">2</span>
+            <span style="color:{{ promoS2Text }};white-space:nowrap;transition:color 260ms ease">Claim offer</span>
+          </div>
+        </div>
+
+        <sc-if value="{{ promoWide }}" hint-placeholder-val="{{ false }}">
+          <div ref="{{ promoBridge }}" aria-hidden="true" style="position:absolute;left:50%;top:50%;width:42px;height:42px;margin:-21px 0 0 -21px;border-radius:50%;background:#2C4A3B;color:#FAF8F4;display:flex;align-items:center;justify-content:center;font-size:15px;z-index:2;opacity:0.55;transition:opacity 420ms ease, transform 420ms cubic-bezier(.19,1,.22,1)">&#8594;</div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
   <div ref="{{ stickyCta }}" style="position:fixed;left:0;right:0;bottom:0;z-index:50;background:#FAF8F4;border-top:1px solid #E4E0D6;padding:12px 20px;display:none;align-items:center;justify-content:space-between;gap:16px">
     <span style="font-size:13px;color:#55584D">Photography already suitable?</span>
-    <a href="#enquiry" style="background:#2C4A3B;color:#FAF8F4;padding:12px 18px;font-size:14px;font-weight:500">Check my course</a>
+    <a href="#enquiry" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="background:#2C4A3B;color:#FAF8F4;padding:12px 18px;font-size:14px;font-weight:500">Check my course</a>
   </div>
 </div>
 
@@ -846,15 +1293,34 @@ input, select { font-family: Inter, system-ui, sans-serif; }
   &quot;showQrPackage&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot; },
   &quot;showStickyMobileCta&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot; }
 }">
-const COST = {
-  holesPerDay: 6,
-  extraDays: 1,
-  dayRate: { "Local club": 4200, "Destination course": 5400, "Resort / multi-course facility": 6600 },
-  aerialPerDay: 1600,
-  travelPerDay: { "Local club": 350, "Destination course": 1100, "Resort / multi-course facility": 1400 },
-  roundsPerDay: { "Local club": 110, "Destination course": 90, "Resort / multi-course facility": 150 },
-  displacedShare: 0.22,
-  feeOptions: [150, 250, 380, 580]
+const DRONE = {
+  9: { low: 1000, high: 1500 },
+  18: { low: 2000, high: 3000 },
+  27: { low: 3000, high: 4500 },
+  36: { low: 4000, high: 6000 }
+};
+
+const CV_CALC = {
+  9: { from: 1490, note: "Essentials · 9 holes", homepage: "Available as an add-on" },
+  18: { from: 1990, note: "Complete · 18 holes", homepage: "Included in Complete" },
+  27: { from: 2850, note: "27-hole project", homepage: "Included" },
+  36: { from: 3700, note: "36-hole project", homepage: "Included" }
+};
+
+const TYPE_CONTEXT = {
+  "Local club": "Designed for straightforward course coverage.",
+  "Destination course": "The homepage film becomes especially valuable for visitor decision-making.",
+  "Resort / multi-course facility": "Larger facilities may require broader course coverage."
+};
+
+
+const COST = { feeOptions: [150, 250, 380, 580], roundOptions: [0, 12, 24, 48] };
+
+const PACKAGES = {
+  9: { name: "Essentials", from: 1490 },
+  18: { name: "Complete", from: 1990 },
+  hosted: { name: "Hosted", from: 2390 },
+  custom: { name: "Custom multi-course quote", from: null }
 };
 
 const JOURNEY = [
@@ -869,14 +1335,22 @@ class Component extends DCLogic {
     holes: 18,
     courseType: "Local club",
     greenFee: 250,
+    disruptOn: false, roundsAffected: 0,
     journeyOpen: 0,
     panel: null,
     faqOpen: null,
     step: 1,
     done: false,
     club: "", formHoles: "18", url: "", wants: [], name: "", role: "", email: "", phone: "",
-    clubError: false, contactError: ""
+    clubError: false, urlError: false, wantError: false, contactError: "",
+    sending: false, sendError: "", sentVia: "web",
+    liked: false, saved: false,
+    promoOpen: false, promoWide: false, promoStage: "website", promoRevealed: false,
+    promoUrl: "", promoUrlError: false, promoEmail: "", promoEmailError: false,
+    promoSending: false, promoSent: false, promoCode: "", promoReserved: false
   };
+
+  social = { likes: 4182, comments: 218, shares: 613, watching: 312 };
 
   refs = {};
   ref(k) { this.refs[k] = this.refs[k] || React.createRef(); return this.refs[k]; }
@@ -887,7 +1361,11 @@ class Component extends DCLogic {
     const hv = this.el("heroVideo");
     if (hv) { hv.muted = true; hv.volume = 0; hv.removeAttribute("controls"); }
     this.silence();
-    this._onKey = e => { if (e.key === "Escape" && this.state.panel) this.closePanel(); };
+    this._onKey = e => {
+      if (e.key !== "Escape") return;
+      if (this.state.promoOpen) { this.promoClose(); return; }
+      if (this.state.panel) this.closePanel();
+    };
     document.addEventListener("keydown", this._onKey);
     this.reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     this.setupReveal();
@@ -895,13 +1373,25 @@ class Component extends DCLogic {
     this.setupCompare();
     this.setupScroll();
     this.setupSticky();
+    this.setupOriginFill();
+    this.setupFlyArrows();
+    this.setupHoverLines();
+    this.setupTilt();
+    this._popArmed = true;
+    this.setupCardTilt();
+    this.setupFounding();
+    this.setupPromo();
     this.paintCalc(false);
   }
 
   componentWillUnmount() {
     document.removeEventListener("keydown", this._onKey);
+    clearTimeout(this._promoTimer);
+    cancelAnimationFrame(this._confettiRaf);
+    if (this._promoScroll) window.removeEventListener("scroll", this._promoScroll);
     if (this._hush) ["play", "playing", "loadedmetadata", "canplay", "volumechange"].forEach(ev => document.removeEventListener(ev, this._hush, true));
     document.body.style.overflow = "";
+    this.stopSocial();
     if (this.io) this.io.disconnect();
     if (this.vio) this.vio.disconnect();
     window.removeEventListener("scroll", this.onScroll);
@@ -925,13 +1415,24 @@ class Component extends DCLogic {
     this.revealNodes = nodes;
     this.io = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) this.show(e.target); });
-    }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
+    }, { threshold: 0.24, rootMargin: "0px 0px -16% 0px" });
     nodes.forEach(n => this.io.observe(n));
+  }
+
+  revealDelay(n) {
+    const parent = n.parentElement;
+    const step = parent && parent.hasAttribute("data-reveal-stagger")
+      ? parseFloat(parent.getAttribute("data-reveal-stagger")) || 0 : 0;
+    const idx = step ? Array.prototype.indexOf.call(parent.children, n) : 0;
+    return 90 + idx * step;
   }
 
   show(n) {
     if (!n || n.dataset.revealed === "1") return;
     n.dataset.revealed = "1";
+    const d = this.revealDelay(n);
+    n.style.transitionDelay = d + "ms";
+    setTimeout(() => { n.style.transitionDelay = ""; }, d + 1100);
     n.style.opacity = "1";
     n.style.transform = "none";
     n.style.clipPath = "inset(0 0 0 0)";
@@ -945,7 +1446,7 @@ class Component extends DCLogic {
     this.revealNodes.forEach(n => {
       if (n.dataset.revealed === "1") return;
       const r = n.getBoundingClientRect();
-      if (r.top < vh * 0.92 || r.bottom < 0) this.show(n);
+      if (r.top < vh * 0.84 || r.bottom < 0) this.show(n);
       else pending = true;
     });
     if (!pending) this.revealNodes = null;
@@ -1078,6 +1579,37 @@ class Component extends DCLogic {
         this.tween(this.el("m4"), 0, 1, v => String(Math.round(v)));
       }
     }
+    if (!this.calcRevealed) {
+      const n = this.el("costRow");
+      if (n && n.getBoundingClientRect().top < vh * 0.92) {
+        this.calcRevealed = true;
+        this.paintCalc(false);
+        if (!this.reduced) {
+          const rows = Array.from(document.querySelectorAll("[data-matrix-row]"));
+          document.querySelectorAll("[data-col]").forEach(cell => {
+            const cv = cell.getAttribute("data-col") === "cv";
+            const row = cell.closest("[data-matrix-row]");
+            const delay = row ? Math.min(rows.indexOf(row), 8) * 45 : 0;
+            cell.style.opacity = "0";
+            cell.style.transform = "translateX(" + (cv ? 12 : -12) + "px)";
+            setTimeout(() => {
+              cell.style.transition = "opacity " + (cv ? 300 : 380) + "ms ease, transform " + (cv ? 340 : 420) + "ms cubic-bezier(.19,1,.22,1)";
+              cell.style.opacity = "1";
+              cell.style.transform = "none";
+            }, delay);
+          });
+          document.querySelectorAll("[data-tick]").forEach((tick, i) => {
+            tick.style.opacity = "0";
+            tick.style.transform = "scale(0.7)";
+            setTimeout(() => {
+              tick.style.transition = "opacity 260ms ease, transform 320ms cubic-bezier(.19,1,.22,1)";
+              tick.style.opacity = "1";
+              tick.style.transform = "none";
+            }, 120 + Math.min(i, 8) * 45);
+          });
+        }
+      }
+    }
     this.paintSticky();
   }
 
@@ -1095,6 +1627,9 @@ class Component extends DCLogic {
     if (cta) {
       cta.style.color = solid ? "#2C4A3B" : "#FAF8F4";
       cta.style.borderColor = solid ? "#2C4A3B" : "rgba(250,248,244,0.6)";
+      cta.setAttribute("data-ofill", solid ? "#2C4A3B" : "#FAF8F4");
+      cta.setAttribute("data-ofill-text", solid ? "#FAF8F4" : "#16170F");
+      delete cta.dataset.ofillBase;
     }
     const mark = document.querySelector("[data-nav-mark]"), word = document.querySelector("[data-nav-word]");
     if (mark) mark.src = solid ? "assets/cv-mark.png" : "assets/cv-mark-light.png";
@@ -1128,56 +1663,495 @@ class Component extends DCLogic {
   /* ---------- counters ---------- */
   tween(node, from, to, fmt, ms) {
     if (!node) return;
+    if (node._tweenRaf) cancelAnimationFrame(node._tweenRaf);
     if (this.reduced) { node.textContent = fmt(to); return; }
     const dur = ms || 900, t0 = performance.now();
     const step = now => {
       const p = Math.min(1, (now - t0) / dur);
       const e = 1 - Math.pow(1 - p, 3);
       node.textContent = fmt(from + (to - from) * e);
-      if (p < 1) requestAnimationFrame(step);
+      node._tweenRaf = p < 1 ? requestAnimationFrame(step) : 0;
     };
-    requestAnimationFrame(step);
+    node._tweenRaf = requestAnimationFrame(step);
   }
 
+  /* ---------- pill + flying arrow ---------- */
+  setupFlyArrows() {
+    document.querySelectorAll("[data-flyarrow]").forEach(el => {
+      if (el.dataset.flyReady === "1") return;
+      el.dataset.flyReady = "1";
+      const pill = el.querySelector("[data-fly-pill]");
+      const circle = el.querySelector("[data-fly-circle]");
+      const a = el.querySelector("[data-fly-a]");
+      const b = el.querySelector("[data-fly-b]");
+      const paint = on => {
+        [pill, circle].forEach(n => {
+          if (!n) return;
+          n.style.background = on ? "#2C4A3B" : "#DDE8CC";
+          n.style.color = on ? "#FAF8F4" : "#16170F";
+        });
+        if (a) a.style.transform = on ? "translate(260%,-260%)" : "translate(0,0)";
+        if (b) b.style.transform = on ? "translate(0,0)" : "translate(-260%,260%)";
+      };
+      el.addEventListener("pointerenter", () => paint(true));
+      el.addEventListener("pointerleave", () => paint(false));
+      el.addEventListener("focus", () => { if (el.matches(":focus-visible")) paint(true); });
+      el.addEventListener("blur", () => paint(false));
+    });
+  }
+
+  /* ---------- founding-course strip ---------- */
+  setupFounding() {
+    document.querySelectorAll("[data-invite]").forEach(host => {
+      if (host.dataset.inviteReady === "1") return;
+      host.dataset.inviteReady = "1";
+      const card = host.querySelector("[data-invite-card]");
+      if (!card) return;
+      const paint = on => {
+        card.style.opacity = on ? "1" : "0";
+        card.style.transform = on ? "translate(-50%,0)" : "translate(-50%,6px)";
+      };
+      host.addEventListener("pointerenter", () => paint(true));
+      host.addEventListener("pointerleave", () => paint(false));
+    });
+
+    // Delegated so it survives re-renders and hot reloads — no per-node flags.
+    if (!this._cvmarkBound) {
+      this._cvmarkBound = true;
+      const quoteOf = (host) => {
+        const line = host.querySelector("[data-cvmark-type]");
+        if (!line) return null;
+        if (!line.dataset.cvQuote) line.dataset.cvQuote = line.textContent.trim();
+        return line;
+      };
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let raf = null;
+      const type = (host) => {
+        const line = quoteOf(host);
+        if (!line) return;
+        const quote = line.dataset.cvQuote || "";
+        if (reduced) { line.textContent = quote; return; }
+        cancelAnimationFrame(raf);
+        const t0 = performance.now();
+        line.textContent = "";
+        const step = (now) => {
+          const chars = Math.min(quote.length, Math.round((now - t0) / 16));
+          line.textContent = quote.slice(0, chars);
+          if (chars < quote.length) raf = requestAnimationFrame(step);
+        };
+        raf = requestAnimationFrame(step);
+      };
+      const reset = (host) => {
+        cancelAnimationFrame(raf);
+        const line = quoteOf(host);
+        if (line) line.textContent = "";
+      };
+      document.addEventListener("mouseover", (e) => {
+        const host = e.target.closest && e.target.closest("[data-cvmark]");
+        if (!host || host.dataset.cvmarkTyping === "1") return;
+        host.dataset.cvmarkTyping = "1";
+        type(host);
+      });
+      document.addEventListener("mouseout", (e) => {
+        const host = e.target.closest && e.target.closest("[data-cvmark]");
+        if (!host || (e.relatedTarget && host.contains(e.relatedTarget))) return;
+        if (host.getAttribute("data-cvmark-open") === "1") return;
+        delete host.dataset.cvmarkTyping;
+        reset(host);
+      });
+      // Click latches it open: hover is unreachable on touch.
+      document.addEventListener("click", (e) => {
+        const host = e.target.closest && e.target.closest("[data-cvmark]");
+        document.querySelectorAll('[data-cvmark][data-cvmark-open="1"]').forEach(open => {
+          if (open !== host) { open.removeAttribute("data-cvmark-open"); delete open.dataset.cvmarkTyping; reset(open); }
+        });
+        if (!host) return;
+        if (host.getAttribute("data-cvmark-open") === "1") {
+          host.removeAttribute("data-cvmark-open");
+          delete host.dataset.cvmarkTyping;
+          reset(host);
+        } else {
+          host.setAttribute("data-cvmark-open", "1");
+          type(host);
+        }
+      });
+      document.addEventListener("focusin", (e) => {
+        const host = e.target.closest && e.target.closest("[data-cvmark]");
+        if (host) type(host);
+      });
+    }
+  }
+
+  /* ---------- most-popular hover burst ---------- */
+  popBurst() {
+    if (this.reduced || this._popArmed === false) return;
+    const host = this.el("popBadge");
+    if (!host) return;
+    this._popArmed = false;
+    const colors = ["#C9A25E", "#B08D4F", "#A95752", "#C9645D", "#FAF8F4"];
+    for (let i = 0; i < 7; i++) {
+      const bit = document.createElement("span");
+      const round = i % 3 === 0;
+      const w = round ? 3 : 4, h = round ? 3 : 2;
+      bit.style.cssText = "position:absolute;left:50%;top:50%;width:" + w + "px;height:" + h + "px;pointer-events:none;background:" +
+        colors[i % colors.length] + ";border-radius:" + (round ? "50%" : "1px") + ";z-index:3";
+      host.appendChild(bit);
+      const a = (-140 + Math.random() * 280) * Math.PI / 180;
+      const d = 12 + Math.random() * 18;
+      const anim = bit.animate([
+        { transform: "translate(-50%,-50%) translate(0,0) rotate(0deg)", opacity: 0.95 },
+        { transform: "translate(-50%,-50%) translate(" + (Math.cos(a) * d).toFixed(1) + "px," + (Math.sin(a) * d - 6).toFixed(1) + "px) rotate(" + Math.round(-90 + Math.random() * 180) + "deg)", opacity: 0 }
+      ], { duration: 380 + Math.random() * 170, easing: "cubic-bezier(.19,1,.22,1)", fill: "forwards" });
+      anim.onfinish = () => bit.remove();
+    }
+  }
+
+  /* ---------- perspective tilt on cards ---------- */
+  setupCardTilt() {
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+    document.querySelectorAll("[data-tilt3d]").forEach(el => {
+      if (el.dataset.tilt3dReady === "1") return;
+      el.dataset.tilt3dReady = "1";
+      const hero = el.getAttribute("data-tilt3d") === "hero";
+      const img = el.querySelector("[data-tilt3d-img] img");
+      const baseShadow = hero ? "0 18px 44px -30px rgba(22,23,15,0.4)" : "";
+      const lift = () => {
+        el.style.boxShadow = hero ? "0 26px 56px -30px rgba(22,23,15,0.46)" : "0 16px 38px -30px rgba(22,23,15,0.34)";
+        if (!hero) el.style.borderColor = "#D8D3C6";
+      };
+      const rest = () => {
+        el.style.boxShadow = baseShadow;
+        if (!hero) el.style.borderColor = "#E4E0D6";
+        el.style.transform = "";
+        if (img) img.style.transform = "";
+      };
+      if (this.reduced || coarse) {
+        el.addEventListener("pointerenter", lift);
+        el.addEventListener("pointerleave", rest);
+        return;
+      }
+      const max = hero ? 2 : 2.4;
+      const liftY = hero ? -3 : 0;
+      let raf = 0;
+      if (hero) {
+        el.addEventListener("pointerenter", () => this.popBurst());
+        el.addEventListener("pointerleave", () => { this._popArmed = true; });
+      }
+      el.addEventListener("pointermove", e => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          el.style.transition = "transform 240ms cubic-bezier(.19,1,.22,1), box-shadow 420ms ease, border-color 420ms ease";
+          el.style.transform = "perspective(1100px) rotateY(" + (x * max).toFixed(2) + "deg) rotateX(" + (-y * max).toFixed(2) + "deg) translateY(" + liftY + "px)";
+          if (img) img.style.transform = "translate3d(" + (-x * 8).toFixed(2) + "px," + (-y * 6).toFixed(2) + "px,0) scale(1.02)";
+          lift();
+        });
+      });
+      el.addEventListener("pointerleave", () => {
+        if (raf) cancelAnimationFrame(raf);
+        el.style.transition = "transform 520ms cubic-bezier(.19,1,.22,1), box-shadow 420ms ease, border-color 420ms ease";
+        rest();
+      });
+    });
+  }
+
+  /* ---------- pointer-reactive image ---------- */
+  setupTilt() {
+    if (this.reduced) return;
+    document.querySelectorAll("[data-tilt]").forEach(el => {
+      if (el.dataset.tiltReady === "1") return;
+      el.dataset.tiltReady = "1";
+      const img = el.querySelector("img");
+      if (!img) return;
+      let raf = 0;
+      el.addEventListener("pointermove", e => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          img.style.transition = "transform 320ms cubic-bezier(.19,1,.22,1)";
+          img.style.transform = "translate3d(" + (-x * 16).toFixed(2) + "px," + (-y * 16).toFixed(2) + "px,0) scale(1.06)";
+        });
+      });
+      el.addEventListener("pointerleave", () => {
+        if (raf) cancelAnimationFrame(raf);
+        img.style.transition = "transform 640ms cubic-bezier(.19,1,.22,1)";
+        img.style.transform = "translate3d(0,0,0) scale(1)";
+      });
+    });
+  }
+
+  /* ---------- hover underline (+ paired arrow swap) ---------- */
+  setupHoverLines() {
+    document.querySelectorAll("[data-uline]").forEach(el => {
+      if (el.dataset.ulineReady === "1") return;
+      el.dataset.ulineReady = "1";
+      const bar = el.querySelector("[data-uline-bar]");
+      const a = el.querySelector("[data-uline-a]");
+      const b = el.querySelector("[data-uline-b]");
+      const icon = el.querySelector("[data-uline-icon]");
+      if (this.reduced) return;
+      const paint = on => {
+        if (bar) {
+          bar.style.transformOrigin = on ? "left center" : "right center";
+          void bar.offsetWidth;
+          bar.style.transform = on ? "scaleX(1)" : "scaleX(0)";
+        }
+        if (a) a.style.transform = on ? "translateX(320%)" : "translateX(0)";
+        if (b) b.style.transform = on ? "translateX(0)" : "translateX(-320%)";
+        if (icon) icon.style.transform = on ? "scale(1.16)" : "scale(1)";
+      };
+      el.addEventListener("pointerenter", () => paint(true));
+      el.addEventListener("pointerleave", () => paint(false));
+      el.addEventListener("focus", () => { if (el.matches(":focus-visible")) paint(true); });
+      el.addEventListener("blur", () => paint(false));
+    });
+  }
+
+  /* ---------- origin fill on buttons ---------- */
+  setupOriginFill(root) {
+    const scope = root || document;
+    scope.querySelectorAll("[data-ofill]").forEach(el => {
+      if (el.dataset.ofillReady === "1") return;
+      el.dataset.ofillReady = "1";
+      const cs = getComputedStyle(el);
+      if (cs.position === "static") el.style.position = "relative";
+      el.style.overflow = "hidden";
+      el.style.backgroundRepeat = "no-repeat";
+      el.style.backgroundSize = "0px 0px";
+      el.style.backgroundPosition = "50% 50%";
+      if (this.reduced) return;
+      const EASE = "cubic-bezier(.19,1,.22,1)";
+      const TRANS = "background-size 640ms " + EASE + ", background-position 640ms " + EASE + ", color 340ms " + EASE + ", transform 220ms ease";
+      const soft = f => {
+        const m = /^#?([0-9a-f]{6})$/i.exec(String(f).trim());
+        if (!m) return "transparent";
+        const n = parseInt(m[1], 16);
+        return "rgba(" + (n >> 16 & 255) + "," + (n >> 8 & 255) + "," + (n & 255) + ",0)";
+      };
+      const point = e => {
+        const r = el.getBoundingClientRect();
+        return e ? { x: e.clientX - r.left, y: e.clientY - r.top, w: r.width, h: r.height }
+                 : { x: r.width / 2, y: r.height / 2, w: r.width, h: r.height };
+      };
+      const grow = p => {
+        const fill = el.getAttribute("data-ofill") || "#16170F";
+        el.style.backgroundImage = "radial-gradient(circle closest-side, " + fill + " 0%, " + fill + " 84%, " + soft(fill) + " 100%)";
+        const hoverText = el.getAttribute("data-ofill-text") || "#FAF8F4";
+        const d = 2.5 * Math.max(
+          Math.hypot(p.x, p.y), Math.hypot(p.w - p.x, p.y),
+          Math.hypot(p.x, p.h - p.y), Math.hypot(p.w - p.x, p.h - p.y)
+        );
+        el.style.transition = "none";
+        el.style.backgroundPosition = p.x.toFixed(1) + "px " + p.y.toFixed(1) + "px";
+        el.style.backgroundSize = "0px 0px";
+        void el.offsetWidth;
+        el.style.transition = TRANS;
+        el.style.backgroundPosition = (p.x - d / 2).toFixed(1) + "px " + (p.y - d / 2).toFixed(1) + "px";
+        el.style.backgroundSize = Math.ceil(d) + "px " + Math.ceil(d) + "px";
+        el.style.color = hoverText;
+      };
+      const shrink = p => {
+        el.style.transition = TRANS;
+        el.style.backgroundPosition = p.x.toFixed(1) + "px " + p.y.toFixed(1) + "px";
+        el.style.backgroundSize = "0px 0px";
+        el.style.color = el.dataset.ofillBase || "";
+      };
+      const remember = () => { if (!el.dataset.ofillBase) el.dataset.ofillBase = el.style.color || getComputedStyle(el).color; };
+      el.addEventListener("pointerenter", e => { remember(); grow(point(e)); });
+      el.addEventListener("pointerleave", e => shrink(point(e)));
+      el.addEventListener("focus", () => { if (el.matches(":focus-visible")) { remember(); grow(point()); } });
+      el.addEventListener("blur", () => shrink(point()));
+      el.addEventListener("pointerdown", () => { el.style.transform = "scale(0.985)"; });
+      const up = () => { el.style.transform = ""; };
+      el.addEventListener("pointerup", up);
+      el.addEventListener("pointercancel", up);
+    });
+  }
+
+  /* ---------- social proof ---------- */
+  fmtN(v) { return Math.round(v).toLocaleString("en-AU"); }
+
+  paintSocial(animate) {
+    const s = this.social;
+    const put = (key, to, prevKey) => {
+      const node = this.el(key);
+      if (!node) return;
+      const from = this._socialPrev ? this._socialPrev[prevKey] : to;
+      if (animate && from !== to) this.tween(node, from, to, v => this.fmtN(v), 620);
+      else node.textContent = this.fmtN(to);
+    };
+    put("likeCount", s.likes, "likes");
+    put("commentCount", s.comments, "comments");
+    put("shareCount", s.shares, "shares");
+    const w = this.el("watchCount");
+    if (w) w.textContent = this.fmtN(s.watching) + " watching";
+    const line = this.el("likeLine");
+    if (line) line.textContent = "Liked by " + this.fmtN(s.likes) + " people";
+    this._socialPrev = { likes: s.likes, comments: s.comments, shares: s.shares };
+  }
+
+  floatHeart(xPct) {
+    const layer = this.el("burstLayer");
+    if (!layer || this.reduced) return;
+    const el = document.createElement("span");
+    el.textContent = "\u2665";
+    const x = xPct == null ? 55 + Math.random() * 28 : xPct;
+    el.style.cssText = "position:absolute;left:" + x.toFixed(1) + "%;bottom:12%;font-size:" + (12 + Math.random() * 11).toFixed(0) + "px;line-height:1;color:#FAF8F4;text-shadow:0 1px 4px rgba(10,12,8,0.5);will-change:transform,opacity;opacity:0";
+    layer.appendChild(el);
+    const drift = (Math.random() - 0.5) * 46;
+    const anim = el.animate([
+      { transform: "translate(0,0) scale(0.5)", opacity: 0 },
+      { transform: "translate(" + (drift * 0.35).toFixed(1) + "px,-38px) scale(1)", opacity: 1, offset: 0.24 },
+      { transform: "translate(" + drift.toFixed(1) + "px,-155px) scale(0.8)", opacity: 0 }
+    ], { duration: 1450 + Math.random() * 650, easing: "cubic-bezier(.22,.61,.36,1)" });
+    anim.onfinish = () => el.remove();
+  }
+
+  burst(n) { for (let i = 0; i < n; i++) setTimeout(() => this.floatHeart(), i * 90); }
+
+  commentPool() {
+    return [
+      "Booked a round after watching this.",
+      "That 18th looks brutal from the tee.",
+      "Sending this to the trip group.",
+      "Never seen the back nine laid out like that.",
+      "Is the visitor rate the same in winter?",
+      "Best course video I've seen from a club.",
+      "Hole 7 is worth the drive on its own."
+    ];
+  }
+
+  rotateComment() {
+    const node = this.el("commentLine");
+    if (!node) return;
+    const pool = this.commentPool();
+    this._cIdx = ((this._cIdx == null ? 0 : this._cIdx) + 1) % pool.length;
+    const text = pool[this._cIdx];
+    if (this.reduced) { node.textContent = text; return; }
+    node.style.opacity = "0";
+    setTimeout(() => { node.textContent = text; node.style.opacity = "1"; }, 280);
+  }
+
+  startSocial() {
+    if (this._socialTimer) return;
+    this._socialPrev = null;
+    this.paintSocial(false);
+    this._socialTimer = setInterval(() => {
+      const s = this.social;
+      s.likes += 1 + Math.floor(Math.random() * 4);
+      if (Math.random() > 0.5) s.comments += 1;
+      if (Math.random() > 0.68) s.shares += 1;
+      s.watching = Math.max(180, Math.min(640, s.watching + Math.round((Math.random() - 0.44) * 16)));
+      this.paintSocial(true);
+      if (Math.random() > 0.42) this.floatHeart();
+      if (Math.random() > 0.62) this.rotateComment();
+    }, 1700);
+    this._dotTimer = setInterval(() => {
+      const d = this.el("liveDot");
+      if (!d) return;
+      d.style.transition = "opacity 480ms ease";
+      d.style.opacity = d.style.opacity === "0.2" ? "1" : "0.2";
+    }, 900);
+  }
+
+  stopSocial() {
+    if (this._socialTimer) { clearInterval(this._socialTimer); this._socialTimer = null; }
+    if (this._dotTimer) { clearInterval(this._dotTimer); this._dotTimer = null; }
+  }
+
+  tapLike = e => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    const liked = !this.state.liked;
+    this.social.likes += liked ? 1 : -1;
+    this.setState({ liked }, () => this.paintSocial(false));
+    if (liked) this.burst(6);
+  };
+
+  tapStage = () => {
+    if (!this.state.liked) {
+      this.social.likes += 1;
+      this.setState({ liked: true }, () => this.paintSocial(false));
+    }
+    this.burst(4);
+  };
+
+  tapComment = e => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    this.social.comments += 1;
+    this.paintSocial(true);
+    this.rotateComment();
+  };
+
+  tapShare = e => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    this.social.shares += 1;
+    this.paintSocial(true);
+  };
+
+  tapSave = e => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    this.setState(st => ({ saved: !st.saved }));
+  };
+
   /* ---------- calculator ---------- */
-  calc(holes, type, fee) {
-    const days = Math.ceil(holes / COST.holesPerDay) + COST.extraDays;
-    const perDay = COST.dayRate[type] + COST.aerialPerDay + COST.travelPerDay[type];
-    const mid = Math.round((days * perDay) / 100) * 100;
-    const displaced = Math.round(days * COST.roundsPerDay[type] * COST.displacedShare);
-    const lost = displaced * fee;
-    return { days, crew: days, holes, mid, displaced, lost, total: mid + lost };
+  calc(holes, type) {
+    const s = this.state;
+    return {
+      holes,
+      drone: DRONE[holes] || DRONE[18],
+      cv: CV_CALC[holes] || CV_CALC[18],
+      context: TYPE_CONTEXT[type] || TYPE_CONTEXT["Local club"],
+      lost: s.disruptOn ? s.roundsAffected * s.greenFee : 0
+    };
+  }
+
+  flashRow(node) {
+    if (!node || this.reduced) return;
+    node.style.backgroundColor = "rgba(44,74,59,0.07)";
+    clearTimeout(node._flash);
+    node._flash = setTimeout(() => { node.style.backgroundColor = "transparent"; }, 520);
   }
 
   money(v) { return "$" + Math.round(v).toLocaleString("en-AU"); }
 
   paintCalc(animate) {
-    const c = this.calc(this.state.holes, this.state.courseType, this.state.greenFee);
-    const prev = this.prevCalc || { days: 0, crew: 0, holes: 0, displaced: 0, mid: 0, lost: 0, total: 0 };
-    const go = (key, from, to, fmt) => {
-      const node = this.el(key);
-      if (!node) return;
-      if (animate) this.tween(node, from, to, fmt, 600);
-      else node.textContent = fmt(to);
-    };
-    go("tDays", prev.days, c.days, v => String(Math.round(v)));
-    go("tCrew", prev.crew, c.crew, v => String(Math.round(v)));
-    go("tClosure", prev.holes, c.holes, v => String(Math.round(v)));
-    go("tDisplaced", prev.displaced, c.displaced, v => Math.round(v).toLocaleString("en-AU"));
-    go("tCost", prev.mid, c.mid, v => this.money(v));
-    go("tLost", prev.lost, c.lost, v => this.money(v));
-    go("tTotal", prev.total, c.total, v => this.money(v));
-    const prod = this.el("barProd"), clos = this.el("barClosure");
-    if (prod) { prod.style.transition = "width 600ms cubic-bezier(.22,.61,.36,1)"; prod.style.width = ((c.mid / c.total) * 100).toFixed(1) + "%"; }
-    if (clos) { clos.style.transition = "width 600ms cubic-bezier(.22,.61,.36,1)"; clos.style.width = ((c.lost / c.total) * 100).toFixed(1) + "%"; }
-    const avoid = this.el("avoidLine");
-    if (avoid) avoid.textContent = "Avoid " + c.days + " filming days, " + c.displaced.toLocaleString("en-AU") + " displaced rounds and every hour of course closure.";
+    const c = this.calc(this.state.holes, this.state.courseType);
+    const changed = !this.prevCalc || this.prevCalc.holes !== c.holes;
     this.prevCalc = c;
+    if (!animate || !changed || this.reduced) return;
+    this.flashRow(this.el("costRow"));
+    ["wrapDrone", "wrapCv", "hWrapDrone", "hWrapCv"].forEach((key, i) => {
+      const n = this.el(key);
+      if (!n) return;
+      const cv = key.toLowerCase().indexOf("cv") > -1;
+      n.style.transition = "none";
+      n.style.opacity = "0";
+      n.style.transform = "translateY(" + (cv ? 7 : -7) + "px)";
+      requestAnimationFrame(() => {
+        n.style.transition = "opacity 320ms ease, transform 420ms cubic-bezier(.19,1,.22,1)";
+        n.style.opacity = "1";
+        n.style.transform = "none";
+      });
+    });
   }
+
+  choosePackage = (holes, wants) => () => this.setState({ formHoles: holes, wants: wants.slice(), wantError: false, clubError: false });
+
+  quoteFromCalc = () => {
+    const h = this.state.holes;
+    const wants = h === 9 ? ["Individual hole films"] : ["Individual hole films", "Homepage film"];
+    this.setState({ formHoles: h === 36 ? "36+" : String(h), wants, wantError: false });
+  };
 
   setHoles = n => { this.setState({ holes: n }, () => this.paintCalc(true)); };
   setType = t => { this.setState({ courseType: t }, () => this.paintCalc(true)); };
   setFee = f => { this.setState({ greenFee: f }, () => this.paintCalc(true)); };
+  setRounds = n => { this.setState({ roundsAffected: n }, () => this.paintCalc(true)); };
+  toggleDisrupt = () => this.setState(s => ({ disruptOn: !s.disruptOn }), () => this.paintCalc(false));
 
   openPanel = id => this.setState({ panel: id });
   closePanel = () => this.setState({ panel: null });
@@ -1190,24 +2164,424 @@ class Component extends DCLogic {
     if (v) { v.dataset.allowAudio = "1"; v.muted = false; v.volume = 1; v.controls = true; this.safePlay(v); }
   };
 
+  /* ---------- promo modal ---------- */
+  promoForced() {
+    try {
+      return location.hash === "#promo" || /(?:^|[?&])promo=1(?:&|$)/.test(location.search.slice(1));
+    } catch (e) { return false; }
+  }
+
+  promoEligible() {
+    if (this.promoForced()) return true;
+    try {
+      if (sessionStorage.getItem("cv_promo_seen_v2") === "1") return false;
+      const claimed = Number(localStorage.getItem("cv_promo_claimed_v2") || 0);
+      if (claimed && Date.now() - claimed < 30 * 864e5) return false;
+    } catch (e) {}
+    return true;
+  }
+
+  setupPromo() {
+    if (!this.promoEligible()) return;
+    if (this.promoForced()) { setTimeout(() => this.openPromo(), 260); return; }
+    this._promoTimer = setTimeout(() => this.openPromo(), 4600);
+    this._promoScroll = () => {
+      const d = document.documentElement;
+      const pct = window.scrollY / Math.max(1, d.scrollHeight - window.innerHeight);
+      if (pct > 0.18) this.openPromo();
+    };
+    window.addEventListener("scroll", this._promoScroll, { passive: true });
+  }
+
+  promoBusy() {
+    if (this.state.panel || this.state.step > 1 || this.state.done) return true;
+    const eq = document.getElementById("enquiry");
+    if (eq) {
+      const r = eq.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.85 && r.bottom > 0) return true;
+    }
+    return false;
+  }
+
+  openPromo() {
+    if (this.state.promoOpen || this._promoShown || !this.promoEligible()) return;
+    if (!this.promoForced() && this.promoBusy()) return;
+    this._promoShown = true;
+    clearTimeout(this._promoTimer);
+    cancelAnimationFrame(this._confettiRaf);
+    window.removeEventListener("scroll", this._promoScroll);
+    if (!this.promoForced()) { try { sessionStorage.setItem("cv_promo_seen_v2", "1"); } catch (e) {} }
+    document.body.style.overflow = "hidden";
+    this.setState({ promoOpen: true, promoWide: window.innerWidth >= 700 });
+  }
+
+  promoClose = () => {
+    document.body.style.overflow = "";
+    this.setState({ promoOpen: false });
+  };
+
+  promoBackdrop = e => { if (!this._scratching) this.promoClose(); };
+  promoStop = e => { if (e && e.stopPropagation) e.stopPropagation(); };
+
+  promoRevealStep = () => {
+    if (!this.validDomain(this.state.promoUrl)) { this.setState({ promoUrlError: true }); return; }
+    this.setState({ promoStage: "scratch", promoUrlError: false });
+  };
+
+  promoForceReveal = () => this.completeScratch();
+
+  promoNudgeUrl() {
+    this.setState({ promoUrlError: true });
+    const input = document.getElementById("cv-promo-url");
+    if (input) input.focus();
+  }
+
+  completeScratch() {
+    if (this.state.promoStage === "website") { this.promoNudgeUrl(); return; }
+    if (this.state.promoRevealed) return;
+    const c = this.el("promoCanvas");
+    if (c) {
+      c.style.opacity = "0";
+      c.style.pointerEvents = "none";
+    }
+    this.setState({ promoRevealed: true, promoStage: "claim" });
+  }
+
+  shakeCard() {
+    const wrap = this.el("promoCardWrap");
+    if (!wrap || this.reduced) return;
+    const keys = [0, -7, 6, -4, 3, -1.5, 0];
+    let i = 0;
+    const tick = () => {
+      if (i >= keys.length) { wrap.style.transform = ""; return; }
+      wrap.style.transition = "transform 62ms linear";
+      wrap.style.transform = "translateX(" + keys[i] + "px) rotate(" + (keys[i] * 0.09).toFixed(2) + "deg)";
+      i++;
+      setTimeout(tick, 62);
+    };
+    tick();
+  }
+
+  burstConfetti() {
+    const cv = this.el("promoConfetti");
+    if (!cv || this.reduced) return;
+    const box = cv.getBoundingClientRect();
+    const w = Math.max(120, box.width), h = Math.max(120, box.height);
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = Math.round(w * dpr);
+    cv.height = Math.round(h * dpr);
+    const ctx = cv.getContext("2d");
+    ctx.scale(dpr, dpr);
+    cv.style.opacity = "1";
+    const colors = ["#E8484A", "#F2A03D", "#F6D64B", "#3E9E5E", "#3B7DD8", "#8B5CF6", "#EC6BA8", "#B08D4F", "#2C4A3B"];
+    const bits = [];
+    const origins = [
+      { x: w / 2, y: h * 0.52, n: 46, spread: 2.3, sp: 4.2, pow: 5.6 },
+      { x: w * 0.16, y: h * 0.74, n: 26, spread: 1.0, sp: 5.4, pow: 5.2, aim: -Math.PI / 2 + 0.5 },
+      { x: w * 0.84, y: h * 0.74, n: 26, spread: 1.0, sp: 5.4, pow: 5.2, aim: -Math.PI / 2 - 0.5 }
+    ];
+    origins.forEach(o => {
+      for (let i = 0; i < o.n; i++) {
+        const a = (o.aim != null ? o.aim : -Math.PI / 2) + (Math.random() - 0.5) * o.spread;
+        const sp = o.sp + Math.random() * o.pow;
+        const ribbon = Math.random() < 0.32;
+        bits.push({
+          x: o.x, y: o.y,
+          vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+          rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.42,
+          w: ribbon ? 2.5 + Math.random() * 2 : 4 + Math.random() * 4.5,
+          h: ribbon ? 9 + Math.random() * 7 : 4 + Math.random() * 5,
+          round: !ribbon && Math.random() < 0.3,
+          sway: 0.4 + Math.random() * 1.1,
+          phase: Math.random() * Math.PI * 2,
+          c: colors[Math.floor(Math.random() * colors.length)],
+          life: 0, max: 86 + Math.random() * 52
+        });
+      }
+    });
+    const step = () => {
+      ctx.clearRect(0, 0, w, h);
+      let live = 0;
+      bits.forEach(b => {
+        if (b.life > b.max) return;
+        live++;
+        b.life++;
+        b.vy += 0.19;
+        b.vx *= 0.99;
+        b.x += b.vx + Math.sin(b.life * 0.11 + b.phase) * b.sway * 0.5;
+        b.y += b.vy;
+        b.rot += b.vr;
+        const flip = Math.abs(Math.cos(b.life * 0.12 + b.phase));
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, Math.min(1, (1 - b.life / b.max) * 1.35));
+        ctx.translate(b.x, b.y);
+        ctx.rotate(b.rot);
+        ctx.scale(1, 0.25 + flip * 0.75);
+        ctx.fillStyle = b.c;
+        if (b.round) {
+          ctx.beginPath();
+          ctx.arc(0, 0, b.w / 2, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h);
+        }
+        ctx.restore();
+      });
+      if (live) this._confettiRaf = requestAnimationFrame(step);
+      else { cv.style.opacity = "0"; ctx.clearRect(0, 0, w, h); }
+    };
+    cancelAnimationFrame(this._confettiRaf);
+    step();
+  }
+
+  runSequence() {
+    const claim = this.el("promoClaim");
+    if (!claim) return;
+    const items = Array.from(claim.querySelectorAll("[data-seq]"))
+      .sort((a, b) => Number(a.getAttribute("data-seq")) - Number(b.getAttribute("data-seq")));
+    items.forEach((n, i) => {
+      if (this.reduced) { n.style.opacity = "1"; n.style.transform = "none"; return; }
+      setTimeout(() => {
+        n.style.transition = "opacity 460ms ease, transform 520ms cubic-bezier(.19,1,.22,1)";
+        n.style.opacity = "1";
+        n.style.transform = "none";
+      }, 260 + i * 340);
+    });
+  }
+
+  initScratch(canvas) {
+    canvas.dataset.ready = "1";
+    const wrap = canvas.parentElement;
+    const box = wrap.getBoundingClientRect();
+    const w = Math.max(120, box.width), h = Math.max(80, box.height);
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    const ctx = canvas.getContext("2d");
+    ctx.scale(dpr, dpr);
+    const g = ctx.createLinearGradient(0, 0, w, h);
+    g.addColorStop(0, "#C69F5C");
+    g.addColorStop(0.42, "#B08D4F");
+    g.addColorStop(1, "#96763C");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+    ctx.strokeStyle = "rgba(255,251,243,0.17)";
+    ctx.lineWidth = 1;
+    for (let i = 0; i < 11; i++) {
+      ctx.beginPath();
+      for (let x = 0; x <= w; x += 5) {
+        const y = 12 + i * 17 + Math.sin((x / w) * Math.PI * 2 + i * 0.8) * 8 + Math.sin(x / 31 + i) * 3;
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+    const dots = Math.round(w * h * 0.05);
+    for (let i = 0; i < dots; i++) {
+      ctx.fillStyle = Math.random() > 0.5 ? "rgba(255,255,255,0.06)" : "rgba(22,23,15,0.05)";
+      ctx.fillRect(Math.random() * w, Math.random() * h, 1, 1);
+    }
+    ctx.fillStyle = "rgba(255,252,246,0.72)";
+    ctx.font = "600 10px ui-sans-serif, system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    try { ctx.letterSpacing = "0.22em"; } catch (e) {}
+    ctx.fillText("SCRATCH TO REVEAL", w / 2, h / 2);
+
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+    const rad = coarse ? 52 : 40;
+    let last = null, checkAt = 0;
+    const pos = e => {
+      const b = canvas.getBoundingClientRect();
+      return { x: e.clientX - b.left, y: e.clientY - b.top };
+    };
+    const erase = p => {
+      ctx.globalCompositeOperation = "destination-out";
+      if (last) {
+        ctx.lineWidth = rad * 2;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.beginPath();
+        ctx.moveTo(last.x, last.y);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+      }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, rad, 0, Math.PI * 2);
+      ctx.fill();
+      last = p;
+      const now = performance.now();
+      if (now - checkAt > 130) { checkAt = now; this.measureScratch(canvas); }
+    };
+    canvas.addEventListener("pointerdown", e => {
+      if (this.state.promoStage === "website") { this.promoNudgeUrl(); return; }
+      this._scratching = true;
+      last = null;
+      try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+      erase(pos(e));
+    });
+    canvas.addEventListener("pointermove", e => { if (this._scratching) erase(pos(e)); });
+    const stop = () => {
+      if (!this._scratching) return;
+      this._scratching = false;
+      last = null;
+      this.measureScratch(canvas);
+      setTimeout(() => { this._scratching = false; }, 60);
+    };
+    canvas.addEventListener("pointerup", stop);
+    canvas.addEventListener("pointercancel", stop);
+    canvas.addEventListener("pointerleave", stop);
+  }
+
+  measureScratch(canvas) {
+    const s = this._probe || (this._probe = document.createElement("canvas"));
+    s.width = 48; s.height = 30;
+    const c = s.getContext("2d");
+    c.clearRect(0, 0, 48, 30);
+    c.drawImage(canvas, 0, 0, 48, 30);
+    let clear = 0;
+    const d = c.getImageData(0, 0, 48, 30).data;
+    for (let i = 3; i < d.length; i += 4) if (d[i] < 40) clear++;
+    const pct = clear / (48 * 30);
+    if (pct >= 0.45 && !this.state.promoRevealed) this.setState({ promoRevealed: true, promoStage: "claim" });
+  }
+
+  promoCodeFor() {
+    let existing = "";
+    try { existing = localStorage.getItem("cv_promo_code_v2") || ""; } catch (e) {}
+    if (existing) return { code: existing, reserved: true };
+    const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    let code = "CV-";
+    for (let i = 0; i < 6; i++) code += alphabet[Math.floor(Math.random() * alphabet.length)];
+    return { code, reserved: false };
+  }
+
+  promoSubmit = () => {
+    const s = this.state;
+    if (s.promoSending) return;
+    const email = s.promoEmail.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { this.setState({ promoEmailError: true }); return; }
+    const site = this.validDomain(s.promoUrl)
+      ? s.promoUrl.trim().replace(/^https?:\/\//i, "").replace(/^www\./i, "").replace(/\/+$/, "")
+      : s.promoUrl.trim();
+    const issued = this.promoCodeFor();
+    const expiry = new Date(Date.now() + 14 * 864e5).toISOString().slice(0, 10);
+    this.setState({ promoSending: true, promoEmailError: false });
+    const settle = () => {
+      try {
+        localStorage.setItem("cv_promo_code_v2", issued.code);
+        localStorage.setItem("cv_promo_claimed_v2", String(Date.now()));
+      } catch (e) {}
+      this.setState({ promoSending: false, promoSent: true, promoCode: issued.code, promoReserved: issued.reserved });
+    };
+    let settled = false;
+    const finish = () => { if (!settled) { settled = true; settle(); } };
+    const timer = setTimeout(finish, 8000);
+    fetch("https://formsubmit.co/ajax/business@coursevista.com.au", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        _subject: "CourseVista 10% offer claimed — " + site,
+        _template: "table",
+        _captcha: "false",
+        Offer: "10% off first CourseVista project",
+        Code: issued.code,
+        "Club website": site,
+        Email: email,
+        Expires: expiry,
+        "First project only": "yes",
+        Source: "coursevista.com.au — scratch offer"
+      })
+    }).then(() => { clearTimeout(timer); finish(); })
+      .catch(() => { clearTimeout(timer); finish(); });
+  };
+
   /* ---------- form ---------- */
   next = () => {
     const s = this.state;
+    if (s.sending) return;
     if (s.step === 1) {
       if (!s.club.trim()) { this.setState({ clubError: true }); return; }
       this.setState({ step: 2, clubError: false });
       return;
     }
-    if (s.step === 2 || s.step === 3) { this.setState({ step: s.step + 1 }); return; }
+    if (s.step === 2) {
+      if (!this.validDomain(s.url)) { this.setState({ urlError: true }); return; }
+      this.setState({ step: 3, urlError: false });
+      return;
+    }
+    if (s.step === 3) {
+      if (!s.wants.length) { this.setState({ wantError: true }); return; }
+      this.setState({ step: 4, wantError: false });
+      return;
+    }
     const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email.trim());
     if (!s.name.trim() || !okEmail) {
       this.setState({ contactError: !s.name.trim() ? "We need a name to address the assessment to." : "That email doesn't look complete — check it and we'll send the assessment there." });
       return;
     }
-    this.setState({ done: true, contactError: "" });
+    this.setState({ contactError: "" });
+    this.submit();
   };
 
-  back = () => this.setState(st => ({ step: Math.max(1, st.step - 1), contactError: "" }));
+  validDomain(v) {
+    const t = (v || "").trim().replace(/^https?:\/\//i, "").replace(/^www\./i, "").replace(/\/.*$/, "");
+    return /^[a-z0-9][a-z0-9-]*(\.[a-z0-9-]+)+$/i.test(t);
+  }
+
+  enquiryFields() {
+    const s = this.state;
+    return {
+      Club: s.club.trim(),
+      Website: s.url.trim(),
+      Holes: s.formHoles,
+      "Wants to create": s.wants.join(", "),
+      Name: s.name.trim(),
+      Role: s.role.trim() || "—",
+      Email: s.email.trim(),
+      Phone: s.phone.trim() || "—",
+      Source: "coursevista.com.au — home page enquiry"
+    };
+  }
+
+  mailtoHref() {
+    const f = this.enquiryFields();
+    const body = Object.keys(f).map(k => k + ": " + f[k]).join("\r\n");
+    return "mailto:business@coursevista.com.au?subject=" + encodeURIComponent("CourseVista enquiry — " + (this.state.club.trim() || "new club"))
+      + "&body=" + encodeURIComponent(body);
+  }
+
+  submit() {
+    const f = this.enquiryFields();
+    const payload = Object.assign({
+      _subject: "CourseVista enquiry — " + (this.state.club.trim() || "new club"),
+      _template: "table",
+      _captcha: "false"
+    }, f);
+    this._settled = false;
+    this.setState({ sending: true, sendError: "" });
+    const done = via => { if (!this._settled) { this._settled = true; this.setState({ done: true, sending: false, sentVia: via }); } };
+    const fail = () => {
+      if (this._settled) return;
+      this._settled = true;
+      try { window.location.href = this.mailtoHref(); } catch (e) {}
+      this.setState({ done: true, sending: false, sentVia: "mail" });
+    };
+    let timer = setTimeout(fail, 9000);
+    fetch("https://formsubmit.co/ajax/business@coursevista.com.au", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then(r => (r.ok ? r.json() : Promise.reject(new Error("bad status"))))
+      .then(j => {
+        clearTimeout(timer);
+        const ok = j && (j.success === true || j.success === "true");
+        if (ok) done("web"); else fail();
+      })
+      .catch(() => { clearTimeout(timer); fail(); });
+  }
+
+  back = () => this.setState(st => ({ step: Math.max(1, st.step - 1), contactError: "", sendError: "" }));
 
   componentDidUpdate() {
     if (this._lastPanel !== this.state.panel) {
@@ -1228,6 +2602,63 @@ class Component extends DCLogic {
           node.querySelectorAll("video[data-panel-video]").forEach(v => { if (v.muted) this.safePlay(v); });
         }
       }
+      if (this.state.panel) this.setupOriginFill(this.el("panel") || document);
+      if (this.state.panel === "homepage") this.startSocial();
+      else this.stopSocial();
+    }
+    if (this.state.promoOpen) {
+      const card = this.el("promoCard");
+      if (card && card.dataset.entered !== "1") {
+        card.dataset.entered = "1";
+        if (!this.reduced) {
+          card.style.opacity = "0";
+          card.style.transform = "scale(0.975)";
+          requestAnimationFrame(() => {
+            card.style.transition = "opacity 320ms cubic-bezier(.19,1,.22,1), transform 340ms cubic-bezier(.19,1,.22,1)";
+            card.style.opacity = "1";
+            card.style.transform = "none";
+          });
+        }
+        const input = document.getElementById("cv-promo-url");
+        if (input) setTimeout(() => input.focus(), 340);
+      }
+      const canvas = this.el("promoCanvas");
+      if (canvas && canvas.dataset.ready !== "1") this.initScratch(canvas);
+      const bridge = this.el("promoBridge");
+      if (bridge) {
+        const on = this.state.promoStage !== "website";
+        bridge.style.opacity = on ? "1" : "0.55";
+        bridge.style.transform = on ? "translateX(3px)" : "none";
+      }
+      const claim = this.el("promoClaim");
+      if (claim && claim.dataset.entered !== "1") {
+        claim.dataset.entered = "1";
+        if (!this.reduced) {
+          claim.style.opacity = "0";
+          claim.style.transform = "translateY(10px)";
+          requestAnimationFrame(() => {
+            claim.style.transition = "opacity 380ms ease, transform 420ms cubic-bezier(.19,1,.22,1)";
+            claim.style.opacity = "1";
+            claim.style.transform = "none";
+          });
+        }
+        if (!this._scratching) {
+          const input = document.getElementById("cv-promo-email");
+          if (input) setTimeout(() => { if (!this._scratching) input.focus({ preventScroll: true }); }, 420);
+        }
+      }
+      if (this.state.promoSent && this._celebrated !== true) {
+        this._celebrated = true;
+        this.shakeCard();
+        setTimeout(() => this.burstConfetti(), 180);
+        this.runSequence();
+      }
+      const sentLine = this.el("promoSentLine");
+      if (sentLine && this.state.promoSent) {
+        sentLine.textContent = (this.state.promoReserved
+          ? "Your CourseVista offer is already reserved — we've resent the code to "
+          : "We've sent your CourseVista code to ") + this.state.promoEmail.trim() + ".";
+      }
     }
     if (this._lastStep !== this.state.step) {
       this._lastStep = this.state.step;
@@ -1238,6 +2669,7 @@ class Component extends DCLogic {
   }
 
   toggleWant = label => this.setState(st => ({
+    wantError: false,
     wants: st.wants.indexOf(label) >= 0 ? st.wants.filter(w => w !== label) : st.wants.concat([label])
   }));
 
@@ -1257,17 +2689,28 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state;
     const R = k => this.ref(k);
+    const calcNow = this.calc(s.holes, s.courseType);
     const holeOptions = [9, 18, 27, 36].map(n => ({
-      label: String(n), active: s.holes === n, inactiveLabel: s.holes !== n, onPick: () => this.setHoles(n)
+      label: String(n), active: s.holes === n, inactive: s.holes !== n, onPick: () => this.setHoles(n)
     }));
-    const feeOptions = COST.feeOptions.map(f => ({
-      label: "$" + f, active: s.greenFee === f, inactiveLabel: s.greenFee !== f, onPick: () => this.setFee(f)
+    const feeOptions = COST.feeOptions.map(v => ({
+      label: "$" + v, active: s.greenFee === v, inactive: s.greenFee !== v, onPick: () => this.setFee(v)
     }));
-    const journey = JOURNEY.map((j, i) => ({
-      n: j.n, title: j.title, body: j.body,
-      open: s.journeyOpen === i, closed: s.journeyOpen !== i,
-      onToggle: () => this.setState(st => ({ journeyOpen: st.journeyOpen === i ? null : i }))
+    const roundOptions = COST.roundOptions.map(v => ({
+      label: String(v), active: s.roundsAffected === v, inactive: s.roundsAffected !== v, onPick: () => this.setRounds(v)
     }));
+    const journey = JOURNEY.map((j, i) => {
+      const open = s.journeyOpen === i;
+      return {
+        n: j.n, title: j.title, body: j.body,
+        open, closed: !open,
+        caret: open ? "rotate(180deg)" : "rotate(0deg)",
+        caretColor: open ? "#E6D3AC" : "#A8B0A4",
+        rows: open ? "1fr" : "0fr",
+        fade: open ? "1" : "0",
+        onToggle: () => this.setState(st => ({ journeyOpen: st.journeyOpen === i ? null : i }))
+      };
+    });
     const typeOptions = ["Local club", "Destination course", "Resort / multi-course facility"].map(t => ({
       label: t, active: s.courseType === t, inactive: s.courseType !== t, onPick: () => this.setType(t)
     }));
@@ -1290,11 +2733,16 @@ class Component extends DCLogic {
         onPick: () => this.toggleWant(l)
       };
     });
-    const faqs = this.faqList().map((f, i) => ({
-      q: f.q, a: f.a,
-      open: s.faqOpen === i, closed: s.faqOpen !== i,
-      onToggle: () => this.setState(st => ({ faqOpen: st.faqOpen === i ? null : i }))
-    }));
+    const faqs = this.faqList().map((f, i) => {
+      const open = s.faqOpen === i;
+      return {
+        q: f.q, a: f.a, open, closed: !open,
+        caret: open ? "rotate(180deg)" : "rotate(0deg)",
+        rows: open ? "1fr" : "0fr",
+        fade: open ? "1" : "0",
+        onToggle: () => this.setState(st => ({ faqOpen: st.faqOpen === i ? null : i }))
+      };
+    });
 
     return {
       headerRef: R("headerRef"), heroFrame: R("heroFrame"), heroVideo: R("heroVideo"), heroContent: R("heroContent"), heroDim: R("heroDim"),
@@ -1302,14 +2750,56 @@ class Component extends DCLogic {
       v1: R("v1"), v2: R("v2"), scrub1: R("scrub1"),
       whyWrap: R("whyWrap"), whyVideo: R("whyVideo"), whyStill: R("whyStill"),
       m1: R("m1"), m2: R("m2"), m3: R("m3"), m4: R("m4"),
-      tDays: R("tDays"), tCrew: R("tCrew"), tClosure: R("tClosure"), tCost: R("tCost"), avoidLine: R("avoidLine"),
-      tDisplaced: R("tDisplaced"), tLost: R("tLost"), tTotal: R("tTotal"), barProd: R("barProd"), barClosure: R("barClosure"),
+      marquee: R("marquee"), costRow: R("costRow"), wrapDrone: R("wrapDrone"), wrapCv: R("wrapCv"), popBadge: R("popBadge"),
+      hWrapDrone: R("hWrapDrone"), hWrapCv: R("hWrapCv"),
+      droneLo: this.money(calcNow.drone.low), droneHi: this.money(calcNow.drone.high),
+      cvFrom: this.money(calcNow.cv.from), cvNote: calcNow.cv.note, cvHomepage: calcNow.cv.homepage,
+      droneNoteShort: "Indicative " + calcNow.holes + "-hole market range",
+      droneNote: calcNow.holes + "-hole indicative market range",
+      calcHead: calcNow.holes === 9
+        ? "Nine holes, properly presented. No second shoot required."
+        : "A complete course experience. No second shoot required.",
+      calcContext: calcNow.context,
+      lostExposure: this.money(calcNow.lost),
+      pickEssentials: this.choosePackage("9", ["Individual hole films"]),
+      pickComplete: this.choosePackage("18", ["Individual hole films", "Homepage film"]),
+      pickHosted: this.choosePackage("18", ["Individual hole films", "Homepage film", "Hosted course guide"]),
+      pickCustom: this.choosePackage("27", ["Not sure yet"]),
+      quoteFromCalc: this.quoteFromCalc,
       featureVideo: R("featureVideo"),
       progressBar: R("progressBar"), clubInput: R("clubInput"), stickyCta: R("stickyCta"),
+      promoOpen: s.promoOpen, promoWide: s.promoWide, promoRevealed: s.promoRevealed,
+      promoScratching: s.promoStage === "scratch" && !s.promoRevealed,
+      promoUnsent: s.promoRevealed && !s.promoSent,
+      promoSent: s.promoSent,
+      promoSending: s.promoSending,
+      promoSubmitLabel: s.promoSending ? "Sending…" : "Send my code",
+      promoUrl: s.promoUrl, promoUrlError: s.promoUrlError,
+      promoEmail: s.promoEmail, promoEmailError: s.promoEmailError,
+      promoUrlBorder: s.promoUrlError ? "#A8302A" : "#E4E0D6",
+      promoEmailBorder: s.promoEmailError ? "#B08D4F" : "#E4E0D6",
+      promoS1Border: s.promoStage === "website" ? "#2C4A3B" : "#2C4A3B",
+      promoS1Bg: s.promoStage === "website" ? "#FFFFFF" : "#2C4A3B",
+      promoS1Fg: s.promoStage === "website" ? "#2C4A3B" : "#FAF8F4",
+      promoS1Text: "#16170F",
+      promoS2Border: s.promoRevealed ? "#2C4A3B" : "#E4E0D6",
+      promoS2Bg: s.promoRevealed ? "#2C4A3B" : "#FFFFFF",
+      promoS2Fg: s.promoRevealed ? "#FAF8F4" : "#8A8D82",
+      promoS2Text: s.promoRevealed ? "#16170F" : "#8A8D82",
+      promoCard: R("promoCard"), promoCanvas: R("promoCanvas"), promoClaim: R("promoClaim"),
+      promoCardWrap: R("promoCardWrap"), promoConfetti: R("promoConfetti"),
+      promoBridge: R("promoBridge"), promoSentLine: R("promoSentLine"),
+      promoClose: this.promoClose, promoBackdrop: this.promoBackdrop, promoStop: this.promoStop,
+      promoRevealStep: this.promoRevealStep, promoForceReveal: this.promoForceReveal, promoSubmit: this.promoSubmit,
+      setPromoUrl: e => this.setState({ promoUrl: e.target.value, promoUrlError: false }),
+      setPromoEmail: e => this.setState({ promoEmail: e.target.value, promoEmailError: false }),
+      promoUrlKey: e => { if (e.key === "Enter") this.promoRevealStep(); },
+      promoEmailKey: e => { if (e.key === "Enter") this.promoSubmit(); },
       playFeature: this.playFeature,
       showCalculator: this.props.showCalculator ?? true,
       showQr: this.props.showQrPackage ?? true,
-      holeOptions, typeOptions, feeOptions, journey, holeChoices, wantChoices, faqs,
+      holeOptions, typeOptions, feeOptions, roundOptions, journey, holeChoices, wantChoices, faqs,
+      disruptOn: s.disruptOn, toggleDisrupt: this.toggleDisrupt,
       guideHoles: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       holeNav: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
       panel: R("panel"),
@@ -1327,12 +2817,29 @@ class Component extends DCLogic {
       isStep3: !s.done && s.step === 3, isStep4: !s.done && s.step === 4,
       canGoBack: !s.done && s.step > 1,
       stepLabel: s.step + " / 4",
-      nextLabel: s.step === 4 ? "Check my course" : "Continue",
+      nextLabel: s.sending ? "Sending…" : s.step === 4 ? "Check my course" : "Continue",
       club: s.club, url: s.url, name: s.name, role: s.role, email: s.email, phone: s.phone,
-      clubError: s.clubError, contactError: s.contactError,
+      clubError: s.clubError, urlError: s.urlError, wantError: s.wantError, contactError: s.contactError,
+      sending: s.sending, sendError: s.sendError,
+      submitBg: s.sending ? "#55584D" : "#2C4A3B",
+      submitCursor: s.sending ? "default" : "pointer",
+      mailtoHref: this.mailtoHref(),
+      doneNote: s.sentVia === "web"
+        ? "Sent through to"
+        : "Your email app should have opened with the details ready to send. If it didn't, write to",
       clubOrCourse: s.club.trim() || "your club",
+      liked: s.liked, saved: s.saved,
+      heartColor: s.liked ? "#E0605E" : "#FAF8F4",
+      heartScale: s.liked ? "scale(1.22)" : "scale(1)",
+      saveColor: s.saved ? "#E6D3AC" : "#FAF8F4",
+      saveScale: s.saved ? "scale(1.18)" : "scale(1)",
+      tapLike: this.tapLike, tapStage: this.tapStage, tapComment: this.tapComment,
+      tapShare: this.tapShare, tapSave: this.tapSave,
+      likeCount: R("likeCount"), commentCount: R("commentCount"), shareCount: R("shareCount"),
+      likeLine: R("likeLine"), commentLine: R("commentLine"), watchCount: R("watchCount"),
+      liveDot: R("liveDot"), burstLayer: R("burstLayer"),
       setClub: e => this.setState({ club: e.target.value, clubError: false }),
-      setUrl: e => this.setState({ url: e.target.value }),
+      setUrl: e => this.setState({ url: e.target.value, urlError: false }),
       setName: e => this.setState({ name: e.target.value }),
       setRole: e => this.setState({ role: e.target.value }),
       setEmail: e => this.setState({ email: e.target.value }),

@@ -1,0 +1,9 @@
+{
+  "name": "coursevista",
+  "private": true,
+  "version": "1.0.0",
+  "description": "CourseVista static site + Stripe ordering functions",
+  "dependencies": {
+    "stripe": "^16.12.0"
+  }
+}
