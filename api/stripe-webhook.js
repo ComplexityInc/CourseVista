@@ -17,6 +17,27 @@ function rawBody(req) {
   });
 }
 
+
+// The in-memory store does not survive between serverless invocations, so the
+// webhook can arrive at a cold instance that knows nothing about the order.
+// Everything needed for the emails is already on the Stripe metadata, so we
+// merge it in and never depend on the store being warm.
+function fromMetadata(md, extra) {
+  return Object.assign({
+    order_number: md.order_number,
+    club_name: md.club_name,
+    club_website: md.club_website,
+    hole_count: md.hole_count,
+    package: md.package,
+    payment_type: md.payment_type,
+    project_price: Number(md.project_price || 0),
+    remaining_balance: Number(md.remaining_balance || 0),
+    promo_code: md.promo_code || null,
+    location: md.location,
+    customer_name: md.customer_name,
+  }, extra || {});
+}
+
 async function applyPayment(orderNumber, { paid, remaining, customerId, paymentIntentId, email, stage }) {
   if (!orderNumber) return null;
   const existing = await getOrder(orderNumber);
@@ -62,9 +83,10 @@ module.exports = async (req, res) => {
         stage: md.payment_stage
       });
       if (order) {
+        const full = Object.assign(fromMetadata(md), order);
         if (md.promo_code) await markRedeemed(md.promo_code);
-        await sendCustomerConfirmation(order);
-        await sendInternalNotification(order);
+        await sendCustomerConfirmation(full);
+        await sendInternalNotification(full);
       }
     }
 
@@ -92,9 +114,10 @@ module.exports = async (req, res) => {
         stage: md.payment_stage
       });
       if (order) {
+        const full = Object.assign(fromMetadata(md), order);
         if (md.promo_code) await markRedeemed(md.promo_code);
-        await sendCustomerConfirmation(order);
-        await sendInternalNotification(order);
+        await sendCustomerConfirmation(full);
+        await sendInternalNotification(full);
       }
     }
 
