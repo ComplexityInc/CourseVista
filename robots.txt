@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Client preview pages — not for indexing.
+Disallow: /glenelg/
+Disallow: /order/
+Disallow: /start
+Disallow: /api/
+
+Sitemap: https://www.coursevista.com.au/sitemap.xml
