@@ -14,7 +14,12 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'method_not_allowed' });
   const body = req.body || {};
 
-  if (!body.club_name || !body.customer_email) return res.status(400).json({ error: 'missing_fields' });
+  if (!body.club_name) return res.status(400).json({ error: 'missing_club' });
+
+  // customer_email is optional at this point: the Payment Element mounts on
+  // arrival at step 4, before the receipt email field has been filled in.
+  // Stripe collects it during confirmation, and the webhook reads it back.
+  const hasEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(body.customer_email || ''));
   if (EXTENDED_HOLE_COUNTS.includes(String(body.hole_count))) {
     return res.status(409).json({ error: 'assessment_required' });
   }
@@ -55,20 +60,20 @@ module.exports = async (req, res) => {
 
   // A reusable Customer keeps the deposit, the final-balance invoice and the
   // club's tax details on one record.
-  const found = await stripe.customers.list({ email: order.customer_email, limit: 1 });
-  const customer = found.data[0] || await stripe.customers.create({
-    email: order.customer_email,
-    name: order.club_name,
-    metadata: { order_number: order.order_number, club_website: order.club_website || '' }
-  });
+  let customer = null;
+  if (hasEmail) {
+    const found = await stripe.customers.list({ email: order.customer_email, limit: 1 });
+    customer = found.data[0] || await stripe.customers.create({
+      email: order.customer_email,
+      name: order.club_name,
+      metadata: { order_number: order.order_number, club_website: order.club_website || '' }
+    });
+  }
 
-  const intent = await stripe.paymentIntents.create({
+  const intentParams = {
     amount: pricing.amountDueNow,
     currency: CURRENCY,
-    customer: customer.id,
-    setup_future_usage: 'off_session',
     automatic_payment_methods: { enabled: true },
-    receipt_email: order.customer_email,
     description: `${pricing.lineLabel} — ${order.club_name}`,
     metadata: {
       order_number: order.order_number,
@@ -79,13 +84,27 @@ module.exports = async (req, res) => {
       payment_type: order.payment_type,
       project_price: String(pricing.projectPrice),
       remaining_balance: String(pricing.remainingBalance),
-      promo_code: order.promo_code || ''
+      promo_code: order.promo_code || '',
+      customer_name: body.customer_name || ''
     }
-  });
+  };
+  if (customer) {
+    intentParams.customer = customer.id;
+    intentParams.setup_future_usage = 'off_session';
+  }
+  if (hasEmail) intentParams.receipt_email = order.customer_email;
+
+  let intent;
+  try {
+    intent = await stripe.paymentIntents.create(intentParams);
+  } catch (err) {
+    console.error('[create-payment-intent] Stripe rejected:', err && err.message);
+    return res.status(502).json({ error: 'stripe_error', detail: err && err.message });
+  }
 
   await updateOrder(order.order_number, {
     stripe_payment_intent_id: intent.id,
-    stripe_customer_id: customer.id
+    stripe_customer_id: customer ? customer.id : null
   });
 
   res.setHeader('Cache-Control', 'no-store');
