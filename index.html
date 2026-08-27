@@ -16,6 +16,11 @@
 <style>
 html, body { margin: 0; padding: 0; background: #FAF8F4; }
 html { scroll-behavior: smooth; }
+/* Let the browser skip layout/paint for sections that are off screen.
+   contain-intrinsic-size keeps the scrollbar stable while they are skipped. */
+section, [data-reveal] { content-visibility: auto; contain-intrinsic-size: auto 600px; }
+#hero, header, [data-cvmark] { content-visibility: visible; }
+video { contain: paint; }
 body { font-family: Inter, system-ui, sans-serif; color: #55584D; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 a { color: #2C4A3B; text-decoration: none; }
 a:hover { color: #16170F; }
@@ -54,8 +59,8 @@ input, select { font-family: Inter, system-ui, sans-serif; }
   <main id="top">
 
     <section ref="{{ heroFrame }}" style="position:sticky;top:0;z-index:0;isolation:isolate;overflow:hidden;min-height:640px;height:100svh;display:flex;align-items:flex-end;background:#16170F">
-      <video ref="{{ heroVideo }}" muted="{{ true }}" defaultMuted="{{ true }}" volume="{{ 0 }}" loop="{{ true }}" playsInline="{{ true }}" autoPlay="{{ true }}" disableRemotePlayback="{{ true }}" preload="metadata" poster="assets/course-coastal.png" aria-label="Cinematic course film" src="assets/hero.mp4" style="position:absolute;inset:-4% -2%;width:104%;height:108%;object-fit:cover"></video>
-      <div ref="{{ heroDim }}" style="position:absolute;inset:0;background:rgba(10,12,8,0.3)"></div>
+      <video ref="{{ heroVideo }}" muted="{{ true }}" defaultMuted="{{ true }}" volume="{{ 0 }}" loop="{{ true }}" playsInline="{{ true }}" autoPlay="{{ true }}" disableRemotePlayback="{{ true }}" preload="metadata" poster="assets/course-coastal.png" aria-label="Cinematic course film" src="assets/hero.mp4" style="position:absolute;inset:-4% -2%;width:104%;height:108%;object-fit:cover;will-change:transform;transform:translateZ(0)"></video>
+      <div ref="{{ heroDim }}" style="position:absolute;inset:0;background:#0A0C08;opacity:0.3;will-change:opacity"></div>
       <div style="position:absolute;left:0;right:0;bottom:0;height:62%;background:linear-gradient(to bottom, rgba(10,12,8,0), rgba(10,12,8,0.5))"></div>
       <div ref="{{ heroContent }}" style="position:relative;width:100%;max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,40px) clamp(104px,17vh,196px)">
         <div data-reveal="up" style="font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#E4E0D6">Cinematic course films · without the shoot</div>
@@ -201,7 +206,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
         <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;flex:1 1 480px;max-width:22ch;text-wrap:pretty">From a photograph to a place you can move through.</h2>
       </div>
       <div data-reveal="clip" ref="{{ compareWrap }}" role="slider" tabindex="0" aria-label="Compare original photograph with the CourseVista film" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" style="position:relative;aspect-ratio:16/9;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden;touch-action:none;cursor:ew-resize;user-select:none">
-        <video ref="{{ compareVideo }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" poster="assets/poster-07.png" src="assets/hole-07.mp4" aria-label="CourseVista film of the seventh hole" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+        <video ref="{{ compareVideo }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/poster-07.png" src="assets/hole-07.mp4" aria-label="CourseVista film of the seventh hole" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
         <img ref="{{ compareBefore }}" src="assets/photo-fairway.png" alt="Original club photograph of the hole" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(0.82) contrast(0.94)">
         <div ref="{{ compareLine }}" style="position:absolute;top:0;bottom:0;left:50%;width:1px;background:#FAF8F4;box-shadow:none">
           <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#FAF8F4;border:1px solid #2C4A3B;display:flex;align-items:center;justify-content:center;gap:3px;color:#2C4A3B;font-size:10px">
@@ -243,7 +248,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
               </div>
               <div style="flex:1 1 380px;min-width:0;height:clamp(168px,21vw,232px);transition:transform 480ms cubic-bezier(.22,.61,.36,1)" style-hover="transform:scale(1.015)">
                 <div style="position:relative;height:100%;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
-                  <video ref="{{ v1 }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" poster="assets/poster-03.png" src="assets/hole-03.mp4" aria-label="Hole film, tee to green" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+                  <video ref="{{ v1 }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/poster-03.png" src="assets/hole-03.mp4" aria-label="Hole film, tee to green" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
                   <div style="position:absolute;top:0;left:0;right:0;padding:12px 14px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline">
                     <span style="font-family:'Playfair Display',Georgia,serif;font-size:20px;line-height:1;color:#FAF8F4">Hole 18</span>
                     <span style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#E4E0D6">Par 4</span>
@@ -283,7 +288,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                     <span style="display:flex;gap:10px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#8A8D82"><span>Course</span><span>Visitors</span><span>Members</span></span>
                   </div>
                   <div style="position:relative;flex:1 1 auto;min-height:0;background:#F1EDE6;overflow:hidden">
-                    <video ref="{{ v2 }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" poster="assets/course-mist.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down running as a club website hero" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+                    <video ref="{{ v2 }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/course-mist.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down running as a club website hero" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
                     <div style="position:absolute;left:0;bottom:0;padding:12px 14px">
                       <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(13px,1.4vw,18px);color:#FAF8F4;max-width:18ch;line-height:1.15">Experience the course before you arrive.</div>
                       <span style="display:inline-block;margin-top:8px;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#FAF8F4;border-bottom:1px solid rgba(250,248,244,0.6);padding-bottom:2px">Book a tee time</span>
@@ -573,7 +578,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
           <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;flex:1 1 auto">Sample films</h2>
         </div>
         <a href="#enquiry" data-reveal="scale" style="display:block;position:relative;aspect-ratio:21/9;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
-          <video ref="{{ featureVideo }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" poster="assets/poster-club.png" src="assets/cutdown.mp4" aria-label="Demonstration homepage film" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+          <video ref="{{ featureVideo }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/poster-club.png" src="assets/cutdown.mp4" aria-label="Demonstration homepage film" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
           <div style="position:absolute;left:0;right:0;bottom:0;padding:clamp(20px,3vw,36px);display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between">
             <div>
               <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(24px,2.8vw,38px);color:#FAF8F4;line-height:1.1">Your Golf Club</div>
@@ -1006,7 +1011,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(24px,3vw,44px);padding-top:clamp(22px,3vw,34px)">
             <div>
               <div style="position:relative;aspect-ratio:16/9;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
-                <video data-panel-video="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" controls="{{ true }}" preload="metadata" poster="assets/poster-03.png" src="assets/hole-03.mp4" aria-label="Full hole film" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+                <video data-panel-video="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" controls="{{ true }}" preload="none" poster="assets/poster-03.png" src="assets/hole-03.mp4" aria-label="Full hole film" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
               </div>
               <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:14px">
                 <sc-for list="{{ holeNav }}" as="n" hint-placeholder-count="18">
@@ -1045,7 +1050,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                 <span style="display:flex;gap:14px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82"><span>Course</span><span>Visitors</span><span>Members</span></span>
               </div>
               <div style="position:relative;aspect-ratio:16/9;background:#F1EDE6;overflow:hidden">
-                <video data-panel-video="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" poster="assets/course-mist.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+                <video data-panel-video="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/course-mist.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
                 <div style="position:absolute;left:0;bottom:0;padding:clamp(14px,2vw,26px)">
                   <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(18px,2.4vw,30px);color:#FAF8F4;max-width:20ch;line-height:1.12;text-wrap:pretty">Experience the course before you arrive.</div>
                   <span style="display:inline-block;margin-top:12px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#FAF8F4;border-bottom:1px solid rgba(250,248,244,0.6);padding-bottom:3px">Book a tee time</span>
@@ -1440,16 +1445,21 @@ class Component extends DCLogic {
   }
 
   sweepReveals() {
-    if (!this.revealNodes) return;
-    const vh = window.innerHeight;
-    let pending = false;
+    // Reveals are handled by IntersectionObserver now. Calling
+    // getBoundingClientRect() on every unrevealed node once per scroll frame
+    // forced a synchronous layout per node, which is what made scrolling
+    // stutter in content-heavy sections.
+    if (!this.revealNodes || this.revealIO) return;
+    this.revealIO = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        this.show(e.target);
+        obs.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -16% 0px", threshold: 0 });
     this.revealNodes.forEach(n => {
-      if (n.dataset.revealed === "1") return;
-      const r = n.getBoundingClientRect();
-      if (r.top < vh * 0.84 || r.bottom < 0) this.show(n);
-      else pending = true;
+      if (n.dataset.revealed !== "1") this.revealIO.observe(n);
     });
-    if (!pending) this.revealNodes = null;
   }
 
   /* ---------- video ---------- */
@@ -1538,7 +1548,11 @@ class Component extends DCLogic {
       this.tick = true;
       requestAnimationFrame(() => { this.tick = false; this.paintScroll(); });
     };
-    this.onResize = () => { this.paintScroll(); this.paintSticky(); };
+    this.onResize = () => {
+      this._heroH = null;               // cached layout value, recompute once
+      this.paintScroll();
+      this.paintSticky();
+    };
     window.addEventListener("scroll", this.onScroll, { passive: true });
     window.addEventListener("resize", this.onResize);
     this.paintScroll();
@@ -1546,32 +1560,55 @@ class Component extends DCLogic {
 
   paintScroll() {
     const vh = window.innerHeight;
+    const y = window.scrollY;
     this.sweepReveals();
     this.paintHeader();
-    if (!this.reduced) {
-      const frame = this.el("heroFrame"), vid = this.el("heroVideo"), content = this.el("heroContent"), dim = this.el("heroDim");
-      if (frame && vid) {
-        const h = Math.max(1, frame.offsetHeight);
-        const p = Math.max(0, Math.min(1, window.scrollY / (h * 0.85)));
-        const cover = p;
-        vid.style.transform = "translate3d(0," + (cover * -46).toFixed(1) + "px,0) scale(" + (1 + cover * 0.05).toFixed(3) + ")";
-        if (dim) dim.style.background = "rgba(10,12,8," + (0.3 + cover * 0.26).toFixed(3) + ")";
-        if (content) {
-          content.style.transform = "translate3d(0," + (p * -34).toFixed(1) + "px,0)";
-          content.style.opacity = String(Math.max(0, 1 - p * 1.5));
-        }
+
+    // ---- READ PHASE -------------------------------------------------
+    // Every layout read happens here, before any style is written.
+    // Interleaving reads and writes forced a synchronous layout on each
+    // read, several times per frame. This is the main scroll-jank fix.
+    const frame = this.el("heroFrame"), vid = this.el("heroVideo");
+    const content = this.el("heroContent"), dim = this.el("heroDim");
+    const whyWrap = this.el("whyWrap"), still = this.el("whyStill");
+
+    if (frame && this._heroH == null) this._heroH = Math.max(1, frame.offsetHeight);
+    const heroH = this._heroH || 1;
+
+    let whyRect = null;
+    if (whyWrap && still) whyRect = whyWrap.getBoundingClientRect();
+
+    let metricsTop = null;
+    if (!this.metricsDone) {
+      const m0 = this.el("m1");
+      if (m0) metricsTop = m0.getBoundingClientRect().top;
+    }
+    let calcTop = null;
+    if (!this.calcRevealed) {
+      const n0 = this.el("costRow");
+      if (n0) calcTop = n0.getBoundingClientRect().top;
+    }
+
+    // ---- WRITE PHASE ------------------------------------------------
+    if (!this.reduced && frame && vid) {
+      const p = Math.max(0, Math.min(1, y / (heroH * 0.85)));
+      // scale() on a full-screen video re-rasterises the layer every
+      // frame. translate3d alone composites on the GPU for free.
+      vid.style.transform = "translate3d(0," + (p * -46).toFixed(1) + "px,0)";
+      if (dim) dim.style.opacity = String(Math.min(1, 0.3 + p * 0.26));
+      if (content) {
+        content.style.transform = "translate3d(0," + (p * -34).toFixed(1) + "px,0)";
+        content.style.opacity = String(Math.max(0, 1 - p * 1.5));
       }
     }
-    const whyWrap = this.el("whyWrap"), still = this.el("whyStill");
-    if (whyWrap && still) {
-      const r = whyWrap.getBoundingClientRect();
-      const p = Math.max(0, Math.min(1, (vh * 0.78 - r.top) / (r.height * 0.7)));
+
+    if (whyRect && still) {
+      const p = Math.max(0, Math.min(1, (vh * 0.78 - whyRect.top) / (whyRect.height * 0.7)));
       still.style.opacity = this.reduced ? "0" : String(1 - p);
-      still.style.transform = "scale(" + (1 + p * 0.02).toFixed(3) + ")";
     }
+
     if (!this.metricsDone) {
-      const m = this.el("m1");
-      if (m && m.getBoundingClientRect().top < vh * 0.9) {
+      if (metricsTop != null && metricsTop < vh * 0.9) {
         this.metricsDone = true;
         this.tween(this.el("m1"), 0, 30, v => String(Math.round(v)));
         this.tween(this.el("m2"), 0, 18, v => String(Math.round(v)));
@@ -1580,8 +1617,7 @@ class Component extends DCLogic {
       }
     }
     if (!this.calcRevealed) {
-      const n = this.el("costRow");
-      if (n && n.getBoundingClientRect().top < vh * 0.92) {
+      if (calcTop != null && calcTop < vh * 0.92) {
         this.calcRevealed = true;
         this.paintCalc(false);
         if (!this.reduced) {
