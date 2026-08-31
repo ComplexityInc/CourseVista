@@ -52,8 +52,48 @@
   .inputs-sub{font-size:14px;color:#55584D;margin:0 0 16px}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
   .thumb{margin:0}
-  .thumb img{width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid #E4E0D6;background:#F2EFE8}
+  .thumb button{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;font:inherit;text-align:left}
+  .thumb img{width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid #E4E0D6;background:#F2EFE8;
+             transition:aspect-ratio .28s ease, box-shadow .28s ease, border-color .28s ease}
+  .thumb button:hover img,.thumb button:focus-visible img{aspect-ratio:1/1;border-color:#2C4A3B;box-shadow:0 6px 22px rgba(22,23,15,.13)}
   .thumb figcaption{font-size:12px;color:#77796F;margin-top:6px}
+  @media(prefers-reduced-motion:reduce){.thumb img{transition:none}}
+
+  /* lightbox */
+  .lb{position:fixed;inset:0;z-index:60;background:rgba(16,17,15,.9);display:none;align-items:center;justify-content:center;padding:24px}
+  .lb[open],.lb.on{display:flex}
+  .lb img{max-width:min(1100px,94vw);max-height:88vh;width:auto;height:auto;object-fit:contain;border:1px solid rgba(255,255,255,.16)}
+  .lb-close{position:absolute;top:16px;right:18px;background:none;border:0;color:#FAF8F4;font-size:30px;line-height:1;cursor:pointer;padding:8px}
+  .lb-cap{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#CFCFC6;font-size:13px}
+
+  /* CTA */
+  .cta h2{margin-bottom:10px}
+  .cta .sub{font-size:17px;color:#55584D;max-width:34ch;margin:0 auto}
+  .ctapoints{list-style:none;padding:0;margin:30px auto 0;max-width:520px;display:grid;gap:0;text-align:left;
+             border-top:1px solid #E4E0D6}
+  .ctapoints li{border-bottom:1px solid #E4E0D6;padding:14px 2px;font-size:15px;color:#16170F;display:flex;gap:12px;align-items:baseline}
+  .ctapoints li::before{content:"";flex:0 0 6px;height:6px;background:#2C4A3B;border-radius:50%;transform:translateY(-2px)}
+
+  /* modal */
+  .modal{position:fixed;inset:0;z-index:70;background:rgba(16,17,15,.62);display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto}
+  .modal.on{display:flex}
+  .sheet{background:#FAF8F4;border:1px solid #E4E0D6;max-width:520px;width:100%;padding:28px 26px 26px;margin:auto;position:relative}
+  .sheet h3{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:25px;color:#16170F;margin:0 0 6px}
+  .sheet p.hint{font-size:14px;color:#77796F;margin:0 0 20px}
+  .fld{margin:0 0 14px}
+  .fld label{display:block;font-size:13px;color:#55584D;margin:0 0 5px}
+  .fld input,.fld textarea{width:100%;font:inherit;font-size:15px;color:#16170F;background:#FFF;border:1px solid #D8D4C8;padding:11px 12px}
+  .fld input:focus,.fld textarea:focus{outline:none;border-color:#2C4A3B}
+  .fld textarea{min-height:74px;resize:vertical}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .sheet .btn{width:100%;margin-top:8px;text-align:center;cursor:pointer}
+  .sheet .btn[disabled]{opacity:.6;cursor:default}
+  .x{position:absolute;top:10px;right:12px;background:none;border:0;font-size:26px;line-height:1;color:#77796F;cursor:pointer;padding:6px}
+  .msg{font-size:14px;margin:12px 0 0;min-height:1.2em}
+  .msg.err{color:#9B3A2F}
+  .msg.ok{color:#2C4A3B}
+  @media(max-width:460px){.two{grid-template-columns:1fr}}
   .tally{margin:16px 0 0;font-size:14px;color:#16170F;font-weight:600}
   .tally span{display:block;font-weight:400;color:#55584D;margin-top:5px;max-width:62ch}
 
@@ -115,11 +155,11 @@
         <p class="inputs-h">What this was built from</p>
         <p class="inputs-sub">Every image used to produce the film above.</p>
         <div class="grid">
-          <figure class="thumb"><img src="/demo/assets/case-01-src-1.jpg" alt="Source photograph one" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 1</figcaption></figure>
-          <figure class="thumb"><img src="/demo/assets/case-01-src-2.jpg" alt="Source photograph two" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 2</figcaption></figure>
-          <figure class="thumb"><img src="/demo/assets/case-01-src-3.jpg" alt="Source photograph three" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 3</figcaption></figure>
-          <figure class="thumb"><img src="/demo/assets/case-01-src-4.jpg" alt="Source photograph four" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 4</figcaption></figure>
-          <figure class="thumb"><img src="/demo/assets/case-01-map.jpg" alt="Hole map diagram" loading="lazy" decoding="async" width="400" height="300"><figcaption>Hole map</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-01-src-1.jpg" data-cap="Photo 1" aria-label="Enlarge photo 1"><img src="/demo/assets/case-01-src-1.jpg" alt="Source photograph one" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Photo 1</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-01-src-2.jpg" data-cap="Photo 2" aria-label="Enlarge photo 2"><img src="/demo/assets/case-01-src-2.jpg" alt="Source photograph two" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Photo 2</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-01-src-3.jpg" data-cap="Photo 3" aria-label="Enlarge photo 3"><img src="/demo/assets/case-01-src-3.jpg" alt="Source photograph three" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Photo 3</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-01-src-4.jpg" data-cap="Photo 4" aria-label="Enlarge photo 4"><img src="/demo/assets/case-01-src-4.jpg" alt="Source photograph four" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Photo 4</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-01-map.jpg" data-cap="Hole map" aria-label="Enlarge hole map"><img src="/demo/assets/case-01-map.jpg" alt="Hole map diagram" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Hole map</figcaption></figure>
         </div>
         <p class="tally">Built from 4 photographs and 1 hole map.</p>
       </div>
@@ -142,11 +182,11 @@
         <p class="inputs-h">What this was built from</p>
         <p class="inputs-sub">Every image used to produce the film above.</p>
         <div class="grid">
-          <figure class="thumb"><img src="/demo/assets/case-02-src-1.jpg" alt="Source photograph one" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 1</figcaption></figure>
-          <figure class="thumb"><img src="/demo/assets/case-02-src-2.jpg" alt="Source photograph two" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 2</figcaption></figure>
-          <figure class="thumb"><img src="/demo/assets/case-02-src-3.jpg" alt="Source photograph three" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 3</figcaption></figure>
-          <figure class="thumb"><img src="/demo/assets/case-02-src-4.jpg" alt="Source photograph four" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 4</figcaption></figure>
-          <figure class="thumb"><img src="/demo/assets/case-02-map.jpg" alt="Hole map diagram" loading="lazy" decoding="async" width="400" height="300"><figcaption>Hole map</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-02-src-1.jpg" data-cap="Photo 1" aria-label="Enlarge photo 1"><img src="/demo/assets/case-02-src-1.jpg" alt="Source photograph one" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Photo 1</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-02-src-2.jpg" data-cap="Photo 2" aria-label="Enlarge photo 2"><img src="/demo/assets/case-02-src-2.jpg" alt="Source photograph two" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Photo 2</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-02-src-3.jpg" data-cap="Photo 3" aria-label="Enlarge photo 3"><img src="/demo/assets/case-02-src-3.jpg" alt="Source photograph three" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Photo 3</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-02-src-4.jpg" data-cap="Photo 4" aria-label="Enlarge photo 4"><img src="/demo/assets/case-02-src-4.jpg" alt="Source photograph four" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Photo 4</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-02-map.jpg" data-cap="Hole map" aria-label="Enlarge hole map"><img src="/demo/assets/case-02-map.jpg" alt="Hole map diagram" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Hole map</figcaption></figure>
         </div>
         <p class="tally">Built from 4 photographs and 1 hole map.</p>
       </div>
@@ -169,11 +209,11 @@
         <p class="inputs-h">What this was built from</p>
         <p class="inputs-sub">Every image used to produce the film above.</p>
         <div class="grid">
-          <figure class="thumb"><img src="/demo/assets/case-03-src-1.jpg" alt="Source photograph one" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 1</figcaption></figure>
-          <figure class="thumb"><img src="/demo/assets/case-03-src-2.jpg" alt="Source photograph two" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 2</figcaption></figure>
-          <figure class="thumb"><img src="/demo/assets/case-03-src-3.jpg" alt="Source photograph three" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 3</figcaption></figure>
-          <figure class="thumb"><img src="/demo/assets/case-03-src-4.jpg" alt="Source photograph four" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 4</figcaption></figure>
-          <figure class="thumb"><img src="/demo/assets/case-03-map.jpg" alt="Hole map diagram" loading="lazy" decoding="async" width="400" height="300"><figcaption>Hole map</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-03-src-1.jpg" data-cap="Photo 1" aria-label="Enlarge photo 1"><img src="/demo/assets/case-03-src-1.jpg" alt="Source photograph one" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Photo 1</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-03-src-2.jpg" data-cap="Photo 2" aria-label="Enlarge photo 2"><img src="/demo/assets/case-03-src-2.jpg" alt="Source photograph two" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Photo 2</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-03-src-3.jpg" data-cap="Photo 3" aria-label="Enlarge photo 3"><img src="/demo/assets/case-03-src-3.jpg" alt="Source photograph three" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Photo 3</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-03-src-4.jpg" data-cap="Photo 4" aria-label="Enlarge photo 4"><img src="/demo/assets/case-03-src-4.jpg" alt="Source photograph four" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Photo 4</figcaption></figure>
+          <figure class="thumb"><button type="button" data-full="/demo/assets/case-03-map.jpg" data-cap="Hole map" aria-label="Enlarge hole map"><img src="/demo/assets/case-03-map.jpg" alt="Hole map diagram" loading="lazy" decoding="async" width="400" height="300"></button><figcaption>Hole map</figcaption></figure>
         </div>
         <p class="tally">Built from 4 photographs and 1 hole map.
           <span>Five images per hole, all of them already published. That is less than almost any club has sitting on its own website.</span>
@@ -210,8 +250,13 @@
   <section class="cta">
     <div class="wrap">
       <h2>Three holes, free.</h2>
-      <p>Pick any three holes on your course and I'll build them at no cost, so you can judge the films rather than the pitch. If they're useful we'll talk about the rest. If they're not, you've lost nothing.</p>
-      <a class="btn" href="mailto:business@coursevista.com.au?subject=Three%20holes">Start with three holes</a>
+      <p class="sub">Judge the films, not the pitch.</p>
+      <ul class="ctapoints">
+        <li>Pick any three holes on your course</li>
+        <li>I build them from photography you already have</li>
+        <li>No cost, no site visit, nothing to commit to</li>
+      </ul>
+      <button class="btn" type="button" data-open-modal>Start with three holes</button>
     </div>
   </section>
 
@@ -228,6 +273,138 @@
     <p><a href="/">CourseVista</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
   </div>
 </footer>
+
+
+<!-- lightbox -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Enlarged source image">
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img id="lbImg" src="" alt="">
+  <p class="lb-cap" id="lbCap"></p>
+</div>
+
+<!-- three holes free -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="sheet">
+    <button class="x" type="button" data-close aria-label="Close">&times;</button>
+    <h3 id="modalTitle">Three holes, free</h3>
+    <p class="hint">Tell me where to look and which holes you want. I'll come back within a day.</p>
+
+    <div class="fld"><label for="f-club">Club name</label>
+      <input id="f-club" type="text" autocomplete="organization" required></div>
+
+    <div class="fld"><label for="f-site">Club website</label>
+      <input id="f-site" type="text" inputmode="url" placeholder="yourclub.com.au"></div>
+
+    <div class="two">
+      <div class="fld"><label for="f-name">Your name</label>
+        <input id="f-name" type="text" autocomplete="name"></div>
+      <div class="fld"><label for="f-role">Role</label>
+        <input id="f-role" type="text" placeholder="General Manager"></div>
+    </div>
+
+    <div class="two">
+      <div class="fld"><label for="f-email">Email</label>
+        <input id="f-email" type="email" autocomplete="email" required></div>
+      <div class="fld"><label for="f-phone">Phone (optional)</label>
+        <input id="f-phone" type="tel" autocomplete="tel"></div>
+    </div>
+
+    <div class="fld"><label for="f-holes">Which three holes?</label>
+      <input id="f-holes" type="text" placeholder="e.g. 1, 9 and 18 — or tell me to pick"></div>
+
+    <div class="fld"><label for="f-notes">Anything else (optional)</label>
+      <textarea id="f-notes" placeholder="Course changes, upcoming events, where your photography lives"></textarea></div>
+
+    <div class="hp"><label>Company<input id="f-company" type="text" tabindex="-1" autocomplete="off"></label></div>
+
+    <button class="btn" type="button" id="send">Send request</button>
+    <p class="msg" id="msg" role="status" aria-live="polite"></p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
+  var modal = document.getElementById('modal'), msg = document.getElementById('msg'), btn = document.getElementById('send');
+  var lastFocus = null;
+
+  function openLb(src, cap) {
+    lastFocus = document.activeElement;
+    lbImg.src = src; lbImg.alt = cap; lbCap.textContent = cap;
+    lb.classList.add('on'); document.body.style.overflow = 'hidden';
+    lb.querySelector('.lb-close').focus();
+  }
+  function closeLb() {
+    lb.classList.remove('on'); lbImg.src = ''; document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+  function openModal() {
+    lastFocus = document.activeElement;
+    modal.classList.add('on'); document.body.style.overflow = 'hidden';
+    document.getElementById('f-club').focus();
+  }
+  function closeModal() {
+    modal.classList.remove('on'); document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-full]');
+    if (t) { openLb(t.dataset.full, t.dataset.cap || ''); return; }
+    if (e.target.closest('.lb-close') || e.target === lb) { closeLb(); return; }
+    if (e.target.closest('[data-open-modal]')) { openModal(); return; }
+    if (e.target.closest('[data-close]') || e.target === modal) { closeModal(); return; }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (lb.classList.contains('on')) closeLb();
+    else if (modal.classList.contains('on')) closeModal();
+  });
+
+  function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+  btn.addEventListener('click', function () {
+    var email = val('f-email'), club = val('f-club');
+    msg.className = 'msg';
+    if (!club) { msg.classList.add('err'); msg.textContent = 'Which club are you with?'; document.getElementById('f-club').focus(); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      msg.classList.add('err'); msg.textContent = 'That email doesn\u2019t look complete.'; document.getElementById('f-email').focus(); return;
+    }
+
+    btn.disabled = true; btn.textContent = 'Sending\u2026'; msg.textContent = '';
+
+    fetch('/api/demo-request', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        club: club, website: val('f-site'), name: val('f-name'), role: val('f-role'),
+        email: email, phone: val('f-phone'), holes: val('f-holes'),
+        notes: val('f-notes'), company: val('f-company')
+      })
+    })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        btn.disabled = false; btn.textContent = 'Send request';
+        if (res.ok) {
+          msg.classList.add('ok');
+          msg.textContent = 'Got it \u2014 check your inbox for a confirmation. I\u2019ll be in touch within a day.';
+          ['f-club','f-site','f-name','f-role','f-email','f-phone','f-holes','f-notes'].forEach(function (id) {
+            var el = document.getElementById(id); if (el) el.value = '';
+          });
+          setTimeout(closeModal, 2600);
+        } else {
+          msg.classList.add('err');
+          msg.textContent = (res.j && res.j.error) || 'Something went wrong. Email business@coursevista.com.au instead.';
+        }
+      })
+      .catch(function () {
+        btn.disabled = false; btn.textContent = 'Send request';
+        msg.classList.add('err');
+        msg.textContent = 'Connection problem. Email business@coursevista.com.au instead.';
+      });
+  });
+})();
+</script>
 
 </body>
 </html>
