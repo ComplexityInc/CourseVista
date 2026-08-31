@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demonstration — course films built from photographs already online | CourseVista</title>
+<meta name="description" content="Four golf holes rebuilt as cinematic tee-to-green films using only photography the course had already published. Every source image is shown alongside the film it produced.">
+<link rel="canonical" href="https://www.coursevista.com.au/demo">
+<meta property="og:title" content="Four holes, built from photographs that were already online">
+<meta property="og:description" content="No site visit, no drone operator, no club involvement. The source material for every film is shown underneath it.">
+<meta property="og:url" content="https://www.coursevista.com.au/demo">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#2C4A3B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#FAF8F4;color:#55584D;font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:clip}
+  img,video{display:block;max-width:100%}
+  a{color:#2C4A3B;text-decoration:none}
+  a:hover{color:#16170F}
+  :focus-visible{outline:2px solid #2C4A3B;outline-offset:3px}
+
+  .bar{border-bottom:1px solid #E4E0D6;background:rgba(250,248,244,.92);position:sticky;top:0;z-index:5}
+  .bar-in,.wrap{max-width:940px;margin:0 auto;padding-left:24px;padding-right:24px}
+  .bar-in{padding-top:16px;padding-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo img{height:24px;width:auto}
+  .navlink{font-size:14px;color:#77796F}
+
+  .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#77796F;margin:0 0 14px}
+  h1{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:clamp(29px,5.4vw,46px);line-height:1.13;color:#16170F;margin:0 0 20px;text-wrap:pretty}
+  .lede{font-size:clamp(16px,2.1vw,18px);line-height:1.65;max-width:60ch;margin:0}
+  .lede strong{color:#16170F;font-weight:600}
+  header.hero{padding:clamp(44px,7vw,84px) 0 clamp(34px,5vw,54px);border-bottom:1px solid #E4E0D6}
+
+  h2{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:clamp(23px,3.4vw,31px);line-height:1.2;color:#2C4A3B;margin:0 0 16px}
+
+  .case{padding:clamp(38px,6vw,62px) 0;border-bottom:1px solid #E4E0D6}
+  .caselabel{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px;margin:0 0 18px}
+  .casenum{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#2C4A3B;font-weight:600}
+  .casedesc{font-size:14px;color:#77796F}
+  .player{position:relative;width:100%;aspect-ratio:16/9;background:#16170F;border:1px solid #E4E0D6;overflow:hidden}
+  .player video{width:100%;height:100%;object-fit:cover}
+
+  .inputs{margin:26px 0 0;background:#FFF;border:1px solid #E4E0D6;padding:20px 22px 22px}
+  .inputs-h{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#77796F;margin:0 0 4px}
+  .inputs-sub{font-size:14px;color:#55584D;margin:0 0 16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+  .thumb{margin:0}
+  .thumb img{width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid #E4E0D6;background:#F2EFE8}
+  .thumb figcaption{font-size:12px;color:#77796F;margin-top:6px}
+  .tally{margin:16px 0 0;font-size:14px;color:#16170F;font-weight:600}
+  .tally span{display:block;font-weight:400;color:#55584D;margin-top:5px;max-width:62ch}
+
+  .method{padding:clamp(40px,6vw,66px) 0;border-bottom:1px solid #E4E0D6}
+  .steps{display:grid;gap:22px;grid-template-columns:1fr;margin:26px 0 0;padding:0;list-style:none}
+  .steps li{border-top:1px solid #E4E0D6;padding-top:16px}
+  .steps b{display:block;color:#16170F;font-size:16px;margin-bottom:5px}
+  .stepn{font-size:11px;letter-spacing:.15em;color:#2C4A3B;font-weight:600;display:block;margin-bottom:8px}
+
+  .cta{padding:clamp(44px,7vw,74px) 0 clamp(28px,4vw,38px);text-align:center}
+  .cta p{max-width:52ch;margin:0 auto;font-size:17px}
+  .btn{display:inline-block;margin-top:26px;background:#2C4A3B;color:#FFF;padding:15px 30px;font-size:15px;font-weight:500;border:1px solid #2C4A3B}
+  .btn:hover{background:#16170F;border-color:#16170F;color:#FFF}
+
+  .note{max-width:64ch;margin:0 auto;padding:0 0 clamp(46px,7vw,72px);font-size:13px;line-height:1.6;color:#8A8D82}
+
+  footer{border-top:1px solid #E4E0D6;padding:26px 0 44px;font-size:14px;color:#77796F}
+  footer a{color:#77796F}
+
+  @media(min-width:720px){.steps{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:400px){.bar-in,.wrap{padding-left:18px;padding-right:18px}.grid{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <a class="logo" href="/">
+      <img src="/assets/cv-mark.png" alt="CourseVista">
+      <img src="/assets/cv-wordmark.png" alt="" style="height:15px">
+    </a>
+    <a class="navlink" href="/">← CourseVista</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Demonstration</p>
+    <h1>Four holes, built from photographs that were already online.</h1>
+    <p class="lede">Each film below was made without visiting the course, without a drone operator, and without the club being involved at all — <strong>using only images the course had already published on its own website</strong>. The source material for every one is shown underneath it.</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ CASE 01 ============ -->
+  <section class="case">
+    <div class="wrap">
+      <div class="caselabel">
+        <span class="casenum">Case Study 01</span>
+        <span class="casedesc">Par 4 · opening hole</span>
+      </div>
+      <div class="player">
+        <video controls preload="metadata" playsinline poster="/demo/assets/case-01-poster.jpg" aria-label="Tee-to-green film, case study one">
+          <source src="/demo/assets/case-01.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="inputs">
+        <p class="inputs-h">What this was built from</p>
+        <p class="inputs-sub">Every image used to produce the film above.</p>
+        <div class="grid">
+          <figure class="thumb"><img src="/demo/assets/case-01-src-1.jpg" alt="Source photograph one" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 1</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-01-src-2.jpg" alt="Source photograph two" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 2</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-01-src-3.jpg" alt="Source photograph three" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 3</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-01-src-4.jpg" alt="Source photograph four" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 4</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-01-map.jpg" alt="Hole map diagram" loading="lazy" decoding="async" width="400" height="300"><figcaption>Hole map</figcaption></figure>
+        </div>
+        <p class="tally">Built from 4 photographs and 1 hole map.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CASE 02 ============ -->
+  <section class="case">
+    <div class="wrap">
+      <div class="caselabel">
+        <span class="casenum">Case Study 02</span>
+        <span class="casedesc">Par 5 · dogleg right</span>
+      </div>
+      <div class="player">
+        <video controls preload="none" playsinline poster="/demo/assets/case-02-poster.jpg" aria-label="Tee-to-green film, case study two">
+          <source src="/demo/assets/case-02.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="inputs">
+        <p class="inputs-h">What this was built from</p>
+        <p class="inputs-sub">Every image used to produce the film above.</p>
+        <div class="grid">
+          <figure class="thumb"><img src="/demo/assets/case-02-src-1.jpg" alt="Source photograph one" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 1</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-02-src-2.jpg" alt="Source photograph two" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 2</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-02-src-3.jpg" alt="Source photograph three" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 3</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-02-src-4.jpg" alt="Source photograph four" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 4</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-02-map.jpg" alt="Hole map diagram" loading="lazy" decoding="async" width="400" height="300"><figcaption>Hole map</figcaption></figure>
+        </div>
+        <p class="tally">Built from 4 photographs and 1 hole map.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CASE 03 ============ -->
+  <section class="case">
+    <div class="wrap">
+      <div class="caselabel">
+        <span class="casenum">Case Study 03</span>
+        <span class="casedesc">Par 3 · short iron over water</span>
+      </div>
+      <div class="player">
+        <video controls preload="none" playsinline poster="/demo/assets/case-03-poster.jpg" aria-label="Tee-to-green film, case study three">
+          <source src="/demo/assets/case-03.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="inputs">
+        <p class="inputs-h">What this was built from</p>
+        <p class="inputs-sub">Every image used to produce the film above.</p>
+        <div class="grid">
+          <figure class="thumb"><img src="/demo/assets/case-03-src-1.jpg" alt="Source photograph one" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 1</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-03-src-2.jpg" alt="Source photograph two" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 2</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-03-map.jpg" alt="Hole map diagram" loading="lazy" decoding="async" width="400" height="300"><figcaption>Hole map</figcaption></figure>
+        </div>
+        <p class="tally">Built from 2 photographs and 1 hole map.
+          <span>This is the least material any of the four had — and it is less than almost any club has sitting on its own website.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CASE 04 ============ -->
+  <section class="case">
+    <div class="wrap">
+      <div class="caselabel">
+        <span class="casenum">Case Study 04</span>
+        <span class="casedesc">Par 4 · closing hole</span>
+      </div>
+      <div class="player">
+        <video controls preload="none" playsinline poster="/demo/assets/case-04-poster.jpg" aria-label="Tee-to-green film, case study four">
+          <source src="/demo/assets/case-04.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="inputs">
+        <p class="inputs-h">What this was built from</p>
+        <p class="inputs-sub">Every image used to produce the film above.</p>
+        <div class="grid">
+          <figure class="thumb"><img src="/demo/assets/case-04-src-1.jpg" alt="Source photograph one" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 1</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-04-src-2.jpg" alt="Source photograph two" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 2</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-04-src-3.jpg" alt="Source photograph three" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 3</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-04-src-4.jpg" alt="Source photograph four" loading="lazy" decoding="async" width="400" height="300"><figcaption>Photo 4</figcaption></figure>
+          <figure class="thumb"><img src="/demo/assets/case-04-map.jpg" alt="Hole map diagram" loading="lazy" decoding="async" width="400" height="300"><figcaption>Hole map</figcaption></figure>
+        </div>
+        <p class="tally">Built from 4 photographs and 1 hole map.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ METHOD ============ -->
+  <section class="method">
+    <div class="wrap">
+      <h2>How a course gets filmed without anyone turning up</h2>
+      <ol class="steps">
+        <li>
+          <span class="stepn">01</span>
+          <b>You send what you have</b>
+          Photographs, a hole map, a scorecard diagram, an old brochure shoot. Whatever exists. Phone photos are fine.
+        </li>
+        <li>
+          <span class="stepn">02</span>
+          <b>Each hole is built tee to green</b>
+          One continuous film per hole, matched to how the hole actually plays — the dogleg where the dogleg is, the bunkers where the bunkers are.
+        </li>
+        <li>
+          <span class="stepn">03</span>
+          <b>Nothing on the course changes</b>
+          No tee sheet cleared, no closure, no drone overhead, no members inconvenienced, no committee approval for site access.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta">
+    <div class="wrap">
+      <h2>Three holes, free.</h2>
+      <p>Pick any three holes on your course and I'll build them at no cost, so you can judge the films rather than the pitch. If they're useful we'll talk about the rest. If they're not, you've lost nothing.</p>
+      <a class="btn" href="mailto:business@coursevista.com.au?subject=Three%20holes">Start with three holes</a>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <p class="note">A note on the films above: these were made as a demonstration, from photographs a course had already published publicly. The course did not commission them and was not involved. They are here to show that a club's existing imagery is enough to work from — nothing more.</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>CourseVista · ABN 63 310 893 546 · South Australia<br>
+    <a href="mailto:business@coursevista.com.au">business@coursevista.com.au</a> · <a href="tel:+61473239787">0473 239 787</a></p>
+    <p><a href="/">CourseVista</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
