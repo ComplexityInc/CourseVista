@@ -1,15 +1,16 @@
-Drop the demo assets in this folder using exactly these names.
+Assets for the public demonstration page (/demo).
 
-Per case study (01-04):
+The page layout is /demo/demo.js; what it shows is set in /demo/configs/public.js.
+To add, remove or relabel a film or source image, edit that config — not the HTML.
+
+Per case study:
   case-0N.mp4           the film
-  case-0N-poster.jpg    poster frame
-  case-0N-src-1.jpg     source photograph 1
-  case-0N-src-2.jpg     source photograph 2
-  case-0N-src-3.jpg     source photograph 3   (omit for case 03)
-  case-0N-src-4.jpg     source photograph 4   (omit for case 03)
+  case-0N-poster.jpg    poster frame (resting artwork before play / on pause / after the end)
+  case-0N-src-N.jpg     source photographs shown under "What this was built from"
   case-0N-map.jpg       hole map
 
-Case study 03 is wired for 2 photographs + 1 map, per the spec.
-If a source image is missing the thumbnail will show as a broken
-image, so remove that <figure> block from index.html rather than
-leaving it pointing at a file that does not exist.
+A video listed in the config but missing from this folder is skipped
+automatically, so it never appears as a broken player.
+
+Client demos (e.g. /demo/mt-osmond) keep their own files in /demo/<slug>/assets/.
+Never reuse one client's footage or logo on another client's page.

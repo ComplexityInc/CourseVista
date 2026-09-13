@@ -1,5 +1,5 @@
 const Stripe = require('stripe');
-const { CURRENCY, GST_MODE } = require('../lib/pricing');
+const { CURRENCY, GST_MODE, packageLabel } = require('../lib/pricing');
 const { getOrder, updateOrder } = require('../lib/store');
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', { apiVersion: '2024-06-20' });
@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
         currency: CURRENCY,
         unit_amount: order.remaining_balance,
         tax_behavior: GST_MODE === 'inclusive' ? 'inclusive' : 'exclusive',
-        product_data: { name: `CourseVista ${order.package} — final balance`, description: order.club_name }
+        product_data: { name: `CourseVista ${packageLabel(order.package, order.hole_count)} — final balance`, description: order.club_name }
       }
     }],
     metadata: { order_number: order.order_number, payment_stage: 'balance' },

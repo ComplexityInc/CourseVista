@@ -3,6 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "description": "CourseVista static site + Stripe ordering functions",
+  "scripts": {
+    "check": "node scripts/verify.js"
+  },
   "dependencies": {
     "stripe": "^16.12.0"
   }

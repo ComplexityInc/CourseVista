@@ -1,5 +1,5 @@
 const Stripe = require('stripe');
-const { resolve, EXTENDED_HOLE_COUNTS, CURRENCY, GST_MODE } = require('../lib/pricing');
+const { resolve, CURRENCY, GST_MODE } = require('../lib/pricing');
 const { validate } = require('../lib/promo');
 const { createOrder, updateOrder } = require('../lib/store');
 
@@ -11,9 +11,6 @@ module.exports = async (req, res) => {
   const body = req.body || {};
 
   if (!body.club_name || !body.customer_email) return res.status(400).json({ error: 'missing_fields' });
-  if (EXTENDED_HOLE_COUNTS.includes(String(body.hole_count))) {
-    return res.status(409).json({ error: 'assessment_required' });
-  }
 
   // Prices are resolved server-side only — anything sent from the browser is ignored.
   const promo = body.promo_code ? await validate(body.promo_code) : { valid: false };
@@ -21,11 +18,12 @@ module.exports = async (req, res) => {
   try {
     pricing = resolve({
       packageKey: body.package,
+      holes: body.hole_count,
       paymentType: body.payment_type === 'full' ? 'full' : 'deposit',
       promoValid: promo.valid
     });
   } catch (e) {
-    return res.status(400).json({ error: 'unknown_package' });
+    return res.status(400).json({ error: e.code || 'unknown_package' });
   }
 
   const order = await createOrder({
@@ -33,7 +31,7 @@ module.exports = async (req, res) => {
     club_name: body.club_name,
     club_website: body.club_website,
     location: body.location,
-    hole_count: body.hole_count,
+    hole_count: String(pricing.holes),
     package: pricing.packageKey,
     project_price: pricing.projectPrice,
     payment_type: body.payment_type === 'full' ? 'full' : 'deposit',
@@ -61,7 +59,7 @@ module.exports = async (req, res) => {
         tax_behavior: GST_MODE === 'inclusive' ? 'inclusive' : 'exclusive',
         product_data: {
           name: pricing.lineLabel,
-          description: `${order.club_name} — ${order.hole_count} holes`
+          description: `${order.club_name} — ${pricing.holes} holes`
         }
       }
     }],
@@ -71,16 +69,17 @@ module.exports = async (req, res) => {
       package: pricing.packageKey,
       club_name: order.club_name,
       club_website: order.club_website,
-      hole_count: String(order.hole_count),
+      hole_count: String(pricing.holes),
+      location: order.location || '',
       payment_type: order.payment_type,
       project_price: String(pricing.projectPrice),
       remaining_balance: String(pricing.remainingBalance),
       promo_code: order.promo_code || ''
     },
     success_url: `${SITE}/order/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${SITE}/start?package=${pricing.packageKey}&cancelled=1`
+    cancel_url: `${SITE}/start?package=${pricing.packageKey}&holes=${pricing.holes}&cancelled=1`
   });
 
   await updateOrder(order.order_number, { stripe_checkout_session_id: session.id });
-  res.status(200).json({ url: session.url, order_number: order.order_number });
+  res.status(200).json({ url: session.url, order_number: order.order_number, amount_due_now: pricing.amountDueNow });
 };

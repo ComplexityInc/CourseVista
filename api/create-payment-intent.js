@@ -1,5 +1,5 @@
 const Stripe = require('stripe');
-const { resolve, EXTENDED_HOLE_COUNTS, CURRENCY } = require('../lib/pricing');
+const { resolve, CURRENCY } = require('../lib/pricing');
 const { validate } = require('../lib/promo');
 const { createOrder, updateOrder } = require('../lib/store');
 
@@ -20,20 +20,20 @@ module.exports = async (req, res) => {
   // arrival at step 4, before the receipt email field has been filled in.
   // Stripe collects it during confirmation, and the webhook reads it back.
   const hasEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(body.customer_email || ''));
-  if (EXTENDED_HOLE_COUNTS.includes(String(body.hole_count))) {
-    return res.status(409).json({ error: 'assessment_required' });
-  }
 
+  // Package + hole count are the only pricing inputs taken from the browser.
+  // Any project_price / amount_due_now it sends is ignored.
   const promo = body.promo_code ? await validate(body.promo_code) : { valid: false };
   let pricing;
   try {
     pricing = resolve({
       packageKey: body.package,
+      holes: body.hole_count,
       paymentType: body.payment_type === 'full' ? 'full' : 'deposit',
       promoValid: promo.valid
     });
   } catch (e) {
-    return res.status(400).json({ error: 'unknown_package' });
+    return res.status(400).json({ error: e.code || 'unknown_package' });
   }
 
   const order = await createOrder({
@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
     club_name: body.club_name,
     club_website: body.club_website,
     location: body.location,
-    hole_count: body.hole_count,
+    hole_count: String(pricing.holes),
     package: pricing.packageKey,
     project_price: pricing.projectPrice,
     payment_type: body.payment_type === 'full' ? 'full' : 'deposit',
@@ -80,7 +80,8 @@ module.exports = async (req, res) => {
       package: pricing.packageKey,
       club_name: order.club_name,
       club_website: order.club_website || '',
-      hole_count: String(order.hole_count),
+      hole_count: String(pricing.holes),
+      location: order.location || '',
       payment_type: order.payment_type,
       project_price: String(pricing.projectPrice),
       remaining_balance: String(pricing.remainingBalance),
@@ -112,6 +113,9 @@ module.exports = async (req, res) => {
     client_secret: intent.client_secret,
     publishable_key: process.env.STRIPE_PUBLISHABLE_KEY,
     order_number: order.order_number,
-    amount_due_now: pricing.amountDueNow
+    package: pricing.packageKey,
+    hole_count: pricing.holes,
+    amount_due_now: pricing.amountDueNow,
+    payable_total: pricing.payableTotal
   });
 };

@@ -6,8 +6,10 @@
 // Returns exactly what Resend said, which is what makes it useful.
 
 const email = require('../lib/email');
+const { resolve } = require('../lib/pricing');
 
 const INTERNAL = process.env.COURSEVISTA_INTERNAL_EMAIL || 'business@coursevista.com.au';
+const SAMPLE_PRICING = resolve({ packageKey: 'complete', holes: 18, paymentType: 'deposit', promoValid: false });
 
 const SAMPLE = {
   order_number: 'CV-TEST01',
@@ -17,9 +19,9 @@ const SAMPLE = {
   hole_count: '18',
   package: 'complete',
   payment_type: 'deposit',
-  project_price: 199000,
-  amount_paid: 99500,
-  remaining_balance: 99500,
+  project_price: SAMPLE_PRICING.projectPrice,
+  amount_paid: SAMPLE_PRICING.amountDueNow,
+  remaining_balance: SAMPLE_PRICING.remainingBalance,
   customer_name: 'Test Contact',
   customer_email: INTERNAL,
   source_type: 'website',
@@ -43,11 +45,16 @@ module.exports = async (req, res) => {
 
   try {
     if (type === 'confirmation')   result = await email.sendCustomerConfirmation(SAMPLE);
-    else if (type === 'enquiry')   result = await email.sendEnquiry({
-      club: 'Test Golf Club', url: 'testgolf.com.au', holes: '18',
-      name: 'Test Contact', role: 'General Manager',
-      email: INTERNAL, phone: '0400 000 000', goals: 'Hole films',
-    });
+    else if (type === 'free-hole' || type === 'free-hole-ack') {
+      const lead = {
+        id: 'FH-TEST01', type: 'free_hole_trial', offer: 'one_free_hole', trial_holes: 1,
+        course_name: 'Test Golf Club', course_website: 'testgolf.com.au',
+        customer_email: INTERNAL, preferred_hole: 7, source: 'test-email',
+      };
+      result = type === 'free-hole'
+        ? await email.sendFreeHoleRequest(lead)
+        : await email.sendFreeHoleAcknowledgement(lead);
+    }
     else if (type === 'promo')     result = await email.sendPromoCode(INTERNAL, 'CV-TEST99');
     else                           result = await email.sendInternalNotification(SAMPLE);
   } catch (err) {
@@ -62,7 +69,7 @@ module.exports = async (req, res) => {
     from: process.env.EMAIL_FROM || '(default) CourseVista <business@send.coursevista.com.au>',
     resend: result,
     next: result && result.ok
-      ? 'Check that inbox, and spam. Then try ?type=confirmation, ?type=enquiry, ?type=promo'
+      ? 'Check that inbox, and spam. Then try ?type=confirmation, ?type=free-hole, ?type=free-hole-ack, ?type=promo'
       : 'See Resend -> Logs for the rejection reason. Usually an unverified domain or a from-address that does not match it.',
   });
 };

@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./catalog.js"></script>
 <script src="./support.js"></script>
+<script src="./finder.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -51,7 +53,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
         <a data-nav-link="1" data-uline="1" href="#work" style="color:#FAF8F4;position:relative;display:inline-block;padding-bottom:4px">Work<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></a>
         <a data-nav-link="1" data-uline="1" href="#why" style="color:#FAF8F4;position:relative;display:inline-block;padding-bottom:4px">Why CourseVista<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></a>
         <a data-nav-link="1" data-uline="1" href="#pricing" style="color:#FAF8F4;position:relative;display:inline-block;padding-bottom:4px">Pricing<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></a>
-        <a data-nav-cta="1" href="#enquiry" data-ofill="#FAF8F4" data-ofill-text="#16170F" style="border:1px solid rgba(250,248,244,0.6);color:#FAF8F4;padding:9px 16px;font-weight:500">See your course</a>
+        <a data-nav-cta="1" href="#free-hole" data-free-hole="1" data-ofill="#FAF8F4" data-ofill-text="#16170F" style="border:1px solid rgba(250,248,244,0.6);color:#FAF8F4;padding:9px 16px;font-weight:500;white-space:nowrap">Get one hole free</a>
       </nav>
     </div>
   </header>
@@ -67,8 +69,8 @@ input, select { font-family: Inter, system-ui, sans-serif; }
         <h1 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FAF8F4;font-size:clamp(42px,7vw,96px);line-height:1.0;letter-spacing:-0.02em;margin:22px 0 0;max-width:16ch;text-wrap:pretty">Your course, in motion.</h1>
         <p data-reveal="up" style="font-size:clamp(16px,1.35vw,19px);line-height:1.6;color:#E4E0D6;margin:26px 0 0;max-width:52ch;text-wrap:pretty">Turn the photography your club already owns into cinematic tee-to-green flyovers — without a site visit, filming crew or course closure.</p>
         <div data-reveal="up" style="margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
-          <a href="#enquiry" data-flyarrow="1" style="display:inline-flex;align-items:center;gap:0;flex:0 0 auto">
-            <span data-fly-pill="1" style="background:#DDE8CC;color:#16170F;border-radius:999px;padding:16px 30px;font-size:15px;font-weight:500;transition:background-color 340ms cubic-bezier(.16,1,.3,1), color 300ms ease">See what your course could look like</span>
+          <a href="#free-hole" data-free-hole="1" data-flyarrow="1" style="display:inline-flex;align-items:center;gap:0;flex:0 0 auto">
+            <span data-fly-pill="1" style="background:#DDE8CC;color:#16170F;border-radius:999px;padding:16px 30px;font-size:15px;font-weight:500;transition:background-color 340ms cubic-bezier(.16,1,.3,1), color 300ms ease">Get one hole free</span>
             <span data-fly-circle="1" style="position:relative;overflow:hidden;width:52px;height:52px;border-radius:50%;background:#DDE8CC;color:#16170F;display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:background-color 340ms cubic-bezier(.16,1,.3,1), color 300ms ease">
               <span data-fly-a="1" style="position:absolute;font-size:16px;line-height:1;transition:transform 460ms cubic-bezier(.22,.61,.36,1)">&#8599;</span>
               <span data-fly-b="1" style="position:absolute;font-size:16px;line-height:1;transform:translate(-260%,260%);transition:transform 460ms cubic-bezier(.22,.61,.36,1)">&#8599;</span>
@@ -111,8 +113,8 @@ input, select { font-family: Inter, system-ui, sans-serif; }
           course.
         </h2>
         <p style="font-size:16px;line-height:1.7;color:#55584D;margin:26px 0 0;max-width:54ch;text-wrap:pretty">CourseVista is still early. Every club we work with directly helps shape the product — and standout projects may be featured here for future clubs to explore.</p>
-        <a href="#enquiry" data-uline="1" style="display:inline-flex;align-items:center;gap:9px;margin-top:24px;font-size:15px;font-weight:500;color:#2C4A3B">
-          <span style="position:relative;display:inline-block;padding-bottom:3px">Work with us<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></span>
+        <a href="#free-hole" data-free-hole="1" data-uline="1" style="display:inline-flex;align-items:center;gap:9px;margin-top:24px;font-size:15px;font-weight:500;color:#2C4A3B">
+          <span style="position:relative;display:inline-block;padding-bottom:3px">Get one hole free<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></span>
           <span style="font-size:13px">&#8594;</span>
         </a>
       </div>
@@ -288,7 +290,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                     <span style="display:flex;gap:10px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#8A8D82"><span>Course</span><span>Visitors</span><span>Members</span></span>
                   </div>
                   <div style="position:relative;flex:1 1 auto;min-height:0;background:#F1EDE6;overflow:hidden">
-                    <video ref="{{ v2 }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/course-mist.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down running as a club website hero" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+                    <video ref="{{ v2 }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/poster-club.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down running as a club website hero" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
                     <div style="position:absolute;left:0;bottom:0;padding:12px 14px">
                       <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(13px,1.4vw,18px);color:#FAF8F4;max-width:18ch;line-height:1.15">Experience the course before you arrive.</div>
                       <span style="display:inline-block;margin-top:8px;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#FAF8F4;border-bottom:1px solid rgba(250,248,244,0.6);padding-bottom:2px">Book a tee time</span>
@@ -383,67 +385,44 @@ input, select { font-family: Inter, system-ui, sans-serif; }
             <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px;padding-top:9px">04</div>
             <div style="flex:1 1 460px">
               <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,50px);line-height:1.08;margin:0;max-width:19ch">See what avoiding the shoot changes.</h2>
-              <p style="font-size:16px;line-height:1.62;color:#55584D;margin:20px 0 0;max-width:58ch;text-wrap:pretty">Compare a conventional on-course filming production with a remote CourseVista project. Adjust the course assumptions below.</p>
+              <p style="font-size:16px;line-height:1.62;color:#55584D;margin:20px 0 0;max-width:58ch;text-wrap:pretty">Compare an indicative on-course drone production with CourseVista Essentials &#8212; individual hole films built from the photography your club already has.</p>
             </div>
           </div>
 
-          <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82;margin-top:clamp(34px,4vw,52px)">Step 01 · Assumptions</div>
-          <div style="background:#E4E0D6;border:1px solid #E4E0D6;margin-top:14px;display:flex;flex-wrap:wrap;gap:1px">
-            <div style="flex:1 1 190px;padding:22px 26px 24px;background:#FFFFFF">
-              <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Holes</div>
-                <div style="display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:14px">
-                  <sc-for list="{{ holeOptions }}" as="opt" hint-placeholder-count="4">
-                    <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="background:none;border:0;padding:6px 10px 7px;cursor:pointer;font-family:'Playfair Display',Georgia,serif;font-size:21px;color:#8A8D82" style-hover="color:#16170F">
-                      <sc-if value="{{ opt.active }}" hint-placeholder-val="{{ false }}">
-                        <span style="color:#16170F;border-bottom:2px solid #2C4A3B;padding-bottom:6px">{{ opt.label }}</span>
-                      </sc-if>
-                      <sc-if value="{{ opt.inactive }}" hint-placeholder-val="{{ true }}">
-                        <span>{{ opt.label }}</span>
-                      </sc-if>
-                    </button>
-                  </sc-for>
-                </div>
+          <div style="margin-top:clamp(34px,4vw,52px);background:#FFFFFF;border:1px solid #E4E0D6;padding:clamp(18px,2.4vw,26px) clamp(18px,3vw,34px);display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between">
+            <div style="flex:1 1 240px;min-width:0">
+              <div id="cv-compare-holes" style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Number of holes</div>
+              <div style="font-size:14px;line-height:1.55;color:#55584D;margin-top:8px;text-wrap:pretty">Total holes at your facility. Both prices below update as you choose.</div>
             </div>
-            <div style="flex:2 1 300px;padding:22px 26px 24px;background:#FFFFFF">
-              <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Course type</div>
-                <div style="display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:14px">
-                  <sc-for list="{{ typeOptions }}" as="opt" hint-placeholder-count="3">
-                    <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="background:none;border:0;padding:6px 10px 7px;cursor:pointer;font-family:inherit;font-size:14px;color:#8A8D82" style-hover="color:#16170F">
-                      <sc-if value="{{ opt.active }}" hint-placeholder-val="{{ false }}">
-                        <span style="color:#16170F;border-bottom:2px solid #2C4A3B;padding-bottom:6px">{{ opt.label }}</span>
-                      </sc-if>
-                      <sc-if value="{{ opt.inactive }}" hint-placeholder-val="{{ true }}">
-                        <span>{{ opt.label }}</span>
-                      </sc-if>
-                    </button>
-                  </sc-for>
-                </div>
+            <div role="group" aria-labelledby="cv-compare-holes" style="flex:1 1 280px;max-width:400px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px">
+              <sc-for list="{{ holeOptions }}" as="opt" hint-placeholder-count="4">
+                <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" aria-label="{{ opt.aria }}" style="min-height:52px;padding:0 8px;border:1px solid {{ opt.border }};background:{{ opt.bg }};color:{{ opt.fg }};font-family:'Playfair Display',Georgia,serif;font-size:22px;line-height:1;cursor:pointer;transition:background-color 240ms ease, border-color 240ms ease, color 240ms ease" style-hover="border-color:#2C4A3B">{{ opt.label }}</button>
+              </sc-for>
             </div>
           </div>
 
           <div style="background:#FFFFFF;border:1px solid #E4E0D6;border-top:0;padding:clamp(22px,3vw,34px) clamp(18px,3vw,34px) clamp(26px,3vw,36px)">
             <div style="display:flex;flex-wrap:wrap;gap:6px 14px;align-items:flex-end;padding-bottom:12px">
-              <div style="flex:1 1 210px;min-width:0;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Step 02 · Comparison</div>
+              <div style="flex:1 1 210px;min-width:0;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Comparison &#183; {{ holesLabel }}</div>
               <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px">
-                <div style="flex:1 1 0;min-width:0;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#55584D;line-height:1.55">On-course drone</div>
-                <div style="flex:1 1 0;min-width:0;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#2C4A3B;line-height:1.55">CourseVista</div>
+                <div style="flex:1 1 0;min-width:0;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#55584D;line-height:1.55">On-course drone<span style="display:block;color:#8A8D82">Indicative</span></div>
+                <div style="flex:1 1 0;min-width:0;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#2C4A3B;line-height:1.55">CourseVista<span style="display:block;color:#8A6B2E">Essentials</span></div>
               </div>
             </div>
 
             <div ref="{{ costRow }}" style="display:flex;flex-wrap:wrap;gap:8px 14px;border-top:1px solid #E4E0D6;border-bottom:2px solid #E4E0D6;padding:20px 0 22px;transition:background-color 460ms ease">
-              <div style="flex:1 1 210px;min-width:0;font-size:14px;font-weight:500;color:#16170F;text-wrap:pretty">Production estimate</div>
+              <div style="flex:1 1 210px;min-width:0;font-size:14px;font-weight:500;color:#16170F;text-wrap:pretty">Production cost</div>
               <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px">
                 <div data-col="drone" style="flex:1 1 0;min-width:0">
-                  <div ref="{{ wrapDrone }}" style="display:flex;align-items:baseline;gap:2px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.4vw,29px);line-height:1.1;color:#16170F">
-                    <span>{{ droneLo }}</span><span>–</span><span>{{ droneHi }}</span>
+                  <div ref="{{ wrapDrone }}" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:2px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.4vw,29px);line-height:1.1;color:#16170F">
+                    <span>{{ droneLo }}</span><span>&#8211;</span><span>{{ droneHi }}</span>
                   </div>
                   <div style="font-size:12px;color:#8A8D82;margin-top:7px;text-wrap:pretty">{{ droneNoteShort }}</div>
                 </div>
                 <div data-col="cv" style="flex:1 1 0;min-width:0">
-                  <div ref="{{ wrapCv }}" style="display:flex;align-items:baseline;gap:6px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.4vw,29px);line-height:1.1;color:#2C4A3B">
-                    <span style="font-family:inherit;font-size:13px;color:#8A8D82">from</span><span>{{ cvFrom }}</span>
-                  </div>
-                  <div style="font-size:12px;color:#8A8D82;margin-top:7px;text-wrap:pretty">{{ cvNote }}</div>
+                  <div ref="{{ wrapCv }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(24px,2.8vw,34px);line-height:1.05;color:#2C4A3B">{{ cvPrice }}</div>
+                  <div style="font-size:12px;font-weight:500;color:#2C4A3B;margin-top:7px;text-wrap:pretty">{{ cvLabel }}</div>
+                  <div style="font-size:11.5px;color:#8A8D82;margin-top:3px">AUD, inc. GST</div>
                 </div>
               </div>
             </div>
@@ -478,15 +457,24 @@ input, select { font-family: Inter, system-ui, sans-serif; }
             </div>
             <div data-matrix-row="1" style="display:flex;flex-wrap:wrap;gap:2px 14px;align-items:center;border-top:1px solid #F1EDE6;padding:11px 0;transition:background-color 260ms ease" style-hover="background:#FBFAF7">
               <div style="flex:1 1 210px;min-width:0;font-size:14px;line-height:1.35;color:#16170F;text-wrap:pretty">Existing photography reused</div>
-              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px"><div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#55584D;font-weight:400"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A6534F" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M9.2 9.2 L14.8 14.8 M14.8 9.2 L9.2 14.8"></path></svg><span style="overflow-wrap:anywhere">Usually not</span></div><div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#2C4A3B;font-weight:500"><svg data-tick="1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M8.4 12.3 L11 14.9 L15.8 9.3"></path></svg><span style="overflow-wrap:anywhere">Yes</span></div></div>
+              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px">
+                <div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#55584D"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A6534F" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M9.2 9.2 L14.8 14.8 M14.8 9.2 L9.2 14.8"></path></svg><span style="overflow-wrap:anywhere">Usually not</span></div>
+                <div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#2C4A3B;font-weight:500"><svg data-tick="1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M8.4 12.3 L11 14.9 L15.8 9.3"></path></svg><span style="overflow-wrap:anywhere">Yes</span></div>
+              </div>
             </div>
             <div data-matrix-row="1" style="display:flex;flex-wrap:wrap;gap:2px 14px;align-items:center;border-top:1px solid #F1EDE6;padding:11px 0;transition:background-color 260ms ease" style-hover="background:#FBFAF7">
               <div style="flex:1 1 210px;min-width:0;font-size:14px;line-height:1.35;color:#16170F;text-wrap:pretty">Individual hole films</div>
-              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px"><div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#8A8D82;font-weight:400"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8A8D82" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6" stroke-dasharray="3 3"></circle></svg><span style="overflow-wrap:anywhere">Package dependent</span></div><div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#2C4A3B;font-weight:500"><svg data-tick="1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M8.4 12.3 L11 14.9 L15.8 9.3"></path></svg><span style="overflow-wrap:anywhere">Included</span></div></div>
+              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px">
+                <div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#8A8D82"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8A8D82" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6" stroke-dasharray="3 3"></circle></svg><span style="overflow-wrap:anywhere">Package dependent</span></div>
+                <div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#2C4A3B;font-weight:500"><svg data-tick="1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M8.4 12.3 L11 14.9 L15.8 9.3"></path></svg><span style="overflow-wrap:anywhere">{{ cvFilms }}</span></div>
+              </div>
             </div>
             <div data-matrix-row="1" style="display:flex;flex-wrap:wrap;gap:2px 14px;align-items:center;border-top:1px solid #F1EDE6;padding:11px 0;transition:background-color 260ms ease" style-hover="background:#FBFAF7">
               <div style="flex:1 1 210px;min-width:0;font-size:14px;line-height:1.35;color:#16170F;text-wrap:pretty">Homepage cinematic film</div>
-              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px"><div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#8A8D82;font-weight:400"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8A8D82" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6" stroke-dasharray="3 3"></circle></svg><span style="overflow-wrap:anywhere">Package dependent</span></div><div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#2C4A3B;font-weight:500"><svg data-tick="1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C4A3B" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6"></circle><path d="M8.4 12.3 L11 14.9 L15.8 9.3"></path></svg><span style="overflow-wrap:anywhere"><span>{{ cvHomepage }}</span></span></div></div>
+              <div style="flex:1 1 240px;min-width:0;display:flex;gap:14px">
+                <div data-col="drone" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.35;color:#8A8D82"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8A8D82" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="12" r="8.6" stroke-dasharray="3 3"></circle></svg><span style="overflow-wrap:anywhere">Package dependent</span></div>
+                <div data-col="cv" style="flex:1 1 0;min-width:0;display:flex;align-items:flex-start;gap:7px;font-size:14px;line-height:1.35;color:#55584D"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8A8D82" stroke-width="1.7" aria-hidden="true" style="flex:0 0 auto;margin-top:1px"><circle cx="12" cy="12" r="8.6" stroke-dasharray="3 3"></circle></svg><span style="overflow-wrap:anywhere">Not in Essentials<span style="display:block;font-size:12px;color:#8A8D82;margin-top:2px">Included with Complete</span></span></div>
+              </div>
             </div>
 
             <div style="border-top:1px solid #E4E0D6;margin-top:22px;padding:16px 0 0">
@@ -534,39 +522,41 @@ input, select { font-family: Inter, system-ui, sans-serif; }
               </sc-if>
             </div>
 
-            <p style="font-size:12px;color:#8A8D82;margin:18px 0 0;max-width:66ch;font-style:italic">Drone-production ranges are based on published Australian golf flyover pricing. On-course requirements vary by operator and filming conditions.</p>
           </div>
 
           <div style="background:#2C4A3B;color:#FAF8F4;padding:clamp(28px,3.4vw,46px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:32px 52px;align-items:start">
             <div>
               <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#E6D3AC">The difference</div>
               <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(24px,3vw,40px);line-height:1.14;margin-top:18px;max-width:20ch;text-wrap:pretty">{{ calcHead }}</div>
-              <div style="font-size:15px;line-height:1.6;color:#D8DCD2;margin-top:20px;max-width:34ch;text-wrap:pretty">No site visit. No shoot scheduling. No weather window to organise.</div>
-              <div style="font-size:13px;line-height:1.6;color:#A8B0A4;margin-top:16px;max-width:34ch;text-wrap:pretty">{{ calcContext }}</div>
+              <div style="font-size:15px;line-height:1.6;color:#D8DCD2;margin-top:20px;max-width:36ch;text-wrap:pretty">No site visit. No shoot scheduling. No weather window to organise.</div>
+              <div style="font-size:13px;line-height:1.6;color:#A8B0A4;margin-top:16px;max-width:40ch;text-wrap:pretty">{{ calcContext }}</div>
             </div>
-            <div style="display:flex;flex-direction:column;gap:24px;align-items:flex-start">
+            <div style="display:flex;flex-direction:column;gap:22px;align-items:flex-start">
               <div style="width:100%;display:flex;flex-wrap:wrap;gap:24px 32px">
                 <div style="flex:1 1 150px;min-width:0">
-                  <div style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#A8B0A4;line-height:1.5">On-course drone</div>
-                  <div ref="{{ hWrapDrone }}" style="display:flex;align-items:baseline;gap:2px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(23px,2.7vw,33px);line-height:1.1;color:#FAF8F4;margin-top:11px">
-                    <span>{{ droneLo }}</span><span>–</span><span>{{ droneHi }}</span>
+                  <div style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#A8B0A4;line-height:1.5">On-course drone &#183; indicative</div>
+                  <div ref="{{ hWrapDrone }}" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:2px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(23px,2.7vw,33px);line-height:1.1;color:#FAF8F4;margin-top:11px">
+                    <span>{{ droneLo }}</span><span>&#8211;</span><span>{{ droneHi }}</span>
                   </div>
                   <div style="font-size:12px;color:#A8B0A4;margin-top:8px;text-wrap:pretty">{{ droneNote }}</div>
                 </div>
                 <div style="flex:1 1 150px;min-width:0">
                   <div style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#E6D3AC;line-height:1.5">CourseVista</div>
-                  <div ref="{{ hWrapCv }}" style="display:flex;align-items:baseline;gap:6px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(23px,2.7vw,33px);line-height:1.1;color:#FAF8F4;margin-top:11px">
-                    <span style="font-family:inherit;font-size:13px;color:#A8B0A4">from</span><span>{{ cvFrom }}</span>
-                  </div>
-                  <div style="font-size:12px;color:#A8B0A4;margin-top:8px;text-wrap:pretty">{{ cvNote }}</div>
+                  <div ref="{{ hWrapCv }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,3.4vw,44px);line-height:1;color:#FAF8F4;margin-top:9px">{{ cvPrice }}</div>
+                  <div style="font-size:13px;font-weight:500;color:#E6D3AC;margin-top:9px">{{ cvLabel }}</div>
+                  <div style="font-size:12px;color:#A8B0A4;margin-top:3px">AUD, inc. GST</div>
                 </div>
               </div>
-              <div style="font-size:14px;color:#E6D3AC;max-width:42ch;text-wrap:pretty;border-top:1px solid rgba(250,248,244,0.18);padding-top:16px;width:100%">Comparable production cost. No second shoot to organise.</div>
-              <a href="#enquiry" onClick="{{ quoteFromCalc }}" data-ofill="#E6D3AC" data-ofill-text="#16170F" style="background:#FAF8F4;color:#2C4A3B;padding:15px 26px;font-size:15px;font-weight:500">See your course estimate</a>
+              <div style="font-size:14px;line-height:1.55;color:#E6D3AC;max-width:44ch;text-wrap:pretty;border-top:1px solid rgba(250,248,244,0.18);padding-top:16px;width:100%">{{ positionLine }}</div>
+              <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px">
+                <a href="#find-package" data-finder="1" data-holes="{{ holes }}" data-ofill="#E6D3AC" data-ofill-text="#16170F" style="display:inline-flex;align-items:center;gap:10px;background:#FAF8F4;color:#2C4A3B;padding:15px 26px;font-size:15px;font-weight:500"><span>Find my package</span><span aria-hidden="true" style="font-size:13px">&#8594;</span></a>
+                <a href="{{ startEssentialsHref }}" style="font-size:14px;color:#FAF8F4;border-bottom:1px solid rgba(250,248,244,0.45);padding-bottom:2px" style-hover="color:#E6D3AC">Continue with Essentials</a>
+              </div>
+              <div style="font-size:12.5px;line-height:1.55;color:#A8B0A4;max-width:44ch;text-wrap:pretty">Two quick questions match your holes and inclusions to the right package. No contact details needed.</div>
             </div>
           </div>
 
-          <p style="font-size:12px;color:#8A8D82;margin:22px 0 0;max-width:92ch;font-style:italic">Indicative comparison only. Drone-production pricing and on-course requirements vary by provider, location, deliverables and operating conditions. CourseVista prices shown are package starting points and remain subject to source-material assessment.</p>
+          <p style="font-size:12px;line-height:1.6;color:#8A8D82;margin:22px 0 0;max-width:92ch;font-style:italic">Indicative comparison only. Drone-production ranges are based on published Australian golf flyover pricing and vary by provider, location, deliverables and operating conditions. CourseVista prices are Essentials package prices for the selected hole count, in AUD including GST. Source photography is reviewed before production; if it needs work beyond the package, we confirm any change before proceeding.</p>
         </div>
       </section>
     </sc-if>
@@ -577,29 +567,29 @@ input, select { font-family: Inter, system-ui, sans-serif; }
           <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px">05</div>
           <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;flex:1 1 auto">Sample films</h2>
         </div>
-        <a href="#enquiry" data-reveal="scale" style="display:block;position:relative;aspect-ratio:21/9;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
+        <a href="#free-hole" data-free-hole="1" data-reveal="scale" style="display:block;position:relative;aspect-ratio:21/9;background:#F1EDE6;border:1px solid #E4E0D6;overflow:hidden">
           <video ref="{{ featureVideo }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/poster-club.png" src="assets/cutdown.mp4" aria-label="Demonstration homepage film" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
           <div style="position:absolute;left:0;right:0;bottom:0;padding:clamp(20px,3vw,36px);display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between">
             <div>
               <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(24px,2.8vw,38px);color:#FAF8F4;line-height:1.1">Your Golf Club</div>
               <div style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#E4E0D6;margin-top:10px">Demonstration · Tee to green</div>
             </div>
-            <span style="font-size:14px;color:#FAF8F4;border-bottom:1px solid rgba(250,248,244,0.5);padding-bottom:3px">View the course →</span>
+            <span style="font-size:14px;color:#FAF8F4;border-bottom:1px solid rgba(250,248,244,0.5);padding-bottom:3px">Get one hole free →</span>
           </div>
         </a>
         <p style="font-size:14px;color:#8A8D82;margin:22px 0 0;max-width:56ch">Sample hole films built from the kind of photography clubs already hold — website imagery, planner maps, existing aerials. Demonstrations, not client work.</p>
       </div>
     </section>
 
-    <section id="three" style="position:relative;z-index:1;overflow:hidden;background:#2C4A3B;color:#FAF8F4;scroll-margin-top:90px">
+    <section id="one-hole" style="position:relative;z-index:1;overflow:hidden;background:#2C4A3B;color:#FAF8F4;scroll-margin-top:90px">
       <img src="assets/tex-leaf.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.3">
       <div style="position:relative;max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(36px,5vw,80px);align-items:start">
         <div>
           <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#E6D3AC;letter-spacing:0.06em">06</div>
-          <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FAF8F4;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:18px 0 0;max-width:18ch;text-wrap:pretty">Don't take our word for it. Send us three holes.</h2>
-          <p style="font-size:17px;line-height:1.66;color:#D8DCD2;margin:26px 0 34px;max-width:50ch;text-wrap:pretty">If your existing photography is suitable, we'll build three sample holes before you commit to the full course.</p>
-          <a href="#enquiry" data-ofill="#E6D3AC" data-ofill-text="#16170F" style="display:inline-block;background:#FAF8F4;color:#2C4A3B;padding:15px 26px;font-size:15px;font-weight:500">Try three holes</a>
-          <div style="font-size:13px;color:#A8B0A4;margin-top:16px">No cost. No obligation. Yours to review.</div>
+          <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FAF8F4;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:18px 0 0;max-width:18ch;text-wrap:pretty">Don't take our word for it. Get one hole free.</h2>
+          <p style="font-size:17px;line-height:1.66;color:#D8DCD2;margin:26px 0 34px;max-width:50ch;text-wrap:pretty">One free hole flyover of your course, built from the photography you already have. Then choose a package when you&#8217;re ready for the rest.</p>
+          <a href="#free-hole" data-free-hole="1" data-ofill="#E6D3AC" data-ofill-text="#16170F" style="display:inline-block;background:#FAF8F4;color:#2C4A3B;padding:15px 26px;font-size:15px;font-weight:500">Get one hole free</a>
+          <div style="font-size:13px;color:#A8B0A4;margin-top:16px">No payment required.</div>
         </div>
         <div>
           <div style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#E6D3AC">From 18 holes to 18 flyovers</div>
@@ -678,107 +668,102 @@ input, select { font-family: Inter, system-ui, sans-serif; }
           </div>
         </div>
         <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px 32px;margin-top:44px;border-top:1px solid #E4E0D6;padding-top:32px">
-          <p style="font-size:17px;margin:0;color:#16170F;font-family:'Playfair Display',Georgia,serif;font-size:22px">Not sure? Send us the club name. We'll check for you.</p>
-          <a href="#enquiry" data-ofill="#2C4A3B" data-ofill-text="#FAF8F4" style="border:1px solid #2C4A3B;color:#2C4A3B;padding:13px 22px;font-size:15px;font-weight:500">Check my course</a>
+          <p style="font-size:17px;margin:0;color:#16170F;font-family:'Playfair Display',Georgia,serif;font-size:22px">Not sure your photography is enough? Try it on one hole.</p>
+          <a href="#free-hole" data-free-hole="1" data-ofill="#2C4A3B" data-ofill-text="#FAF8F4" style="border:1px solid #2C4A3B;color:#2C4A3B;padding:13px 22px;font-size:15px;font-weight:500">Get one hole free</a>
         </div>
       </div>
     </section>
 
     <section id="pricing" style="position:relative;z-index:1;background:#FAF8F4;border-top:1px solid #E4E0D6;scroll-margin-top:90px">
       <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px)">
-        <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:clamp(38px,4vw,56px)">
+        <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:clamp(28px,3.2vw,40px)">
           <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px">08</div>
           <div style="flex:1 1 480px">
             <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;max-width:20ch;text-wrap:pretty">Choose how far you want to take it.</h2>
-            <p style="font-size:17px;line-height:1.66;margin:22px 0 0;max-width:60ch;text-wrap:pretty">Start with the holes you need, build the complete course, or add a hosted CourseVista guide. Every project is quoted from the package that best fits the source photography and reconstruction required.</p>
-            <a href="#enquiry" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="display:inline-block;margin-top:26px;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500">Get a course quote</a>
+            <p style="font-size:17px;line-height:1.66;margin:22px 0 0;max-width:60ch;text-wrap:pretty">Every package covers all of your holes. Start with the hole films, add a homepage cinematic film, or add a hosted CourseVista course guide.</p>
+            <a href="#find-package" data-finder="1" data-holes="{{ holes }}" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="display:inline-block;margin-top:26px;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500">Find my package</a>
           </div>
         </div>
 
-        <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:stretch">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-bottom:clamp(24px,2.8vw,36px)">
+          <span id="cv-pricing-holes" style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Prices for</span>
+          <div role="group" aria-labelledby="cv-pricing-holes" style="display:grid;grid-template-columns:repeat(4,minmax(54px,1fr));gap:6px">
+            <sc-for list="{{ holeOptions }}" as="opt" hint-placeholder-count="4">
+              <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" aria-label="{{ opt.aria }}" style="min-height:46px;padding:0 14px;border:1px solid {{ opt.border }};background:{{ opt.bg }};color:{{ opt.fg }};font-family:'Playfair Display',Georgia,serif;font-size:19px;line-height:1;cursor:pointer;transition:background-color 240ms ease, border-color 240ms ease, color 240ms ease" style-hover="border-color:#2C4A3B">{{ opt.label }}</button>
+            </sc-for>
+          </div>
+          <span style="font-size:14px;color:#55584D">holes &#183; AUD, inc. GST</span>
+        </div>
 
-          <div data-tilt3d="1" data-reveal="up" style="flex:1 1 205px;min-width:0;max-width:430px;margin-top:clamp(0px,2.4vw,34px);background:#FFFFFF;border:1px solid #E4E0D6;display:flex;flex-direction:column;transition:transform 420ms cubic-bezier(.19,1,.22,1), box-shadow 420ms ease, border-color 420ms ease;transform-style:preserve-3d">
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:20px;align-items:stretch">
+
+          <div data-tilt3d="1" data-reveal="up" style="flex:1 1 260px;min-width:0;max-width:440px;background:#FFFFFF;border:1px solid #E4E0D6;display:flex;flex-direction:column;transition:transform 420ms cubic-bezier(.19,1,.22,1), box-shadow 420ms ease, border-color 420ms ease;transform-style:preserve-3d">
             <div style="padding:12px clamp(22px,2.2vw,28px);border-bottom:1px solid #E4E0D6;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Package 01</div>
             <div style="padding:clamp(22px,2.4vw,30px) clamp(22px,2.2vw,28px) clamp(24px,2.4vw,30px);display:flex;flex-direction:column;flex:1 1 auto">
               <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:25px;margin:0">Essentials</h3>
-              <div style="font-size:14px;color:#55584D;margin-top:9px;text-wrap:pretty">The essential hole-film package.</div>
-              <div style="border-top:1px solid #E4E0D6;margin-top:20px;padding-top:18px;display:flex;align-items:baseline;gap:9px">
-                <span style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">From</span>
-                <span style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,3vw,36px);line-height:1;color:#16170F">$1,490</span>
+              <div style="font-size:14px;color:#55584D;margin-top:9px;text-wrap:pretty">Individual hole films for your course.</div>
+              <div style="border-top:1px solid #E4E0D6;margin-top:20px;padding-top:18px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px">
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,3vw,36px);line-height:1;color:#16170F">{{ priceEssentials }}</span>
+                <span style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">{{ holesLabel }}</span>
               </div>
-              <div style="font-size:13px;line-height:1.6;color:#8A8D82;margin-top:12px;text-wrap:pretty">For smaller courses, or clubs wanting to modernise their core hole pages.</div>
-              <div style="display:flex;flex-direction:column;font-size:14px;margin-top:20px;margin-bottom:24px">
-                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Up to 9 individual tee-to-green hole films</span>
-                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Approximately 30 seconds per hole</span>
-                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Website-ready delivered files</span>
-                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Commercial usage rights</span>
-                <span style="padding:10px 0;border-top:1px solid #E4E0D6;border-bottom:1px solid #E4E0D6">One revision round</span>
+              <div style="font-size:13px;line-height:1.6;color:#8A8D82;margin-top:12px;text-wrap:pretty">For clubs that want every hole on film, ready for their course pages.</div>
+              <div style="display:flex;flex-direction:column;font-size:14px;margin-top:20px;margin-bottom:24px;border-bottom:1px solid #E4E0D6">
+                <sc-for list="{{ essentialsFeatures }}" as="f" hint-placeholder-count="5">
+                  <span style="padding:10px 0;border-top:1px solid #E4E0D6">{{ f.text }}</span>
+                </sc-for>
               </div>
               <div style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
-                <a href="/start?package=essentials" data-ofill="#2C4A3B" data-ofill-text="#FAF8F4" style="align-self:stretch;display:flex;align-items:center;justify-content:center;gap:9px;border:1px solid #2C4A3B;color:#2C4A3B;font-size:14px;font-weight:500;padding:13px 18px"><span>Start Essentials</span><span style="font-size:13px">&#8594;</span></a>
+                <a href="{{ startEssentialsHref }}" data-ofill="#2C4A3B" data-ofill-text="#FAF8F4" style="align-self:stretch;display:flex;align-items:center;justify-content:center;gap:9px;border:1px solid #2C4A3B;color:#2C4A3B;font-size:14px;font-weight:500;padding:13px 18px"><span>Continue with Essentials</span><span style="font-size:13px">&#8594;</span></a>
                 <span style="font-size:12px;color:#8A8D82;text-align:center">Secure online project setup</span>
               </div>
             </div>
           </div>
 
-          <div data-tilt3d="hero" data-reveal="up" style="position:relative;overflow:hidden;flex:1.42 1 250px;min-width:0;background:#1B2A22;border:1px solid #2C4A3B;color:#FAF8F4;display:flex;flex-direction:column;box-shadow:0 18px 44px -30px rgba(22,23,15,0.4);transition:transform 420ms cubic-bezier(.19,1,.22,1), box-shadow 420ms ease;transform-style:preserve-3d">
+          <div data-tilt3d="hero" data-reveal="up" style="position:relative;overflow:hidden;flex:1 1 260px;min-width:0;max-width:440px;background:#1B2A22;border:1px solid #2C4A3B;color:#FAF8F4;display:flex;flex-direction:column;transition:transform 420ms cubic-bezier(.19,1,.22,1), box-shadow 420ms ease;transform-style:preserve-3d">
             <div data-tilt3d-img="1" aria-hidden="true" style="position:absolute;inset:0;overflow:hidden">
               <img src="assets/pricing-consult.png" alt="" style="position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;object-position:52% 38%;transition:transform 620ms cubic-bezier(.19,1,.22,1)">
               <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(15,24,19,0.16) 0%, rgba(15,24,19,0.2) 22%, rgba(15,24,19,0.5) 58%, rgba(15,24,19,0.78) 100%)"></div>
               <div style="position:absolute;inset:0;background:linear-gradient(100deg, rgba(15,24,19,0.62) 0%, rgba(15,24,19,0.34) 46%, rgba(15,24,19,0) 88%)"></div>
             </div>
-            <div style="position:relative;padding:14px clamp(24px,2.6vw,34px);border-bottom:1px solid rgba(250,248,244,0.16);font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#E6D3AC">Package 02</div>
-            <div style="position:relative;padding:clamp(26px,2.8vw,36px) clamp(24px,2.6vw,34px) clamp(28px,2.8vw,36px);display:flex;flex-direction:column;flex:1 1 auto">
-              <div style="display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center">
-                <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FAF8F4;font-size:31px;margin:0">Complete</h3>
-                <span ref="{{ popBadge }}" style="position:relative;display:inline-block">
-                  <span style="position:relative;display:inline-flex;align-items:center;gap:7px;border:1px solid #A95752;background:rgba(169,87,82,0.14);color:#D98B84;border-radius:100px;padding:6px 13px;font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;white-space:nowrap">
-                    <span style="width:4px;height:4px;border-radius:50%;background:#C9645D"></span>
-                    <span>Most popular</span>
-                  </span>                </span>
+            <div style="position:relative;padding:12px clamp(22px,2.2vw,28px);border-bottom:1px solid rgba(250,248,244,0.16);font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#E6D3AC">Package 02</div>
+            <div style="position:relative;padding:clamp(22px,2.4vw,30px) clamp(22px,2.2vw,28px) clamp(24px,2.4vw,30px);display:flex;flex-direction:column;flex:1 1 auto">
+              <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FAF8F4;font-size:25px;margin:0">Complete</h3>
+              <div style="font-size:14px;color:#D8DCD2;margin-top:9px;text-wrap:pretty">Every hole, plus a homepage cinematic film.</div>
+              <div style="border-top:1px solid rgba(250,248,244,0.16);margin-top:20px;padding-top:18px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px">
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,3vw,36px);line-height:1;color:#FAF8F4">{{ priceComplete }}</span>
+                <span style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#A8B0A4">{{ holesLabel }}</span>
               </div>
-              <div style="font-size:15px;color:#D8DCD2;margin-top:9px;text-wrap:pretty">The complete 18-hole course experience.</div>
-              <div style="border-top:1px solid rgba(250,248,244,0.16);margin-top:22px;padding-top:20px;display:flex;align-items:baseline;gap:10px">
-                <span style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#A8B0A4">From</span>
-                <span style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(38px,4.2vw,52px);line-height:1;color:#FAF8F4">$1,990</span>
+              <div style="font-size:13px;line-height:1.6;color:#A8B0A4;margin-top:12px;text-wrap:pretty">For clubs that want every hole on film and a cinematic cut for the top of their website.</div>
+              <div style="display:flex;flex-direction:column;font-size:14px;color:rgba(250,248,244,0.94);margin-top:20px;margin-bottom:24px;border-bottom:1px solid rgba(250,248,244,0.16)">
+                <sc-for list="{{ completeFeatures }}" as="f" hint-placeholder-count="6">
+                  <span style="padding:10px 0;border-top:1px solid rgba(250,248,244,0.16)">{{ f.text }}</span>
+                </sc-for>
               </div>
-              <div style="font-size:14px;line-height:1.6;color:#A8B0A4;margin-top:12px;text-wrap:pretty">The primary CourseVista product, and the package most 18-hole clubs should choose.</div>
-              <div style="display:flex;flex-direction:column;font-size:15px;color:rgba(250,248,244,0.94);margin-top:20px;margin-bottom:26px">
-                <span style="padding:11px 0;border-top:1px solid rgba(250,248,244,0.16)">Up to 18 individual tee-to-green hole films</span>
-                <span style="padding:11px 0;border-top:1px solid rgba(250,248,244,0.16)">Homepage cinematic course film</span>
-                <span style="padding:11px 0;border-top:1px solid rgba(250,248,244,0.16)">Website-ready delivered files</span>
-                <span style="padding:11px 0;border-top:1px solid rgba(250,248,244,0.16)">Commercial usage rights</span>
-                <span style="padding:11px 0;border-top:1px solid rgba(250,248,244,0.16)">One revision round</span>
-                <span style="padding:11px 0;border-top:1px solid rgba(250,248,244,0.16);border-bottom:1px solid rgba(250,248,244,0.16)">Consistent CourseVista presentation across the course</span>
-              </div>
-              <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
-                <a href="/start?package=complete" data-ofill="#E6D3AC" data-ofill-text="#16170F" style="align-self:stretch;display:flex;align-items:center;justify-content:center;gap:9px;background:#FAF8F4;color:#2C4A3B;padding:15px 20px;font-size:15px;font-weight:500"><span>Start Complete</span><span style="font-size:13px">&#8594;</span></a>
-                <span style="font-size:12px;color:#A8B0A4;text-align:center">Secure online project setup &#183; about 2 minutes</span>
+              <div style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+                <a href="{{ startCompleteHref }}" data-ofill="#E6D3AC" data-ofill-text="#16170F" style="align-self:stretch;display:flex;align-items:center;justify-content:center;gap:9px;background:#FAF8F4;color:#2C4A3B;padding:13px 18px;font-size:14px;font-weight:500"><span>Continue with Complete</span><span style="font-size:13px">&#8594;</span></a>
+                <span style="font-size:12px;color:#A8B0A4;text-align:center">Secure online project setup</span>
               </div>
             </div>
           </div>
 
-          <div data-tilt3d="1" data-reveal="up" style="flex:1 1 205px;min-width:0;max-width:430px;margin-top:clamp(0px,2.4vw,34px);background:#FFFFFF;border:1px solid #E4E0D6;display:flex;flex-direction:column;transition:transform 420ms cubic-bezier(.19,1,.22,1), box-shadow 420ms ease, border-color 420ms ease;transform-style:preserve-3d">
+          <div data-tilt3d="1" data-reveal="up" style="flex:1 1 260px;min-width:0;max-width:440px;background:#FFFFFF;border:1px solid #E4E0D6;display:flex;flex-direction:column;transition:transform 420ms cubic-bezier(.19,1,.22,1), box-shadow 420ms ease, border-color 420ms ease;transform-style:preserve-3d">
             <div style="padding:12px clamp(22px,2.2vw,28px);border-bottom:1px solid #E4E0D6;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">Package 03</div>
             <div style="padding:clamp(22px,2.4vw,30px) clamp(22px,2.2vw,28px) clamp(24px,2.4vw,30px);display:flex;flex-direction:column;flex:1 1 auto">
               <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:25px;margin:0">Hosted</h3>
               <div style="font-size:14px;color:#55584D;margin-top:9px;text-wrap:pretty">Films plus your own hosted course guide.</div>
-              <div style="border-top:1px solid #E4E0D6;margin-top:20px;padding-top:18px;display:flex;align-items:baseline;gap:9px">
-                <span style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">From</span>
-                <span style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,3vw,36px);line-height:1;color:#16170F">$2,390</span>
+              <div style="border-top:1px solid #E4E0D6;margin-top:20px;padding-top:18px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px">
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,3vw,36px);line-height:1;color:#16170F">{{ priceHosted }}</span>
+                <span style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#8A8D82">{{ holesLabel }}</span>
               </div>
               <div style="font-size:13px;line-height:1.6;color:#8A8D82;margin-top:12px;text-wrap:pretty">For clubs wanting the films and a complete visitor-facing course guide.</div>
-              <div style="display:flex;flex-direction:column;font-size:14px;margin-top:20px">
-                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Everything in Complete</span>
-                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Dedicated CourseVista hosted course page</span>
-                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Hole-by-hole navigation</span>
-                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Mobile-friendly viewing</span>
-                <span style="padding:10px 0;border-top:1px solid #E4E0D6">Dedicated course URL</span>
-                <span style="padding:10px 0;border-top:1px solid #E4E0D6;border-bottom:1px solid #E4E0D6">Initial hosted setup</span>
+              <div style="display:flex;flex-direction:column;font-size:14px;margin-top:20px;border-bottom:1px solid #E4E0D6">
+                <sc-for list="{{ hostedFeatures }}" as="f" hint-placeholder-count="6">
+                  <span style="padding:10px 0;border-top:1px solid #E4E0D6">{{ f.text }}</span>
+                </sc-for>
               </div>
-              <div style="font-size:12px;color:#8A8D82;margin:12px 0 22px">Hosting renewal may apply after the first year.</div>
+              <div style="font-size:12px;color:#8A8D82;margin:12px 0 22px">{{ hostedNote }}</div>
               <div style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
-                <a href="/start?package=hosted" data-ofill="#2C4A3B" data-ofill-text="#FAF8F4" style="align-self:stretch;display:flex;align-items:center;justify-content:center;gap:9px;border:1px solid #2C4A3B;color:#2C4A3B;font-size:14px;font-weight:500;padding:13px 18px"><span>Start Hosted</span><span style="font-size:13px">&#8594;</span></a>
+                <a href="{{ startHostedHref }}" data-ofill="#2C4A3B" data-ofill-text="#FAF8F4" style="align-self:stretch;display:flex;align-items:center;justify-content:center;gap:9px;border:1px solid #2C4A3B;color:#2C4A3B;font-size:14px;font-weight:500;padding:13px 18px"><span>Continue with Hosted</span><span style="font-size:13px">&#8594;</span></a>
                 <span style="font-size:12px;color:#8A8D82;text-align:center">Secure online project setup</span>
               </div>
             </div>
@@ -789,14 +774,14 @@ input, select { font-family: Inter, system-ui, sans-serif; }
           <div>
             <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Bespoke work</div>
             <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(23px,2.6vw,32px);line-height:1.15;color:#16170F;margin-top:14px">Need something different?</div>
-            <p style="font-size:15px;line-height:1.66;color:#55584D;margin:14px 0 0;max-width:42ch;text-wrap:pretty">For 27-hole, 36-hole, multi-course or unusual source-photography projects, start the same way &#8212; we&#8217;ll confirm the scope and price before anything is paid.</p>
-            <a href="/start?package=complete" data-uline="1" style="display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-size:15px;font-weight:500;color:#2C4A3B">
-              <span style="position:relative;display:inline-block;padding-bottom:3px">Start an extended project<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></span>
+            <p style="font-size:15px;line-height:1.66;color:#55584D;margin:14px 0 0;max-width:42ch;text-wrap:pretty">For facilities beyond 36 holes, multiple courses or unusual source photography, talk to us first &#8212; we&#8217;ll confirm the scope and price before anything is paid.</p>
+            <a href="mailto:business@coursevista.com.au?subject=Bespoke%20CourseVista%20project" data-uline="1" style="display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-size:15px;font-weight:500;color:#2C4A3B">
+              <span style="position:relative;display:inline-block;padding-bottom:3px">Email us about a bespoke project<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></span>
               <span style="font-size:13px">&#8594;</span>
             </a>
           </div>
           <div style="display:flex;flex-direction:column;font-size:15px;color:#55584D">
-            <span style="padding:13px 0;border-top:1px solid #F1EDE6">Additional course, or 27 and 36-hole facilities</span>
+            <span style="padding:13px 0;border-top:1px solid #F1EDE6">More than 36 holes, or additional courses</span>
             <span style="padding:13px 0;border-top:1px solid #F1EDE6">Additional homepage or social film</span>
             <span style="padding:13px 0;border-top:1px solid #F1EDE6">Additional revision round</span>
             <span style="padding:13px 0;border-top:1px solid #F1EDE6">Complex source reconstruction</span>
@@ -809,16 +794,16 @@ input, select { font-family: Inter, system-ui, sans-serif; }
         <div style="background:#FFFFFF;border:1px solid #E4E0D6;margin-top:20px;padding:clamp(24px,2.8vw,38px);display:flex;flex-wrap:wrap;gap:24px 48px;align-items:center;justify-content:space-between">
           <div style="flex:1 1 420px;min-width:0">
             <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Not ready to commit?</div>
-            <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(23px,2.6vw,33px);line-height:1.15;color:#16170F;margin-top:14px">See three holes first.</div>
-            <p style="font-size:15px;line-height:1.62;color:#55584D;margin:12px 0 0;max-width:52ch;text-wrap:pretty">If your existing photography is suitable, we'll build three sample holes before you commit to the complete course.</p>
+            <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(23px,2.6vw,33px);line-height:1.15;color:#16170F;margin-top:14px">Start with one hole free.</div>
+            <p style="font-size:15px;line-height:1.62;color:#55584D;margin:12px 0 0;max-width:52ch;text-wrap:pretty">One free hole flyover of your course. Additional holes are part of a package &#8212; choose one when you&#8217;re ready.</p>
           </div>
           <div style="flex:0 0 auto;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
-            <a href="#three" data-ofill="#2C4A3B" data-ofill-text="#FAF8F4" style="border:1px solid #2C4A3B;color:#2C4A3B;padding:14px 22px;font-size:15px;font-weight:500">Try three holes</a>
-            <span style="font-size:13px;color:#8A8D82">No cost. No obligation.</span>
+            <a href="#free-hole" data-free-hole="1" data-ofill="#2C4A3B" data-ofill-text="#FAF8F4" style="border:1px solid #2C4A3B;color:#2C4A3B;padding:14px 22px;font-size:15px;font-weight:500">Get one hole free</a>
+            <span style="font-size:13px;color:#8A8D82">No payment required.</span>
           </div>
         </div>
 
-        <p style="max-width:58ch;margin:clamp(34px,4vw,52px) auto 0;text-align:center;font-size:13px;line-height:1.7;color:#8A8D82;text-wrap:pretty">Every course is different. Final pricing depends on hole count, usable source photography, reconstruction complexity, and selected deliverables.</p>
+        <p style="max-width:60ch;margin:clamp(34px,4vw,52px) auto 0;text-align:center;font-size:13px;line-height:1.7;color:#8A8D82;text-wrap:pretty">Package prices are set by total hole count and include GST. We review your source photography before production; if it needs work beyond the package, we&#8217;ll confirm any change with you before proceeding.</p>
       </div>
     </section>
 
@@ -855,124 +840,14 @@ input, select { font-family: Inter, system-ui, sans-serif; }
       </div>
     </section>
 
-    <section id="enquiry" style="position:relative;z-index:1;overflow:hidden;background:#2C4A3B;color:#FAF8F4;scroll-margin-top:80px">
-      <img src="assets/tex-marble.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.35">
-      <div style="position:relative;max-width:1360px;margin:0 auto;padding:clamp(68px,9vw,120px) clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:clamp(36px,5vw,80px);align-items:start">
-        <div>
-          <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FAF8F4;font-size:clamp(32px,4.6vw,58px);line-height:1.06;margin:0;max-width:18ch;text-wrap:pretty">Your course is already photographed. Let's put it in motion.</h2>
-          <p style="font-size:18px;line-height:1.62;color:#D8DCD2;margin:26px 0 0;max-width:50ch;text-wrap:pretty">Send us the club name. We'll tell you whether the photography you already have is enough to build from — before either of us spends anything.</p>
-          <div style="margin-top:40px;border-top:1px solid rgba(250,248,244,0.2);padding-top:24px;display:flex;flex-direction:column;gap:10px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(19px,2vw,25px)">
-            <a href="mailto:business@coursevista.com.au" style="color:#FAF8F4" style-hover="color:#E6D3AC">business@coursevista.com.au</a>
-            <a href="tel:+61473239787" style="color:#FAF8F4" style-hover="color:#E6D3AC">0473 239 787</a>
-          </div>
-          <div style="font-size:13px;color:#A8B0A4;margin-top:16px">Brandon Pullens · CourseVista · Adelaide · working nationally</div>
-        </div>
-
-        <div style="background:#FAF8F4;padding:clamp(24px,3vw,40px)">
-          <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
-            <div>
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:16px">
-                <div style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#2C4A3B">{{ stepLabel }}</div>
-                <sc-if value="{{ canGoBack }}" hint-placeholder-val="{{ false }}">
-                  <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13px;color:#8A8D82" style-hover="color:#2C4A3B">← Back</button>
-                </sc-if>
-              </div>
-              <div style="height:1px;background:#E4E0D6;margin:16px 0 30px;position:relative">
-                <div ref="{{ progressBar }}" style="position:absolute;left:0;top:0;height:1px;width:25%;background:#2C4A3B"></div>
-              </div>
-
-              <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
-                <div>
-                  <label for="cv-club" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.2vw,27px);color:#16170F;display:block;margin-bottom:20px">Which club are you with?</label>
-                  <input id="cv-club" ref="{{ clubInput }}" type="text" value="{{ club }}" onChange="{{ setClub }}" onKeyDown="{{ onKeyNext }}" placeholder="Club name" autoComplete="organization" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:15px 16px;font-size:16px;color:#16170F">
-                  <sc-if value="{{ clubError }}" hint-placeholder-val="{{ false }}">
-                    <div style="font-size:13px;color:#8A6B2E;margin-top:10px">A club name gets us started — that's all we need here.</div>
-                  </sc-if>
-                </div>
-              </sc-if>
-
-              <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
-                <div>
-                  <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.2vw,27px);color:#16170F;margin-bottom:20px">How many holes?</div>
-                  <div style="display:flex;flex-wrap:wrap;gap:10px">
-                    <sc-for list="{{ holeChoices }}" as="opt" hint-placeholder-count="5">
-                      <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="border:1px solid {{ opt.border }};background:{{ opt.bg }};color:{{ opt.fg }};padding:13px 20px;font-size:15px;cursor:pointer;min-width:56px">{{ opt.label }}</button>
-                    </sc-for>
-                  </div>
-                  <label for="cv-url" style="display:block;font-size:13px;color:#8A8D82;margin:28px 0 10px">Club website</label>
-                  <input id="cv-url" type="text" value="{{ url }}" onChange="{{ setUrl }}" placeholder="yourclub.com.au" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:15px 16px;font-size:16px;color:#16170F">
-                  <sc-if value="{{ urlError }}" hint-placeholder-val="{{ false }}">
-                    <div style="font-size:13px;color:#8A6B2E;margin-top:10px">We need the club's web address — that's where we look for the photography.</div>
-                  </sc-if>
-                </div>
-              </sc-if>
-
-              <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
-                <div>
-                  <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.2vw,27px);color:#16170F;margin-bottom:20px">What would you like to create?</div>
-                  <div style="display:flex;flex-direction:column">
-                    <sc-for list="{{ wantChoices }}" as="opt" hint-placeholder-count="4">
-                      <button type="button" onClick="{{ opt.onPick }}" aria-pressed="{{ opt.active }}" style="display:flex;align-items:center;gap:14px;background:none;border:0;border-top:1px solid #E4E0D6;padding:16px 0;cursor:pointer;text-align:left;font-size:16px;color:#55584D" style-hover="color:#16170F">
-                        <span style="width:16px;height:16px;border:1px solid {{ opt.border }};background:{{ opt.box }};flex:0 0 auto"></span>
-                        <span>{{ opt.label }}</span>
-                      </button>
-                    </sc-for>
-                    <div style="border-top:1px solid #E4E0D6"></div>
-                  </div>
-                  <sc-if value="{{ wantError }}" hint-placeholder-val="{{ false }}">
-                    <div style="font-size:13px;color:#8A6B2E;margin-top:14px">Pick at least one — "Not sure yet" is a fine answer.</div>
-                  </sc-if>
-                </div>
-              </sc-if>
-
-              <sc-if value="{{ isStep4 }}" hint-placeholder-val="{{ false }}">
-                <div>
-                  <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.2vw,27px);color:#16170F;margin-bottom:20px">Where should we send the assessment?</div>
-                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:14px">
-                    <div>
-                      <label for="cv-name" style="display:block;font-size:12px;color:#8A8D82;margin-bottom:8px">Name</label>
-                      <input id="cv-name" type="text" value="{{ name }}" onChange="{{ setName }}" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:14px 15px;font-size:16px;color:#16170F">
-                    </div>
-                    <div>
-                      <label for="cv-role" style="display:block;font-size:12px;color:#8A8D82;margin-bottom:8px">Role</label>
-                      <input id="cv-role" type="text" value="{{ role }}" onChange="{{ setRole }}" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:14px 15px;font-size:16px;color:#16170F">
-                    </div>
-                    <div>
-                      <label for="cv-email" style="display:block;font-size:12px;color:#8A8D82;margin-bottom:8px">Email</label>
-                      <input id="cv-email" type="email" value="{{ email }}" onChange="{{ setEmail }}" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:14px 15px;font-size:16px;color:#16170F">
-                    </div>
-                    <div>
-                      <label for="cv-phone" style="display:block;font-size:12px;color:#8A8D82;margin-bottom:8px">Phone (optional)</label>
-                      <input id="cv-phone" type="tel" value="{{ phone }}" onChange="{{ setPhone }}" style="width:100%;box-sizing:border-box;background:#FFFFFF;border:1px solid #E4E0D6;padding:14px 15px;font-size:16px;color:#16170F">
-                    </div>
-                  </div>
-                  <sc-if value="{{ contactError }}" hint-placeholder-val="{{ false }}">
-                    <div style="font-size:13px;color:#8A6B2E;margin-top:14px">{{ contactError }}</div>
-                  </sc-if>
-                </div>
-              </sc-if>
-
-              <sc-if value="{{ sendError }}" hint-placeholder-val="{{ false }}">
-                <div style="font-size:13px;color:#8A6B2E;margin-top:16px">{{ sendError }}</div>
-              </sc-if>
-              <button type="button" onClick="{{ next }}" disabled="{{ sending }}" data-flyarrow="1" style="margin-top:30px;width:100%;background:none;border:0;padding:0;display:flex;align-items:center;gap:0;cursor:{{ submitCursor }}">
-                <span data-fly-pill="1" style="flex:1 1 auto;background:#DDE8CC;color:#16170F;border-radius:999px;padding:16px 22px;font-size:15px;font-weight:500;text-align:center;transition:background-color 340ms cubic-bezier(.16,1,.3,1), color 300ms ease">{{ nextLabel }}</span>
-                <span data-fly-circle="1" style="position:relative;overflow:hidden;width:52px;height:52px;border-radius:50%;background:#DDE8CC;color:#16170F;display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:background-color 340ms cubic-bezier(.16,1,.3,1), color 300ms ease">
-                  <span data-fly-a="1" style="position:absolute;font-size:16px;line-height:1;transition:transform 460ms cubic-bezier(.22,.61,.36,1)">&#8599;</span>
-                  <span data-fly-b="1" style="position:absolute;font-size:16px;line-height:1;transform:translate(-260%,260%);transition:transform 460ms cubic-bezier(.22,.61,.36,1)">&#8599;</span>
-                </span>
-              </button>
-            </div>
-          </sc-if>
-
-          <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
-            <div style="padding:8px 0">
-              <div style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#2C4A3B">Received</div>
-              <p style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.2vw,28px);line-height:1.3;color:#16170F;margin:20px 0 0;text-wrap:pretty">We'll review the photography available for {{ clubOrCourse }} and tell you whether it's suitable before discussing a project.</p>
-              <div style="border-top:1px solid #E4E0D6;margin-top:28px;padding-top:20px;font-size:14px;color:#8A8D82;text-wrap:pretty">{{ doneNote }} <a href="{{ mailtoHref }}" style="color:#2C4A3B;border-bottom:1px solid #E4E0D6">business@coursevista.com.au</a>. We reply within two business days.</div>
-            </div>
-          </sc-if>
-        </div>
+    <section id="get-started" style="position:relative;z-index:1;overflow:hidden;background:#1F3328;color:#FFFFFF;scroll-margin-top:80px">
+      <span id="enquiry" aria-hidden="true" style="position:absolute;top:0;left:0"></span>
+      <img src="assets/course-flag.png" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%">
+      <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(24,40,31,0.8) 0%, rgba(24,40,31,0.68) 50%, rgba(24,40,31,0.86) 100%)"></div>
+      <div style="position:relative;max-width:860px;margin:0 auto;padding:clamp(96px,13vw,176px) clamp(22px,5vw,40px);display:flex;flex-direction:column;align-items:center;text-align:center">
+        <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FFFFFF;font-size:clamp(32px,4.8vw,56px);line-height:1.1;letter-spacing:-0.01em;margin:0;max-width:17ch;text-wrap:balance">Improve Your Golf Course With Cinematic Flyover Videos</h2>
+        <p style="font-size:clamp(16px,1.45vw,19px);line-height:1.62;color:rgba(255,255,255,0.88);margin:24px 0 0;max-width:44ch;text-wrap:pretty">Get one hole of your course turned into a flyover, free. Then choose a package when you&#8217;re ready for the rest.</p>
+        <a href="#free-hole" data-free-hole="1" data-ofill="#E6D3AC" data-ofill-text="#16170F" style="margin-top:clamp(32px,4vw,44px);display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:58px;background:#FAF8F4;color:#16170F;padding:0 36px;font-size:16px;font-weight:600;letter-spacing:0.01em">Try Today<span aria-hidden="true" style="font-size:15px">&#8594;</span></a>
       </div>
     </section>
 
@@ -983,9 +858,11 @@ input, select { font-family: Inter, system-ui, sans-serif; }
           <a href="#work" style="color:#8A8D82" style-hover="color:#2C4A3B">Work</a>
           <a href="#how" style="color:#8A8D82" style-hover="color:#2C4A3B">How it works</a>
           <a href="#pricing" style="color:#8A8D82" style-hover="color:#2C4A3B">Pricing</a>
-          <a href="#enquiry" style="color:#8A8D82" style-hover="color:#2C4A3B">Contact</a>
+          <a href="#free-hole" data-free-hole="1" style="color:#8A8D82" style-hover="color:#2C4A3B">Get one hole free</a>
         </nav>
         <div style="margin-left:auto;display:flex;flex-wrap:wrap;gap:10px 22px">
+          <a href="mailto:business@coursevista.com.au" style="color:#8A8D82" style-hover="color:#2C4A3B">business@coursevista.com.au</a>
+          <a href="tel:+61473239787" style="color:#8A8D82" style-hover="color:#2C4A3B">0473 239 787</a>
           <span>Australia</span>
           <span>ABN 63 310 893 546</span>
           <span>© 2026 CourseVista</span>
@@ -1021,7 +898,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:12px;margin-top:16px">
                     <div style="aspect-ratio:4/3;border:1px solid #E4E0D6;background:#F1EDE6;overflow:hidden"><img src="assets/photo-tee.png" alt="Tee view" style="width:100%;height:100%;object-fit:cover"></div>
                     <div style="aspect-ratio:4/3;border:1px solid #E4E0D6;background:#F1EDE6;overflow:hidden"><img src="assets/photo-fairway.png" alt="Fairway" style="width:100%;height:100%;object-fit:cover"></div>
-                    <div style="aspect-ratio:4/3;border:1px solid #E4E0D6;background:#F1EDE6;overflow:hidden"><img src="assets/course-bunker.png" alt="Green complex from above" style="width:100%;height:100%;object-fit:cover"></div>
+                    <div style="aspect-ratio:4/3;border:1px solid #E4E0D6;background:#F1EDE6;overflow:hidden"><img src="assets/photo-green.png" alt="Green complex" style="width:100%;height:100%;object-fit:cover"></div>
                   </div>
             </div>
             <div style="display:flex;flex-direction:column;gap:18px">
@@ -1032,7 +909,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                 <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#8A8D82">Delivery</span><span style="color:#16170F">Download link, about two weeks</span></div>
               </div>
               <div style="border-top:1px solid #B08D4F;padding-top:18px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(19px,2vw,25px);line-height:1.25;color:#16170F;text-wrap:pretty">The files are yours outright. No licence, no expiry, no attribution.</div>
-              <a href="#enquiry" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="align-self:flex-start;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500">See your course in motion</a>
+              <a href="#free-hole" data-free-hole="1" onClick="{{ closePanel }}" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="align-self:flex-start;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500">Get one hole free</a>
             </div>
           </div>
         </sc-if>
@@ -1050,7 +927,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                 <span style="display:flex;gap:14px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82"><span>Course</span><span>Visitors</span><span>Members</span></span>
               </div>
               <div style="position:relative;aspect-ratio:16/9;background:#F1EDE6;overflow:hidden">
-                <video data-panel-video="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/course-mist.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+                <video data-panel-video="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/poster-club.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
                 <div style="position:absolute;left:0;bottom:0;padding:clamp(14px,2vw,26px)">
                   <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(18px,2.4vw,30px);color:#FAF8F4;max-width:20ch;line-height:1.12;text-wrap:pretty">Experience the course before you arrive.</div>
                   <span style="display:inline-block;margin-top:12px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#FAF8F4;border-bottom:1px solid rgba(250,248,244,0.6);padding-bottom:3px">Book a tee time</span>
@@ -1171,7 +1048,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                 <div style="font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#8A6B2E">Reporting</div>
                 <p style="font-size:15px;line-height:1.6;margin:10px 0 0;text-wrap:pretty">Monthly view and scan counts per hole, so you can see which holes visitors actually watch.</p>
               </div>
-              <a href="#enquiry" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="align-self:flex-start;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500">Ask about a hosted guide</a>
+              <a href="#pricing" onClick="{{ closePanel }}" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="align-self:flex-start;background:#2C4A3B;color:#FAF8F4;padding:14px 22px;font-size:15px;font-weight:500">View packages</a>
             </div>
           </div>
         </sc-if>
@@ -1261,7 +1138,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                   </div>
                   <div data-seq="5" style="opacity:0;transform:translateY(9px)">
                     <div style="display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:20px">
-                      <a href="#enquiry" onClick="{{ promoClose }}" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="background:#2C4A3B;color:#FAF8F4;padding:13px 20px;font-size:14px;font-weight:500;border-radius:7px">Get a course quote</a>
+                      <a href="#pricing" onClick="{{ promoClose }}" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="background:#2C4A3B;color:#FAF8F4;padding:13px 20px;font-size:14px;font-weight:500;border-radius:7px">View packages</a>
                       <button type="button" onClick="{{ promoClose }}" style="background:none;border:0;padding:0;font-family:inherit;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Continue browsing</button>
                     </div>
                   </div>
@@ -1287,8 +1164,8 @@ input, select { font-family: Inter, system-ui, sans-serif; }
   </sc-if>
 
   <div ref="{{ stickyCta }}" style="position:fixed;left:0;right:0;bottom:0;z-index:50;background:#FAF8F4;border-top:1px solid #E4E0D6;padding:12px 20px;display:none;align-items:center;justify-content:space-between;gap:16px">
-    <span style="font-size:13px;color:#55584D">Photography already suitable?</span>
-    <a href="#enquiry" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="background:#2C4A3B;color:#FAF8F4;padding:12px 18px;font-size:14px;font-weight:500">Check my course</a>
+    <span style="font-size:13px;line-height:1.4;color:#55584D">One free hole flyover of your course.</span>
+    <a href="#free-hole" data-free-hole="1" data-ofill="#16170F" data-ofill-text="#FAF8F4" style="flex:0 0 auto;background:#2C4A3B;color:#FAF8F4;padding:12px 18px;font-size:14px;font-weight:500;white-space:nowrap">Get one hole free</a>
   </div>
 </div>
 
@@ -1298,6 +1175,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
   &quot;showQrPackage&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot; },
   &quot;showStickyMobileCta&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot; }
 }">
+// Indicative published Australian drone flyover pricing, by hole count only.
 const DRONE = {
   9: { low: 1000, high: 1500 },
   18: { low: 2000, high: 3000 },
@@ -1305,50 +1183,27 @@ const DRONE = {
   36: { low: 4000, high: 6000 }
 };
 
-const CV_CALC = {
-  9: { from: 1490, note: "Essentials · 9 holes", homepage: "Available as an add-on" },
-  18: { from: 1990, note: "Complete · 18 holes", homepage: "Included in Complete" },
-  27: { from: 2850, note: "27-hole project", homepage: "Included" },
-  36: { from: 3700, note: "36-hole project", homepage: "Included" }
-};
+const CAT = window.CVCatalog;
 
-const TYPE_CONTEXT = {
-  "Local club": "Designed for straightforward course coverage.",
-  "Destination course": "The homepage film becomes especially valuable for visitor decision-making.",
-  "Resort / multi-course facility": "Larger facilities may require broader course coverage."
-};
-
+const HOLE_WORDS = { 9: "Nine", 18: "Eighteen", 27: "Twenty-seven", 36: "Thirty-six" };
 
 const COST = { feeOptions: [150, 250, 380, 580], roundOptions: [0, 12, 24, 48] };
 
-const PACKAGES = {
-  9: { name: "Essentials", from: 1490 },
-  18: { name: "Complete", from: 1990 },
-  hosted: { name: "Hosted", from: 2390 },
-  custom: { name: "Custom multi-course quote", from: null }
-};
-
 const JOURNEY = [
-  { n: "01", title: "Tell us your club", body: "We check the photography already published by your club and tell you whether it is sufficient. Nothing is needed from you but the name." },
-  { n: "02", title: "See three holes", body: "We create three sample holes at no cost, sent as a link you can share with your committee. They are yours either way." },
-  { n: "03", title: "Approve the course", body: "If the result is right, we build the remaining holes. If it isn't, we leave it there and you have lost nothing." },
-  { n: "04", title: "Receive everything", body: "Your complete hole-film set, the homepage cut and the optional hosted course guide are delivered in about two weeks from go-ahead." }
+  { n: "01", title: "Tell us your course", body: "Send the course name, website and where to send your flyover. We check the photography your club already publishes." },
+  { n: "02", title: "Get one hole free", body: "If the photography is suitable, we build one hole of your course into a flyover at no cost. No payment is required and it's yours either way." },
+  { n: "03", title: "Choose a package", body: "Want the rest of the course? Pick the package and hole count that suit you and order online. Additional holes are part of a package purchase." },
+  { n: "04", title: "Receive everything", body: "Your hole films, plus the homepage film or hosted course guide if your package includes them, are delivered in about two weeks from go-ahead." }
 ];
 
 class Component extends DCLogic {
   state = {
     holes: 18,
-    courseType: "Local club",
     greenFee: 250,
     disruptOn: false, roundsAffected: 0,
     journeyOpen: 0,
     panel: null,
     faqOpen: null,
-    step: 1,
-    done: false,
-    club: "", formHoles: "18", url: "", wants: [], name: "", role: "", email: "", phone: "",
-    clubError: false, urlError: false, wantError: false, contactError: "",
-    sending: false, sendError: "", sentVia: "web",
     liked: false, saved: false,
     promoOpen: false, promoWide: false, promoStage: "website", promoRevealed: false,
     promoUrl: "", promoUrlError: false, promoEmail: "", promoEmailError: false,
@@ -1362,7 +1217,6 @@ class Component extends DCLogic {
   el(k) { return this.refs[k] && this.refs[k].current; }
 
   componentDidMount() {
-    this._lastStep = this.state.step;
     const hv = this.el("heroVideo");
     if (hv) { hv.muted = true; hv.volume = 0; hv.removeAttribute("controls"); }
     this.silence();
@@ -1382,7 +1236,6 @@ class Component extends DCLogic {
     this.setupFlyArrows();
     this.setupHoverLines();
     this.setupTilt();
-    this._popArmed = true;
     this.setupCardTilt();
     this.setupFounding();
     this.setupPromo();
@@ -1818,30 +1671,6 @@ class Component extends DCLogic {
     }
   }
 
-  /* ---------- most-popular hover burst ---------- */
-  popBurst() {
-    if (this.reduced || this._popArmed === false) return;
-    const host = this.el("popBadge");
-    if (!host) return;
-    this._popArmed = false;
-    const colors = ["#C9A25E", "#B08D4F", "#A95752", "#C9645D", "#FAF8F4"];
-    for (let i = 0; i < 7; i++) {
-      const bit = document.createElement("span");
-      const round = i % 3 === 0;
-      const w = round ? 3 : 4, h = round ? 3 : 2;
-      bit.style.cssText = "position:absolute;left:50%;top:50%;width:" + w + "px;height:" + h + "px;pointer-events:none;background:" +
-        colors[i % colors.length] + ";border-radius:" + (round ? "50%" : "1px") + ";z-index:3";
-      host.appendChild(bit);
-      const a = (-140 + Math.random() * 280) * Math.PI / 180;
-      const d = 12 + Math.random() * 18;
-      const anim = bit.animate([
-        { transform: "translate(-50%,-50%) translate(0,0) rotate(0deg)", opacity: 0.95 },
-        { transform: "translate(-50%,-50%) translate(" + (Math.cos(a) * d).toFixed(1) + "px," + (Math.sin(a) * d - 6).toFixed(1) + "px) rotate(" + Math.round(-90 + Math.random() * 180) + "deg)", opacity: 0 }
-      ], { duration: 380 + Math.random() * 170, easing: "cubic-bezier(.19,1,.22,1)", fill: "forwards" });
-      anim.onfinish = () => bit.remove();
-    }
-  }
-
   /* ---------- perspective tilt on cards ---------- */
   setupCardTilt() {
     const coarse = window.matchMedia("(pointer: coarse)").matches;
@@ -1850,9 +1679,9 @@ class Component extends DCLogic {
       el.dataset.tilt3dReady = "1";
       const hero = el.getAttribute("data-tilt3d") === "hero";
       const img = el.querySelector("[data-tilt3d-img] img");
-      const baseShadow = hero ? "0 18px 44px -30px rgba(22,23,15,0.4)" : "";
+      const baseShadow = "";
       const lift = () => {
-        el.style.boxShadow = hero ? "0 26px 56px -30px rgba(22,23,15,0.46)" : "0 16px 38px -30px rgba(22,23,15,0.34)";
+        el.style.boxShadow = "0 16px 38px -30px rgba(22,23,15,0.34)";
         if (!hero) el.style.borderColor = "#D8D3C6";
       };
       const rest = () => {
@@ -1866,13 +1695,9 @@ class Component extends DCLogic {
         el.addEventListener("pointerleave", rest);
         return;
       }
-      const max = hero ? 2 : 2.4;
-      const liftY = hero ? -3 : 0;
+      const max = 2.4;
+      const liftY = 0;
       let raf = 0;
-      if (hero) {
-        el.addEventListener("pointerenter", () => this.popBurst());
-        el.addEventListener("pointerleave", () => { this._popArmed = true; });
-      }
       el.addEventListener("pointermove", e => {
         const r = el.getBoundingClientRect();
         const x = (e.clientX - r.left) / r.width - 0.5;
@@ -2134,13 +1959,13 @@ class Component extends DCLogic {
   };
 
   /* ---------- calculator ---------- */
-  calc(holes, type) {
+  // The comparison always shows Essentials for the selected hole count.
+  calc(holes) {
     const s = this.state;
     return {
       holes,
       drone: DRONE[holes] || DRONE[18],
-      cv: CV_CALC[holes] || CV_CALC[18],
-      context: TYPE_CONTEXT[type] || TYPE_CONTEXT["Local club"],
+      cv: CAT.price("essentials", holes),
       lost: s.disruptOn ? s.roundsAffected * s.greenFee : 0
     };
   }
@@ -2155,7 +1980,7 @@ class Component extends DCLogic {
   money(v) { return "$" + Math.round(v).toLocaleString("en-AU"); }
 
   paintCalc(animate) {
-    const c = this.calc(this.state.holes, this.state.courseType);
+    const c = this.calc(this.state.holes);
     const changed = !this.prevCalc || this.prevCalc.holes !== c.holes;
     this.prevCalc = c;
     if (!animate || !changed || this.reduced) return;
@@ -2175,16 +2000,11 @@ class Component extends DCLogic {
     });
   }
 
-  choosePackage = (holes, wants) => () => this.setState({ formHoles: holes, wants: wants.slice(), wantError: false, clubError: false });
+  featureRows(key) { return CAT.features(key, this.state.holes).map(text => ({ text })); }
 
-  quoteFromCalc = () => {
-    const h = this.state.holes;
-    const wants = h === 9 ? ["Individual hole films"] : ["Individual hole films", "Homepage film"];
-    this.setState({ formHoles: h === 36 ? "36+" : String(h), wants, wantError: false });
-  };
+  startHref(key) { return "/start?package=" + key + "&holes=" + this.state.holes; }
 
   setHoles = n => { this.setState({ holes: n }, () => this.paintCalc(true)); };
-  setType = t => { this.setState({ courseType: t }, () => this.paintCalc(true)); };
   setFee = f => { this.setState({ greenFee: f }, () => this.paintCalc(true)); };
   setRounds = n => { this.setState({ roundsAffected: n }, () => this.paintCalc(true)); };
   toggleDisrupt = () => this.setState(s => ({ disruptOn: !s.disruptOn }), () => this.paintCalc(false));
@@ -2230,7 +2050,7 @@ class Component extends DCLogic {
   }
 
   promoBusy() {
-    if (this.state.panel || this.state.step > 1 || this.state.done) return true;
+    if (this.state.panel) return true;
     const eq = document.getElementById("enquiry");
     if (eq) {
       const r = eq.getBoundingClientRect();
@@ -2531,93 +2351,11 @@ class Component extends DCLogic {
       .catch(() => { clearTimeout(timer); finish(); });
   };
 
-  /* ---------- form ---------- */
-  next = () => {
-    const s = this.state;
-    if (s.sending) return;
-    if (s.step === 1) {
-      if (!s.club.trim()) { this.setState({ clubError: true }); return; }
-      this.setState({ step: 2, clubError: false });
-      return;
-    }
-    if (s.step === 2) {
-      if (!this.validDomain(s.url)) { this.setState({ urlError: true }); return; }
-      this.setState({ step: 3, urlError: false });
-      return;
-    }
-    if (s.step === 3) {
-      if (!s.wants.length) { this.setState({ wantError: true }); return; }
-      this.setState({ step: 4, wantError: false });
-      return;
-    }
-    const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email.trim());
-    if (!s.name.trim() || !okEmail) {
-      this.setState({ contactError: !s.name.trim() ? "We need a name to address the assessment to." : "That email doesn't look complete — check it and we'll send the assessment there." });
-      return;
-    }
-    this.setState({ contactError: "" });
-    this.submit();
-  };
-
   validDomain(v) {
     const t = (v || "").trim().replace(/^https?:\/\//i, "").replace(/^www\./i, "").replace(/\/.*$/, "");
     return /^[a-z0-9][a-z0-9-]*(\.[a-z0-9-]+)+$/i.test(t);
   }
 
-  enquiryFields() {
-    const s = this.state;
-    return {
-      Club: s.club.trim(),
-      Website: s.url.trim(),
-      Holes: s.formHoles,
-      "Wants to create": s.wants.join(", "),
-      Name: s.name.trim(),
-      Role: s.role.trim() || "—",
-      Email: s.email.trim(),
-      Phone: s.phone.trim() || "—",
-      Source: "coursevista.com.au — home page enquiry"
-    };
-  }
-
-  mailtoHref() {
-    const f = this.enquiryFields();
-    const body = Object.keys(f).map(k => k + ": " + f[k]).join("\r\n");
-    return "mailto:business@coursevista.com.au?subject=" + encodeURIComponent("CourseVista enquiry — " + (this.state.club.trim() || "new club"))
-      + "&body=" + encodeURIComponent(body);
-  }
-
-  submit() {
-    const f = this.enquiryFields();
-    const payload = Object.assign({
-      _subject: "CourseVista enquiry — " + (this.state.club.trim() || "new club"),
-      _template: "table",
-      _captcha: "false"
-    }, f);
-    this._settled = false;
-    this.setState({ sending: true, sendError: "" });
-    const done = via => { if (!this._settled) { this._settled = true; this.setState({ done: true, sending: false, sentVia: via }); } };
-    const fail = () => {
-      if (this._settled) return;
-      this._settled = true;
-      try { window.location.href = this.mailtoHref(); } catch (e) {}
-      this.setState({ done: true, sending: false, sentVia: "mail" });
-    };
-    let timer = setTimeout(fail, 9000);
-    fetch("https://formsubmit.co/ajax/business@coursevista.com.au", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(payload)
-    })
-      .then(r => (r.ok ? r.json() : Promise.reject(new Error("bad status"))))
-      .then(j => {
-        clearTimeout(timer);
-        const ok = j && (j.success === true || j.success === "true");
-        if (ok) done("web"); else fail();
-      })
-      .catch(() => { clearTimeout(timer); fail(); });
-  }
-
-  back = () => this.setState(st => ({ step: Math.max(1, st.step - 1), contactError: "", sendError: "" }));
 
   componentDidUpdate() {
     if (this._lastPanel !== this.state.panel) {
@@ -2696,28 +2434,17 @@ class Component extends DCLogic {
           : "We've sent your CourseVista code to ") + this.state.promoEmail.trim() + ".";
       }
     }
-    if (this._lastStep !== this.state.step) {
-      this._lastStep = this.state.step;
-      const bar = this.el("progressBar");
-      if (bar) bar.style.width = this.state.step * 25 + "%";
-      if (this.state.step === 1) { const i = this.el("clubInput"); if (i) i.focus(); }
-    }
   }
-
-  toggleWant = label => this.setState(st => ({
-    wantError: false,
-    wants: st.wants.indexOf(label) >= 0 ? st.wants.filter(w => w !== label) : st.wants.concat([label])
-  }));
 
   faqList() {
     return [
       { q: "Do you need to visit the course?", a: "No. Everything is built from the photography you already publish. Nothing is shot on site and your course is never closed." },
-      { q: "What photography do you need?", a: "Tee views, fairway coverage, green complexes, and a course map or yardage information. Existing aerial imagery helps. Send the club name and we'll check what's already published." },
+      { q: "What photography do you need?", a: "Tee views, fairway coverage, green complexes, and a course map or yardage information. Existing aerial imagery helps. Request your free hole and we'll check what's already published." },
       { q: "What if our photography isn't good enough?", a: "Then we'll tell you, before either of us spends anything. Some courses can't be done well from what's published, and we'd rather say so than deliver something that doesn't look like your course. Often clubs hold far more imagery than they've put online — that's usually the fix." },
-      { q: "How are the films made?", a: "They're built from your own course photography rather than filmed on site. That's why a full eighteen costs a fraction of a conventional production, and why we'd rather show you three finished holes than describe the process." },
+      { q: "How are the films made?", a: "They're built from your own course photography rather than filmed on site. That's why there's no shoot day to schedule or pay for, and why we'd rather show you one finished hole than describe the process." },
       { q: "Who owns the files?", a: "You do, outright. No licence, no expiry, no attribution required. Use them on your site, your socials, your ads, anywhere." },
       { q: "How long does production take?", a: "About two weeks from go-ahead for a full eighteen plus the homepage cut-down." },
-      { q: "We already have drone flyovers. Why would we use CourseVista?", a: "Worth a look at when they were made. A lot of club footage predates a bunker programme or a redesign and shows holes that no longer exist. Rebuilding from current photography is faster and cheaper than commissioning another shoot." },
+      { q: "We already have drone flyovers. Why would we use CourseVista?", a: "Worth a look at when they were made. A lot of club footage predates a bunker programme or a redesign and shows holes that no longer exist. Rebuilding from current photography means no new shoot to organise." },
       { q: "Do you work outside South Australia?", a: "Yes. Distance makes no difference to the process — clubs in Victoria, New South Wales, Queensland, WA and Tasmania are all the same job." }
     ];
   }
@@ -2725,10 +2452,15 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state;
     const R = k => this.ref(k);
-    const calcNow = this.calc(s.holes, s.courseType);
-    const holeOptions = [9, 18, 27, 36].map(n => ({
-      label: String(n), active: s.holes === n, inactive: s.holes !== n, onPick: () => this.setHoles(n)
-    }));
+    const calcNow = this.calc(s.holes);
+    const holesLabel = s.holes + " holes";
+    const holeOptions = CAT.HOLE_COUNTS.map(n => {
+      const on = s.holes === n;
+      return {
+        label: String(n), aria: n + " holes", active: on, inactive: !on, onPick: () => this.setHoles(n),
+        bg: on ? "#2C4A3B" : "#FFFFFF", border: on ? "#2C4A3B" : "#D9D4C8", fg: on ? "#FAF8F4" : "#55584D"
+      };
+    });
     const feeOptions = COST.feeOptions.map(v => ({
       label: "$" + v, active: s.greenFee === v, inactive: s.greenFee !== v, onPick: () => this.setFee(v)
     }));
@@ -2745,28 +2477,6 @@ class Component extends DCLogic {
         rows: open ? "1fr" : "0fr",
         fade: open ? "1" : "0",
         onToggle: () => this.setState(st => ({ journeyOpen: st.journeyOpen === i ? null : i }))
-      };
-    });
-    const typeOptions = ["Local club", "Destination course", "Resort / multi-course facility"].map(t => ({
-      label: t, active: s.courseType === t, inactive: s.courseType !== t, onPick: () => this.setType(t)
-    }));
-    const holeChoices = ["9", "18", "27", "36+", "Other"].map(l => {
-      const active = s.formHoles === l;
-      return {
-        label: l, active,
-        border: active ? "#2C4A3B" : "#E4E0D6",
-        bg: active ? "#2C4A3B" : "#FFFFFF",
-        fg: active ? "#FAF8F4" : "#55584D",
-        onPick: () => this.setState({ formHoles: l })
-      };
-    });
-    const wantChoices = ["Individual hole films", "Homepage film", "Hosted course guide", "Not sure yet"].map(l => {
-      const active = s.wants.indexOf(l) >= 0;
-      return {
-        label: l, active,
-        border: active ? "#2C4A3B" : "#E4E0D6",
-        box: active ? "#2C4A3B" : "#FFFFFF",
-        onPick: () => this.toggleWant(l)
       };
     });
     const faqs = this.faqList().map((f, i) => {
@@ -2786,24 +2496,30 @@ class Component extends DCLogic {
       v1: R("v1"), v2: R("v2"), scrub1: R("scrub1"),
       whyWrap: R("whyWrap"), whyVideo: R("whyVideo"), whyStill: R("whyStill"),
       m1: R("m1"), m2: R("m2"), m3: R("m3"), m4: R("m4"),
-      marquee: R("marquee"), costRow: R("costRow"), wrapDrone: R("wrapDrone"), wrapCv: R("wrapCv"), popBadge: R("popBadge"),
+      marquee: R("marquee"), costRow: R("costRow"), wrapDrone: R("wrapDrone"), wrapCv: R("wrapCv"),
       hWrapDrone: R("hWrapDrone"), hWrapCv: R("hWrapCv"),
       droneLo: this.money(calcNow.drone.low), droneHi: this.money(calcNow.drone.high),
-      cvFrom: this.money(calcNow.cv.from), cvNote: calcNow.cv.note, cvHomepage: calcNow.cv.homepage,
+      cvPrice: this.money(calcNow.cv), cvLabel: "Essentials \u00b7 " + holesLabel, cvFilms: calcNow.holes + " included",
       droneNoteShort: "Indicative " + calcNow.holes + "-hole market range",
       droneNote: calcNow.holes + "-hole indicative market range",
-      calcHead: calcNow.holes === 9
-        ? "Nine holes, properly presented. No second shoot required."
-        : "A complete course experience. No second shoot required.",
-      calcContext: calcNow.context,
+      calcHead: HOLE_WORDS[calcNow.holes] + " hole films for " + this.money(calcNow.cv) + ". No shoot day required.",
+      calcContext: "Essentials covers the individual hole films. A homepage film comes with Complete, and a hosted course page with Hosted.",
+      positionLine: (calcNow.cv < calcNow.drone.low ? "Below" : calcNow.cv <= calcNow.drone.high ? "Within" : "Above")
+        + " the indicative " + calcNow.holes + "-hole drone range, with nothing to schedule on course.",
       lostExposure: this.money(calcNow.lost),
-      pickEssentials: this.choosePackage("9", ["Individual hole films"]),
-      pickComplete: this.choosePackage("18", ["Individual hole films", "Homepage film"]),
-      pickHosted: this.choosePackage("18", ["Individual hole films", "Homepage film", "Hosted course guide"]),
-      pickCustom: this.choosePackage("27", ["Not sure yet"]),
-      quoteFromCalc: this.quoteFromCalc,
+      holes: s.holes, holesLabel,
+      priceEssentials: CAT.formatPrice("essentials", s.holes),
+      priceComplete: CAT.formatPrice("complete", s.holes),
+      priceHosted: CAT.formatPrice("hosted", s.holes),
+      essentialsFeatures: this.featureRows("essentials"),
+      completeFeatures: this.featureRows("complete"),
+      hostedFeatures: this.featureRows("hosted"),
+      hostedNote: CAT.PACKAGES.hosted.note,
+      startEssentialsHref: this.startHref("essentials"),
+      startCompleteHref: this.startHref("complete"),
+      startHostedHref: this.startHref("hosted"),
       featureVideo: R("featureVideo"),
-      progressBar: R("progressBar"), clubInput: R("clubInput"), stickyCta: R("stickyCta"),
+      stickyCta: R("stickyCta"),
       promoOpen: s.promoOpen, promoWide: s.promoWide, promoRevealed: s.promoRevealed,
       promoScratching: s.promoStage === "scratch" && !s.promoRevealed,
       promoUnsent: s.promoRevealed && !s.promoSent,
@@ -2834,7 +2550,7 @@ class Component extends DCLogic {
       playFeature: this.playFeature,
       showCalculator: this.props.showCalculator ?? true,
       showQr: this.props.showQrPackage ?? true,
-      holeOptions, typeOptions, feeOptions, roundOptions, journey, holeChoices, wantChoices, faqs,
+      holeOptions, feeOptions, roundOptions, journey, faqs,
       disruptOn: s.disruptOn, toggleDisrupt: this.toggleDisrupt,
       guideHoles: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       holeNav: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
@@ -2848,22 +2564,6 @@ class Component extends DCLogic {
       openGuide: () => this.openPanel("guide"),
       closePanel: this.closePanel,
       stop: e => e.stopPropagation(),
-      formOpen: !s.done, done: s.done,
-      isStep1: !s.done && s.step === 1, isStep2: !s.done && s.step === 2,
-      isStep3: !s.done && s.step === 3, isStep4: !s.done && s.step === 4,
-      canGoBack: !s.done && s.step > 1,
-      stepLabel: s.step + " / 4",
-      nextLabel: s.sending ? "Sending…" : s.step === 4 ? "Check my course" : "Continue",
-      club: s.club, url: s.url, name: s.name, role: s.role, email: s.email, phone: s.phone,
-      clubError: s.clubError, urlError: s.urlError, wantError: s.wantError, contactError: s.contactError,
-      sending: s.sending, sendError: s.sendError,
-      submitBg: s.sending ? "#55584D" : "#2C4A3B",
-      submitCursor: s.sending ? "default" : "pointer",
-      mailtoHref: this.mailtoHref(),
-      doneNote: s.sentVia === "web"
-        ? "Sent through to"
-        : "Your email app should have opened with the details ready to send. If it didn't, write to",
-      clubOrCourse: s.club.trim() || "your club",
       liked: s.liked, saved: s.saved,
       heartColor: s.liked ? "#E0605E" : "#FAF8F4",
       heartScale: s.liked ? "scale(1.22)" : "scale(1)",
@@ -2874,14 +2574,6 @@ class Component extends DCLogic {
       likeCount: R("likeCount"), commentCount: R("commentCount"), shareCount: R("shareCount"),
       likeLine: R("likeLine"), commentLine: R("commentLine"), watchCount: R("watchCount"),
       liveDot: R("liveDot"), burstLayer: R("burstLayer"),
-      setClub: e => this.setState({ club: e.target.value, clubError: false }),
-      setUrl: e => this.setState({ url: e.target.value, urlError: false }),
-      setName: e => this.setState({ name: e.target.value }),
-      setRole: e => this.setState({ role: e.target.value }),
-      setEmail: e => this.setState({ email: e.target.value }),
-      setPhone: e => this.setState({ phone: e.target.value }),
-      onKeyNext: e => { if (e.key === "Enter") this.next(); },
-      next: this.next, back: this.back
     };
   }
 }

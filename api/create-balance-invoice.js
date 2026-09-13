@@ -1,5 +1,5 @@
 const Stripe = require('stripe');
-const { CURRENCY, GST_MODE } = require('../lib/pricing');
+const { CURRENCY, GST_MODE, packageLabel } = require('../lib/pricing');
 const { getOrder, updateOrder } = require('../lib/store');
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', { apiVersion: '2024-06-20' });
@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
     currency: CURRENCY,
     // Stripe Tax works out GST from the club's address and our AU registration.
     automatic_tax: { enabled: true },
-    description: `Final balance — CourseVista ${order.package} for ${order.club_name}`,
+    description: `Final balance — CourseVista ${packageLabel(order.package, order.hole_count)} for ${order.club_name}`,
     metadata: { order_number: order.order_number, payment_stage: 'balance' },
     pending_invoice_items_behavior: 'exclude'
   });
@@ -47,7 +47,7 @@ module.exports = async (req, res) => {
     currency: CURRENCY,
     amount: order.remaining_balance,
     tax_behavior: GST_MODE === 'inclusive' ? 'inclusive' : 'exclusive',
-    description: `CourseVista ${order.package} — final balance (${order.hole_count} holes)`
+    description: `CourseVista ${packageLabel(order.package, order.hole_count)} — final balance`
   });
 
   const finalised = await stripe.invoices.finalizeInvoice(invoice.id);
