@@ -18,10 +18,10 @@
   a{color:#2C4A3B}
   a:hover{color:#16170F}
   .bar{border-bottom:1px solid #E4E0D6;background:#FAF8F4;position:sticky;top:0;z-index:5}
-  .bar-in{max-width:820px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-  .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .bar-in{max-width:820px;margin:0 auto;padding:6px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .logo{display:flex;align-items:center;gap:10px;min-height:44px;text-decoration:none}
   .logo img{height:24px;width:auto;display:block}
-  .back{font-size:14px;text-decoration:none;color:#77796F}
+  .back{display:inline-flex;align-items:center;min-height:44px;font-size:14px;text-decoration:none;color:#77796F}
   main{max-width:820px;margin:0 auto;padding:56px 24px 80px}
   h1{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:clamp(30px,5vw,42px);line-height:1.15;color:#16170F;margin:0 0 12px}
   .meta{font-size:14px;color:#77796F;margin:0 0 40px;padding-bottom:24px;border-bottom:1px solid #E4E0D6}
@@ -37,7 +37,8 @@
   th,td{text-align:left;padding:11px 12px 11px 0;border-bottom:1px solid #E4E0D6;vertical-align:top}
   th{color:#77796F;font-weight:500;font-size:14px}
   footer{border-top:1px solid #E4E0D6;margin-top:64px;padding-top:24px;font-size:14px;color:#77796F}
-  @media(max-width:560px){main{padding:36px 20px 60px}table,thead,tbody,th,td,tr{display:block}th{display:none}td{border:none;padding:3px 0}tr{border-bottom:1px solid #E4E0D6;padding:12px 0}td:first-child{font-weight:600;color:#16170F}}
+  footer a{display:inline-block;padding:9px 0;white-space:nowrap}
+  @media(max-width:560px){.bar-in{padding:6px 20px}main{padding:36px 20px 60px}table,thead,tbody,th,td,tr{display:block}th{display:none}td{border:none;padding:3px 0}tr{border-bottom:1px solid #E4E0D6;padding:12px 0}td:first-child{font-weight:600;color:#16170F}}
 </style>
 </head>
 <body>

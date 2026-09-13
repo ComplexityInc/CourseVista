@@ -29,13 +29,24 @@ input, select, textarea { font-family: inherit; }
 @keyframes cv-pay-marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
 @media (prefers-reduced-motion: reduce) { [style*="cv-pay-marquee"] { animation: none !important; } }
 @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; } }
+/* Phones (< 720px): hooks set with data-m="…" on inline-styled elements. */
+@media (max-width: 719px) {
+  [data-m~="steps"] { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 8px !important; }
+  [data-m~="step"] { padding-right: 0 !important; min-width: 0; }
+  [data-m~="stepbtn"] { flex-direction: column; align-items: flex-start !important; gap: 5px !important; width: 100%; min-height: 44px; padding: 6px 0 8px !important; }
+  [data-m~="stepdash"] { display: none !important; }
+  [data-m~="holes4"] { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px !important; }
+  [data-m~="holes4"] > button { min-width: 0 !important; padding-left: 0 !important; padding-right: 0 !important; }
+  [data-m~="oddfill"] > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+  [style*="font-size: 10px"] { font-size: 11px !important; }
+}
 </style>
 </helmet>
 
 <div style="min-height:100vh;background:#FAF8F4;color:#55584D;font-family:Inter,system-ui,sans-serif">
 
   <header style="position:sticky;top:0;z-index:30;background:rgba(250,248,244,0.94);backdrop-filter:blur(12px);border-bottom:1px solid #E4E0D6">
-    <div style="max-width:1180px;margin:0 auto;padding:15px clamp(18px,4vw,34px);display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap">
+    <div style="max-width:1180px;margin:0 auto;padding:15px clamp(20px,4vw,34px);display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap">
       <a href="/" style="display:flex;align-items:center;gap:10px;flex:0 0 auto">
         <img src="../../assets/cv-mark.png" alt="CourseVista" style="height:26px;width:auto">
         <img src="../../assets/cv-wordmark.png" alt="" style="height:15px;width:auto">
@@ -48,17 +59,17 @@ input, select, textarea { font-family: inherit; }
   </header>
 
   <sc-if value="{{ showFlow }}" hint-placeholder-val="{{ true }}">
-  <div style="max-width:1180px;margin:0 auto;padding:clamp(26px,3.6vw,48px) clamp(18px,4vw,34px) 96px">
+  <div style="max-width:1180px;margin:0 auto;padding:clamp(26px,3.6vw,48px) clamp(20px,4vw,34px) 96px">
 
-    <div style="display:flex;flex-wrap:wrap;gap:6px 0;align-items:center;margin-bottom:clamp(28px,3.4vw,44px)">
+    <div data-m="steps" style="display:flex;flex-wrap:wrap;gap:6px 0;align-items:center;margin-bottom:clamp(28px,3.4vw,44px)">
       <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
-        <div style="display:flex;align-items:center;gap:12px;flex:0 1 auto;padding-right:12px">
-          <button type="button" onClick="{{ s.go }}" style="display:flex;align-items:baseline;gap:9px;background:none;border:0;padding:6px 0;cursor:pointer;text-align:left">
+        <div data-m="step" style="display:flex;align-items:center;gap:12px;flex:0 1 auto;padding-right:12px">
+          <button type="button" data-m="stepbtn" onClick="{{ s.go }}" style="display:flex;align-items:baseline;gap:9px;background:none;border:0;padding:6px 0;cursor:pointer;text-align:left">
             <span style="font-size:10px;font-weight:600;letter-spacing:0.18em;color:{{ s.numColor }}">{{ s.num }}</span>
             <span style="font-size:13px;font-weight:500;letter-spacing:0.01em;color:{{ s.color }};border-bottom:1px solid {{ s.rule }};padding-bottom:3px">{{ s.label }}</span>
           </button>
           <sc-if value="{{ s.showDash }}" hint-placeholder-val="{{ true }}">
-            <span style="width:clamp(16px,3vw,46px);height:1px;background:#DAD5C9"></span>
+            <span data-m="stepdash" style="width:clamp(16px,3vw,46px);height:1px;background:#DAD5C9"></span>
           </sc-if>
         </div>
       </sc-for>
@@ -95,7 +106,7 @@ input, select, textarea { font-family: inherit; }
 
               <div>
                 <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D82;margin-bottom:10px">Number of holes</div>
-                <div style="display:flex;flex-wrap:wrap;gap:10px">
+                <div data-m="holes4" style="display:flex;flex-wrap:wrap;gap:10px">
                   <sc-for list="{{ holeOptions }}" as="h" hint-placeholder-count="4">
                     <button type="button" onClick="{{ h.pick }}" aria-pressed="{{ h.on }}" style="min-width:74px;padding:12px 18px;font-size:15px;font-weight:500;cursor:pointer;background:{{ h.bg }};border:1px solid {{ h.border }};color:{{ h.color }};transition:background-color 240ms ease, border-color 240ms ease, color 240ms ease">{{ h.label }}</button>
                   </sc-for>
@@ -142,7 +153,7 @@ input, select, textarea { font-family: inherit; }
               <button type="button" onClick="{{ next }}" data-ofill="#16170F" style="display:inline-flex;align-items:center;gap:10px;background:#2C4A3B;color:#FAF8F4;border:0;padding:15px 26px;font-size:15px;font-weight:500;cursor:pointer;transition:background-color 300ms ease">
                 <span>Continue</span><span style="font-size:13px">&#8594;</span>
               </button>
-              <button type="button" onClick="{{ exitBack }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
+              <button type="button" onClick="{{ exitBack }}" style="background:none;border:0;padding:12px 8px;margin:-12px -8px;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
               <span style="font-size:13px;color:#8A8D82">Takes about 2 minutes</span>
             </div>
           </div>
@@ -183,7 +194,7 @@ input, select, textarea { font-family: inherit; }
               <button type="button" onClick="{{ next }}" data-ofill="#16170F" style="display:inline-flex;align-items:center;gap:10px;background:#2C4A3B;color:#FAF8F4;border:0;padding:15px 26px;font-size:15px;font-weight:500;cursor:pointer;transition:background-color 300ms ease">
                 <span>{{ step2Cta }}</span><span style="font-size:13px">&#8594;</span>
               </button>
-              <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
+              <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:12px 8px;margin:-12px -8px;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
             </div>
           </div>
         </sc-if>
@@ -242,12 +253,12 @@ input, select, textarea { font-family: inherit; }
             <div style="font-size:14px;color:#8A8D82;margin-top:16px">Final production begins once source material is confirmed.</div>
 
             <div style="display:flex;align-items:flex-start;gap:13px;margin-top:24px;max-width:64ch">
-              <button type="button" onClick="{{ toggleTerms }}" aria-pressed="{{ termsOk }}" style="flex:0 0 auto;margin-top:2px;width:20px;height:20px;border:1px solid {{ termsBorder }};background:{{ termsFill }};cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0">
+              <button type="button" onClick="{{ toggleTerms }}" aria-pressed="{{ termsOk }}" style="flex:0 0 auto;box-sizing:content-box;margin:-10px -12px -12px -12px;width:20px;height:20px;border:12px solid transparent;background:{{ termsFill }};background-clip:padding-box;box-shadow:inset 0 0 0 1px {{ termsBorder }};cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0">
                 <span style="font-size:12px;line-height:1;color:#FAF8F4;opacity:{{ termsCheck }}">&#10003;</span>
               </button>
               <div style="font-size:14.5px;line-height:1.6;text-wrap:pretty">
                 <span>I confirm that I am authorised to commission this work for the club and agree to the CourseVista project terms.</span>
-                <button type="button" onClick="{{ openTerms }}" style="background:none;border:0;padding:0;margin-left:7px;font-size:14.5px;color:#2C4A3B;text-decoration:underline;text-underline-offset:3px;cursor:pointer">View project terms</button>
+                <button type="button" onClick="{{ openTerms }}" style="background:none;border:0;padding:12px 0;margin:-12px 0 -12px 7px;font-size:14.5px;color:#2C4A3B;text-decoration:underline;text-underline-offset:3px;cursor:pointer">View project terms</button>
               </div>
             </div>
             <sc-if value="{{ errTerms }}" hint-placeholder-val="{{ false }}">
@@ -258,7 +269,7 @@ input, select, textarea { font-family: inherit; }
               <button type="button" onClick="{{ next }}" data-ofill="#16170F" style="display:inline-flex;align-items:center;gap:10px;background:#2C4A3B;color:#FAF8F4;border:0;padding:15px 26px;font-size:15px;font-weight:500;cursor:pointer;transition:background-color 300ms ease">
                 <span>Continue to payment</span><span style="font-size:13px">&#8594;</span>
               </button>
-              <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
+              <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:12px 8px;margin:-12px -8px;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
             </div>
           </div>
         </sc-if>
@@ -323,7 +334,7 @@ input, select, textarea { font-family: inherit; }
               <sc-if value="{{ showPromo }}" hint-placeholder-val="{{ true }}">
                 <div style="border-top:1px solid #F1EDE6;margin-top:18px;padding-top:16px">
                   <sc-if value="{{ promoClosed }}" hint-placeholder-val="{{ true }}">
-                    <button type="button" onClick="{{ openPromo }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer;text-decoration:underline;text-underline-offset:3px" style-hover="color:#2C4A3B">Have an offer code?</button>
+                    <button type="button" onClick="{{ openPromo }}" style="background:none;border:0;padding:12px 0;margin:-12px 0;font-size:14px;color:#8A8D82;cursor:pointer;text-decoration:underline;text-underline-offset:3px" style-hover="color:#2C4A3B">Have an offer code?</button>
                   </sc-if>
                   <sc-if value="{{ promoOpen }}" hint-placeholder-val="{{ false }}">
                     <div>
@@ -415,7 +426,7 @@ input, select, textarea { font-family: inherit; }
 
             <div style="margin-top:clamp(26px,3vw,38px)">
               <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">What happens next</div>
-              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,148px),1fr));gap:1px;background:#E4E0D6;border:1px solid #E4E0D6;margin-top:14px">
+              <div data-m="oddfill" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,148px),1fr));gap:1px;background:#E4E0D6;border:1px solid #E4E0D6;margin-top:14px">
                 <sc-for list="{{ nextSteps }}" as="n" hint-placeholder-count="5">
                   <div style="background:#FDFCFA;padding:16px 15px;display:flex;flex-direction:column;gap:7px">
                     <span style="font-size:9.5px;font-weight:600;letter-spacing:0.2em;color:{{ n.numColor }}">{{ n.num }}</span>
@@ -436,7 +447,7 @@ input, select, textarea { font-family: inherit; }
                 </sc-if>
                 <span>{{ payLabel }}</span>
               </button>
-              <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
+              <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:12px 8px;margin:-12px -8px;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
             </div>
             <sc-if value="{{ payError }}" hint-placeholder-val="{{ false }}">
               <div style="border:1px solid #E4C9C7;background:#FBF3F2;color:#A95752;font-size:13.5px;line-height:1.6;padding:13px 15px;margin-top:14px;max-width:56ch;text-wrap:pretty">{{ payError }}</div>
@@ -493,7 +504,7 @@ input, select, textarea { font-family: inherit; }
   </sc-if>
 
   <sc-if value="{{ showAssessment }}" hint-placeholder-val="{{ false }}">
-    <div style="max-width:760px;margin:0 auto;padding:clamp(40px,6vw,90px) clamp(18px,4vw,34px) 110px;animation:cv-fade 560ms cubic-bezier(.19,1,.22,1) both">
+    <div style="max-width:760px;margin:0 auto;padding:clamp(40px,6vw,90px) clamp(20px,4vw,34px) 110px;animation:cv-fade 560ms cubic-bezier(.19,1,.22,1) both">
       <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Source review</div>
       <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(31px,4.4vw,50px);line-height:1.08;margin:16px 0 0;max-width:17ch;text-wrap:pretty">We need to check the source material first.</h1>
       <p style="font-size:17px;line-height:1.65;margin:18px 0 0;max-width:52ch;text-wrap:pretty">Send the course through and we'll confirm what's workable before you pay anything.</p>
@@ -521,24 +532,24 @@ input, select, textarea { font-family: inherit; }
           </sc-if>
           <span>Request source review</span>
         </button>
-        <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
+        <button type="button" onClick="{{ back }}" style="background:none;border:0;padding:12px 8px;margin:-12px -8px;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
       </div>
       <div style="font-size:13px;color:#8A8D82;margin-top:14px">No payment is taken at this stage.</div>
     </div>
   </sc-if>
 
   <sc-if value="{{ showAssessmentDone }}" hint-placeholder-val="{{ false }}">
-    <div style="max-width:700px;margin:0 auto;padding:clamp(60px,9vw,130px) clamp(18px,4vw,34px) 130px;animation:cv-fade 560ms cubic-bezier(.19,1,.22,1) both">
+    <div style="max-width:700px;margin:0 auto;padding:clamp(60px,9vw,130px) clamp(20px,4vw,34px) 130px;animation:cv-fade 560ms cubic-bezier(.19,1,.22,1) both">
       <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Assessment requested</div>
       <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(31px,4.4vw,48px);line-height:1.08;margin:16px 0 0;max-width:16ch;text-wrap:pretty">We're reviewing your course.</h1>
       <p style="font-size:17px;line-height:1.65;margin:18px 0 0;max-width:50ch;text-wrap:pretty">We'll look at what's on {{ websiteShort }}, confirm what's workable and come back to you within two business days with next steps.</p>
       <div style="font-size:14px;color:#8A8D82;margin-top:26px;border-top:1px solid #E4E0D6;padding-top:18px">Reference {{ orderNumber }} &#183; sent to {{ email }}</div>
-      <a href="/" style="display:inline-flex;align-items:center;gap:9px;margin-top:26px;font-size:15px;font-weight:500;color:#2C4A3B">Back to CourseVista<span style="font-size:13px">&#8594;</span></a>
+      <a href="/" style="display:inline-flex;align-items:center;gap:9px;min-height:44px;margin-top:14px;font-size:15px;font-weight:500;color:#2C4A3B">Back to CourseVista<span style="font-size:13px">&#8594;</span></a>
     </div>
   </sc-if>
 
   <sc-if value="{{ showSuccess }}" hint-placeholder-val="{{ false }}">
-    <div style="max-width:860px;margin:0 auto;padding:clamp(38px,5vw,74px) clamp(18px,4vw,34px) 110px;animation:cv-fade 560ms cubic-bezier(.19,1,.22,1) both">
+    <div style="max-width:860px;margin:0 auto;padding:clamp(38px,5vw,74px) clamp(20px,4vw,34px) 110px;animation:cv-fade 560ms cubic-bezier(.19,1,.22,1) both">
       <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Project reserved</div>
       <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(33px,4.8vw,56px);line-height:1.06;margin:16px 0 0;text-wrap:pretty">Welcome to CourseVista.</h1>
       <p style="font-size:17px;line-height:1.65;margin:18px 0 0;max-width:54ch;text-wrap:pretty">Your project is reserved and your payment has been received. Let's get everything we need to begin.</p>
@@ -600,7 +611,7 @@ input, select, textarea { font-family: inherit; }
             </sc-if>
             <span>{{ sendSourceLabel }}</span>
           </button>
-          <button type="button" onClick="{{ sourceBack }}" style="background:none;border:0;padding:0;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
+          <button type="button" onClick="{{ sourceBack }}" style="background:none;border:0;padding:12px 8px;margin:-12px -8px;font-size:14px;color:#8A8D82;cursor:pointer" style-hover="color:#2C4A3B">Back</button>
           <span style="font-size:13px;color:#8A8D82">Anything can follow by email to business@coursevista.com.au.</span>
         </div>
       </div>
@@ -608,7 +619,7 @@ input, select, textarea { font-family: inherit; }
   </sc-if>
 
   <sc-if value="{{ showDone }}" hint-placeholder-val="{{ false }}">
-    <div style="max-width:760px;margin:0 auto;padding:clamp(50px,7vw,110px) clamp(18px,4vw,34px) 130px;animation:cv-fade 560ms cubic-bezier(.19,1,.22,1) both">
+    <div style="max-width:760px;margin:0 auto;padding:clamp(50px,7vw,110px) clamp(20px,4vw,34px) 130px;animation:cv-fade 560ms cubic-bezier(.19,1,.22,1) both">
       <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">{{ orderNumber }}</div>
       <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(31px,4.4vw,50px);line-height:1.08;margin:16px 0 0;max-width:16ch;text-wrap:pretty">That's everything we need for now.</h1>
       <p style="font-size:17px;line-height:1.65;margin:18px 0 0;max-width:52ch;text-wrap:pretty">We'll review your source material and be in touch if anything is missing. Here's where your project sits.</p>
@@ -624,7 +635,7 @@ input, select, textarea { font-family: inherit; }
       </div>
 
       <div style="font-size:14px;line-height:1.65;color:#8A8D82;margin-top:22px;max-width:56ch;text-wrap:pretty">{{ balanceNote }}</div>
-      <a href="/" style="display:inline-flex;align-items:center;gap:9px;margin-top:26px;font-size:15px;font-weight:500;color:#2C4A3B">Back to CourseVista<span style="font-size:13px">&#8594;</span></a>
+      <a href="/" style="display:inline-flex;align-items:center;gap:9px;min-height:44px;margin-top:14px;font-size:15px;font-weight:500;color:#2C4A3B">Back to CourseVista<span style="font-size:13px">&#8594;</span></a>
     </div>
   </sc-if>
 
@@ -636,7 +647,7 @@ input, select, textarea { font-family: inherit; }
             <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">CourseVista</div>
             <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(24px,3vw,32px);margin:12px 0 0">Project terms</h2>
           </div>
-          <button type="button" onClick="{{ closeTerms }}" aria-label="Close" style="margin-left:auto;background:none;border:1px solid #D9D4C8;width:34px;height:34px;font-size:15px;color:#55584D;cursor:pointer;flex:0 0 auto" style-hover="border-color:#2C4A3B;color:#2C4A3B">&#215;</button>
+          <button type="button" onClick="{{ closeTerms }}" aria-label="Close" style="margin-left:auto;background:none;border:1px solid #D9D4C8;width:44px;height:44px;font-size:15px;color:#55584D;cursor:pointer;flex:0 0 auto" style-hover="border-color:#2C4A3B;color:#2C4A3B">&#215;</button>
         </div>
         <div style="display:flex;flex-direction:column;margin-top:22px">
           <sc-for list="{{ terms }}" as="t" hint-placeholder-count="8">

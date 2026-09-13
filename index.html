@@ -38,6 +38,44 @@ input, select { font-family: Inter, system-ui, sans-serif; }
 [data-cvmark]:hover [data-cvmark-disc], [data-cvmark]:focus-within [data-cvmark-disc], [data-cvmark][data-cvmark-open="1"] [data-cvmark-disc] { transform: scale(1.14); box-shadow: 0 16px 30px -18px rgba(22,23,15,0.5); }
 [data-cvmark]:hover [data-cvmark-card], [data-cvmark]:focus-within [data-cvmark-card], [data-cvmark][data-cvmark-open="1"] [data-cvmark-card] { opacity: 1 !important; transform: translate(-50%,0) !important; pointer-events: auto !important; }
 @media (prefers-reduced-motion: reduce) { [data-marquee-track] { animation: none !important; } }
+/* Phones (< 720px). The page is styled inline, so small-screen adjustments hook
+   onto data-m="…" markers rather than restyling each element. */
+@media (max-width: 719px) {
+  [data-m~="navlink"], [data-m~="navcta"] { display: none !important; }
+  [data-m~="menu"] { display: inline-flex !important; }
+  [data-m~="trust"] { gap: 10px 20px !important; }
+  [data-m~="trust"] > span { padding: 0 !important; border-left: 0 !important; }
+  [data-m~="head"] { flex-direction: column !important; align-items: flex-start !important; gap: 14px !important; }
+  /* stacked heads: children size to their content (a flex-basis would otherwise become a height) */
+  [data-m~="head"] > * { flex: 0 0 auto !important; }
+  [data-m~="head"] > :first-child { padding-top: 0 !important; }
+  [data-m~="indent0"] { padding-left: 0 !important; }
+  [data-m~="stats"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; row-gap: 26px; }
+  [data-m~="stats"] > div { padding: 24px 12px 0 !important; }
+  [data-m~="stats"] > div:nth-child(odd) { border-left: 0 !important; }
+  [data-m~="stack"] { grid-template-columns: minmax(0, 1fr) !important; }
+  [data-m~="faq-img"] { aspect-ratio: 3 / 2 !important; max-width: none !important; }
+  [data-m~="foot"] { flex-direction: column !important; align-items: flex-start !important; gap: 18px !important; padding-bottom: calc(108px + env(safe-area-inset-bottom)) !important; }
+  [data-m~="foot"] > div { margin-left: 0 !important; }
+  [data-m~="foot"] > nav, [data-m~="foot"] > div { align-items: center; row-gap: 0 !important; }
+  [data-m~="foot"] a, [data-m~="foot"] span { display: inline-flex; align-items: center; min-height: 40px; }
+  [style*="font-size: 10px"] { font-size: 11px !important; }
+  /* the mock website inside the Homepage film panel is an illustration; keep its nav compact */
+  [data-m~="mocknav"] { font-size: 9px !important; gap: 10px !important; letter-spacing: 0.08em !important; }
+  [data-m~="mocknav"] > :nth-child(2) { display: none; }
+  /* text links keep their look but get a finger-sized hit area */
+  [data-m~="tap"] { position: relative; }
+  [data-m~="tap"]::after { content: ""; position: absolute; inset: -10px -6px; }
+}
+/* Short phones (e.g. 320×568, 375×667): tighten the hero so its first line clears the header. */
+@media (max-width: 719px) and (max-height: 740px) {
+  [data-m~="herocontent"] { padding-bottom: 88px !important; }
+  [data-m~="herocontent"] > h1 { margin-top: 16px !important; }
+  [data-m~="herocontent"] > p { margin-top: 18px !important; }
+  [data-m~="herocta"] { margin-top: 26px !important; }
+  [data-m~="trust"] { margin-top: 28px !important; }
+}
+@media (min-width: 720px) { [data-m~="mnav"] { display: none !important; } }
 </style>
 </helmet>
 
@@ -45,18 +83,44 @@ input, select { font-family: Inter, system-ui, sans-serif; }
 
   <header ref="{{ headerRef }}" style="position:fixed;top:0;left:0;right:0;z-index:40;background:transparent;border-bottom:1px solid rgba(250,248,244,0.2);transition:background-color 420ms ease, border-color 420ms ease">
     <div style="max-width:1360px;margin:0 auto;padding:16px clamp(20px,4vw,40px);display:flex;align-items:center;gap:20px 32px;flex-wrap:wrap">
-      <a href="#top" style="display:flex;align-items:center;gap:10px;flex:0 0 auto">
+      <a href="#top" data-m="tap" style="display:flex;align-items:center;gap:10px;flex:0 0 auto">
         <img data-nav-mark="1" src="assets/cv-mark-light.png" alt="CourseVista" style="height:28px;width:auto">
         <img data-nav-word="1" src="assets/cv-wordmark-light.png" alt="" style="height:16px;width:auto">
       </a>
       <nav style="margin-left:auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px 26px;font-size:14px;font-weight:500">
-        <a data-nav-link="1" data-uline="1" href="#work" style="color:#FAF8F4;position:relative;display:inline-block;padding-bottom:4px">Work<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></a>
-        <a data-nav-link="1" data-uline="1" href="#why" style="color:#FAF8F4;position:relative;display:inline-block;padding-bottom:4px">Why CourseVista<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></a>
-        <a data-nav-link="1" data-uline="1" href="#pricing" style="color:#FAF8F4;position:relative;display:inline-block;padding-bottom:4px">Pricing<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></a>
-        <a data-nav-cta="1" href="#free-hole" data-free-hole="1" data-ofill="#FAF8F4" data-ofill-text="#16170F" style="border:1px solid rgba(250,248,244,0.6);color:#FAF8F4;padding:9px 16px;font-weight:500;white-space:nowrap">Get one hole free</a>
+        <a data-nav-link="1" data-uline="1" data-m="navlink" href="#work" style="color:#FAF8F4;position:relative;display:inline-block;padding-bottom:4px">Work<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></a>
+        <a data-nav-link="1" data-uline="1" data-m="navlink" href="#why" style="color:#FAF8F4;position:relative;display:inline-block;padding-bottom:4px">Why CourseVista<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></a>
+        <a data-nav-link="1" data-uline="1" data-m="navlink" href="#pricing" style="color:#FAF8F4;position:relative;display:inline-block;padding-bottom:4px">Pricing<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></a>
+        <a data-nav-cta="1" data-m="navcta" href="#free-hole" data-free-hole="1" data-ofill="#FAF8F4" data-ofill-text="#16170F" style="border:1px solid rgba(250,248,244,0.6);color:#FAF8F4;padding:9px 16px;font-weight:500;white-space:nowrap">Get one hole free</a>
+        <button type="button" data-m="menu" data-nav-link="1" onClick="{{ toggleNav }}" aria-expanded="{{ navOpen }}" aria-controls="cv-mnav" style="display:none;align-items:center;gap:10px;min-height:44px;margin:-8px -10px -8px 0;padding:0 10px;background:none;border:0;color:#FAF8F4;font-size:14px;font-weight:500;cursor:pointer">
+          <span aria-hidden="true" style="display:flex;flex-direction:column;gap:5px"><span style="display:block;width:18px;height:1.5px;background:currentColor"></span><span style="display:block;width:18px;height:1.5px;background:currentColor"></span></span>
+          Menu
+        </button>
       </nav>
     </div>
   </header>
+
+  <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+    <div id="cv-mnav" data-m="mnav" role="dialog" aria-modal="true" aria-label="Menu" style="position:fixed;inset:0;z-index:70;background:#FAF8F4;display:flex;flex-direction:column;overflow-y:auto">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px clamp(20px,4vw,40px);border-bottom:1px solid #E4E0D6">
+        <a href="#top" onClick="{{ closeNav }}" style="display:flex;align-items:center;gap:10px">
+          <img src="assets/cv-mark.png" alt="CourseVista" style="height:28px;width:auto">
+          <img src="assets/cv-wordmark.png" alt="" style="height:16px;width:auto">
+        </a>
+        <button type="button" ref="{{ navClose }}" onClick="{{ dismissNav }}" aria-label="Close menu" style="display:inline-flex;align-items:center;gap:10px;min-height:44px;margin:-8px -10px -8px 0;padding:0 10px;background:none;border:0;color:#2C4A3B;font-size:14px;font-weight:500;cursor:pointer">Close<span aria-hidden="true" style="font-size:15px;line-height:1">&#10005;</span></button>
+      </div>
+      <nav aria-label="Main" style="display:flex;flex-direction:column;padding:8px clamp(20px,4vw,40px) 0">
+        <a href="#work" onClick="{{ closeNav }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px;border-bottom:1px solid #E4E0D6;font-family:'Playfair Display',Georgia,serif;font-size:26px;color:#16170F">Work<span aria-hidden="true" style="font-family:Inter,system-ui,sans-serif;font-size:15px;color:#8A8D82">&#8594;</span></a>
+        <a href="#why" onClick="{{ closeNav }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px;border-bottom:1px solid #E4E0D6;font-family:'Playfair Display',Georgia,serif;font-size:26px;color:#16170F">Why CourseVista<span aria-hidden="true" style="font-family:Inter,system-ui,sans-serif;font-size:15px;color:#8A8D82">&#8594;</span></a>
+        <a href="#one-hole" onClick="{{ closeNav }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px;border-bottom:1px solid #E4E0D6;font-family:'Playfair Display',Georgia,serif;font-size:26px;color:#16170F">How it works<span aria-hidden="true" style="font-family:Inter,system-ui,sans-serif;font-size:15px;color:#8A8D82">&#8594;</span></a>
+        <a href="#pricing" onClick="{{ closeNav }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px;border-bottom:1px solid #E4E0D6;font-family:'Playfair Display',Georgia,serif;font-size:26px;color:#16170F">Pricing<span aria-hidden="true" style="font-family:Inter,system-ui,sans-serif;font-size:15px;color:#8A8D82">&#8594;</span></a>
+      </nav>
+      <div style="margin-top:auto;padding:32px clamp(20px,4vw,40px) calc(28px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:12px">
+        <a href="#free-hole" data-free-hole="1" onClick="{{ closeNav }}" style="display:flex;align-items:center;justify-content:center;min-height:54px;background:#2C4A3B;color:#FAF8F4;font-size:15px;font-weight:500">Get one hole free</a>
+        <div style="font-size:13px;color:#8A8D82;text-align:center">No payment required.</div>
+      </div>
+    </div>
+  </sc-if>
 
   <main id="top">
 
@@ -64,11 +128,11 @@ input, select { font-family: Inter, system-ui, sans-serif; }
       <video ref="{{ heroVideo }}" muted="{{ true }}" defaultMuted="{{ true }}" volume="{{ 0 }}" loop="{{ true }}" playsInline="{{ true }}" autoPlay="{{ true }}" disableRemotePlayback="{{ true }}" preload="metadata" poster="assets/course-coastal.png" aria-label="Cinematic course film" src="assets/hero.mp4" style="position:absolute;inset:-4% -2%;width:104%;height:108%;object-fit:cover;will-change:transform;transform:translateZ(0)"></video>
       <div ref="{{ heroDim }}" style="position:absolute;inset:0;background:#0A0C08;opacity:0.3;will-change:opacity"></div>
       <div style="position:absolute;left:0;right:0;bottom:0;height:62%;background:linear-gradient(to bottom, rgba(10,12,8,0), rgba(10,12,8,0.5))"></div>
-      <div ref="{{ heroContent }}" style="position:relative;width:100%;max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,40px) clamp(104px,17vh,196px)">
+      <div ref="{{ heroContent }}" data-m="herocontent" style="position:relative;width:100%;max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,40px) clamp(104px,17vh,196px)">
         <div data-reveal="up" style="font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#E4E0D6">Cinematic course films · without the shoot</div>
         <h1 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FAF8F4;font-size:clamp(42px,7vw,96px);line-height:1.0;letter-spacing:-0.02em;margin:22px 0 0;max-width:16ch;text-wrap:pretty">Your course, in motion.</h1>
         <p data-reveal="up" style="font-size:clamp(16px,1.35vw,19px);line-height:1.6;color:#E4E0D6;margin:26px 0 0;max-width:52ch;text-wrap:pretty">Turn the photography your club already owns into cinematic tee-to-green flyovers — without a site visit, filming crew or course closure.</p>
-        <div data-reveal="up" style="margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
+        <div data-reveal="up" data-m="herocta" style="margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
           <a href="#free-hole" data-free-hole="1" data-flyarrow="1" style="display:inline-flex;align-items:center;gap:0;flex:0 0 auto">
             <span data-fly-pill="1" style="background:#DDE8CC;color:#16170F;border-radius:999px;padding:16px 30px;font-size:15px;font-weight:500;transition:background-color 340ms cubic-bezier(.16,1,.3,1), color 300ms ease">Get one hole free</span>
             <span data-fly-circle="1" style="position:relative;overflow:hidden;width:52px;height:52px;border-radius:50%;background:#DDE8CC;color:#16170F;display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:background-color 340ms cubic-bezier(.16,1,.3,1), color 300ms ease">
@@ -76,7 +140,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
               <span data-fly-b="1" style="position:absolute;font-size:16px;line-height:1;transform:translate(-260%,260%);transition:transform 460ms cubic-bezier(.22,.61,.36,1)">&#8599;</span>
             </span>
           </a>
-          <button type="button" onClick="{{ playFeature }}" data-uline="1" style="background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center;gap:11px;color:#FAF8F4;font-size:15px" style-hover="color:#E6D3AC">
+          <button type="button" onClick="{{ playFeature }}" data-uline="1" data-m="tap" style="background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center;gap:11px;color:#FAF8F4;font-size:15px" style-hover="color:#E6D3AC">
             <span style="position:relative;overflow:hidden;width:28px;height:28px;border:1px solid rgba(250,248,244,0.7);border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto">
               <span data-uline-a="1" style="position:absolute;font-size:9px;line-height:1;padding-left:2px;transition:transform 620ms cubic-bezier(.34,1.4,.64,1)">&#9654;</span>
               <span data-uline-b="1" style="position:absolute;font-size:9px;line-height:1;padding-left:2px;transform:translateX(-320%);transition:transform 620ms cubic-bezier(.34,1.4,.64,1)">&#9654;</span>
@@ -84,7 +148,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
             <span style="position:relative;display:inline-block;padding-bottom:4px">Watch a hole film · 0:30<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 620ms cubic-bezier(.19,1,.22,1)"></span></span>
           </button>
         </div>
-        <div data-reveal="up" style="margin-top:clamp(38px,6vh,64px);border-top:1px solid rgba(250,248,244,0.24);padding-top:16px;display:flex;flex-wrap:wrap;gap:8px 0;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#E4E0D6">
+        <div data-reveal="up" data-m="trust" style="margin-top:clamp(38px,6vh,64px);border-top:1px solid rgba(250,248,244,0.24);padding-top:16px;display:flex;flex-wrap:wrap;gap:8px 0;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#E4E0D6">
           <span style="padding-right:22px">No site visit</span>
           <span style="padding:0 22px;border-left:1px solid rgba(250,248,244,0.24)">No shoot day</span>
           <span style="padding-left:22px;border-left:1px solid rgba(250,248,244,0.24)">No course closure</span>
@@ -113,7 +177,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
           course.
         </h2>
         <p style="font-size:16px;line-height:1.7;color:#55584D;margin:26px 0 0;max-width:54ch;text-wrap:pretty">CourseVista is still early. Every club we work with directly helps shape the product — and standout projects may be featured here for future clubs to explore.</p>
-        <a href="#free-hole" data-free-hole="1" data-uline="1" style="display:inline-flex;align-items:center;gap:9px;margin-top:24px;font-size:15px;font-weight:500;color:#2C4A3B">
+        <a href="#free-hole" data-free-hole="1" data-uline="1" data-m="tap" style="display:inline-flex;align-items:center;gap:9px;margin-top:24px;font-size:15px;font-weight:500;color:#2C4A3B">
           <span style="position:relative;display:inline-block;padding-bottom:3px">Get one hole free<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></span>
           <span style="font-size:13px">&#8594;</span>
         </a>
@@ -203,7 +267,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
 
     <section id="compare" style="position:relative;z-index:1;background:#FAF8F4;padding:clamp(64px,8vw,120px) clamp(20px,4vw,40px)">
       <div style="max-width:1360px;margin:0 auto">
-      <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:44px">
+      <div data-m="head" style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:44px">
         <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px">01</div>
         <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;flex:1 1 480px;max-width:22ch;text-wrap:pretty">From a photograph to a place you can move through.</h2>
       </div>
@@ -220,7 +284,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:24px 48px;align-items:flex-start;margin-top:28px">
         <p style="font-size:17px;line-height:1.66;margin:0;max-width:56ch;flex:1 1 420px;text-wrap:pretty">The club already owns the raw visual information. CourseVista turns it into a coherent journey from tee to green.</p>
-        <a href="#work" style="font-size:15px;font-weight:500;border-bottom:1px solid #E4E0D6;padding-bottom:4px" style-hover="border-bottom-color:#2C4A3B">Watch the full transformation →</a>
+        <a href="#work" data-m="tap" style="font-size:15px;font-weight:500;border-bottom:1px solid #E4E0D6;padding-bottom:4px" style-hover="border-bottom-color:#2C4A3B">Watch the full transformation →</a>
       </div>
       </div>
     </section>
@@ -287,7 +351,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
                   </div>
                   <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 12px;border-bottom:1px solid #E4E0D6;flex:0 0 auto">
                     <span style="font-family:'Playfair Display',Georgia,serif;font-size:12px;color:#16170F">Your Golf Club</span>
-                    <span style="display:flex;gap:10px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#8A8D82"><span>Course</span><span>Visitors</span><span>Members</span></span>
+                    <span data-m="mocknav" style="display:flex;gap:10px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#8A8D82"><span>Course</span><span>Visitors</span><span>Members</span></span>
                   </div>
                   <div style="position:relative;flex:1 1 auto;min-height:0;background:#F1EDE6;overflow:hidden">
                     <video ref="{{ v2 }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/poster-club.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down running as a club website hero" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
@@ -341,11 +405,11 @@ input, select { font-family: Inter, system-ui, sans-serif; }
       <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,4vw,40px)">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(36px,5vw,80px);align-items:center">
           <div>
-            <div style="display:flex;gap:28px;margin-bottom:26px">
+            <div data-m="head" style="display:flex;gap:28px;margin-bottom:26px">
               <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px;padding-top:10px">03</div>
               <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;max-width:20ch;text-wrap:pretty">The course is being judged before the first tee.</h2>
             </div>
-            <div style="padding-left:72px;max-width:58ch">
+            <div data-m="indent0" style="padding-left:72px;max-width:58ch">
               <p style="font-size:17px;line-height:1.68;margin:0 0 18px;text-wrap:pretty">Most club websites show a photograph and a yardage table. A member already knows what that means.</p>
               <p style="font-size:17px;line-height:1.68;margin:0;text-wrap:pretty">A visitor choosing where to spend a green fee, a weekend or a stay-and-play trip does not. CourseVista lets them understand the landscape before they arrive.</p>
             </div>
@@ -355,7 +419,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
             <img ref="{{ whyStill }}" src="assets/photo-green.png" alt="Static club photograph of the green complex" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
           </div>
         </div>
-        <div style="margin-top:clamp(48px,6vw,88px);border-top:1px solid #B08D4F;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+        <div data-m="stats" style="margin-top:clamp(48px,6vw,88px);border-top:1px solid #B08D4F;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
           <div style="padding:30px 24px 0;text-align:center">
             <div ref="{{ m1 }}" style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(42px,4.6vw,60px);line-height:1;color:#16170F">30</div>
             <div style="font-size:13px;color:#8A8D82;margin-top:12px">seconds per hole</div>
@@ -550,7 +614,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
               <div style="font-size:14px;line-height:1.55;color:#E6D3AC;max-width:44ch;text-wrap:pretty;border-top:1px solid rgba(250,248,244,0.18);padding-top:16px;width:100%">{{ positionLine }}</div>
               <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px">
                 <a href="#find-package" data-finder="1" data-holes="{{ holes }}" data-ofill="#E6D3AC" data-ofill-text="#16170F" style="display:inline-flex;align-items:center;gap:10px;background:#FAF8F4;color:#2C4A3B;padding:15px 26px;font-size:15px;font-weight:500"><span>Find my package</span><span aria-hidden="true" style="font-size:13px">&#8594;</span></a>
-                <a href="{{ startEssentialsHref }}" style="font-size:14px;color:#FAF8F4;border-bottom:1px solid rgba(250,248,244,0.45);padding-bottom:2px" style-hover="color:#E6D3AC">Continue with Essentials</a>
+                <a href="{{ startEssentialsHref }}" data-m="tap" style="font-size:14px;color:#FAF8F4;border-bottom:1px solid rgba(250,248,244,0.45);padding-bottom:2px" style-hover="color:#E6D3AC">Continue with Essentials</a>
               </div>
               <div style="font-size:12.5px;line-height:1.55;color:#A8B0A4;max-width:44ch;text-wrap:pretty">Two quick questions match your holes and inclusions to the right package. No contact details needed.</div>
             </div>
@@ -563,7 +627,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
 
     <section id="work" style="position:relative;z-index:1;background:#FAF8F4;border-top:1px solid #E4E0D6;scroll-margin-top:90px">
       <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px)">
-        <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:44px">
+        <div data-m="head" style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:44px">
           <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px">05</div>
           <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;flex:1 1 auto">Sample films</h2>
         </div>
@@ -616,7 +680,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
 
     <section style="position:relative;z-index:1;border-top:1px solid #E4E0D6;background:#FFFFFF">
       <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px)">
-        <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:44px">
+        <div data-m="head" style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:44px">
           <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px">07</div>
           <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;flex:1 1 auto;max-width:22ch">You may already have everything we need.</h2>
         </div>
@@ -676,7 +740,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
 
     <section id="pricing" style="position:relative;z-index:1;background:#FAF8F4;border-top:1px solid #E4E0D6;scroll-margin-top:90px">
       <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px)">
-        <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:clamp(28px,3.2vw,40px)">
+        <div data-m="head" style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;margin-bottom:clamp(28px,3.2vw,40px)">
           <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em;flex:0 0 44px">08</div>
           <div style="flex:1 1 480px">
             <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,52px);line-height:1.08;margin:0;max-width:20ch;text-wrap:pretty">Choose how far you want to take it.</h2>
@@ -775,7 +839,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
             <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#B08D4F">Bespoke work</div>
             <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(23px,2.6vw,32px);line-height:1.15;color:#16170F;margin-top:14px">Need something different?</div>
             <p style="font-size:15px;line-height:1.66;color:#55584D;margin:14px 0 0;max-width:42ch;text-wrap:pretty">For facilities beyond 36 holes, multiple courses or unusual source photography, talk to us first &#8212; we&#8217;ll confirm the scope and price before anything is paid.</p>
-            <a href="mailto:business@coursevista.com.au?subject=Bespoke%20CourseVista%20project" data-uline="1" style="display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-size:15px;font-weight:500;color:#2C4A3B">
+            <a href="mailto:business@coursevista.com.au?subject=Bespoke%20CourseVista%20project" data-uline="1" data-m="tap" style="display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-size:15px;font-weight:500;color:#2C4A3B">
               <span style="position:relative;display:inline-block;padding-bottom:3px">Email us about a bespoke project<span data-uline-bar="1" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform 460ms cubic-bezier(.19,1,.22,1)"></span></span>
               <span style="font-size:13px">&#8594;</span>
             </a>
@@ -808,11 +872,11 @@ input, select { font-family: Inter, system-ui, sans-serif; }
     </section>
 
     <section style="position:relative;z-index:1;border-top:1px solid #E4E0D6;background:#FFFFFF">
-      <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px);display:grid;grid-template-columns:minmax(min(100%,300px),0.82fr) minmax(min(100%,320px),1.5fr);gap:clamp(24px,3vw,48px);align-items:start">
+      <div data-m="stack" style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,40px);display:grid;grid-template-columns:minmax(min(100%,300px),0.82fr) minmax(min(100%,320px),1.5fr);gap:clamp(24px,3vw,48px);align-items:start">
         <div>
           <div style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#B08D4F;letter-spacing:0.06em">09</div>
           <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(30px,4.2vw,48px);line-height:1.08;margin:18px 0 0;max-width:14ch">Questions clubs ask.</h2>
-          <div data-tilt="1" data-reveal="scale" style="position:relative;overflow:hidden;margin-top:clamp(28px,3vw,44px);aspect-ratio:4/5;max-width:400px;background:#F1EDE6;border:1px solid #E4E0D6">
+          <div data-tilt="1" data-reveal="scale" data-m="faq-img" style="position:relative;overflow:hidden;margin-top:clamp(28px,3vw,44px);aspect-ratio:4/5;max-width:400px;background:#F1EDE6;border:1px solid #E4E0D6">
             <img src="assets/faq-golfers.png" alt="Two golfers reviewing a course film on a tablet" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 620ms cubic-bezier(.19,1,.22,1)">
           </div>
         </div>
@@ -852,11 +916,11 @@ input, select { font-family: Inter, system-ui, sans-serif; }
     </section>
 
     <footer style="position:relative;z-index:1;background:#FAF8F4">
-      <div style="max-width:1360px;margin:0 auto;padding:36px clamp(20px,4vw,40px) 56px;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center;font-size:13px;color:#8A8D82">
+      <div data-m="foot" style="max-width:1360px;margin:0 auto;padding:36px clamp(20px,4vw,40px) 56px;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center;font-size:13px;color:#8A8D82">
         <img src="assets/cv-mark.png" alt="CourseVista" style="height:24px;width:auto">
         <nav style="display:flex;flex-wrap:wrap;gap:10px 22px">
           <a href="#work" style="color:#8A8D82" style-hover="color:#2C4A3B">Work</a>
-          <a href="#how" style="color:#8A8D82" style-hover="color:#2C4A3B">How it works</a>
+          <a href="#one-hole" style="color:#8A8D82" style-hover="color:#2C4A3B">How it works</a>
           <a href="#pricing" style="color:#8A8D82" style-hover="color:#2C4A3B">Pricing</a>
           <a href="#free-hole" data-free-hole="1" style="color:#8A8D82" style-hover="color:#2C4A3B">Get one hole free</a>
         </nav>
@@ -881,7 +945,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
             <div style="font-family:'Playfair Display',Georgia,serif;font-size:14px;color:#B08D4F;letter-spacing:0.06em">{{ panelNumber }}</div>
             <h3 style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(25px,3vw,38px);line-height:1.08;margin:12px 0 0">{{ panelTitle }}</h3>
           </div>
-          <button type="button" onClick="{{ closePanel }}" aria-label="Close" style="background:none;border:0;padding:6px;cursor:pointer;font-size:13px;color:#8A8D82;flex:0 0 auto" style-hover="color:#16170F">Close &#10005;</button>
+          <button type="button" onClick="{{ closePanel }}" aria-label="Close" style="background:none;border:0;min-height:44px;padding:0 8px;margin:-10px -8px -10px 0;cursor:pointer;font-size:13px;color:#8A8D82;flex:0 0 auto" style-hover="color:#16170F">Close &#10005;</button>
         </div>
 
         <sc-if value="{{ isFilms }}" hint-placeholder-val="{{ false }}">
@@ -924,7 +988,7 @@ input, select { font-family: Inter, system-ui, sans-serif; }
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;border-bottom:1px solid #E4E0D6">
                 <span style="font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#16170F">Your Golf Club</span>
-                <span style="display:flex;gap:14px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82"><span>Course</span><span>Visitors</span><span>Members</span></span>
+                <span data-m="mocknav" style="display:flex;gap:14px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8D82"><span>Course</span><span>Visitors</span><span>Members</span></span>
               </div>
               <div style="position:relative;aspect-ratio:16/9;background:#F1EDE6;overflow:hidden">
                 <video data-panel-video="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" poster="assets/poster-club.png" src="assets/cutdown.mp4" aria-label="Homepage cut-down" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
@@ -1203,6 +1267,7 @@ class Component extends DCLogic {
     disruptOn: false, roundsAffected: 0,
     journeyOpen: 0,
     panel: null,
+    navOpen: false,
     faqOpen: null,
     liked: false, saved: false,
     promoOpen: false, promoWide: false, promoStage: "website", promoRevealed: false,
@@ -2009,6 +2074,30 @@ class Component extends DCLogic {
   setRounds = n => { this.setState({ roundsAffected: n }, () => this.paintCalc(true)); };
   toggleDisrupt = () => this.setState(s => ({ disruptOn: !s.disruptOn }), () => this.paintCalc(false));
 
+  /* ---------- phone menu ---------- */
+  toggleNav = () => (this.state.navOpen ? this.closeNav() : this.openNav());
+  openNav = () => {
+    document.documentElement.style.overflow = "hidden";
+    document.addEventListener("keydown", this.navKey);
+    window.addEventListener("resize", this.navResize);
+    this.setState({ navOpen: true }, () => { const b = this.el("navClose"); if (b) b.focus({ preventScroll: true }); });
+  };
+  // Links close the menu and let the page jump; Close and Escape hand focus back to the Menu button.
+  closeNav = () => {
+    if (!this.state.navOpen) return;
+    document.documentElement.style.overflow = "";
+    document.removeEventListener("keydown", this.navKey);
+    window.removeEventListener("resize", this.navResize);
+    this.setState({ navOpen: false });
+  };
+  dismissNav = () => {
+    this.closeNav();
+    const menu = document.querySelector('[data-m~="menu"]');
+    if (menu) menu.focus({ preventScroll: true });
+  };
+  navKey = e => { if (e.key === "Escape") this.dismissNav(); };
+  navResize = () => { if (window.innerWidth >= 720) this.closeNav(); };
+
   openPanel = id => this.setState({ panel: id });
   closePanel = () => this.setState({ panel: null });
 
@@ -2554,6 +2643,7 @@ class Component extends DCLogic {
       disruptOn: s.disruptOn, toggleDisrupt: this.toggleDisrupt,
       guideHoles: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       holeNav: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+      navOpen: s.navOpen, toggleNav: this.toggleNav, closeNav: this.closeNav, dismissNav: this.dismissNav, navClose: R("navClose"),
       panel: R("panel"),
       panelOpen: !!s.panel,
       isFilms: s.panel === "films", isHomepage: s.panel === "homepage", isGuide: s.panel === "guide",

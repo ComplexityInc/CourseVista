@@ -67,6 +67,18 @@ point it at a new `demo/configs/<slug>.js`, and put that club's files in
 supplied film with its real hole label, and `handoff` details for the order form.
 Client pages are `noindex` and are not linked from the homepage, `/demo` or the sitemap.
 
+## Phone layout
+
+The homepage and `/start` are styled inline, so their small-screen rules live in
+one `@media (max-width: 719px)` block in each page's `<style>` and hook onto
+`data-m="…"` markers (for example `data-m="stack"` collapses a grid to one column,
+`data-m="head"` stacks a section number above its heading, `data-m="tap"` gives a
+text link a finger-sized hit area without changing its look). When adding a
+section, reuse a marker rather than hard-coding a phone-only style. Below 720px the
+homepage header collapses to a Menu button that opens a full-screen menu.
+`demo/demo.css`, `/terms` and `/privacy` use ordinary class-based media queries.
+Phone gutters are 20px on every page.
+
 ## Ordering flow
 
 `/start` runs the four-step commissioning flow — course, package, review, payment.

@@ -9,15 +9,15 @@ a:hover{color:#16170F}
 button{font-family:inherit}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
-.d-wrap{max-width:1080px;margin:0 auto;padding:0 clamp(18px,4vw,32px)}
+.d-wrap{max-width:1080px;margin:0 auto;padding:0 clamp(20px,4vw,32px)}
 .d-narrow{max-width:760px}
 
 /* bar */
 .d-bar{position:sticky;top:0;z-index:20;background:rgba(250,248,244,.94);border-bottom:1px solid #E4E0D6;backdrop-filter:blur(10px)}
-.d-bar .d-wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px}
-.d-brand{display:flex;align-items:center;gap:10px}
+.d-bar .d-wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:4px;padding-bottom:4px}
+.d-brand{display:flex;align-items:center;gap:10px;min-height:44px}
 .d-brand img{height:24px;width:auto}
-.d-back{font-size:14px;color:#77796F}
+.d-back{display:inline-flex;align-items:center;min-height:44px;font-size:14px;color:#77796F}
 
 /* intro */
 .d-intro{padding:clamp(40px,6.5vw,76px) 0 clamp(26px,3.6vw,40px)}
@@ -117,7 +117,7 @@ button{font-family:inherit}
 .d-btn-secondary:hover{background:#2C4A3B;color:#FAF8F4}
 .d-pkg .d-btn{margin-top:auto;width:100%}
 .d-buy-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;margin-top:16px;font-size:13px;color:#8A8D82}
-.d-linkbtn{background:none;border:0;padding:6px 0;font-size:13.5px;font-weight:500;color:#2C4A3B;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.d-linkbtn{background:none;border:0;padding:12px 0;font-size:13.5px;font-weight:500;color:#2C4A3B;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .d-compare{margin-top:14px;border:1px solid #E4E0D6;background:#FAF8F4}
 .d-compare[hidden]{display:none}
 .d-cmp-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px 18px;align-items:center;padding:14px 18px;border-top:1px solid #E4E0D6}
@@ -125,7 +125,7 @@ button{font-family:inherit}
 .d-cmp-name{font-family:'Playfair Display',Georgia,serif;font-size:19px;color:#16170F}
 .d-cmp-line{display:block;font-family:Inter,system-ui,sans-serif;font-size:13px;color:#8A8D82;margin-top:2px}
 .d-cmp-price{font-family:'Playfair Display',Georgia,serif;font-size:19px;color:#16170F;white-space:nowrap}
-.d-cmp-go{font-size:14px;font-weight:500;white-space:nowrap}
+.d-cmp-go{display:inline-flex;align-items:center;min-height:40px;font-size:14px;font-weight:500;white-space:nowrap}
 
 /* after purchase */
 .d-after{padding:clamp(44px,6vw,72px) 0 0}
@@ -146,11 +146,11 @@ button{font-family:inherit}
 .d-close .d-btn{margin-top:26px;min-height:56px;padding:0 32px;font-size:16px}
 .d-close-alt{margin:16px 0 0;font-size:14px;color:#8A8D82}
 .d-close-alt a{font-weight:500;text-decoration:underline;text-underline-offset:3px}
-.d-footnote{max-width:66ch;margin:0 auto;padding:0 0 40px;font-size:12.5px;line-height:1.6;color:#8A8D82;text-align:center}
+.d-footnote{max-width:66ch;margin:0 auto;padding:0 clamp(20px,4vw,32px) 40px;font-size:12.5px;line-height:1.6;color:#8A8D82;text-align:center}
 
 .d-foot{border-top:1px solid #E4E0D6;padding:24px 0 40px;font-size:14px;color:#77796F}
-.d-foot a{color:#77796F}
-.d-foot p{margin:0 0 8px}
+.d-foot a{color:#77796F;display:inline-block;padding:9px 0}
+.d-foot p{margin:0 0 4px}
 
 /* lightbox */
 .d-lb{position:fixed;inset:0;z-index:60;background:rgba(16,17,15,.9);display:flex;align-items:center;justify-content:center;padding:24px}
@@ -166,4 +166,13 @@ button{font-family:inherit}
   .d-cmp-go{grid-column:1 / -1}
   .d-play{min-height:48px;font-size:14px}
   .d-hole{font-size:11px;padding:6px 9px}
+  .d-holes-label,.d-pkg-kicker,.d-step-n{font-size:11px}
+}
+/* Narrow players: the resting logo sits in the upper part of the frame so the
+   play button below never covers it. */
+@media (max-width:440px){
+  .d-art-logo{align-items:flex-start;padding-top:7%}
+  .d-art-logo img{height:40%;margin-top:0}
+  .d-art-logo .d-wordmark{font-size:20px;margin-top:32px}   /* clears the hole label */
+  .d-pkg .d-btn{padding:0 14px;font-size:14.5px}                /* "Continue with Complete" stays on one line */
 }
