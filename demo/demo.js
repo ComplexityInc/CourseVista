@@ -262,22 +262,43 @@
       if (s === 'error') el.querySelector('.d-err').textContent = 'This flyover couldn’t be loaded. Please refresh to try again.';
     }
 
+    function pauseOthers() {
+      players.forEach(function (other) { if (other !== video && !other.paused) other.pause(); });
+    }
+
+    // Native controls exist only while a film plays. Paused or ended, the logo
+    // covers the full frame, so the control bar (and the frame behind it) is
+    // removed too, except in fullscreen, where the overlay can't be seen.
+    function fullscreen() {
+      var f = document.fullscreenElement || document.webkitFullscreenElement;
+      return f === video || f === el || !!video.webkitDisplayingFullscreen;
+    }
+    function rest() {
+      if (!fullscreen()) video.controls = false;
+    }
+
     function start() {
       if (el.getAttribute('data-state') === 'error') return;
+      pauseOthers();
       if (video.ended) video.currentTime = 0;   // Replay; Resume keeps the paused position.
       video.controls = true;
       var p = video.play();
-      if (p && p.catch) p.catch(function () { set(video.currentTime ? 'paused' : 'idle'); });
+      if (p && p.catch) p.catch(function () { set(video.currentTime ? 'paused' : 'idle'); rest(); });
       video.focus({ preventScroll: true });
     }
 
     overlay.addEventListener('click', start);
     video.addEventListener('play', function () {
-      players.forEach(function (other) { if (other !== video && !other.paused) other.pause(); });
+      pauseOthers();
+      video.controls = true;
       set('playing');
     });
-    video.addEventListener('pause', function () { if (!video.ended) set('paused'); });
-    video.addEventListener('ended', function () { set('ended'); });
+    video.addEventListener('pause', function () { if (!video.ended) { set('paused'); rest(); } });
+    video.addEventListener('ended', function () { set('ended'); rest(); });
+    function leftFullscreen() { if (el.getAttribute('data-state') !== 'playing') rest(); }
+    document.addEventListener('fullscreenchange', leftFullscreen);
+    document.addEventListener('webkitfullscreenchange', leftFullscreen);
+    video.addEventListener('webkitendfullscreen', leftFullscreen);
     video.addEventListener('error', function () { set('error'); });
     var source = video.querySelector('source');
     if (source) source.addEventListener('error', function () { set('error'); });

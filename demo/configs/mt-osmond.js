@@ -40,7 +40,7 @@ window.CV_DEMO = {
         { src: '/demo/mt-osmond/assets/mtosmond-Hole1Img2.png', caption: 'Photo 2' },
         { src: '/demo/mt-osmond/assets/mtosmond-hole1Img3.png', caption: 'Photo 3' },
         { src: '/demo/mt-osmond/assets/mtosmond-Hole1Img4.png', caption: 'Photo 4' },
-        { src: '/demo/mt-osmond/assets/mtosmond-hole1map.png', caption: 'Hole map' }
+        { src: '/demo/mt-osmond/assets/mtosmond-hole1map.jpg', caption: 'Hole map' }
       ]
     },
     {
@@ -51,7 +51,7 @@ window.CV_DEMO = {
         { src: '/demo/mt-osmond/assets/mtosmond-hole3img2.png', caption: 'Photo 2' },
         { src: '/demo/mt-osmond/assets/mtosmond-hole3img3.png', caption: 'Photo 3' },
         { src: '/demo/mt-osmond/assets/mtosmond-hole3img4.png', caption: 'Photo 4' },
-        { src: '/demo/mt-osmond/assets/mtosmond-hole3map.png', caption: 'Hole map' }
+        { src: '/demo/mt-osmond/assets/mtosmond-hole3map.jpg', caption: 'Hole map' }
       ]
     },
     {
@@ -62,7 +62,7 @@ window.CV_DEMO = {
         { src: '/demo/mt-osmond/assets/mtosmond-hole16img2.png', caption: 'Photo 2' },
         { src: '/demo/mt-osmond/assets/mtosmond-hole16img3.png', caption: 'Photo 3' },
         { src: '/demo/mt-osmond/assets/mtosmond-hole16img4.png', caption: 'Photo 4' },
-        { src: '/demo/mt-osmond/assets/mtosmond-hole16map.png', caption: 'Hole map' }
+        { src: '/demo/mt-osmond/assets/mtosmond-hole16map.jpg', caption: 'Hole map' }
       ]
     }
   ],
