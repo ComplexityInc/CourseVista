@@ -906,11 +906,11 @@ input, select { font-family: Inter, system-ui, sans-serif; }
 
     <section id="get-started" style="position:relative;z-index:1;overflow:hidden;background:#1F3328;color:#FFFFFF;scroll-margin-top:80px">
       <span id="enquiry" aria-hidden="true" style="position:absolute;top:0;left:0"></span>
-      <img src="assets/course-flag.png" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%">
-      <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(24,40,31,0.8) 0%, rgba(24,40,31,0.68) 50%, rgba(24,40,31,0.86) 100%)"></div>
+      <!-- Photo shown as-is, no tint. cta-putting.jpg sits on top; the older flag photo only shows if it's missing. -->
+      <div aria-hidden="true" style="position:absolute;inset:0;background-image:url(assets/cta-putting.jpg), url(assets/course-flag.png);background-size:cover;background-position:50% 55%;background-repeat:no-repeat"></div>
       <div style="position:relative;max-width:860px;margin:0 auto;padding:clamp(96px,13vw,176px) clamp(22px,5vw,40px);display:flex;flex-direction:column;align-items:center;text-align:center">
-        <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FFFFFF;font-size:clamp(32px,4.8vw,56px);line-height:1.1;letter-spacing:-0.01em;margin:0;max-width:17ch;text-wrap:balance">Improve Your Golf Course With Cinematic Flyover Videos</h2>
-        <p style="font-size:clamp(16px,1.45vw,19px);line-height:1.62;color:rgba(255,255,255,0.88);margin:24px 0 0;max-width:44ch;text-wrap:pretty">Get one hole of your course turned into a flyover, free. Then choose a package when you&#8217;re ready for the rest.</p>
+        <h2 data-reveal="up" style="font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#FFFFFF;font-size:clamp(32px,4.8vw,56px);line-height:1.1;letter-spacing:-0.01em;margin:0;max-width:17ch;text-wrap:balance;text-shadow:0 2px 18px rgba(10,20,14,0.55), 0 1px 3px rgba(10,20,14,0.45)">Improve Your Golf Course With Cinematic Flyover Videos</h2>
+        <p style="font-size:clamp(16px,1.45vw,19px);line-height:1.62;color:#FFFFFF;margin:24px 0 0;max-width:44ch;text-wrap:pretty;text-shadow:0 1px 12px rgba(10,20,14,0.6), 0 1px 2px rgba(10,20,14,0.5)">Get one hole of your course turned into a flyover, free. Then choose a package when you&#8217;re ready for the rest.</p>
         <a href="#free-hole" data-free-hole="1" data-ofill="#E6D3AC" data-ofill-text="#16170F" style="margin-top:clamp(32px,4vw,44px);display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:58px;background:#FAF8F4;color:#16170F;padding:0 36px;font-size:16px;font-weight:600;letter-spacing:0.01em">Try Today<span aria-hidden="true" style="font-size:15px">&#8594;</span></a>
       </div>
     </section>

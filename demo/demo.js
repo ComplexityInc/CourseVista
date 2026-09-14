@@ -287,13 +287,36 @@
       video.focus({ preventScroll: true });
     }
 
+    // Dragging the timeline pauses the video while the pointer is down and resumes
+    // it on release. That isn't the viewer pausing, so the logo cover only appears
+    // once the pointer is up and the video has actually stayed paused.
+    var holding = false, pauseTimer = 0;
+    function settlePause() {
+      clearTimeout(pauseTimer);
+      pauseTimer = setTimeout(function () {
+        if (holding || !video.paused || video.ended || video.seeking) return;
+        set('paused');
+        rest();
+      }, 300);
+    }
+    function release() {
+      if (!holding) return;
+      holding = false;
+      if (video.paused && !video.ended) settlePause();
+    }
+    video.addEventListener('pointerdown', function () { holding = true; });
+    window.addEventListener('pointerup', release);
+    window.addEventListener('pointercancel', release);
+    video.addEventListener('seeked', function () { if (video.paused && !video.ended) settlePause(); });
+
     overlay.addEventListener('click', start);
     video.addEventListener('play', function () {
+      clearTimeout(pauseTimer);
       pauseOthers();
       video.controls = true;
       set('playing');
     });
-    video.addEventListener('pause', function () { if (!video.ended) { set('paused'); rest(); } });
+    video.addEventListener('pause', function () { if (!video.ended) settlePause(); });
     video.addEventListener('ended', function () { set('ended'); rest(); });
     function leftFullscreen() { if (el.getAttribute('data-state') !== 'playing') rest(); }
     document.addEventListener('fullscreenchange', leftFullscreen);
