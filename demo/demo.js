@@ -573,6 +573,13 @@
     }
     if (video.readyState >= 1) go();
     else {
+      // The players ship preload="none", and load() honours that: it re-runs
+      // resource selection and then stops without fetching, so readyState sits
+      // at 0 and loadedmetadata never fires. Asking for metadata first is what
+      // actually makes the fetch happen. Without this a style pick does nothing
+      // at all on a cold page — it only appeared to work once the film had
+      // already been played.
+      video.preload = 'metadata';
       video.addEventListener('loadedmetadata', go, { once: true });
       video.load();
     }
