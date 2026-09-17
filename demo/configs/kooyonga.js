@@ -43,8 +43,7 @@ window.CV_DEMO = {
         { src: '/demo/kooyonga/assets/kooyonga-hole16-img5.jpg', caption: 'Photo 5' },
         { src: '/demo/kooyonga/assets/kooyonga-hole16-img6.jpg', caption: 'Photo 6' },
         { src: '/demo/kooyonga/assets/kooyonga-hole16-img7.jpg', caption: 'Photo 7' },
-        { src: '/demo/kooyonga/assets/kooyonga-hole16-img8.jpg', caption: 'Photo 8' },
-        { src: '/demo/kooyonga/assets/kooyonga-hole16-flightpath.jpg', caption: 'Flight path' }
+        { src: '/demo/kooyonga/assets/kooyonga-hole16-img8.jpg', caption: 'Photo 8' }
       ]
     }
   ],

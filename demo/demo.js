@@ -344,6 +344,9 @@
 
     function start() {
       if (el.getAttribute('data-state') === 'error') return;
+      // Playing the film on its own terms cancels any style span limit, so a
+      // full watch-through is never cut short at a span boundary.
+      clearStyleGuard();
       pauseOthers();
       if (video.ended) video.currentTime = 0;   // Replay; Resume keeps the paused position.
       video.controls = true;
@@ -522,17 +525,31 @@
   // Seek the first film to a style's span and play it. The span end is honoured
   // with a timeupdate guard that removes itself, so a later full playthrough is
   // never cut short.
+  var styleGuard = null;   // the one active span guard, if any
+
+  // Drop any previous span guard before arming a new one. Without this the
+  // guards accumulate: picking a style that ends at 0:10 and then one that
+  // starts at 0:19 leaves the first guard attached, and it pauses the film the
+  // instant the new span begins.
+  function clearStyleGuard() {
+    if (!styleGuard) return;
+    styleGuard.video.removeEventListener('timeupdate', styleGuard.fn);
+    styleGuard = null;
+  }
+
   function playStyle(card) {
     var video = players[0];
     if (!card || !video) return;
     var from = Number(card.getAttribute('data-from'));
     var to = Number(card.getAttribute('data-to'));
     players.forEach(function (p) { if (!p.paused) p.pause(); });
+    clearStyleGuard();
     function stopAtEnd() {
       if (video.currentTime < to) return;
       video.pause();
-      video.removeEventListener('timeupdate', stopAtEnd);
+      clearStyleGuard();
     }
+    styleGuard = { video: video, fn: stopAtEnd };
     video.addEventListener('timeupdate', stopAtEnd);
     video.controls = true;
 

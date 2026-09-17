@@ -51,7 +51,7 @@ STYLE REFERENCE STILLS (the three-look chooser)
   http.server does NOT, so the chooser cannot be tested with `python -m http.server`
   — the film will just play from the start. Test on a Vercel preview instead.
 
-HOLE 16 — source photographs + flight path
+HOLE 16 — source photographs
   kooyonga-hole16-img1.jpg
   kooyonga-hole16-img2.jpg
   kooyonga-hole16-img3.jpg
@@ -60,11 +60,12 @@ HOLE 16 — source photographs + flight path
   kooyonga-hole16-img6.jpg
   kooyonga-hole16-img7.jpg
   kooyonga-hole16-img8.jpg
-  kooyonga-hole16-flightpath.jpg
 
-  Supplied as PNGs (25 MB total). Converted to JPEG at 1920px wide for delivery
-  — 4.2 MB total, an 83% reduction with no visible difference at the sizes the
-  page shows them. Originals kept in cold storage.
+  Supplied as PNGs. Converted to JPEG at 1920px wide for delivery — no visible
+  difference at the sizes the page shows them. Originals kept in cold storage.
+
+  The flight-path diagram supplied as Img9 is deliberately NOT included: the
+  club does not need it, so it is not shown as a source.
 
 Anything listed but not uploaded is simply left out of the page (no broken
 players or thumbnails). To change names or add a hole, edit
