@@ -144,11 +144,23 @@
     var points = (r.points || []).map(function (p) {
       return '<li><b>' + esc(p[0]) + '</b><span>' + esc(p[1]) + '</span></li>';
     }).join('');
+    // Optional artefact presented with the recognition — a piece of work given
+    // to the course outright. Clicking it opens the same lightbox the source
+    // photographs use.
+    var g = r.gift;
+    var gift = g ? '<figure class="d-recog-gift">' +
+      (g.label ? '<figcaption class="d-recog-gift-label">' + esc(g.label) + '</figcaption>' : '') +
+      '<button type="button" class="d-recog-gift-img" data-full="' + esc(g.src) + '" data-cap="' + esc(g.caption || g.alt || '') + '" aria-label="Enlarge ' + esc(g.alt || 'artwork') + '">' +
+      '<img src="' + esc(g.src) + '" alt="' + esc(g.alt || '') + '" loading="lazy" decoding="async"></button>' +
+      (g.caption ? '<p class="d-recog-gift-cap">' + esc(g.caption) + '</p>' : '') +
+      '</figure>' : '';
+
     return '<section class="d-recog" aria-labelledby="d-recog-h"><div class="d-wrap">' +
       '<div class="d-recog-card">' +
       '<p class="d-recog-badge">' + esc(r.badge) + '</p>' +
       '<h2 id="d-recog-h">' + esc(r.heading) + '</h2>' +
       (body ? '<div class="d-recog-body">' + body + '</div>' : '') +
+      gift +
       (points ? '<ul class="d-recog-points">' + points + '</ul>' : '') +
       (r.signoff ? '<p class="d-recog-sign">' + esc(r.signoff) + '</p>' : '') +
       '</div></div></section>';

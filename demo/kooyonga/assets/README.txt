@@ -3,14 +3,19 @@ Kooyonga Golf Club — demo assets (/demo/kooyonga)
 Put these files directly in this folder. Names are CASE-SENSITIVE on the live
 site (Vercel), so keep them exactly as written. Only Kooyonga material here.
 
-LOGO (resting artwork on every video)  — NOT YET SUPPLIED
-  kooyonga-logo.png            Original colours/proportions. Shown uncropped on white,
-                               never enlarged past 2x its own size — the larger the
-                               source file, the crisper it looks (1000px+ is ideal).
+LOGO (resting artwork on every video)
+  kooyonga-logo.png            580x118. The crest-and-wordmark lockup, cropped from
+                               the top-left of the hole 16 course overview so the page
+                               and the gifted artwork carry exactly the same mark.
+                               Shown uncropped on white, never enlarged past 2x its
+                               own size. If a higher-resolution club logo is supplied
+                               later, replace this file — no config change needed.
 
-  Until this file is added the player rests on the course name set in Playfair,
-  which is a clean card in its own right. Drop the file in and it takes over
-  automatically — no config change needed.
+FOUNDING COURSE BENEFICIARY GIFT
+  kooyonga-hole16-coursemap.jpg   1947x808. The rendered hole 16 overview, tee to
+                               green, presented in the recognition section as the
+                               token given to the club outright. Source PNG was
+                               1.7 MB; JPEG here is 387 KB.
 
 VIDEO
   KooyongaHole16.mp4           Hole 16 · 30s · tee to green, one continuous shot

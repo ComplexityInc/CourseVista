@@ -11,9 +11,9 @@ window.CV_DEMO = {
     // selector is replaced by a fixed line. Set to null to show the selector.
     holes: 18,
     // Resting artwork for every video: the club logo, uncropped, on a solid
-    // ground. The file below is NOT yet in the repo — until it is dropped in,
-    // demo.js falls back to the course name set in Playfair, which is a clean
-    // resting card in its own right. Never substitute another club's artwork.
+    // ground. This is the crest-and-wordmark lockup taken from the hole 16
+    // course overview below, so the page and the gifted artwork carry exactly
+    // the same mark. Never substitute another club's artwork.
     logo: {
       src: '/demo/kooyonga/assets/kooyonga-logo.png',
       alt: 'Kooyonga Golf Club',
@@ -59,10 +59,19 @@ window.CV_DEMO = {
       'So we built new methods for it. Rather than cutting the hole into pieces and hiding the joins, we developed a way to carry one unbroken movement across the whole corridor, holding the terrain, the light and the line of play consistent from the first frame to the last. The flyover above is the result, and it runs as one continuous shot.',
       'Those methods are now part of how every CourseVista course is made. Kooyonga is the course that produced them, and the first to be delivered under the standard they set.'
     ],
+    // The token itself: a rendered overview of the sixteenth, given to the club
+    // outright. Yours to use anywhere — scorecards, signage, the website — with
+    // no charge and no conditions.
+    gift: {
+      label: 'Our thanks, yours to keep',
+      src: '/demo/kooyonga/assets/kooyonga-hole16-coursemap.jpg',
+      alt: 'Kooyonga Golf Club hole 16 course overview, tee to green',
+      caption: 'The sixteenth, rendered tee to green. Yours outright — print it, publish it, put it on the card. No charge, no conditions, whatever you decide about the rest.'
+    },
     points: [
       ['Named as a founding course', 'Kooyonga is recognised, on the record, as the course whose terrain advanced our production method.'],
       ['The technique carries your name', 'The continuity work developed on your sixteenth is now applied to every course we film.'],
-      ['First under the new standard', 'Your flyovers are built with the improved method from the outset — nothing retrofitted.']
+      ['The overview is yours', 'The rendered sixteenth above is given outright, with full rights to use it however you like.']
     ],
     signoff: 'With our thanks — a difficult hole made the work better for every course that follows.'
   },
