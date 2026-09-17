@@ -133,6 +133,38 @@
       '</div></section>';
   }
 
+  // Style chooser — an optional section for a preview film that moves through
+  // several distinct lighting/photographic treatments. Each entry marks a span
+  // of the FIRST film; picking one seeks that film to the span and plays it, so
+  // the club can compare the looks against their own course before deciding
+  // which is carried across every hole.
+  //
+  // Presentation only: the choice is not written into the order. Selecting a
+  // style updates a mailto link so the club can send their preference back.
+  function styles() {
+    var s = C.styles;
+    if (!s || !(s.items || []).length) return '';
+    var cards = s.items.map(function (it, i) {
+      return '<article class="d-style" data-style="' + i + '" data-from="' + it.from + '" data-to="' + it.to + '">' +
+        '<button type="button" class="d-style-shot" aria-label="Play the ' + esc(it.name) + ' section">' +
+        (it.poster ? '<img src="' + esc(it.poster) + '" alt="' + esc(it.name) + '" loading="lazy" decoding="async">' : '') +
+        '<span class="d-style-play" aria-hidden="true"></span>' +
+        '<span class="d-style-time">' + clock(it.from) + '–' + clock(it.to) + '</span>' +
+        '</button>' +
+        '<p class="d-style-n">Style ' + ('0' + (i + 1)) + '</p>' +
+        '<h3 class="d-style-name">' + esc(it.name) + '</h3>' +
+        '<p class="d-style-desc">' + esc(it.detail) + '</p>' +
+        '<label class="d-style-pick"><input type="radio" name="d-style" value="' + i + '"><span class="d-pick-dot" aria-hidden="true"></span><span>This one for our course</span></label>' +
+        '</article>';
+    }).join('');
+    return '<section class="d-styles" aria-labelledby="d-styles-h"><div class="d-wrap">' +
+      '<h2 class="d-styles-h" id="d-styles-h">' + esc(s.heading) + '</h2>' +
+      (s.copy ? '<p class="d-styles-copy">' + esc(s.copy) + '</p>' : '') +
+      '<div class="d-style-grid">' + cards + '</div>' +
+      '<p class="d-styles-foot" data-style-foot hidden></p>' +
+      '</div></section>';
+  }
+
   // Recognition band — an optional standing acknowledgement for a course whose
   // work advanced the production method. Renders only when the config supplies
   // `recognition`, so pages without one are unchanged. Recognition only: it
@@ -455,7 +487,7 @@
 
   /* ---------- boot ---------- */
 
-  root.innerHTML = intro() + films() + recognition() + packages() + after() + closing();
+  root.innerHTML = intro() + films() + styles() + recognition() + packages() + after() + closing();
   update();
   initLogos();
   initFilms();
@@ -472,6 +504,8 @@
       cmp.textContent = state.compare ? 'Hide comparison' : 'Compare all packages';
       return;
     }
+    var shot = e.target.closest('.d-style-shot');
+    if (shot) { playStyle(shot.closest('[data-style]')); return; }
     var thumb = e.target.closest('[data-full]');
     if (thumb) { openLightbox(thumb.getAttribute('data-full'), thumb.getAttribute('data-cap'), thumb); return; }
     // Clicking a package panel (anywhere but its button) selects it.
@@ -480,7 +514,60 @@
   });
   root.addEventListener('change', function (e) {
     if (e.target.name === 'd-pkg') { state.pkg = e.target.value; update(); }
+    if (e.target.name === 'd-style') { pickStyle(Number(e.target.value)); }
   });
+
+  /* ---------- style chooser ---------- */
+
+  // Seek the first film to a style's span and play it. The span end is honoured
+  // with a timeupdate guard that removes itself, so a later full playthrough is
+  // never cut short.
+  function playStyle(card) {
+    var video = players[0];
+    if (!card || !video) return;
+    var from = Number(card.getAttribute('data-from'));
+    var to = Number(card.getAttribute('data-to'));
+    players.forEach(function (p) { if (!p.paused) p.pause(); });
+    function stopAtEnd() {
+      if (video.currentTime < to) return;
+      video.pause();
+      video.removeEventListener('timeupdate', stopAtEnd);
+    }
+    video.addEventListener('timeupdate', stopAtEnd);
+    video.controls = true;
+
+    // The players are preload="none", so before any metadata exists a seek is
+    // silently dropped and playback would start from zero. Wait for the
+    // duration to be known, then seek and play.
+    function go() {
+      try { video.currentTime = from; } catch (e) {}
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+    }
+    if (video.readyState >= 1) go();
+    else {
+      video.addEventListener('loadedmetadata', go, { once: true });
+      video.load();
+    }
+    video.closest('.d-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function pickStyle(i) {
+    var items = (C.styles && C.styles.items) || [];
+    var chosen = items[i];
+    if (!chosen) return;
+    Array.prototype.forEach.call(root.querySelectorAll('[data-style]'), function (el, n) {
+      el.classList.toggle('is-selected', n === i);
+    });
+    var foot = q('[data-style-foot]');
+    if (!foot) return;
+    var subject = encodeURIComponent((course.shortName || course.name || 'Our course') + ' — style preference: ' + chosen.name);
+    var body = encodeURIComponent('We’d like ' + chosen.name + ' used across the course.');
+    foot.hidden = false;
+    foot.innerHTML = '<b>' + esc(chosen.name) + '</b> selected. ' +
+      '<a href="mailto:business@coursevista.com.au?subject=' + subject + '&body=' + body + '">Send us this preference</a> ' +
+      'and we’ll build every hole to match — or just mention it when you order.';
+  }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
 
   window.CVDemo = { state: state, update: update, startHref: startHref };

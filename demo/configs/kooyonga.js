@@ -49,6 +49,35 @@ window.CV_DEMO = {
     }
   ],
   emptyFilmsNote: 'Your Kooyonga flyover will appear here as soon as it’s ready.',
+  // Three treatments carried inside the one continuous hole 16 pass. Spans were
+  // read off the film itself: the luminance curve climbs through the corridor,
+  // troughs at ~0:18 as the shot lifts over the treeline, then rises hard into
+  // the high-key green complex. Picking one seeks the film to that span.
+  // Presentation only — the choice is not written into the order.
+  styles: {
+    heading: 'Three looks, one hole. Choose the one that suits Kooyonga.',
+    copy: 'Your sixteenth was shot as a single unbroken pass, and it moves through three distinct treatments along the way. Play each below. Whichever you choose is the look we build across all eighteen holes, so the course reads as one piece of work rather than eighteen separate films.',
+    items: [
+      {
+        name: 'Raking gold',
+        from: 0, to: 10,
+        poster: '/demo/kooyonga/assets/kooyonga-style-1.jpg',
+        detail: 'Low sun driven straight down the corridor. Long shadows rake across the fairway and the tree line glows from the side. Warm, intimate, and the most dramatic of the three.'
+      },
+      {
+        name: 'Open horizon',
+        from: 10, to: 19,
+        poster: '/demo/kooyonga/assets/kooyonga-style-2.jpg',
+        detail: 'The shot lifts above the treeline and the sky opens up behind the hole. Cooler and cleaner, with the Adelaide skyline on the horizon — the look that best shows where the course sits.'
+      },
+      {
+        name: 'Overhead clarity',
+        from: 19, to: 30,
+        poster: '/demo/kooyonga/assets/kooyonga-style-3.jpg',
+        detail: 'High and square over the green complex, backlight blooming through the gums. Bunkering and contour read with the most definition here — the most useful for showing how a hole actually plays.'
+      }
+    ]
+  },
   // Standing acknowledgement. Recognition only — it does not change any price;
   // the packages below stay at catalogue rates.
   recognition: {

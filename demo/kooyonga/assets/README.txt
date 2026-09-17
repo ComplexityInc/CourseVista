@@ -37,6 +37,20 @@ VIDEO
 
   Keep the HEVC original in cold storage as the master. Do not publish it.
 
+STYLE REFERENCE STILLS (the three-look chooser)
+  kooyonga-style-1.jpg         Raking gold      — frame at 0:04
+  kooyonga-style-2.jpg         Open horizon     — frame at 0:14
+  kooyonga-style-3.jpg         Overhead clarity — frame at 0:26
+
+  Pulled straight from KooyongaHole16.mp4 so each card shows the exact look it
+  plays. The spans (0:00-0:10, 0:10-0:19, 0:19-0:30) are set in
+  /demo/configs/kooyonga.js. If the film is ever re-cut, re-grab these frames
+  and update the spans together, or the cards will misrepresent the footage.
+
+  NOTE: seeking to a span needs HTTP Range support. Vercel provides it; Python's
+  http.server does NOT, so the chooser cannot be tested with `python -m http.server`
+  — the film will just play from the start. Test on a Vercel preview instead.
+
 HOLE 16 — source photographs + flight path
   kooyonga-hole16-img1.jpg
   kooyonga-hole16-img2.jpg
