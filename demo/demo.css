@@ -74,6 +74,20 @@ button{font-family:inherit}
 .d-thumb img{width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid #E4E0D6;background:#F1EDE6}
 .d-thumb span{display:block;font-size:12px;color:#8A8D82;margin-top:5px}
 
+/* recognition band (optional, client demos) */
+.d-recog{padding:0 0 clamp(40px,6vw,72px)}
+.d-recog-card{position:relative;background:#FFF;border:1px solid #E4E0D6;border-top:2px solid #B08D4F;padding:clamp(28px,4.4vw,52px)}
+.d-recog-badge{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#8A6B2E;margin:0 0 14px}
+.d-recog-card h2{font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#16170F;font-size:clamp(25px,3.4vw,38px);line-height:1.12;letter-spacing:-.005em;margin:0;max-width:20ch;text-wrap:balance}
+.d-recog-body{margin-top:18px;max-width:64ch}
+.d-recog-body p{margin:0 0 12px;font-size:15.5px;line-height:1.65;text-wrap:pretty}
+.d-recog-body p:last-child{margin-bottom:0}
+.d-recog-points{list-style:none;margin:26px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#E4E0D6;border:1px solid #E4E0D6}
+.d-recog-points li{background:#FFF;padding:16px 18px 18px}
+.d-recog-points b{display:block;color:#16170F;font-weight:500;font-size:14.5px;margin-bottom:5px}
+.d-recog-points span{display:block;font-size:13.5px;line-height:1.55;color:#55584D}
+.d-recog-sign{margin:22px 0 0;padding-top:18px;border-top:1px solid #E4E0D6;font-size:13px;color:#8A8D82;font-style:italic}
+
 /* packages */
 .d-buy{background:#FFF;border-top:1px solid #E4E0D6;border-bottom:1px solid #E4E0D6;padding:clamp(48px,7vw,84px) 0}
 .d-buy-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 40px;margin-bottom:clamp(24px,3vw,34px)}
@@ -162,11 +176,12 @@ button{font-family:inherit}
 @media (max-width:760px){
   .d-pkgs{grid-template-columns:minmax(0,1fr)}
   .d-steps{grid-template-columns:minmax(0,1fr)}
+  .d-recog-points{grid-template-columns:minmax(0,1fr)}
   .d-cmp-row{grid-template-columns:minmax(0,1fr) auto}
   .d-cmp-go{grid-column:1 / -1}
   .d-play{min-height:48px;font-size:14px}
   .d-hole{font-size:11px;padding:6px 9px}
-  .d-holes-label,.d-pkg-kicker,.d-step-n{font-size:11px}
+  .d-holes-label,.d-pkg-kicker,.d-step-n,.d-recog-badge{font-size:11px}
 }
 /* Narrow players: the resting logo sits in the upper part of the frame so the
    play button below never covers it. */

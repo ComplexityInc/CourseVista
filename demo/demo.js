@@ -133,6 +133,27 @@
       '</div></section>';
   }
 
+  // Recognition band — an optional standing acknowledgement for a course whose
+  // work advanced the production method. Renders only when the config supplies
+  // `recognition`, so pages without one are unchanged. Recognition only: it
+  // never alters prices, which always come from the catalogue.
+  function recognition() {
+    var r = C.recognition;
+    if (!r) return '';
+    var body = (r.body || []).map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
+    var points = (r.points || []).map(function (p) {
+      return '<li><b>' + esc(p[0]) + '</b><span>' + esc(p[1]) + '</span></li>';
+    }).join('');
+    return '<section class="d-recog" aria-labelledby="d-recog-h"><div class="d-wrap">' +
+      '<div class="d-recog-card">' +
+      '<p class="d-recog-badge">' + esc(r.badge) + '</p>' +
+      '<h2 id="d-recog-h">' + esc(r.heading) + '</h2>' +
+      (body ? '<div class="d-recog-body">' + body + '</div>' : '') +
+      (points ? '<ul class="d-recog-points">' + points + '</ul>' : '') +
+      (r.signoff ? '<p class="d-recog-sign">' + esc(r.signoff) + '</p>' : '') +
+      '</div></div></section>';
+  }
+
   function pkgPanel(key, primary) {
     return '<article class="d-pkg ' + (primary ? 'd-pkg-primary' : 'd-pkg-alt') + '" data-pkg="' + key + '">' +
       '<p class="d-pkg-kicker" data-kicker="' + key + '"></p>' +
@@ -422,7 +443,7 @@
 
   /* ---------- boot ---------- */
 
-  root.innerHTML = intro() + films() + packages() + after() + closing();
+  root.innerHTML = intro() + films() + recognition() + packages() + after() + closing();
   update();
   initLogos();
   initFilms();
