@@ -133,6 +133,71 @@
       '</div></section>';
   }
 
+  // Style chooser — an optional section for a preview film that moves through
+  // several distinct lighting/photographic treatments. Each entry marks a span
+  // of the FIRST film; picking one seeks that film to the span and plays it, so
+  // the club can compare the looks against their own course before deciding
+  // which is carried across every hole.
+  //
+  // Presentation only: the choice is not written into the order. Selecting a
+  // style updates a mailto link so the club can send their preference back.
+  function styles() {
+    var s = C.styles;
+    if (!s || !(s.items || []).length) return '';
+    var cards = s.items.map(function (it, i) {
+      return '<article class="d-style" data-style="' + i + '" data-from="' + it.from + '" data-to="' + it.to + '">' +
+        '<button type="button" class="d-style-shot" aria-label="Play the ' + esc(it.name) + ' section">' +
+        (it.poster ? '<img src="' + esc(it.poster) + '" alt="' + esc(it.name) + '" loading="lazy" decoding="async">' : '') +
+        '<span class="d-style-play" aria-hidden="true"></span>' +
+        '<span class="d-style-time">' + clock(it.from) + '–' + clock(it.to) + '</span>' +
+        '</button>' +
+        '<p class="d-style-n">Style ' + ('0' + (i + 1)) + '</p>' +
+        '<h3 class="d-style-name">' + esc(it.name) + '</h3>' +
+        '<p class="d-style-desc">' + esc(it.detail) + '</p>' +
+        '<label class="d-style-pick"><input type="radio" name="d-style" value="' + i + '"><span class="d-pick-dot" aria-hidden="true"></span><span>This one for our course</span></label>' +
+        '</article>';
+    }).join('');
+    return '<section class="d-styles" aria-labelledby="d-styles-h"><div class="d-wrap">' +
+      '<h2 class="d-styles-h" id="d-styles-h">' + esc(s.heading) + '</h2>' +
+      (s.copy ? '<p class="d-styles-copy">' + esc(s.copy) + '</p>' : '') +
+      '<div class="d-style-grid">' + cards + '</div>' +
+      '<p class="d-styles-foot" data-style-foot hidden></p>' +
+      '</div></section>';
+  }
+
+  // Recognition band — an optional standing acknowledgement for a course whose
+  // work advanced the production method. Renders only when the config supplies
+  // `recognition`, so pages without one are unchanged. Recognition only: it
+  // never alters prices, which always come from the catalogue.
+  function recognition() {
+    var r = C.recognition;
+    if (!r) return '';
+    var body = (r.body || []).map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
+    var points = (r.points || []).map(function (p) {
+      return '<li><b>' + esc(p[0]) + '</b><span>' + esc(p[1]) + '</span></li>';
+    }).join('');
+    // Optional artefact presented with the recognition — a piece of work given
+    // to the course outright. Clicking it opens the same lightbox the source
+    // photographs use.
+    var g = r.gift;
+    var gift = g ? '<figure class="d-recog-gift">' +
+      (g.label ? '<figcaption class="d-recog-gift-label">' + esc(g.label) + '</figcaption>' : '') +
+      '<button type="button" class="d-recog-gift-img" data-full="' + esc(g.src) + '" data-cap="' + esc(g.caption || g.alt || '') + '" aria-label="Enlarge ' + esc(g.alt || 'artwork') + '">' +
+      '<img src="' + esc(g.src) + '" alt="' + esc(g.alt || '') + '" loading="lazy" decoding="async"></button>' +
+      (g.caption ? '<p class="d-recog-gift-cap">' + esc(g.caption) + '</p>' : '') +
+      '</figure>' : '';
+
+    return '<section class="d-recog" aria-labelledby="d-recog-h"><div class="d-wrap">' +
+      '<div class="d-recog-card">' +
+      '<p class="d-recog-badge">' + esc(r.badge) + '</p>' +
+      '<h2 id="d-recog-h">' + esc(r.heading) + '</h2>' +
+      (body ? '<div class="d-recog-body">' + body + '</div>' : '') +
+      gift +
+      (points ? '<ul class="d-recog-points">' + points + '</ul>' : '') +
+      (r.signoff ? '<p class="d-recog-sign">' + esc(r.signoff) + '</p>' : '') +
+      '</div></div></section>';
+  }
+
   function pkgPanel(key, primary) {
     return '<article class="d-pkg ' + (primary ? 'd-pkg-primary' : 'd-pkg-alt') + '" data-pkg="' + key + '">' +
       '<p class="d-pkg-kicker" data-kicker="' + key + '"></p>' +
@@ -279,6 +344,9 @@
 
     function start() {
       if (el.getAttribute('data-state') === 'error') return;
+      // Playing the film on its own terms cancels any style span limit, so a
+      // full watch-through is never cut short at a span boundary.
+      clearStyleGuard();
       pauseOthers();
       if (video.ended) video.currentTime = 0;   // Replay; Resume keeps the paused position.
       video.controls = true;
@@ -422,7 +490,7 @@
 
   /* ---------- boot ---------- */
 
-  root.innerHTML = intro() + films() + packages() + after() + closing();
+  root.innerHTML = intro() + films() + styles() + recognition() + packages() + after() + closing();
   update();
   initLogos();
   initFilms();
@@ -439,6 +507,8 @@
       cmp.textContent = state.compare ? 'Hide comparison' : 'Compare all packages';
       return;
     }
+    var shot = e.target.closest('.d-style-shot');
+    if (shot) { playStyle(shot.closest('[data-style]')); return; }
     var thumb = e.target.closest('[data-full]');
     if (thumb) { openLightbox(thumb.getAttribute('data-full'), thumb.getAttribute('data-cap'), thumb); return; }
     // Clicking a package panel (anywhere but its button) selects it.
@@ -447,7 +517,97 @@
   });
   root.addEventListener('change', function (e) {
     if (e.target.name === 'd-pkg') { state.pkg = e.target.value; update(); }
+    if (e.target.name === 'd-style') { pickStyle(Number(e.target.value)); }
   });
+
+  /* ---------- style chooser ---------- */
+
+  // Seek the first film to a style's span and play it. The span end is honoured
+  // with a timeupdate guard that removes itself, so a later full playthrough is
+  // never cut short.
+  var styleGuard = null;   // the one active span guard, if any
+
+  // Drop any previous span guard before arming a new one. Without this the
+  // guards accumulate: picking a style that ends at 0:10 and then one that
+  // starts at 0:19 leaves the first guard attached, and it pauses the film the
+  // instant the new span begins.
+  function clearStyleGuard() {
+    if (!styleGuard) return;
+    styleGuard.video.removeEventListener('timeupdate', styleGuard.fn);
+    styleGuard = null;
+  }
+
+  function playStyle(card) {
+    var video = players[0];
+    if (!card || !video) return;
+    var from = Number(card.getAttribute('data-from'));
+    var to = Number(card.getAttribute('data-to'));
+    players.forEach(function (p) { if (!p.paused) p.pause(); });
+    clearStyleGuard();
+    function stopAtEnd() {
+      if (video.currentTime < to) return;
+      video.pause();
+      clearStyleGuard();
+    }
+    styleGuard = { video: video, fn: stopAtEnd };
+    video.addEventListener('timeupdate', stopAtEnd);
+    video.controls = true;
+
+    // Two ordering hazards here, both seen on a real deployment:
+    //   1. The players are preload="none", so before any metadata exists a seek
+    //      is silently dropped and playback would start from zero.
+    //   2. Calling play() while a seek is still in flight can be dropped, which
+    //      leaves the film parked at the span start instead of running.
+    // So: wait for metadata, seek, and only start playing once the seek lands.
+    function beginPlayback() {
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+    }
+    function go() {
+      if (Math.abs(video.currentTime - from) < 0.25) { beginPlayback(); return; }
+      video.addEventListener('seeked', beginPlayback, { once: true });
+      try { video.currentTime = from; } catch (e) {
+        video.removeEventListener('seeked', beginPlayback);
+        beginPlayback();
+      }
+    }
+    if (video.readyState >= 1) go();
+    else {
+      // The players ship preload="none", and load() honours that: it re-runs
+      // resource selection and then stops without fetching, so readyState sits
+      // at 0 and loadedmetadata never fires. Asking for metadata first is what
+      // actually makes the fetch happen. Without this a style pick does nothing
+      // at all on a cold page — it only appeared to work once the film had
+      // already been played.
+      video.preload = 'metadata';
+      video.addEventListener('loadedmetadata', go, { once: true });
+      video.load();
+    }
+
+    // Only pull the player into view when it isn't already there. Scrolling on
+    // every pick would shunt the style cards off screen, which is exactly when
+    // someone is clicking between them to compare the available looks.
+    var box = video.closest('.d-player').getBoundingClientRect();
+    var visible = box.top >= 0 && box.bottom <= (window.innerHeight || 0);
+    if (!visible) video.closest('.d-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function pickStyle(i) {
+    var items = (C.styles && C.styles.items) || [];
+    var chosen = items[i];
+    if (!chosen) return;
+    Array.prototype.forEach.call(root.querySelectorAll('[data-style]'), function (el, n) {
+      el.classList.toggle('is-selected', n === i);
+    });
+    var foot = q('[data-style-foot]');
+    if (!foot) return;
+    var subject = encodeURIComponent((course.shortName || course.name || 'Our course') + ' — style preference: ' + chosen.name);
+    var body = encodeURIComponent('We’d like ' + chosen.name + ' used across the course.');
+    foot.hidden = false;
+    foot.innerHTML = '<b>' + esc(chosen.name) + '</b> selected. ' +
+      '<a href="mailto:business@coursevista.com.au?subject=' + subject + '&body=' + body + '">Send us this preference</a> ' +
+      'and we’ll build every hole to match — or just mention it when you order.';
+  }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
 
   window.CVDemo = { state: state, update: update, startHref: startHref };
