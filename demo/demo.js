@@ -579,7 +579,7 @@
 
     // Only pull the player into view when it isn't already there. Scrolling on
     // every pick would shunt the style cards off screen, which is exactly when
-    // someone is clicking between them to compare the three looks.
+    // someone is clicking between them to compare the available looks.
     var box = video.closest('.d-player').getBoundingClientRect();
     var visible = box.top >= 0 && box.bottom <= (window.innerHeight || 0);
     if (!visible) video.closest('.d-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
