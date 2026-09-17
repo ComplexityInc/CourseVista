@@ -48,10 +48,12 @@ window.CV_DEMO = {
     }
   ],
   emptyFilmsNote: 'Your Kooyonga flyover will appear here as soon as it’s ready.',
-  // Three treatments carried inside the one continuous hole 16 pass. Spans were
-  // read off the film itself: the luminance curve climbs through the corridor,
-  // troughs at ~0:18 as the shot lifts over the treeline, then rises hard into
-  // the high-key green complex. Picking one seeks the film to that span.
+  // Three treatments carried inside the one continuous hole 16 pass (0:37 film).
+  // Spans were read off the film itself: it fades up into a title card, runs the
+  // corridor in low raking light, lifts over the treeline at ~0:18 where the
+  // luminance troughs, then climbs into the high-key green complex before the
+  // end card at ~0:34. The spans deliberately exclude both cards so each style
+  // plays only its own footage. Picking one seeks the film to that span.
   // Presentation only — the choice is not written into the order.
   styles: {
     heading: 'Three looks, one hole. Choose the one that suits Kooyonga.',
@@ -59,21 +61,21 @@ window.CV_DEMO = {
     items: [
       {
         name: 'Raking gold',
-        from: 0, to: 10,
+        from: 3, to: 18,
         poster: '/demo/kooyonga/assets/kooyonga-style-1.jpg',
         detail: 'Low sun driven straight down the corridor. Long shadows rake across the fairway and the tree line glows from the side. Warm, intimate, and the most dramatic of the three.'
       },
       {
         name: 'Open horizon',
-        from: 10, to: 19,
+        from: 18, to: 26,
         poster: '/demo/kooyonga/assets/kooyonga-style-2.jpg',
         detail: 'The shot lifts above the treeline and the sky opens up behind the hole. Cooler and cleaner, with the Adelaide skyline on the horizon — the look that best shows where the course sits.'
       },
       {
         name: 'Overhead clarity',
-        from: 19, to: 30,
+        from: 26, to: 34,
         poster: '/demo/kooyonga/assets/kooyonga-style-3.jpg',
-        detail: 'High and square over the green complex, backlight blooming through the gums. Bunkering and contour read with the most definition here — the most useful for showing how a hole actually plays.'
+        detail: 'High and square over the green complex, late sun skimming the bunker faces. Contour and bunkering read with the most definition here — the most useful for showing how a hole actually plays.'
       }
     ]
   },

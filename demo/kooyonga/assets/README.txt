@@ -18,34 +18,33 @@ FOUNDING COURSE BENEFICIARY GIFT
                                1.7 MB; JPEG here is 387 KB.
 
 VIDEO
-  KooyongaHole16.mp4           Hole 16 · 30s · tee to green, one continuous shot
+  KooyongaHole16.mp4           Hole 16 · 0:37 · tee to green, one continuous shot,
+                               with the club title card at the head and the
+                               Kooyonga x CourseVista end card at the tail.
 
-  SOURCE WAS HEVC. The camera/render original (KooyongaHole16.mp4, 156.8 MB,
-  hevc/H.265) does NOT play in Chrome or Firefox, and at 156.8 MB exceeded
-  GitHub's 100 MB per-file limit. The copy here was re-encoded to H.264 —
-  the same codec as every other CourseVista film — and compressed for mobile:
+  Source: Kooyonga_Hole_16_Course_Map.mp4 (68.3 MB, h264). Re-encoded and
+  compressed for mobile:
 
-    156.8 MB  ->  30.5 MB       (-81%)
-    hevc      ->  h264 high@4.0, yuv420p
+    68.3 MB  ->  33.0 MB       (-52%)
     1920x1080, 24 fps kept; AAC 128k stereo
     +faststart (index at the front, so it streams instead of downloading first)
 
   The command used, if a replacement is ever needed:
-    ffmpeg -i in.mp4 -c:v libx264 -preset slow -crf 21 -profile:v high -level 4.0 \
-      -pix_fmt yuv420p -vf "scale=1920:1080:flags=lanczos" -r 24 \
-      -c:a aac -b:a 128k -ac 2 -movflags +faststart KooyongaHole16.mp4
+    ffmpeg -i in.mp4 -c:v libx264 -preset slow -crf 21 -profile:v high -level 4.0       -pix_fmt yuv420p -vf "scale=1920:1080:flags=lanczos" -r 24       -c:a aac -b:a 128k -ac 2 -movflags +faststart KooyongaHole16.mp4
 
-  Keep the HEVC original in cold storage as the master. Do not publish it.
+  Keep the original in cold storage as the master. Do not publish it.
 
 STYLE REFERENCE STILLS (the three-look chooser)
-  kooyonga-style-1.jpg         Raking gold      — frame at 0:04
-  kooyonga-style-2.jpg         Open horizon     — frame at 0:14
-  kooyonga-style-3.jpg         Overhead clarity — frame at 0:26
+  kooyonga-style-1.jpg         Raking gold      — frame at 0:10
+  kooyonga-style-2.jpg         Open horizon     — frame at 0:22
+  kooyonga-style-3.jpg         Overhead clarity — frame at 0:30
 
   Pulled straight from KooyongaHole16.mp4 so each card shows the exact look it
-  plays. The spans (0:00-0:10, 0:10-0:19, 0:19-0:30) are set in
-  /demo/configs/kooyonga.js. If the film is ever re-cut, re-grab these frames
-  and update the spans together, or the cards will misrepresent the footage.
+  plays. The spans (0:03-0:18, 0:18-0:26, 0:26-0:34) are set in
+  /demo/configs/kooyonga.js. They deliberately exclude the title card (0:00-0:03)
+  and the end card (0:34-0:37) so each style plays only its own footage. If the
+  film is ever re-cut, re-grab these frames and update the spans together, or the
+  cards will misrepresent the footage.
 
   NOTE: seeking to a span needs HTTP Range support. Vercel provides it; Python's
   http.server does NOT, so the chooser cannot be tested with `python -m http.server`
