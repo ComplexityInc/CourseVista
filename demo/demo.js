@@ -553,20 +553,36 @@
     video.addEventListener('timeupdate', stopAtEnd);
     video.controls = true;
 
-    // The players are preload="none", so before any metadata exists a seek is
-    // silently dropped and playback would start from zero. Wait for the
-    // duration to be known, then seek and play.
-    function go() {
-      try { video.currentTime = from; } catch (e) {}
+    // Two ordering hazards here, both seen on a real deployment:
+    //   1. The players are preload="none", so before any metadata exists a seek
+    //      is silently dropped and playback would start from zero.
+    //   2. Calling play() while a seek is still in flight can be dropped, which
+    //      leaves the film parked at the span start instead of running.
+    // So: wait for metadata, seek, and only start playing once the seek lands.
+    function beginPlayback() {
       var p = video.play();
       if (p && p.catch) p.catch(function () {});
+    }
+    function go() {
+      if (Math.abs(video.currentTime - from) < 0.25) { beginPlayback(); return; }
+      video.addEventListener('seeked', beginPlayback, { once: true });
+      try { video.currentTime = from; } catch (e) {
+        video.removeEventListener('seeked', beginPlayback);
+        beginPlayback();
+      }
     }
     if (video.readyState >= 1) go();
     else {
       video.addEventListener('loadedmetadata', go, { once: true });
       video.load();
     }
-    video.closest('.d-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // Only pull the player into view when it isn't already there. Scrolling on
+    // every pick would shunt the style cards off screen, which is exactly when
+    // someone is clicking between them to compare the three looks.
+    var box = video.closest('.d-player').getBoundingClientRect();
+    var visible = box.top >= 0 && box.bottom <= (window.innerHeight || 0);
+    if (!visible) video.closest('.d-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   function pickStyle(i) {
